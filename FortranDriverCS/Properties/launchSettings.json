@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "FortranDriverCs": {
+      "commandName": "Project",
+      "nativeDebugging": true,
+      "hotReloadEnabled": false
+    }
+  }
+}
