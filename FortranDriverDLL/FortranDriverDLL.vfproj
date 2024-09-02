@@ -54,10 +54,10 @@
 		<Filter Name="Header Files" Filter="fi;fd;h;inc"/>
 		<Filter Name="Resource Files" Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"/>
 		<Filter Name="Source Files" Filter="f90;for;f;fpp;ftn;def;odl;idl">
-		<File RelativePath="..\..\_Common Code\mod_array_inv.f90"/>
-		<File RelativePath="..\..\_Common Code\mod_common.f90"/>
+		<File RelativePath=".\mod_array_inv.f90"/>
+		<File RelativePath=".\mod_common.f90"/>
 		<File RelativePath=".\mod_fortran.f90"/>
-		<File RelativePath="..\..\_Common Code\mod_lu.f90"/></Filter>
+		<File RelativePath=".\mod_lu.f90"/></Filter>
 	</Files>
 	<Globals/>
 </VisualStudioProject>

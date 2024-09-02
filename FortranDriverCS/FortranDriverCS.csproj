@@ -9,9 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\FortranDriverDLL\x64\Debug\FortranDriverDLL.dll" Link="FortranDriverDLL.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="..\FortranDriverDLL\x64\Debug\FortranDriverDLL.dll" Link="FortranDriverDLL.dll" />
     <None Include="..\libifcoremdd.dll" Link="libifcoremdd.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
