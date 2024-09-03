@@ -49,6 +49,9 @@ namespace FortranDriver
             return result;
         }
 
+        public static bool ValueEquals<T>(this T[] first, T[] second) where T : IEquatable<T>
+            => Enumerable.SequenceEqual(first, second);
+
         public static void ShowInConsole(this double[] A, int width = 11, string formatting = "g4")
         {
             int rows = A.GetLength(0);
