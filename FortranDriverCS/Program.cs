@@ -1,4 +1,6 @@
-﻿namespace FortranDriver
+﻿// #define USE_CODE_GEN
+
+namespace FortranDriver
 {
 
     partial class Program
@@ -8,8 +10,11 @@
         {
             Console.WriteLine("Calling Fortran from C#");
             Console.WriteLine();
-            UnmanagedImports.TestFortran();
-            UnmanagedLibrary.TestFortran();
+#if USE_CODE_GEN
+            LibraryImports.TestFortran();
+#else
+            DllImports.TestFortran();
+#endif
         }
 
     }

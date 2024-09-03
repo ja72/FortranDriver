@@ -20,12 +20,12 @@
     CONTAINS
     
     function LUSOLVE(A,b,x) result(ok)
-    real(wp), intent(in) :: A(:,:), b(:)
-    real(wp), intent(in out) :: x(:)
+    real(real64), intent(in) :: A(:,:), b(:)
+    real(real64), intent(in out) :: x(:)
     logical :: ok
-    real(wp), allocatable :: temp(:), LU(:,:)
+    real(real64), allocatable :: temp(:), LU(:,:)
     integer, allocatable :: indx(:)
-    real(wp) :: d
+    real(real64) :: d
     integer :: i, rc, n
 
     ok = .false.
@@ -46,12 +46,12 @@
     end function
     
     function LUSOLVEX(A,b,x) result(ok)
-    real(wp), intent(in) :: A(:,:), b(:,:)
-    real(wp), intent(in out) :: x(:,:)
+    real(real64), intent(in) :: A(:,:), b(:,:)
+    real(real64), intent(in out) :: x(:,:)
     logical :: ok
-    real(wp), allocatable :: temp(:), LU(:,:)
+    real(real64), allocatable :: temp(:), LU(:,:)
     integer, allocatable :: indx(:)
-    real(wp) :: d
+    real(real64) :: d
 
     integer :: i, j, rc, n, m
 
@@ -88,13 +88,13 @@
     !  ***************************************************************
     IMPLICIT NONE
 
-    real(wp), intent(inout), dimension(N,N) :: A
+    real(real64), intent(inout), dimension(N,N) :: A
     integer, intent(in) :: N
     integer, intent(out) :: CODE
     integer, intent(out), dimension(N) :: INDX
-    real(wp), intent(out) :: d    
+    real(real64), intent(out) :: d    
 
-    real(wp)  :: AMAX, DUM, SUMM, VV(nmax)
+    real(real64)  :: AMAX, DUM, SUMM, VV(nmax)
     INTEGER :: i, j, k, imax
 
     D=1
@@ -173,14 +173,14 @@
     !  ******************************************************************
     implicit none
     integer, intent(in) :: N
-    real(wp), intent(in), dimension(N,N) :: A
+    real(real64), intent(in), dimension(N,N) :: A
     integer, intent(in), dimension(N) :: INDX
-    real(wp), intent(inout), dimension(N) :: B
+    real(real64), intent(inout), dimension(N) :: B
 
     integer :: i,j,ii,ll
     !f2py depend(N) A, INDX, B
 
-    real(wp)  SUMM
+    real(real64)  SUMM
 
     II = 0
 
@@ -212,11 +212,11 @@
     END subroutine LUBKSB
 
     subroutine LU_TEST()
-    real(wp), pointer ::  A(:,:)   !real matrix (n x n)
-    real(wp), pointer ::  B(:)     !real vector (n)
-    real(wp), pointer ::  temp(:)  !real temporary vector (n+1)
+    real(real64), pointer ::  A(:,:)   !real matrix (n x n)
+    real(real64), pointer ::  B(:)     !real vector (n)
+    real(real64), pointer ::  temp(:)  !real temporary vector (n+1)
     integer,pointer ::  INDX(:)  !integer vector (n)
-    real(wp) :: d
+    real(real64) :: d
     integer :: i, rc, n = 4
 
     !dynamic allocations
