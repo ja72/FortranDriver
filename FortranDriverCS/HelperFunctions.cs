@@ -1,4 +1,7 @@
 ﻿using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace FortranDriver
 {
@@ -52,42 +55,96 @@ namespace FortranDriver
         public static bool ValueEquals<T>(this T[] first, T[] second) where T : IEquatable<T>
             => Enumerable.SequenceEqual(first, second);
 
-        public static void ShowInConsole(this double[] A, int width = 11, string formatting = "g4")
+        public static void ShowInConsole(this double[] A, string title, int width = 11, string formatting = "g4")
         {
-            int rows = A.GetLength(0);
-            for (int i = 0; i < rows; i++)
-            {
-                Console.Write("|");
-                string text = A[i].ToString(formatting).PadLeft(width);
-                if (text.Length>width)
-                {
-                    text = text.Substring(0, width-1) + "…";
-                }
-                Console.Write($" {text}");
-                Console.WriteLine(" |");
-            }
-            Console.WriteLine();
+            Console.WriteLine(title);
+            Console.WriteLine(A.ToFixedColumnString(formatting, width: width));
         }
 
-        public static void ShowInConsole(this double[,] A, int width = 11, string formatting = "g4")
+        public static void ShowInConsole(this double[,] A, string title, int width = 11, string formatting = "g4")
         {
-            int rows = A.GetLength(1), cols = A.GetLength(0);
-
-            for (int i = 0; i < rows; i++)
+            Console.WriteLine(title);
+            Console.WriteLine(A.ToFixedColumnString(formatting, width: width));
+        }
+        //public static string DefaultFormat { get; set; } = "g6";
+        public static string ToString<T>(this T obj)
+        {
+            return obj switch
             {
-                Console.Write("|");
-                for (int j = 0; j < cols; j++)
+                _ when obj is int i => i.ToString("g"),
+                _ when obj is float t => t.ToString("g"),
+                _ when obj is double x => Math.Round(x, 12).ToString("g"),
+                _ when obj is IFormattable f => f.ToString("g"),
+                _ => obj.ToString(),
+            };
+        }
+        public static string ToString<T>(this T obj, string formatting, IFormatProvider provider = null)
+        {
+            provider ??= CultureInfo.CurrentCulture.NumberFormat;
+            return obj switch
+            {
+                _ when obj is int i => i.ToString(formatting, provider),
+                _ when obj is float t => t.ToString(formatting, provider),
+                _ when obj is double x => Math.Round(x, 12).ToString(formatting, provider),
+                _ when obj is IFormattable f => f.ToString(formatting, provider),
+                _ => obj.ToString(),
+            };
+        }
+
+        public static string ToListString<T>(this T[] array)
+        {
+            return string.Join(",", array.Select((x) => x.ToString<T>()));
+        }
+        public static string ToListString<T>(this T[] array, string formatting, string separator = ",") where T : IFormattable
+        {
+            return string.Join(separator, array.Select((x) => x.ToString<T>(formatting, null)));
+        }
+        public static string ToFixedColumnString<T>(this T[] data, string formatting = null, int width = 11)
+            => ToFixedColumnString<T>(data, formatting, null, width);
+        public static string ToFixedColumnString<T>(this T[] data, string formatting = null, IFormatProvider provider = null, int width = 11)
+        {
+            StringBuilder sb = new StringBuilder();
+            int n = data.Length;
+            for (int i = 0; i < n; i++)
+            {
+                sb.Append('|');
+                var obj = data[i];
+                string text = obj.ToString<T>(formatting, provider);
+                text  = text.PadLeft(width);
+                if (text.Length>width)
                 {
-                    string text = A[j, i].ToString(formatting).PadLeft(width);
+                    text = $"{text.Substring(0, width-1)}…";
+                }
+                sb.Append($" {text}");
+                sb.AppendLine(" |");
+            }
+            sb.AppendLine();
+            return sb.ToString();
+        }
+        public static string ToFixedColumnString<T>(this T[,] data, string formatting = null, int width = 11)
+            => ToFixedColumnString<T>(data, formatting, null, width);
+        public static string ToFixedColumnString<T>(this T[,] data, string formatting = null, IFormatProvider provider = null, int width = 11)
+        {
+            StringBuilder sb = new StringBuilder();
+            int n = data.GetLength(1), m = data.GetLength(0);
+            for (int i = 0; i < n; i++)
+            {
+                sb.Append('|');
+                for (int j = 0; j < m; j++)
+                {
+                    var obj = data[j, i];
+                    string text = obj.ToString<T>(formatting, provider);
+                    text  = text.PadLeft(width);
                     if (text.Length>width)
                     {
-                        text = text.Substring(0, width-1) + "…";
+                        text = $"{text.Substring(0, width-1)}…";
                     }
-                    Console.Write($" {text}");
+                    sb.Append($" {text}");
                 }
-                Console.WriteLine(" |");
+                sb.AppendLine(" |");
             }
-            Console.WriteLine();
+            sb.AppendLine();
+            return sb.ToString();
         }
 
     }

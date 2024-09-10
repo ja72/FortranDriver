@@ -19,48 +19,48 @@
 
     CONTAINS
     
-    function LUSOLVE(A,b,x) result(ok)
-    real(real64), intent(in) :: A(:,:), b(:)
-    real(real64), intent(in out) :: x(:)
-    logical :: ok
-    real(real64), allocatable :: temp(:), LU(:,:)
-    integer, allocatable :: indx(:)
+    pure function LUSOLVE(A, b) result(x)
+    real(real64), intent(in) :: A(:,:), b(size(A,1))
+    real(real64) :: x(size(A,1))
+    logical      :: ok
+    real(real64) :: LU(size(A,1),size(A,1))
+    integer      :: indx(size(A,1))
     real(real64) :: d
-    integer :: i, rc, n
+    integer      :: rc, n
 
     ok = .false.
     n = size(A,1)
-    allocate(LU(n,n))
-    allocate(temp(n+1))
-    allocate(INDX(n))
+    !allocate(LU(n,n))
+    !allocate(temp(n+1))
+    !allocate(INDX(n))
     LU = A
-    x = b
     !call LU decomposition routine
     call LUDCMP(LU,n,INDX,D,rc)
 
     !call appropriate solver if previous return code is ok
     if (rc == 0) then
+        x = b
         call LUBKSB(LU,n,INDX,x)
         ok = .true.
     endif    
     end function
     
-    function LUSOLVEX(A,b,x) result(ok)
+    pure function LUSOLVEX(A,b) result(x)
     real(real64), intent(in) :: A(:,:), b(:,:)
-    real(real64), intent(in out) :: x(:,:)
-    logical :: ok
-    real(real64), allocatable :: temp(:), LU(:,:)
-    integer, allocatable :: indx(:)
+    real(real64) :: x(size(A, 1),size(b, 2))
+    logical      :: ok
+    real(real64) :: LU(size(A, 1),size(A, 1))
+    integer      :: indx(size(A, 1))
     real(real64) :: d
 
-    integer :: i, j, rc, n, m
+    integer :: j, rc, n, m
 
     ok = .false.
     n = size(A, 1)
     m = size(b, 2)
-    allocate(LU(n,n))
-    allocate(temp(n+1))
-    allocate(INDX(n))
+    !allocate(LU(n,n))
+    !allocate(temp(n+1))
+    !allocate(INDX(n))
     LU = A
     x = b
     !call LU decomposition routine

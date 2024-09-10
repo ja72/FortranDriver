@@ -25,17 +25,17 @@ implicit none
     
     pure function vec_outer(a,b) result(ab)
     real(real64), intent(in) :: a(:), b(:)
-    real(real64), allocatable :: ab(:,:)
+    real(real64) :: ab(size(a),size(b))
     integer :: n,m,i,j
         n = size(a)
         m = size(b)
-        allocate(ab(n,m))
+        !allocate(ab(n,m))
         forall(i=1:n, j=1:m)
             ab(i,j) = a(i)*b(j)
         end forall
     end function
         
-    function mat_det(A) result(d)
+    pure function mat_det(A) result(d)
     real(real64), intent(in) :: A(:,:)
     real(real64) :: d
     integer :: n, m
@@ -61,7 +61,7 @@ implicit none
         end select
     end function
     
-    function mat_inv(A) result(B)
+    pure function mat_inv(A) result(B)
     real(real64), intent(in) :: A(:,:)    
     real(real64) :: B(size(A,1),size(A,2))
     integer :: n, m
@@ -87,9 +87,9 @@ implicit none
         end select
     end function
     
-    function mat_solve_vec(A, b) result(x)
+    pure function mat_solve_vec(A, b) result(x)
     real(real64), intent(in) :: A(:,:), b(:)
-    real(real64), allocatable :: x(:)
+    real(real64) :: x(size(A,1))
     integer :: n,m
     
         n = size(A, 1)
@@ -113,10 +113,10 @@ implicit none
         end select
     end function
     
-    function mat_solve_mat(A, B) result(X)
+    pure function mat_solve_mat(A, B) result(X)
     real(real64), intent(in) :: A(:,:), B(:,:)
-    real(real64), allocatable :: X(:,:)
-    real(real64), allocatable :: A_inv(:,:)
+    real(real64) :: X(size(A,1),size(B,2))
+    real(real64) :: A_inv(size(A,1),size(A,1))
         A_inv = mat_inv(A)
         X = matmul(A_inv, B)
     end function
@@ -271,13 +271,13 @@ implicit none
         x = matmul(mat4_inv(A), b)
     end function
     
-    function lu_mat_det(A) result(d)
+    pure function lu_mat_det(A) result(d)
     use mod_lu
-    real(real64) :: d
     real(real64), intent(in) :: A(:,:)
-    logical :: ok
-    real(real64), allocatable :: temp(:), LU(:,:)
-    integer, allocatable :: indx(:)
+    real(real64) :: d
+    logical      :: ok
+    real(real64) :: LU(size(A,1),size(A,1))
+    integer      :: indx(size(A,1))
 
     integer :: i, rc, n, m
     
@@ -288,9 +288,9 @@ implicit none
         end if
 
         ok = .false.
-        allocate(LU(n,n))
-        allocate(temp(n+1))
-        allocate(INDX(n))
+        !allocate(LU(n,n))
+        !allocate(temp(n+1))
+        !allocate(INDX(n))
         LU = A
         !call LU decomposition routine
         call LUDCMP(LU,n,INDX,D,rc)
@@ -299,13 +299,13 @@ implicit none
         end do    
     end function
     
-    function lu_mat_invert(A) result(A_inv)
+    pure function lu_mat_invert(A) result(A_inv)
     use mod_lu
-    real(real64), allocatable :: A_inv(:,:)
     real(real64), intent(in) :: A(:,:)
+    real(real64) :: A_inv(size(A,1),size(A,1))
     logical :: ok
-    real(real64), allocatable :: temp(:), LU(:,:)
-    integer, allocatable :: indx(:)
+    real(real64):: LU(size(A,1),size(A,1))
+    integer :: indx(size(A,1))
     real(real64) :: d
     integer :: i, j, rc, n, m
     
@@ -314,16 +314,16 @@ implicit none
         if( n/= m) then
             error stop "Expecting a square matrix."
         end if
-        allocate(A_inv(n,n))
+        !allocate(A_inv(n,n))
         A_inv = 0.0_wp
         forall(i=1:n)
             A_inv(i,i) = 1.0_wp
         end forall
         
         ok = .false.
-        allocate(LU(n,n))
-        allocate(temp(n+1))
-        allocate(INDX(n))
+        !allocate(LU(n,n))
+        !allocate(temp(n+1))
+        !allocate(INDX(n))
         LU = A
         !call LU decomposition routine
         call LUDCMP(LU,n,INDX,D,rc)
@@ -338,15 +338,15 @@ implicit none
         
     end function
     
-    function lu_mat_solve_vec(A, b) result(x)
+    pure function lu_mat_solve_vec(A, b) result(x)
     use mod_lu
-    real(real64), allocatable :: x(:)
     real(real64), intent(in) :: A(:,:), b(:)
-    logical :: ok
-    real(real64), allocatable :: temp(:), LU(:,:)
-    integer, allocatable :: indx(:)
+    real(real64) :: x(size(A, 1))
+    logical      :: ok
+    real(real64) :: LU(size(A, 1),size(A, 1))
+    integer      :: indx(size(A, 1))
     real(real64) :: d
-    integer :: rc, n, m
+    integer      :: rc, n, m
     
         n = size(A, 1)
         m = size(A, 2)
@@ -355,9 +355,9 @@ implicit none
         end if
 
         ok = .false.
-        allocate(LU(n,n))
-        allocate(temp(n+1))
-        allocate(INDX(n))
+        !allocate(LU(n,n))
+        !allocate(temp(n+1))
+        !allocate(INDX(n))
         LU = A
         x = b
         !call LU decomposition routine
