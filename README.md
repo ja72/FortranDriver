@@ -6,20 +6,37 @@ Compiled with IFX and exports functions that are mostly wrappers to Fortran func
 
 For example, below is the code that wraps the Fortran native matrix multiplication intrinsic.
 
+**Legacy style** fortran exports
+
 ```fortran
 subroutine array_product_mm(n,m,k,A,x,b)
 !DEC$ ATTRIBUTES DLLEXPORT :: array_product_mm
 !DEC$ ATTRIBUTES ALIAS: 'array_product_mm' :: array_product_mm
-!DEC$ ATTRIBUTES VALUE :: n, m, k
+!DEC$ ATTRIBUTES VALUE     :: n, m, k
 !DEC$ ATTRIBUTES REFERENCE :: A, b, x
-integer, intent(in) :: n,m,k
-real(real64), intent(in) :: A(n,m), x(m,k)
+integer, intent(in)       :: n,m,k
+real(real64), intent(in)  :: A(n,m), x(m,k)
 real(real64), intent(out) :: b(n,k)
     
     b = matmul(A, x)    
             
 end subroutine
 ```
+
+and **Modern style** fortran exports
+
+```fortran
+subroutine array_product_mm(n,m,k,A,x,b) bind(c)
+!DEC$ ATTRIBUTES DLLEXPORT :: array_product_mm
+integer, intent(in), value :: n,m,k
+real(real64), intent(in)   :: A(n,m), x(m,k)
+real(real64), intent(out)  :: b(n,k)
+    
+    b = matmul(A, x)    
+            
+end subroutine
+```
+
 
 For matrix inversion, solution of system of equations and for determinant evaluation
 the Fortran library does a direct evaluation for systems with
