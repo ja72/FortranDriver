@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Security;
 using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
-using System.Globalization;
-using System.Drawing;
-using System.ComponentModel;
 using System.Runtime.InteropServices;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Runtime.CompilerServices;
+using System.Linq.Expressions;
 
 namespace FortranDriver
 {
-    public unsafe class NativeMatrix : 
+    public unsafe class NativeMatrix :
+        System.Collections.ICollection,
+        ICollection<double>,
         IFormattable
     {
         public NativeMatrix(int rows, int columns)
@@ -52,10 +49,30 @@ namespace FortranDriver
                 }
             }
         }
-        public static NativeMatrix Random(int n, int m, double minValue = 0, double maxValue = 1)
+        public static NativeMatrix FromRows(int rows, int columns, params double[] values)
+        {
+            double[,] data = new double[rows, columns];
+            FortranMethods.array_reshape_vm(rows*columns, values, columns, rows, data);
+            double[,] temp = new double[columns, rows];
+            FortranMethods.array_tansp_m(columns, rows, data, temp);
+            return new NativeMatrix(temp);
+        }
+        public static NativeMatrix FromColumns(int rows, int columns, params double[] values)
+        {
+            double[,] data = new double[columns, rows];
+            FortranMethods.array_reshape_vm(rows*columns, values, rows, columns, data);
+            return new NativeMatrix(data);
+        }
+        public static NativeMatrix RandoMminMax(int n, int m, double minValue = 0, double maxValue = 1)
         {
             double[,] data = new double[m, n];
-            NativeMatrixMethods.array_rand_m(n, m, minValue, maxValue, data);
+            FortranMethods.array_random_m(n, m, minValue, maxValue, data);
+            return new NativeMatrix(data);
+        }
+        public static NativeMatrix RandomUniform(int n, int m, ref int seed)
+        {
+            double[,] data = new double[m, n];
+            FortranMethods.array_uniform_m(n, m, ref seed, data);
             return new NativeMatrix(data);
         }
 
@@ -67,14 +84,14 @@ namespace FortranDriver
         public static NativeMatrix Scalar(int n, int m, double value)
         {
             double[,] data = new double[m, n];
-            NativeMatrixMethods.array_scalar_m(n, m, value, data);
+            FortranMethods.array_scalar_m(n, m, value, data);
             return new NativeMatrix(data);
         }
         public static NativeMatrix Diagonal(double[] value)
         {
             int n = value.Length;
             double[,] data = new double[n, n];
-            NativeMatrixMethods.array_diag_m(n, value, data);
+            FortranMethods.array_diag_m(n, value, data);
             return new NativeMatrix(data);
         }
         public static NativeMatrix Diagonal(int size, double[] value)
@@ -86,7 +103,7 @@ namespace FortranDriver
                 value = temp;
             }
             double[,] data = new double[size, size];
-            NativeMatrixMethods.array_diag_m(size, value, data);
+            FortranMethods.array_diag_m(size, value, data);
             return new NativeMatrix(data);
         }
 
@@ -107,7 +124,7 @@ namespace FortranDriver
                 (int j1, int m1) = columns.GetOffsetAndLength(Rows);
                 j1 += columns.Start.IsFromEnd ? 1 : 0;
                 int i2 = i1, j2 = j1 + m1;
-                return Slice(this, i1, i2, j1, j2);
+                return Slice(i1, i2, j1, j2);
             }
         }
         public NativeMatrix this[Range rows, Index column]
@@ -118,7 +135,7 @@ namespace FortranDriver
                 i1 += rows.Start.IsFromEnd ? 1 : 0;
                 int j1 = column.GetOffset(Columns) + (column.IsFromEnd ? 1 : 0);
                 int i2 = i1 + n1, j2 = j1;
-                return Slice(this, i1, i2, j1, j2);
+                return Slice(i1, i2, j1, j2);
             }
         }
         public NativeMatrix this[Range rows, Range columns]
@@ -130,7 +147,7 @@ namespace FortranDriver
                 (int j1, int m1) = columns.GetOffsetAndLength(Columns);
                 j1 += columns.Start.IsFromEnd ? 1 : 0;
                 int i2 = i1 + n1, j2 = j1 + m1;
-                return Slice(this, i1, i2, j1, j2);
+                return Slice(i1, i2, j1, j2);
             }
         }
 
@@ -139,40 +156,67 @@ namespace FortranDriver
         internal double[,] Data { get; }
 
         public int Size { get => Math.Min(Rows, Columns); }
-        public int Count { get => Rows*Columns; }
-
-        public Span<double> AsSpan()
-        {
-            fixed (double* ptr = &Data[0, 0])
-            {
-                return new Span<double>(ptr, Data.Length);
-            }
-        }
-
-        public double[] ToArray() => AsSpan().ToArray();
         public double[,] ToArray2() => Data;
 
         public static implicit operator double[,](NativeMatrix a) => a.ToArray2();
         public static explicit operator NativeMatrix(double[,] a) => new NativeMatrix(a);
 
+        #region Algebra
+
+        public static NativeMatrix Round(NativeMatrix A, int digits)
+        {
+            double[,] data = new double[A.Columns, A.Rows];
+            FortranMethods.array_round_m(A.Rows, A.Columns, A.Data, digits, data);
+            return new NativeMatrix(data);
+        }
+
+        public NativeMatrix ReShape(int newRows, int newColumns)
+        {
+            int n = Rows, m = Columns, k = newRows, l = newColumns;
+            double[,] data = new double[l, k];
+            FortranMethods.array_reshape_mm(n, m, Data, k, l, data);
+            return new NativeMatrix(data);
+        }
+        public NativeVector ReShape(int newSize)
+        {
+            int n = Rows, m = Columns, k = newSize;
+            double[] data = new double[k];
+            FortranMethods.array_reshape_mv(n, m, Data, k, data);
+            return new NativeVector(data);
+        }
+        public NativeMatrix Slice(int startRow, int endRow, int startColumn, int endColumn)
+        {
+            double[,] data = new double[endColumn-startColumn+1, endRow-startRow+1];
+            FortranMethods.array_slice_m(Rows, Columns, Data, startRow, endRow, startColumn, endColumn, data);
+            return new NativeMatrix(data);
+        }
+        public NativeVector GetRow(int row)
+            => GetRow(row, 1, Columns);
+        public NativeVector GetRow(int row, int startColumn, int endColumn)
+        {
+            int size = endColumn-startColumn+1;
+            double[,] matrix = new double[size, 1];
+            FortranMethods.array_slice_m(Rows, Columns, Data, row, row, startColumn, endColumn, matrix);
+            double[] data = new double[size];
+            FortranMethods.array_reshape_mv(size, 1, matrix, size, data);
+            return new NativeVector(data);
+        }
+        public NativeVector GetColumn(int row)
+            => GetColumn(row, 1, Columns);
+        public NativeVector GetColumn(int row, int startRow, int endRow)
+        {
+            int size = endRow-startRow+1;
+            double[,] matrix = new double[1, size];
+            FortranMethods.array_slice_m(Rows, Columns, Data, startRow, endRow, row, row, matrix);
+            double[] data = new double[size];
+            FortranMethods.array_reshape_mv(1, size, matrix, size, data);
+            return new NativeVector(data);
+        }
         public static NativeMatrix Transpose(NativeMatrix A)
         {
             int n = A.Rows, m = A.Columns;
             double[,] data = new double[n, m];
-            NativeMatrixMethods.array_tansp_m(n, m, A.Data, data);
-            return new NativeMatrix(data);
-        }
-        public static NativeMatrix Reshape(NativeMatrix A, int newRows, int newColumns)
-        {
-            int n = A.Rows, m = A.Columns, k = newRows, l = newColumns;
-            double[,] data = new double[l, k];
-            NativeMatrixMethods.array_reshape_mm(n, m, A.Data, k, l, data);
-            return new NativeMatrix(data);
-        }
-        public static NativeMatrix Slice(NativeMatrix A, int startRow, int endRow, int startColumn, int endColumn)
-        {
-            double[,] data = new double[endColumn-startColumn+1, endRow-startRow+1];
-            NativeMatrixMethods.array_slice_m(A.Rows, A.Columns, A, startRow, endRow, startColumn, endColumn, data);
+            FortranMethods.array_tansp_m(n, m, A.Data, data);
             return new NativeMatrix(data);
         }
         public static NativeMatrix Negate(NativeMatrix x)
@@ -190,7 +234,7 @@ namespace FortranDriver
             }
             int n = x.Rows, m = x.Columns;
             double[,] data = new double[m, n];
-            NativeMatrixMethods.array_add_m(n, m, x.Data, y.Data, data);
+            FortranMethods.array_add_m(n, m, x.Data, y.Data, data);
             return new NativeMatrix(data);
         }
         public static NativeMatrix Subtract(double x, NativeMatrix y)
@@ -205,17 +249,28 @@ namespace FortranDriver
             }
             int n = x.Rows, m = x.Columns;
             double[,] data = new double[m, n];
-            NativeMatrixMethods.array_subtract_m(n, m, x.Data, y.Data, data);
+            FortranMethods.array_subtract_m(n, m, x.Data, y.Data, data);
             return new NativeMatrix(data);
         }
         public static NativeMatrix Scale(double x, NativeMatrix A)
         {
             int n = A.Rows, m = A.Columns;
             double[,] data = new double[m, n];
-            NativeMatrixMethods.array_scale_m(n, m, x, A.Data, data);
+            FortranMethods.array_scale_m(n, m, x, A.Data, data);
             return new NativeMatrix(data);
         }
 
+        public static NativeVector Product(NativeVector x, NativeMatrix A)
+        {
+            if (x.Size != A.Columns)
+            {
+                throw new ArgumentException($"Expecting {x.Size} columns, found {A.Columns}.", nameof(A));
+            }
+            int n = A.Rows, m = A.Columns;
+            double[] data = new double[m];
+            FortranMethods.array_product_vm(n, m, x.Data, A.Data, data);
+            return new NativeVector(data);
+        }
         public static NativeVector Product(NativeMatrix A, NativeVector x)
         {
             if (x.Size != A.Rows)
@@ -224,7 +279,7 @@ namespace FortranDriver
             }
             int n = A.Rows, m = A.Columns;
             double[] data = new double[m];
-            NativeMatrixMethods.array_product_mv(n, m, A.Data, x.Data, data);
+            FortranMethods.array_product_mv(n, m, A.Data, x.Data, data);
             return new NativeVector(data);
         }
         public static NativeMatrix Product(NativeMatrix A, NativeMatrix X)
@@ -236,34 +291,70 @@ namespace FortranDriver
             }
             int n = A.Rows, m = A.Columns, k = X.Columns;
             double[,] data = new double[k, n];
-            NativeMatrixMethods.array_product_mm(n, m, k, A.Data, X.Data, data);
-            return new NativeMatrix(data);
-        }
-        public static NativeMatrix Solve(NativeMatrix A, NativeMatrix B)
-        {
-            // | A(n,m) | * | x(m,k) | = | b(n,k) |
-            if (B.Rows != A.Rows)
-            {
-                throw new ArgumentException($"Expecting {A.Rows} elements, found {B.Rows}.", nameof(B));
-            }
-            int n = A.Rows, m = A.Columns, k = B.Columns;
-            double[,] data = new double[k, m];
-            NativeMatrixMethods.array_solve_mm(n, m, k, A.Data, B.Data, data);
+            FortranMethods.array_product_mm(n, m, k, A.Data, X.Data, data);
             return new NativeMatrix(data);
         }
 
-        #region Algebra
-        public static double Determinant(NativeMatrix a)
+        public double Determinant()
         {
-            int n = a.Size;
-            NativeMatrixMethods.array_det_m(n, a.Data, out double det);
+            int n = Size;
+            FortranMethods.array_det_m(n, Data, out double det);
             return det;
         }
-        public static NativeMatrix Inverse(NativeMatrix a)
+        public NativeVector Solve(NativeVector b)
         {
-            int n = a.Size;
+            // | A(n,n) | * | x(n) | = | b(n) |
+            if (b.Size != Rows)
+            {
+                throw new ArgumentException($"Expecting {Rows} elements, found {b.Size}.", nameof(b));
+            }
+            int n = Rows, m = Columns;
+            double[] data = new double[m];
+            FortranMethods.array_solve_mv(n, Data, b.Data, data);
+            return new NativeVector(data);
+        }
+        public NativeMatrix Solve(NativeMatrix B)
+        {
+            // | A(n,n) | * | x(n,k) | = | b(n,k) |
+            if (B.Rows != Rows)
+            {
+                throw new ArgumentException($"Expecting {Rows} elements, found {B.Rows}.", nameof(B));
+            }
+            int n = Rows, m = Columns, k = B.Columns;
+            double[,] data = new double[k, m];
+            FortranMethods.array_solve_mm(n, k, Data, B.Data, data);
+            return new NativeMatrix(data);
+        }
+        public NativeVector BlockSolve(NativeVector b)
+        {
+            // | A(n,n) | * | x(n) | = | b(n) |
+            if (b.Size != Rows)
+            {
+                throw new ArgumentException($"Expecting {Rows} elements, found {b.Size}.", nameof(b));
+            }
+            int n = Rows, m = Columns;
+            double[] data = new double[m];
+            FortranMethods.array_block_solve_mv(n, Data, b.Data, data);
+            return new NativeVector(data);
+        }
+        public NativeMatrix BlockSolve(NativeMatrix B)
+        {
+            // | A(n,n) | * | x(n,k) | = | b(n,k) |
+            if (B.Rows != Rows)
+            {
+                throw new ArgumentException($"Expecting {Rows} elements, found {B.Rows}.", nameof(B));
+            }
+            int n = Rows, m = Columns, k = B.Columns;
+            double[,] data = new double[k, m];
+            FortranMethods.array_block_solve_mm(n, k, Data, B.Data, data);
+            return new NativeMatrix(data);
+        }
+
+        public NativeMatrix Inverse()
+        {
+            int n = Size;
             double[,] data = new double[n, n];
-            NativeMatrixMethods.array_inverse_m(n, a.Data, data);
+            FortranMethods.array_inverse_m(n, Data, data);
             return new NativeMatrix(data);
         }
         #endregion
@@ -283,8 +374,8 @@ namespace FortranDriver
         public static NativeMatrix operator *(NativeMatrix a, NativeMatrix b) => Product(a, b);
         public static NativeMatrix operator /(NativeMatrix a, double divisor) => Scale(1 / divisor, a);
         public static NativeMatrix operator ~(NativeMatrix a) => Transpose(a);
-        public static NativeMatrix operator /(NativeMatrix X, NativeMatrix A) => Solve(A, X);
-        public static NativeMatrix operator !(NativeMatrix a) => Inverse(a);
+        public static NativeMatrix operator /(NativeMatrix X, NativeMatrix A) => A.Solve(X);
+        public static NativeMatrix operator !(NativeMatrix a) => a.Inverse();
         #endregion
 
         #region Formatting
@@ -295,20 +386,31 @@ namespace FortranDriver
         public string ToString(string formatting, IFormatProvider formatProvider)
         {
             const int width = 11;
+
+            //double[,] data = new double[Columns, Rows];
+            //FortranMethods.array_round_m(Rows, Columns, Data, 11, data);
+
             StringBuilder sb = new StringBuilder();
             int n = Data.GetLength(1), m = Data.GetLength(0);
+            string[][] data = new string[m][];
+            int[] maxWidth = new int[m];
+            for (int j = 0; j < m; j++)
+            {
+                data[j] = new string[n];
+                for (int i = 0; i < n; i++)
+                {
+                    data[j][i] = Data[j, i].ToString(formatting, formatProvider);
+                }
+                maxWidth[j] = data[j].Max((s) => s.Length);
+            }
+
             for (int i = 0; i < n; i++)
             {
                 sb.Append('|');
                 for (int j = 0; j < m; j++)
                 {
-                    var obj = Data[j, i];
-                    string text = obj.ToString(formatting, formatProvider);
-                    text  = text.PadLeft(width);
-                    if (text.Length>width)
-                    {
-                        text = $"{text.Substring(0, width-1)}…";
-                    }
+                    string text = data[j][i];
+                    text  = text.PadLeft(maxWidth[j]);
                     sb.Append($" {text}");
                 }
                 sb.AppendLine(" |");
@@ -318,81 +420,55 @@ namespace FortranDriver
         }
         #endregion
 
-        #region Fortran Methods
-        // NOTE: Fortran methods declared with `DllImport()`. Consider use the newer `LibraryImport()`
-        //       delcaration instead. Use a ref to first element instead of passing a 2D array.
+        #region Collections
+        public int Count { get => Rows*Columns; }
 
-        internal static class NativeMatrixMethods
+        public Span<double> AsSpan()
         {
-            const string libraryName = "FortranDriverDLL";
+            fixed (double* ptr = &Data[0, 0])
+            {
+                return new Span<double>(ptr, Data.Length);
+            }
+        }
 
-            [DllImport(libraryName, EntryPoint = "array_rand_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void array_rand_m(int rows, int columns, [In] double minValue, [In] double maxValue, [Out] double[,] A);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public double[] ToArray() => AsSpan().ToArray();
 
-            [DllImport(libraryName, EntryPoint = "array_diag_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void array_diag_m(int size, [In] double[] x, [Out] double[,] A);
+        public bool Contains(double item) => IndexOf(item)>=0;
+        public int IndexOf(double item) => Array.IndexOf(Data, item);
+        public IEnumerator<double> GetEnumerator()
+        {
+            for (int j = 0; j < Columns; j++)
+            {
+                for (int i = 0; i < Rows; i++)
+                {
+                    yield return Data[j, i];
+                }
+            }
+        }
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+            => GetEnumerator();
+        bool ICollection<double>.IsReadOnly => true;
+        void ICollection<double>.Add(double item) => throw new NotSupportedException();
+        void ICollection<double>.Clear() => throw new NotSupportedException();
+        bool ICollection<double>.Remove(double item) => throw new NotSupportedException();
+        bool System.Collections.ICollection.IsSynchronized => false;
+        object System.Collections.ICollection.SyncRoot => null;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        void System.Collections.ICollection.CopyTo(Array array, int index)
+        {
+            CopyTo(array as double[], index);
+        }
 
-            [DllImport(libraryName, EntryPoint = "array_scalar_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void array_scalar_m(int rows, int columns, [In] double x, [Out] double[,] A);
-
-            [DllImport(libraryName, EntryPoint = "array_norm_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void array_norm_m(int rows, int columns, [In] double[,] A, ref double s);
-
-            [DllImport(libraryName, EntryPoint = "array_add_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void array_add_m(int rows, int columns, [In] double[,] x, [In] double[,] y, [Out] double[,] z);
-
-            [DllImport(libraryName, EntryPoint = "array_subtract_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void array_subtract_m(int rows, int columns, [In] double[,] x, [In] double[,] y, [Out] double[,] z);
-
-            [DllImport(libraryName, EntryPoint = "array_scale_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void array_scale_m(int rows, int columns, double x, [In] double[,] y, [Out] double[,] z);
-
-            [DllImport(libraryName, EntryPoint = "array_det_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void array_det_m(int size, [In] double[,] A, [Out] out double det);
-
-            [DllImport(libraryName, EntryPoint = "array_tansp_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void array_tansp_m(int rows, int columns, [In] double[,] A, [Out] double[,] At);
-
-            [DllImport(libraryName, EntryPoint = "array_reshape_mm", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void array_reshape_mm(int rows, int columns, [In] double[,] A, int new_rows, int new_columns, [Out] double[,] B);
-
-            [DllImport(libraryName, EntryPoint = "array_slice_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void array_slice_m(int rows, int columns, [In] double[,] A, int start_row, int end_row, int start_column, int end_column, [Out] double[,] B);
-
-
-            /// <summary>
-            /// Fortran DLL call to matrix multiply <code>b=A*x</code>.
-            /// </summary>
-            /// <param name="A">The coefficient matrix.</param>
-            /// <param name="x">The known vector</param>
-            /// <param name="b">The result vector</param>
-            [DllImport(libraryName, EntryPoint = "array_product_mv", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void array_product_mv(int rows, int columns, [In] double[,] A, [In] double[] x, [Out] double[] b);
-
-            /// <summary>
-            /// Fortran DLL call to matrix multiply <code>C=A*B</code>.
-            /// </summary>
-            /// <param name="A">The coefficient matrix.</param>
-            /// <param name="B">The known matrix</param>
-            /// <param name="C">The result matrix</param>
-            [DllImport(libraryName, EntryPoint = "array_product_mm", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void array_product_mm(int rows, int columns, int pages, [In] double[,] A, [In] double[,] B, [Out] double[,] C);
-
-            /// <summary>
-            /// Fortran DLL call to solve the linear system of equations <code>A*X=B</code> for <paramref name="X"/>.
-            /// </summary>
-            /// <param name="A">The coefficient matrix.</param>
-            /// <param name="B">The known matrix. </param>
-            /// <param name="X">The unknown matrix.</param>
-            [DllImport(libraryName, EntryPoint = "array_solve_mm", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void array_solve_mm(int rows, int columns, int pages, [In] double[,] A, [In] double[,] B, [Out] double[,] X);
-
-            [DllImport(libraryName, EntryPoint = "array_inverse_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void array_inverse_m(int size, [In] double[,] A, [Out] double[,] A_inv);
-
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo(double[] array, int index)
+        {
+            array = new double[Data.Length];
+            Buffer.BlockCopy(Data, 0 , array, sizeof(double) * index, Buffer.ByteLength(Data));
         }
 
         #endregion
+
 
     }
 }

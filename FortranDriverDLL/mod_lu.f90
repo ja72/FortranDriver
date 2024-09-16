@@ -16,65 +16,119 @@
 
     integer, parameter :: wp = real64
     integer, parameter :: nmax = 100    
+    
+    type :: lu_info(n)
+        integer, len :: n
+        real(real64) :: data(n,n)
+        integer(int32) :: indx(n)
+        real(real64) :: sgn
+        integer :: ierr
+    contains
+        procedure :: det => lu_det
+        procedure :: inv => lu_inv
+        procedure :: solve_vec => lu_solve_vec
+        procedure :: solve_mat => lu_solve_mat
+        generic :: solve => solve_vec, solve_mat
+    end type
+    
+    interface lu
+        module procedure :: lu_decomp_fix, lu_decomp_dyn
+    end interface
 
     CONTAINS
     
-    pure function LUSOLVE(A, b) result(x)
-    real(real64), intent(in) :: A(:,:), b(size(A,1))
-    real(real64) :: x(size(A,1))
-    logical      :: ok
-    real(real64) :: LU(size(A,1),size(A,1))
-    integer      :: indx(size(A,1))
-    real(real64) :: d
-    integer      :: rc, n
-
-    ok = .false.
-    n = size(A,1)
-    !allocate(LU(n,n))
-    !allocate(temp(n+1))
-    !allocate(INDX(n))
-    LU = A
-    !call LU decomposition routine
-    call LUDCMP(LU,n,INDX,D,rc)
-
-    !call appropriate solver if previous return code is ok
-    if (rc == 0) then
-        x = b
-        call LUBKSB(LU,n,INDX,x)
-        ok = .true.
-    endif    
+    pure function lu_decomp_fix(n, A) result(lu)
+    integer, intent(in) :: n
+    real(real64), intent(in) :: A(n,n)
+    real(real64) :: T(n,n), sgn
+    type(lu_info(n)) :: lu
+    integer :: ierr, indx(n), i
+        T = A
+        indx = [ (i, i=1,n) ]
+        sgn = 1
+        ierr = 0
+        
+        ! 1×1 systems have no LU decomposition
+        if( n > 1 ) then
+            call LUDCMP(T, n, indx, sgn, ierr)
+            if( ierr /= 0 ) then 
+                error stop "Singular Matrix"                
+            end if            
+        end if
+        
+        lu%data = T
+        lu%indx = indx
+        lu%sgn = sgn
+        lu%ierr = ierr
+        
     end function
     
-    pure function LUSOLVEX(A,b) result(x)
-    real(real64), intent(in) :: A(:,:), b(:,:)
-    real(real64) :: x(size(A, 1),size(b, 2))
-    logical      :: ok
-    real(real64) :: LU(size(A, 1),size(A, 1))
-    integer      :: indx(size(A, 1))
+    pure function lu_decomp_dyn(A) result(lu)
+    real(real64), intent(in) :: A(:,:)
+    type(lu_info(:)), allocatable :: lu
+    real(real64) :: lum(size(A,1),size(A,1))
+    integer :: indx(size(A,1))
     real(real64) :: d
-
-    integer :: j, rc, n, m
-
-    ok = .false.
-    n = size(A, 1)
-    m = size(b, 2)
-    !allocate(LU(n,n))
-    !allocate(temp(n+1))
-    !allocate(INDX(n))
-    LU = A
-    x = b
-    !call LU decomposition routine
-    call LUDCMP(LU,n,INDX,D,rc)
-
-    !call appropriate solver if previous return code is ok
-    if (rc == 0) then
-        do j=1, m
-            call LUBKSB(LU,n,INDX,x(:,j))
+    integer :: ierr, n
+        n = size(A,1)
+        lum = A
+        call LUDCMP(lum, n, indx, d, ierr)
+        if( ierr /= 0 ) then
+            error stop "Singular Matrix"
+        end if
+        allocate(lu_info(n) :: lu)
+        lu%data = lum
+        lu%indx = indx
+        lu%sgn = d
+        lu%ierr = ierr
+    end function
+    
+    pure function lu_solve_vec(lu,b) result(x)
+    class(lu_info(*)), intent(in) :: lu
+    real(real64), intent(in) :: b(:)
+    real(real64) :: x(size(b,1))
+        x = b
+        call LUBKSB(lu%data, lu%n, lu%indx, x)
+    end function
+    
+    pure function lu_solve_mat(lu,b) result(x)
+    class(lu_info(*)), intent(in) :: lu
+    real(real64), intent(in) :: b(:,:)
+    real(real64) :: x(size(b,1),size(b,2))
+    integer :: j, k
+        k = size(b,2)
+        x = b
+        do j=1, k
+            call LUBKSB(lu%data, lu%n, lu%indx, x(:,j))
         end do
-        ok = .true.
-    endif
-    end function    
-
+    end function
+    
+    pure function lu_det(lu) result(d)
+    class(lu_info(*)), intent(in) :: lu
+    real(real64) :: d
+    integer :: i, n
+        n = lu%n
+        d = lu%sgn
+        do i=1,n
+            d = d * lu%data(i,i)
+        end do
+    end function
+    
+    pure function lu_inv(lu) result(A_inv)
+    class(lu_info(*)), intent(in) :: lu
+    real(real64) :: A_inv(lu%n, lu%n)
+    integer :: j, k
+        k = lu%n
+        A_inv = 0.0_wp
+        forall(j=1:k)
+            A_inv(j,j) = 1.0_wp
+        end forall
+        do j=1, k
+            call LUBKSB(lu%data, lu%n, lu%indx, A_inv(:,j))
+        end do
+                
+    end function
+    
     pure Subroutine LUDCMP(A,N,INDX,D,CODE)
     !  ***************************************************************
     !  * Given an N x N matrix A, this routine replaces it by the LU *
@@ -157,8 +211,7 @@
 
     RETURN
     
-    END subroutine LUDCMP
-    
+    END subroutine LUDCMP    
     
     pure Subroutine LUBKSB(A, N, INDX, B)
     !  ******************************************************************
@@ -178,7 +231,7 @@
     real(real64), intent(inout), dimension(N) :: B
 
     integer :: i,j,ii,ll
-    !f2py depend(N) A, INDX, B
+    
 
     real(real64)  SUMM
 
@@ -210,6 +263,18 @@
 
     RETURN
     END subroutine LUBKSB
+    
+    pure Subroutine LUBKSB2(A, N, K, INDX, B)
+    implicit none
+    integer, intent(in) :: N, K
+    real(real64), intent(in), dimension(N,N) :: A
+    integer, intent(in), dimension(N) :: INDX
+    real(real64), intent(inout), dimension(N, K) :: B
+    integer :: j
+        do j=1,K
+            call LUBKSB(A, N, INDX, B(:,j))
+        end do
+    end subroutine LUBKSB2
 
     subroutine LU_TEST()
     real(real64), pointer ::  A(:,:)   !real matrix (n x n)

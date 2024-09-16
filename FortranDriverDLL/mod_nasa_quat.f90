@@ -1550,17 +1550,17 @@
     real( real64 ), intent(in) :: q(4)
     real ( real64 ), intent(in) :: d(dim_num)
     real ( real64 ), intent(out) :: a(dim_num,dim_num)
-    real ( real64 ) :: r(dim_num,dim_num), g(dim_num,dim_num)
+    real ( real64 ) :: r(dim_num,dim_num)
     integer :: i
     
         call rotation_quat2mat_inv(q, r, .false.)
         ! call rotation_quat2mat_inv(q, rt, .true.)
         
         forall(i=1:dim_num)
-            g(i,:) = d(i) * r(:,i)
+            a(i,:) = d(i) * r(:,i)
         end forall
         
-        a = matmul(r, g)
+        a = matmul(r, a)
     
     end subroutine
     end module

@@ -115,10 +115,22 @@ implicit none
     
     pure function mat_solve_mat(A, B) result(X)
     real(real64), intent(in) :: A(:,:), B(:,:)
-    real(real64) :: X(size(A,1),size(B,2))
-    real(real64) :: A_inv(size(A,1),size(A,1))
-        A_inv = mat_inv(A)
-        X = matmul(A_inv, B)
+    real(real64) :: X(size(B,1), size(B,2))
+    integer :: n
+        n = size(A, 1)
+        select case(n)
+        case (1)
+            x = B/A(1,1)
+        case (2)   
+            x = mat2_solve_mat(A, B)
+        case (3)
+            x = mat3_solve_mat(A, B)
+        case (4)
+            x = mat4_solve_mat(A, B)
+        case default
+            X = lu_mat_solve_mat(A, B)
+        end select
+        
     end function
     
     pure function mat2_det(A) result(d)
@@ -156,6 +168,23 @@ implicit none
         x(1) = d_inv*(A(2,2)*b(1) - A(1,2)*b(2))
         x(2) = d_inv*(A(1,1)*b(2) - A(2,1)*b(1))    
     end function
+    pure function mat2_solve_mat(A,b) result(x)
+    real(real64), intent(in) :: A(2,2), b(:,:)
+    real(real64) :: x(2,size(b,2)), d_inv, d
+    integer :: h, j
+        if(size(b,1)/=2) then
+            error stop "Expecting 2 rows in B."
+        end if
+        d = mat2_det(A)
+        if( abs(d) <= tiny ) then
+            error stop "Matrix is singular."
+        end if
+        d_inv = 1/d
+        do j=1, h
+            x(1, j) = d_inv*(A(2,2)*b(1, j) - A(1,2)*b(2, j))
+            x(2, j) = d_inv*(A(1,1)*b(2, j) - A(2,1)*b(1, j))    
+        end do
+    end function
     
     pure function mat3_det(A) result(d)
     implicit real(real64) (T)
@@ -191,7 +220,7 @@ implicit none
         
     end function
     
-    pure function mat3_solve_vec(A,b) result(x)
+    pure function mat3_solve_vec(A, b) result(x)
     real(real64) :: x(3), d_inv, d
     real(real64), intent(in) :: A(3,3), b(3)
         d = mat3_det(A)
@@ -202,6 +231,26 @@ implicit none
         x(1) = d_inv*(A(1,2)*(A(2,3)*b(3)-A(3,3)*b(2))+A(1,3)*(A(3,2)*b(2)-A(2,2)*b(3))+b(1)*(A(2,2)*A(3,3)-A(2,3)*A(3,2)))
         x(2) = d_inv*(A(1,1)*(A(3,3)*b(2)-A(2,3)*b(3))+A(1,3)*(A(2,1)*b(3)-A(3,1)*b(2))-b(1)*(A(2,1)*A(3,3)-A(2,3)*A(3,1)))
         x(3) = d_inv*(A(1,1)*(A(2,2)*b(3)-A(3,2)*b(2))+A(1,2)*(A(3,1)*b(2)-A(2,1)*b(3))+b(1)*(A(2,1)*A(3,2)-A(2,2)*A(3,1)))
+    end function
+    
+    pure function mat3_solve_mat(A, b) result(x)
+    real(real64), intent(in) :: A(3,3), b(:,:)
+    real(real64) :: x(3,size(b,2)), d_inv, d
+    integer :: h, j
+        if( size(B,1) /= 3) then
+            error stop "Expecting 3 rows in B."
+        end if
+        h = size(B,2)
+        d = mat3_det(A)
+        if( abs(d) <= tiny ) then
+            error stop "Matrix is singular."
+        end if
+        d_inv = 1/d
+        do j = 1, h
+            x(1, j) = d_inv*(+b(1,j)*(A(2,2)*A(3,3)-A(2,3)*A(3,2)))+A(1,2)*(A(2,3)*b(3,j)-A(3,3)*b(2,j))+A(1,3)*(A(3,2)*b(2,j)-A(2,2)*b(3,j))
+            x(2, j) = d_inv*(-b(1,j)*(A(2,1)*A(3,3)-A(2,3)*A(3,1)))+A(1,3)*(A(2,1)*b(3,j)-A(3,1)*b(2,j))+A(1,1)*(A(3,3)*b(2,j)-A(2,3)*b(3,j))
+            x(3, j) = d_inv*(+b(1,j)*(A(2,1)*A(3,2)-A(2,2)*A(3,1)))+A(1,1)*(A(2,2)*b(3,j)-A(3,2)*b(2,j))+A(1,2)*(A(3,1)*b(2,j)-A(2,1)*b(3,j))
+        end do
     end function
     
     pure function mat4_det(A) result(d)
@@ -271,104 +320,265 @@ implicit none
         x = matmul(mat4_inv(A), b)
     end function
     
+    pure function mat4_solve_mat(A,b) result(x)
+    real(real64), intent(in) :: A(4,4), b(:,:)
+    real(real64) :: x(4, size(b,2))
+    real(real64) :: A_inv(4,4)
+    integer :: m, h
+        m = size(B,1)
+        h = size(B,2)
+        if( m/= 4) then
+            error stop "Expecting a 4 rows in B."
+        end if
+        A_inv = mat4_inv(A)
+        x = matmul(A_inv, b)
+    end function
+    
     pure function lu_mat_det(A) result(d)
-    use mod_lu
     real(real64), intent(in) :: A(:,:)
     real(real64) :: d
-    logical      :: ok
-    real(real64) :: LU(size(A,1),size(A,1))
-    integer      :: indx(size(A,1))
-
-    integer :: i, rc, n, m
-    
+    integer :: n
         n = size(A,1)
-        m = size(A,2)
-        if( n/= m) then
+        if( n/= size(A,2)) then
             error stop "Expecting a square matrix."
         end if
+        d = lu_mat_det_fix(n, A)
+    end function
+    
+    pure function lu_mat_det_fix(n, A) result(d)
+    use mod_lu
+    integer, intent(in) :: n
+    real(real64), intent(in) :: A(n,n)
+    real(real64) :: d
+    type(lu_info(n)) :: lui
+    
+        if( n == 1 ) then
+            d = A(1,1)
+        end if
 
-        ok = .false.
-        !allocate(LU(n,n))
-        !allocate(temp(n+1))
-        !allocate(INDX(n))
-        LU = A
-        !call LU decomposition routine
-        call LUDCMP(LU,n,INDX,D,rc)
-        do i=1, n
-            d =d * LU(i,i)
-        end do    
+        lui = lu(n, A)
+        d = lui%det()
+
     end function
     
     pure function lu_mat_invert(A) result(A_inv)
-    use mod_lu
     real(real64), intent(in) :: A(:,:)
-    real(real64) :: A_inv(size(A,1),size(A,1))
-    logical :: ok
-    real(real64):: LU(size(A,1),size(A,1))
-    integer :: indx(size(A,1))
-    real(real64) :: d
-    integer :: i, j, rc, n, m
+    real(real64) :: A_inv(size(A,1),size(A,2))
+    integer :: n
     
         n = size(A,1)
-        m = size(A,2)
-        if( n/= m) then
+        if( n/= size(A,2)) then
             error stop "Expecting a square matrix."
         end if
-        !allocate(A_inv(n,n))
-        A_inv = 0.0_wp
-        forall(i=1:n)
-            A_inv(i,i) = 1.0_wp
-        end forall
-        
-        ok = .false.
-        !allocate(LU(n,n))
-        !allocate(temp(n+1))
-        !allocate(INDX(n))
-        LU = A
-        !call LU decomposition routine
-        call LUDCMP(LU,n,INDX,D,rc)
+        A_inv = lu_mat_invert_fix(n, A)
+            
+    end function
+    pure function lu_mat_invert_fix(n, A) result(A_inv)
+    use mod_lu
+    integer, intent(in) :: n
+    real(real64), intent(in) :: A(n,n)
+    real(real64) :: A_inv(n,n)
+    type(lu_info(n)) :: lui
+    
+        if(n == 1) then
+            A_inv = 1.0_real64/A(1, 1) 
+            return
+        end if
 
-        !call appropriate solver if previous return code is ok
-        if (rc == 0) then
-            do j=1, n
-                call LUBKSB(LU,n,INDX, A_inv(:,j))
-            end do
-            ok = .true.
-        endif
-        
+        lui = lu(n, A)
+        A_inv = lui%inv()
+            
     end function
     
     pure function lu_mat_solve_vec(A, b) result(x)
-    use mod_lu
     real(real64), intent(in) :: A(:,:), b(:)
-    real(real64) :: x(size(A, 1))
-    logical      :: ok
-    real(real64) :: LU(size(A, 1),size(A, 1))
-    integer      :: indx(size(A, 1))
-    real(real64) :: d
-    integer      :: rc, n, m
-    
+    real(real64) :: x(size(b))
+    integer :: n
         n = size(A, 1)
-        m = size(A, 2)
-        if( n/= m) then
+        if( n/= size(A,2)) then
             error stop "Expecting a square matrix."
         end if
-
-        ok = .false.
-        !allocate(LU(n,n))
-        !allocate(temp(n+1))
-        !allocate(INDX(n))
-        LU = A
-        x = b
-        !call LU decomposition routine
-        call LUDCMP(LU,n,INDX,D,rc)
-
-        !call appropriate solver if previous return code is ok
-        if (rc == 0) then
-            call LUBKSB(LU,n,INDX,x)
-            ok = .true.
-        endif    
+        if( n/= size(b)) then
+            error stop "Incompatible matrix sizes."
+        end if
+        x = lu_mat_solve_vec_fix(n, A, b)
+    end function
+    
+    pure function lu_mat_solve_vec_fix(n, A, b) result(x)
+    use mod_lu
+    integer, intent(in) :: n
+    real(real64), intent(in) :: A(n,n), b(n)
+    real(real64) :: x(n)
+    type(lu_info(n)) :: lui
+    
+        if(n == 1) then
+            x = b/A(1, 1) 
+            return
+        end if
+    
+        lui = lu(n, A)
+        x = lui%solve(b)
         
+    end function
+
+    
+    pure function lu_mat_solve_mat(A, b) result(x)
+    real(real64), intent(in) :: A(:,:), b(:,:)
+    real(real64) :: x(size(b,1),size(b,2))
+    integer :: n, k
+        n = size(A, 1)
+        k = size(B, 2)
+        if( n/= size(A,2)) then
+            error stop "Expecting a square matrix."
+        end if
+        if( n/= size(b, 1)) then
+            error stop "Incompatible matrix sizes."
+        end if
+        x = lu_mat_solve_mat_fix(n, k, A, b)
+    end function
+    
+    pure function lu_mat_solve_mat_fix(n, k, A, b) result(x)
+    use mod_lu
+    integer, intent(in) :: n, k
+    real(real64), intent(in) :: A(n,n), b(n,k)
+    real(real64) :: x(n,k)
+    type(lu_info(n)) :: lui
+    
+        if(n == 1) then
+            x = b/A(1, 1) 
+            return
+        end if
+        
+        lui = lu(n, A)
+        x = lui%solve(b)
+        
+    end function
+    
+    pure function lu_mat_block_solve_vec(A, b) result(x)
+    use mod_lu
+    real(real64), intent(in) :: A(:,:), b(:)
+    real(real64) :: x(size(b))
+    integer :: n
+        n = size(A,1)
+        if(n /= size(A,2) ) then
+            error stop "Expecting a square matrix."
+        end if
+        if( n/= size(b) ) then
+            error stop "Incompatible matrix sizes."
+        end if
+        x = lu_mat_block_solve_vec_fix(n,A,B)
+    end function
+    
+    pure function lu_mat_block_solve_vec_fix(n, A, b) result(x)
+    use mod_lu
+    integer, intent(in) :: n
+    real(real64), intent(in) :: A(n,n), b(n)
+    real(real64) :: x(n)
+    type(lu_info(n)) :: LU_1, LU_2, LU_3, LU_4
+    real(real64) :: A_11(n/2,n/2), A_22(n-n/2,n-n/2), A_12(n/2,n-n/2), A_21(n-n/2,n/2)
+    real(real64) :: B_12(n/2,n-n/2), B_21(n-n/2,n/2), y_1(n/2), y_2(n-n/2)
+    real(real64) :: b_1(n/2), b_2(n-n/2), x_1(n/2), x_2(n-n/2)
+    integer      :: k
+    
+        if(n == 1) then
+            x = b/A(1, 1) 
+            return
+        end if
+            
+        k = n/2
+                
+        b_1 = b(1:k)
+        b_2 = b(k+1:n)
+        A_11 = A(1:k, 1:k)
+        A_12 = A(1:k, k+1:n)
+        A_21 = A(k+1:n, 1:k)
+        A_22 = A(k+1:n, k+1:n)
+                        
+        !call LU decomposition routine on A_11, A_12
+        LU_1 = lu(A_11)
+        LU_2 = lu(A_22)
+        
+        !call LU solver on intermediate results
+        B_12 = LU_1%solve(A_12)
+        B_21 = LU_2%solve(A_21)
+        
+        !call LU decomposition routine on schure inverses
+        LU_3 = lu( A_11 - matmul(A_12, B_21) )
+        LU_4 = lu( A_22 - matmul(A_21, B_12) )
+        
+        !call LU solver on intermediate results
+        y_1  = LU_1%solve(b_1)
+        y_2  = LU_2%solve(b_2)        
+        
+        !call LU solver on final results
+        x_1 = LU_3%solve( b_1 - matmul(A_12, y_2) )
+        x_2 = LU_4%solve( b_2 - matmul(A_21, y_1) )
+        x = [x_1, x_2]
+        
+    end function
+    
+    pure function lu_mat_block_solve_mat(A, b) result(x)
+    use mod_lu
+    real(real64), intent(in) :: A(:,:), b(:,:)
+    real(real64) :: x(size(b,1), size(b, 2))
+    integer :: n, k
+        n = size(A, 1)
+        k = size(b, 2)
+        if(n /= size(A,2) ) then
+            error stop "Expecting a square matrix."
+        end if
+        if( n/= size(b,1) ) then
+            error stop "Incompatible matrix sizes."
+        end if
+        x = lu_mat_block_solve_mat_fix(n,k,A,B)
+    end function
+    
+    pure function lu_mat_block_solve_mat_fix(n, k, A, b) result(x)
+    use mod_lu
+    integer, intent(in) :: n, k
+    real(real64), intent(in) :: A(n,n), b(n,k)
+    real(real64) :: x(n,k)
+    type(lu_info(n)) :: LU_1, LU_2, LU_3, LU_4
+    real(real64) :: A_11(n/2,n/2), A_22(n-n/2,n-n/2), A_12(n/2,n-n/2), A_21(n-n/2,n/2)
+    real(real64) :: B_12(n/2,n-n/2), B_21(n-n/2,n/2), y_1(n/2), y_2(n-n/2)
+    real(real64) :: b_1(n/2), b_2(n-n/2), x_1(n/2), x_2(n-n/2)
+    integer      :: h, j
+            
+        if(n == 1) then
+            x = b/A(1, 1) 
+            return
+        end if
+        
+        h = n/2
+        
+        A_11 = A(1:h, 1:h)
+        A_12 = A(1:h, h+1:n)
+        A_21 = A(h+1:n, 1:h)
+        A_22 = A(h+1:n, h+1:n)
+        !call LU decomposition routine on A_11, A_12
+        LU_1 = lu(A_11)
+        LU_2 = lu(A_22)
+        !call LU solver on intermediate results
+        B_12 = LU_1%solve(A_12)
+        B_21 = LU_2%solve(A_21)
+        !call LU decomposition routine on schure inverses
+        LU_3 = lu( A_11 - matmul(A_12, B_21) )
+        LU_4 = lu( A_22 - matmul(A_21, B_12) )
+        
+        do j=1, k
+                
+            b_1 = b(1:h,j)
+            b_2 = b(h+1:n,j)
+                                
+            !call LU solver on intermediate results
+            y_1  = LU_1%solve(b_1)
+            y_2  = LU_2%solve(b_2)
+        
+            !call LU solver on final results
+            x_1 = LU_3%solve( b_1 - matmul(A_12, y_2) )
+            x_2 = LU_4%solve( b_2 - matmul(A_21, y_1) )
+            x(:,j) = [x_1, x_2]
+        end do
     end function
     
     pure recursive function mat_inv_reduce(M) result(W)

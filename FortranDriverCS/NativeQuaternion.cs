@@ -480,10 +480,10 @@ namespace FortranDriver
                 NativeMatrix R = q1.ToRotationMatrix();
                 NativeMatrix R_inv = q1.ToRotationMatrix(true);
 
-                Console.WriteLine($"Rotation Matrix=\n{R}");
-                Console.WriteLine($"Inverse Rotation Matrix=\n{R_inv}");
+                Console.WriteLine($"Rotation Matrix=\n{NativeMatrix.Round(R,6)}");
+                Console.WriteLine($"Inverse Rotation Matrix=\n{NativeMatrix.Round(R_inv,6)}");
 
-                NativeMatrix eye3 = R_inv * R;
+                NativeMatrix eye3 = NativeMatrix.Round( R_inv * R, 6);
                 Console.WriteLine($"Check that product is identity matrix\n{eye3}");
 
             }
@@ -509,12 +509,12 @@ namespace FortranDriver
                 Console.WriteLine($"Norm = {q.Norm()}\n");
 
                 NativeMatrix R_test = NativeQuaternion.FromAxisAngleToMatrix(axis, angle);
-                Console.WriteLine($"Axis angle to Rotation Matrix=\n{R_test}");
+                Console.WriteLine($"Axis angle to Rotation Matrix=\n{NativeMatrix.Round(R_test,6)}");
 
 
                 NativeMatrix R = q.ToRotationMatrix();
                 NativeQuaternion q_test = NativeQuaternion.FromRotationMatrix(R);
-                Console.WriteLine($"Quat to Rotation Matrix=\n{R}");
+                Console.WriteLine($"Quat to Rotation Matrix=\n{NativeMatrix.Round(R,6)}");
 
             }
             {
@@ -535,9 +535,9 @@ namespace FortranDriver
                 Console.WriteLine($"Rotated Vector = \n{v_rot}");
 
 
-                Console.WriteLine($"Rotation Matrix=\n{R}");
+                Console.WriteLine($"Rotation Matrix=\n{NativeMatrix.Round(R,6)}");
                 NativeMatrix R_axis = NativeQuaternion.FromAxisAngleToMatrix(axis, angle);
-                Console.WriteLine($"Rotation Matrix From Axis/Angle = \n{R_axis}");
+                Console.WriteLine($"Rotation Matrix From Axis/Angle = \n{NativeMatrix.Round(R_axis,6)}");
 
                 NativeQuaternion.FromRotationMatrixToAxisAngle(R_axis, out axis, out angle);
 
