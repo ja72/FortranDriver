@@ -287,37 +287,68 @@ implicit none
     end function
     
     
-    pure function mat4_inv(A) result(B)
-    real(real64) :: B(4,4), d_inv,d
+    pure function mat4_inv(A) result(A_inv)
+    real(real64) :: A_inv(4,4), d_inv,d
     real(real64), intent(in) :: A(4,4)
         d = mat4_det(A)
         if( abs(d) <= tiny ) then
             error stop "Matrix is singular."
         end if
         d_inv = 1/d
-        B(1,1) =  d_inv*(A(2,2)*A(3,3)*A(4,4)-A(2,2)*A(3,4)*A(4,3)-A(2,3)*A(3,2)*A(4,4)+A(2,3)*A(3,4)*A(4,2)+A(2,4)*A(3,2)*A(4,3)-A(2,4)*A(3,3)*A(4,2))
-        B(1,2) = -d_inv*(A(1,2)*A(3,3)*A(4,4)-A(1,2)*A(3,4)*A(4,3)-A(1,3)*A(3,2)*A(4,4)+A(1,3)*A(3,4)*A(4,2)+A(1,4)*A(3,2)*A(4,3)-A(1,4)*A(3,3)*A(4,2))
-        B(1,3) =  d_inv*(A(1,2)*A(2,3)*A(4,4)-A(1,2)*A(2,4)*A(4,3)-A(1,3)*A(2,2)*A(4,4)+A(1,3)*A(2,4)*A(4,2)+A(1,4)*A(2,2)*A(4,3)-A(1,4)*A(2,3)*A(4,2))
-        B(1,4) = -d_inv*(A(1,2)*A(2,3)*A(3,4)-A(1,2)*A(2,4)*A(3,3)-A(1,3)*A(2,2)*A(3,4)+A(1,3)*A(2,4)*A(3,2)+A(1,4)*A(2,2)*A(3,3)-A(1,4)*A(2,3)*A(3,2))
-        B(2,1) = -d_inv*(A(2,1)*A(3,3)*A(4,4)-A(2,1)*A(3,4)*A(4,3)-A(2,3)*A(3,1)*A(4,4)+A(2,3)*A(3,4)*A(4,1)+A(2,4)*A(3,1)*A(4,3)-A(2,4)*A(3,3)*A(4,1))
-        B(2,2) =  d_inv*(A(1,1)*A(3,3)*A(4,4)-A(1,1)*A(3,4)*A(4,3)-A(1,3)*A(3,1)*A(4,4)+A(1,3)*A(3,4)*A(4,1)+A(1,4)*A(3,1)*A(4,3)-A(1,4)*A(3,3)*A(4,1))
-        B(2,3) = -d_inv*(A(1,1)*A(2,3)*A(4,4)-A(1,1)*A(2,4)*A(4,3)-A(1,3)*A(2,1)*A(4,4)+A(1,3)*A(2,4)*A(4,1)+A(1,4)*A(2,1)*A(4,3)-A(1,4)*A(2,3)*A(4,1))
-        B(2,4) =  d_inv*(A(1,1)*A(2,3)*A(3,4)-A(1,1)*A(2,4)*A(3,3)-A(1,3)*A(2,1)*A(3,4)+A(1,3)*A(2,4)*A(3,1)+A(1,4)*A(2,1)*A(3,3)-A(1,4)*A(2,3)*A(3,1))
-        B(3,1) =  d_inv*(A(2,1)*A(3,2)*A(4,4)-A(2,1)*A(3,4)*A(4,2)-A(2,2)*A(3,1)*A(4,4)+A(2,2)*A(3,4)*A(4,1)+A(2,4)*A(3,1)*A(4,2)-A(2,4)*A(3,2)*A(4,1))
-        B(3,2) = -d_inv*(A(1,1)*A(3,2)*A(4,4)-A(1,1)*A(3,4)*A(4,2)-A(1,2)*A(3,1)*A(4,4)+A(1,2)*A(3,4)*A(4,1)+A(1,4)*A(3,1)*A(4,2)-A(1,4)*A(3,2)*A(4,1))
-        B(3,3) =  d_inv*(A(1,1)*A(2,2)*A(4,4)-A(1,1)*A(2,4)*A(4,2)-A(1,2)*A(2,1)*A(4,4)+A(1,2)*A(2,4)*A(4,1)+A(1,4)*A(2,1)*A(4,2)-A(1,4)*A(2,2)*A(4,1))
-        B(3,4) = -d_inv*(A(1,1)*A(2,2)*A(3,4)-A(1,1)*A(2,4)*A(3,2)-A(1,2)*A(2,1)*A(3,4)+A(1,2)*A(2,4)*A(3,1)+A(1,4)*A(2,1)*A(3,2)-A(1,4)*A(2,2)*A(3,1))
-        B(4,1) = -d_inv*(A(2,1)*A(3,2)*A(4,3)-A(2,1)*A(3,3)*A(4,2)-A(2,2)*A(3,1)*A(4,3)+A(2,2)*A(3,3)*A(4,1)+A(2,3)*A(3,1)*A(4,2)-A(2,3)*A(3,2)*A(4,1))
-        B(4,2) =  d_inv*(A(1,1)*A(3,2)*A(4,3)-A(1,1)*A(3,3)*A(4,2)-A(1,2)*A(3,1)*A(4,3)+A(1,2)*A(3,3)*A(4,1)+A(1,3)*A(3,1)*A(4,2)-A(1,3)*A(3,2)*A(4,1))
-        B(4,3) = -d_inv*(A(1,1)*A(2,2)*A(4,3)-A(1,1)*A(2,3)*A(4,2)-A(1,2)*A(2,1)*A(4,3)+A(1,2)*A(2,3)*A(4,1)+A(1,3)*A(2,1)*A(4,2)-A(1,3)*A(2,2)*A(4,1))
-        B(4,4) =  d_inv*(A(1,1)*A(2,2)*A(3,3)-A(1,1)*A(2,3)*A(3,2)-A(1,2)*A(2,1)*A(3,3)+A(1,2)*A(2,3)*A(3,1)+A(1,3)*A(2,1)*A(3,2)-A(1,3)*A(2,2)*A(3,1))
+        A_inv(1,1) =  d_inv*(A(2,2)*A(3,3)*A(4,4)-A(2,2)*A(3,4)*A(4,3)-A(2,3)*A(3,2)*A(4,4)+A(2,3)*A(3,4)*A(4,2)+A(2,4)*A(3,2)*A(4,3)-A(2,4)*A(3,3)*A(4,2))
+        A_inv(1,2) = -d_inv*(A(1,2)*A(3,3)*A(4,4)-A(1,2)*A(3,4)*A(4,3)-A(1,3)*A(3,2)*A(4,4)+A(1,3)*A(3,4)*A(4,2)+A(1,4)*A(3,2)*A(4,3)-A(1,4)*A(3,3)*A(4,2))
+        A_inv(1,3) =  d_inv*(A(1,2)*A(2,3)*A(4,4)-A(1,2)*A(2,4)*A(4,3)-A(1,3)*A(2,2)*A(4,4)+A(1,3)*A(2,4)*A(4,2)+A(1,4)*A(2,2)*A(4,3)-A(1,4)*A(2,3)*A(4,2))        
+        A_inv(1,4) = -d_inv*(A(1,2)*A(2,3)*A(3,4)-A(1,2)*A(2,4)*A(3,3)-A(1,3)*A(2,2)*A(3,4)+A(1,3)*A(2,4)*A(3,2)+A(1,4)*A(2,2)*A(3,3)-A(1,4)*A(2,3)*A(3,2))
+        
+        A_inv(2,1) = -d_inv*(A(2,1)*A(3,3)*A(4,4)-A(2,1)*A(3,4)*A(4,3)-A(2,3)*A(3,1)*A(4,4)+A(2,3)*A(3,4)*A(4,1)+A(2,4)*A(3,1)*A(4,3)-A(2,4)*A(3,3)*A(4,1))
+        A_inv(2,2) =  d_inv*(A(1,1)*A(3,3)*A(4,4)-A(1,1)*A(3,4)*A(4,3)-A(1,3)*A(3,1)*A(4,4)+A(1,3)*A(3,4)*A(4,1)+A(1,4)*A(3,1)*A(4,3)-A(1,4)*A(3,3)*A(4,1))
+        A_inv(2,3) = -d_inv*(A(1,1)*A(2,3)*A(4,4)-A(1,1)*A(2,4)*A(4,3)-A(1,3)*A(2,1)*A(4,4)+A(1,3)*A(2,4)*A(4,1)+A(1,4)*A(2,1)*A(4,3)-A(1,4)*A(2,3)*A(4,1))
+        A_inv(2,4) =  d_inv*(A(1,1)*A(2,3)*A(3,4)-A(1,1)*A(2,4)*A(3,3)-A(1,3)*A(2,1)*A(3,4)+A(1,3)*A(2,4)*A(3,1)+A(1,4)*A(2,1)*A(3,3)-A(1,4)*A(2,3)*A(3,1))
+        
+        A_inv(3,1) =  d_inv*(A(2,1)*A(3,2)*A(4,4)-A(2,1)*A(3,4)*A(4,2)-A(2,2)*A(3,1)*A(4,4)+A(2,2)*A(3,4)*A(4,1)+A(2,4)*A(3,1)*A(4,2)-A(2,4)*A(3,2)*A(4,1))
+        A_inv(3,2) = -d_inv*(A(1,1)*A(3,2)*A(4,4)-A(1,1)*A(3,4)*A(4,2)-A(1,2)*A(3,1)*A(4,4)+A(1,2)*A(3,4)*A(4,1)+A(1,4)*A(3,1)*A(4,2)-A(1,4)*A(3,2)*A(4,1))
+        A_inv(3,3) =  d_inv*(A(1,1)*A(2,2)*A(4,4)-A(1,1)*A(2,4)*A(4,2)-A(1,2)*A(2,1)*A(4,4)+A(1,2)*A(2,4)*A(4,1)+A(1,4)*A(2,1)*A(4,2)-A(1,4)*A(2,2)*A(4,1))
+        A_inv(3,4) = -d_inv*(A(1,1)*A(2,2)*A(3,4)-A(1,1)*A(2,4)*A(3,2)-A(1,2)*A(2,1)*A(3,4)+A(1,2)*A(2,4)*A(3,1)+A(1,4)*A(2,1)*A(3,2)-A(1,4)*A(2,2)*A(3,1))
+        
+        A_inv(4,1) = -d_inv*(A(2,1)*A(3,2)*A(4,3)-A(2,1)*A(3,3)*A(4,2)-A(2,2)*A(3,1)*A(4,3)+A(2,2)*A(3,3)*A(4,1)+A(2,3)*A(3,1)*A(4,2)-A(2,3)*A(3,2)*A(4,1))
+        A_inv(4,2) =  d_inv*(A(1,1)*A(3,2)*A(4,3)-A(1,1)*A(3,3)*A(4,2)-A(1,2)*A(3,1)*A(4,3)+A(1,2)*A(3,3)*A(4,1)+A(1,3)*A(3,1)*A(4,2)-A(1,3)*A(3,2)*A(4,1))
+        A_inv(4,3) = -d_inv*(A(1,1)*A(2,2)*A(4,3)-A(1,1)*A(2,3)*A(4,2)-A(1,2)*A(2,1)*A(4,3)+A(1,2)*A(2,3)*A(4,1)+A(1,3)*A(2,1)*A(4,2)-A(1,3)*A(2,2)*A(4,1))
+        A_inv(4,4) =  d_inv*(A(1,1)*A(2,2)*A(3,3)-A(1,1)*A(2,3)*A(3,2)-A(1,2)*A(2,1)*A(3,3)+A(1,2)*A(2,3)*A(3,1)+A(1,3)*A(2,1)*A(3,2)-A(1,3)*A(2,2)*A(3,1))
 
     end function
 
-    pure function mat4_solve_vec(A,b) result(x)
-    real(real64) :: x(4)
+    pure function mat4_solve_vec(A, b) result(x)
     real(real64), intent(in) :: A(4,4), b(4)
-        x = matmul(mat4_inv(A), b)
+    real(real64) :: x(4), d_inv,d, s(4)
+    
+        !x = matmul(mat4_inv(A), b)
+        
+        d = mat4_det(A)
+        if( abs(d) <= tiny ) then
+            error stop "Matrix is singular."
+        end if
+        d_inv = 1/d
+        s = d_inv*b
+        x(1) =  s(1)*(A(2,2)*A(3,3)*A(4,4)-A(2,2)*A(3,4)*A(4,3)-A(2,3)*A(3,2)*A(4,4)+A(2,3)*A(3,4)*A(4,2)+A(2,4)*A(3,2)*A(4,3)-A(2,4)*A(3,3)*A(4,2)) &
+               -s(2)*(A(1,2)*A(3,3)*A(4,4)-A(1,2)*A(3,4)*A(4,3)-A(1,3)*A(3,2)*A(4,4)+A(1,3)*A(3,4)*A(4,2)+A(1,4)*A(3,2)*A(4,3)-A(1,4)*A(3,3)*A(4,2)) &
+               +s(3)*(A(1,2)*A(2,3)*A(4,4)-A(1,2)*A(2,4)*A(4,3)-A(1,3)*A(2,2)*A(4,4)+A(1,3)*A(2,4)*A(4,2)+A(1,4)*A(2,2)*A(4,3)-A(1,4)*A(2,3)*A(4,2)) &
+               -s(4)*(A(1,2)*A(2,3)*A(3,4)-A(1,2)*A(2,4)*A(3,3)-A(1,3)*A(2,2)*A(3,4)+A(1,3)*A(2,4)*A(3,2)+A(1,4)*A(2,2)*A(3,3)-A(1,4)*A(2,3)*A(3,2)) 
+                                                                                                                                                     
+        x(2) = -s(1)*(A(2,1)*A(3,3)*A(4,4)-A(2,1)*A(3,4)*A(4,3)-A(2,3)*A(3,1)*A(4,4)+A(2,3)*A(3,4)*A(4,1)+A(2,4)*A(3,1)*A(4,3)-A(2,4)*A(3,3)*A(4,1)) &
+               +s(2)*(A(1,1)*A(3,3)*A(4,4)-A(1,1)*A(3,4)*A(4,3)-A(1,3)*A(3,1)*A(4,4)+A(1,3)*A(3,4)*A(4,1)+A(1,4)*A(3,1)*A(4,3)-A(1,4)*A(3,3)*A(4,1)) &
+               -s(3)*(A(1,1)*A(2,3)*A(4,4)-A(1,1)*A(2,4)*A(4,3)-A(1,3)*A(2,1)*A(4,4)+A(1,3)*A(2,4)*A(4,1)+A(1,4)*A(2,1)*A(4,3)-A(1,4)*A(2,3)*A(4,1)) &
+               +s(4)*(A(1,1)*A(2,3)*A(3,4)-A(1,1)*A(2,4)*A(3,3)-A(1,3)*A(2,1)*A(3,4)+A(1,3)*A(2,4)*A(3,1)+A(1,4)*A(2,1)*A(3,3)-A(1,4)*A(2,3)*A(3,1)) 
+                                                                                                                                                     
+        x(3) = +s(1)*(A(2,1)*A(3,2)*A(4,4)-A(2,1)*A(3,4)*A(4,2)-A(2,2)*A(3,1)*A(4,4)+A(2,2)*A(3,4)*A(4,1)+A(2,4)*A(3,1)*A(4,2)-A(2,4)*A(3,2)*A(4,1)) &
+               -s(2)*(A(1,1)*A(3,2)*A(4,4)-A(1,1)*A(3,4)*A(4,2)-A(1,2)*A(3,1)*A(4,4)+A(1,2)*A(3,4)*A(4,1)+A(1,4)*A(3,1)*A(4,2)-A(1,4)*A(3,2)*A(4,1)) &
+               +s(3)*(A(1,1)*A(2,2)*A(4,4)-A(1,1)*A(2,4)*A(4,2)-A(1,2)*A(2,1)*A(4,4)+A(1,2)*A(2,4)*A(4,1)+A(1,4)*A(2,1)*A(4,2)-A(1,4)*A(2,2)*A(4,1)) &
+               -s(4)*(A(1,1)*A(2,2)*A(3,4)-A(1,1)*A(2,4)*A(3,2)-A(1,2)*A(2,1)*A(3,4)+A(1,2)*A(2,4)*A(3,1)+A(1,4)*A(2,1)*A(3,2)-A(1,4)*A(2,2)*A(3,1)) 
+                                                                                                                                                     
+        x(4) = -s(1)*(A(2,1)*A(3,2)*A(4,3)-A(2,1)*A(3,3)*A(4,2)-A(2,2)*A(3,1)*A(4,3)+A(2,2)*A(3,3)*A(4,1)+A(2,3)*A(3,1)*A(4,2)-A(2,3)*A(3,2)*A(4,1)) &
+               +s(2)*(A(1,1)*A(3,2)*A(4,3)-A(1,1)*A(3,3)*A(4,2)-A(1,2)*A(3,1)*A(4,3)+A(1,2)*A(3,3)*A(4,1)+A(1,3)*A(3,1)*A(4,2)-A(1,3)*A(3,2)*A(4,1)) &
+               -s(3)*(A(1,1)*A(2,2)*A(4,3)-A(1,1)*A(2,3)*A(4,2)-A(1,2)*A(2,1)*A(4,3)+A(1,2)*A(2,3)*A(4,1)+A(1,3)*A(2,1)*A(4,2)-A(1,3)*A(2,2)*A(4,1)) &
+               +s(4)*(A(1,1)*A(2,2)*A(3,3)-A(1,1)*A(2,3)*A(3,2)-A(1,2)*A(2,1)*A(3,3)+A(1,2)*A(2,3)*A(3,1)+A(1,3)*A(2,1)*A(3,2)-A(1,3)*A(2,2)*A(3,1)) 
+                
     end function
     
     pure function mat4_solve_mat(A,b) result(x)
@@ -454,7 +485,7 @@ implicit none
         
     end function
     
-    pure function lu_mat_block_solve_vec(A, b) result(x)
+    function lu_mat_block_solve_vec(A, b) result(x)
     use mod_lu
     real(real64), intent(in) :: A(:,:), b(:)
     real(real64) :: x(size(b))
@@ -469,7 +500,7 @@ implicit none
         x = lu_mat_block_solve_vec_fix(n,A,B)
     end function
     
-    pure function lu_mat_block_solve_vec_fix(n, A, b) result(x)
+    function lu_mat_block_solve_vec_fix(n, A, b) result(x)
     use mod_lu
     integer, intent(in) :: n
     real(real64), intent(in) :: A(n,n), b(n)
@@ -486,38 +517,51 @@ implicit none
         end if
             
         k = n/2
+        
+        !$OMP PARALLEL 
+        !$OMP SECTIONS 
                 
+        !$OMP SECTION
         b_1 = b(1:k)
-        b_2 = b(k+1:n)
         A_11 = A(1:k, 1:k)
         A_12 = A(1:k, k+1:n)
+        
+        !$OMP SECTION
+        b_2 = b(k+1:n)
         A_21 = A(k+1:n, 1:k)
         A_22 = A(k+1:n, k+1:n)
+        !$OMP END SECTIONS
                         
-        !call LU decomposition routine on A_11, A_12
+        !$OMP SECTIONS
+        !$OMP SECTION
+        !call LU decomposition routine on A_11
         LU_1 = lu(A_11)
-        LU_2 = lu(A_22)
-        
-        !call LU solver on intermediate results
-        B_12 = LU_1%solve(A_12)
-        B_21 = LU_2%solve(A_21)
-        
-        !call LU decomposition routine on schure inverses
-        LU_3 = lu( A_11 - matmul(A_12, B_21) )
-        LU_4 = lu( A_22 - matmul(A_21, B_12) )
-        
         !call LU solver on intermediate results
         y_1  = LU_1%solve(b_1)
-        y_2  = LU_2%solve(b_2)        
+        B_12 = LU_1%solve(A_12)
+        !call LU decomposition routine on schure inverses
+        LU_4 = lu( A_22 - matmul(A_21, B_12) )
+        !call LU solver on final results
+        x_2 = LU_4%solve( b_2 - matmul(A_21, y_1) )
         
+        !$OMP SECTION
+        !call LU decomposition routine on A_22
+        LU_2 = lu(A_22)
+        !call LU solver on intermediate results
+        y_2  = LU_2%solve(b_2)        
+        B_21 = LU_2%solve(A_21)
+        !call LU decomposition routine on schure inverses
+        LU_3 = lu( A_11 - matmul(A_12, B_21) )
         !call LU solver on final results
         x_1 = LU_3%solve( b_1 - matmul(A_12, y_2) )
-        x_2 = LU_4%solve( b_2 - matmul(A_21, y_1) )
+        
+        !$OMP END SECTIONS
         x = [x_1, x_2]
         
+        !$OMP END PARALLEL
     end function
     
-    pure function lu_mat_block_solve_mat(A, b) result(x)
+    function lu_mat_block_solve_mat(A, b) result(x)
     use mod_lu
     real(real64), intent(in) :: A(:,:), b(:,:)
     real(real64) :: x(size(b,1), size(b, 2))
@@ -533,7 +577,7 @@ implicit none
         x = lu_mat_block_solve_mat_fix(n,k,A,B)
     end function
     
-    pure function lu_mat_block_solve_mat_fix(n, k, A, b) result(x)
+    function lu_mat_block_solve_mat_fix(n, k, A, b) result(x)
     use mod_lu
     integer, intent(in) :: n, k
     real(real64), intent(in) :: A(n,n), b(n,k)
@@ -551,34 +595,59 @@ implicit none
         
         h = n/2
         
+        !$OMP PARALLEL 
+        !$OMP SECTIONS 
+        
+        !$OMP SECTION
         A_11 = A(1:h, 1:h)
         A_12 = A(1:h, h+1:n)
+        !$OMP SECTION
         A_21 = A(h+1:n, 1:h)
         A_22 = A(h+1:n, h+1:n)
-        !call LU decomposition routine on A_11, A_12
+        !$OMP END SECTIONS 
+        
+        !$OMP SECTIONS 
+        !$OMP SECTION
+        !call LU decomposition routine on A_11
         LU_1 = lu(A_11)
-        LU_2 = lu(A_22)
         !call LU solver on intermediate results
         B_12 = LU_1%solve(A_12)
+        !call LU decomposition routine on schure inverses
+        LU_4 = lu( A_22 - matmul(A_21, B_12) )
+        
+        !$OMP SECTION
+        !call LU decomposition routine on A_22
+        LU_2 = lu(A_22)        
+        !call LU solver on intermediate results
         B_21 = LU_2%solve(A_21)
         !call LU decomposition routine on schure inverses
         LU_3 = lu( A_11 - matmul(A_12, B_21) )
-        LU_4 = lu( A_22 - matmul(A_21, B_12) )
+        !$OMP END SECTIONS
         
         do j=1, k
-                
+            
+            !$OMP SECTIONS 
+                                                
+            !call LU solver on intermediate results
+            !$OMP SECTION
             b_1 = b(1:h,j)
-            b_2 = b(h+1:n,j)
-                                
             !call LU solver on intermediate results
             y_1  = LU_1%solve(b_1)
-            y_2  = LU_2%solve(b_2)
-        
-            !call LU solver on final results
-            x_1 = LU_3%solve( b_1 - matmul(A_12, y_2) )
+            !call LU decomposition routine on schure inverses
             x_2 = LU_4%solve( b_2 - matmul(A_21, y_1) )
+            
+            !$OMP SECTION
+            b_2 = b(h+1:n,j)
+            !call LU solver on intermediate results
+            y_2  = LU_2%solve(b_2)
+            !call LU decomposition routine on schure inverses
+            x_1 = LU_3%solve( b_1 - matmul(A_12, y_2) )
+        
+            !$OMP END SECTIONS
+            !call LU solver on final results
             x(:,j) = [x_1, x_2]
         end do
+        !$OMP END PARALLEL
     end function
     
     pure recursive function mat_inv_reduce(M) result(W)

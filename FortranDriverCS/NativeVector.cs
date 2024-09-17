@@ -182,7 +182,8 @@ namespace FortranDriver
             string[][] data = [new string[n]];
             for (int i = 0; i < n; i++)
             {
-                data[0][i] = Data[i].ToString(formatting, formatProvider);
+                double x = Math.Round(Data[i], 11);
+                data[0][i] = x.ToString(formatting, formatProvider);
             }
             int maxWidth = data[0].Max((s) => s.Length);
             for (int i = 0; i < n; i++)

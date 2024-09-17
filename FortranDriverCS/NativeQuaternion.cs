@@ -28,37 +28,37 @@ namespace FortranDriver
         public static NativeQuaternion FromRotationAxis(double[] axis, double angle)
         {
             double[] data = new double[4];
-            NativeQuaternionMethods.rotation_axis2quat(axis, angle, data);
+            FortranMethods.rotation_axis2quat(axis, angle, data);
             return new NativeQuaternion(data);
         }
         public static NativeQuaternion FromRotationMatrix(NativeMatrix R)
         {
             double[] data = new double[4];
-            NativeQuaternionMethods.rotation_mat2quat(R.Data, data);
+            FortranMethods.rotation_mat2quat(R.Data, data);
             return new NativeQuaternion(data);
         }
         public static void FromRotationMatrixToAxisAngle(NativeMatrix R, out double[] axis, out double angle)
         {
             axis = new double[3];
             angle = 0;
-            NativeQuaternionMethods.rotation_mat2axis(R.Data, axis, ref angle);
+            FortranMethods.rotation_mat2axis(R.Data, axis, ref angle);
         }
         public static NativeVector RotateVectorFromMatrix(NativeMatrix R, NativeVector vector)
         {
             double[] data = new double[3];
-            NativeQuaternionMethods.rotation_mat_vector(R.Data, vector.Data, data);
+            FortranMethods.rotation_mat_vector(R.Data, vector.Data, data);
             return new NativeVector(data);
         }
         public static NativeMatrix FromAxisAngleToMatrix(double[] axis, double angle)
         {
             double[,] data = new double[3, 3];
-            NativeQuaternionMethods.rotation_axis2mat(axis, angle, data);
+            FortranMethods.rotation_axis2mat(axis, angle, data);
             return new NativeMatrix(data);
         }
         public static NativeVector RotateAxisAngleVector(double[] axis, double angle, double[] vector)
         {
             double[] data = new double[3];
-            NativeQuaternionMethods.rotation_axis_vector(axis, angle, vector, data);
+            FortranMethods.rotation_axis_vector(axis, angle, vector, data);
             return new NativeVector(data);
         }
 
@@ -66,13 +66,13 @@ namespace FortranDriver
         public static NativeQuaternion RandomUniform()
         {
             double[] data = new double[4];
-            NativeQuaternionMethods.q8_normal_01(ref seed, data);
+            FortranMethods.q8_normal_01(ref seed, data);
             return new NativeQuaternion(data);
         }
         public static NativeQuaternion RandomRotation()
         {
             double[] data = new double[4];
-            NativeQuaternionMethods.rotate_normal_01(ref seed, data);
+            FortranMethods.rotate_normal_01(ref seed, data);
             return new NativeQuaternion(data);
         }
 
@@ -120,13 +120,13 @@ namespace FortranDriver
         public double Scalar()
         {
             double s = 0;
-            NativeQuaternionMethods.q8_scalar(Data, ref s);
+            FortranMethods.q8_scalar(Data, ref s);
             return s;
         }
         public NativeVector Vector()
         {
             double[] v = new double[3];
-            NativeQuaternionMethods.q8_vector(Data, v);
+            FortranMethods.q8_vector(Data, v);
             return new NativeVector(v);
         }
 
@@ -135,11 +135,11 @@ namespace FortranDriver
             double[,] R = new double[3, 3];
             if (inverse)
             {
-                NativeQuaternionMethods.rotation_quat2mat_inv(Data, R, true);
+                FortranMethods.rotation_quat2mat_inv(Data, R, true);
             }
             else
             {
-                NativeQuaternionMethods.rotation_quat2mat(Data, R);
+                FortranMethods.rotation_quat2mat(Data, R);
             }
             return new NativeMatrix(R);
         }
@@ -147,7 +147,7 @@ namespace FortranDriver
         {
             axis = new double[3];
             angle = 0;
-            NativeQuaternionMethods.rotation_quat2axis(Data, axis, ref angle);
+            FortranMethods.rotation_quat2axis(Data, axis, ref angle);
         }
         #endregion
 
@@ -155,13 +155,13 @@ namespace FortranDriver
         public static double Dot(NativeQuaternion q1, NativeQuaternion q2)
         {
             double result = 0;
-            NativeQuaternionMethods.q8_dot(q1.Data, q2.Data, ref result);
+            FortranMethods.q8_dot(q1.Data, q2.Data, ref result);
             return result;
         }
         public static NativeVector Cross(NativeQuaternion q1, NativeQuaternion q2)
         {
             double[] result = new double[4];
-            NativeQuaternionMethods.q8_cross(q1.Data, q2.Data, result);
+            FortranMethods.q8_cross(q1.Data, q2.Data, result);
             return new NativeVector(result);
         }
         public static NativeQuaternion Negate(NativeQuaternion x)
@@ -169,37 +169,37 @@ namespace FortranDriver
         public static NativeQuaternion Add(NativeQuaternion q1, NativeQuaternion q2)
         {
             double[] data = new double[4];
-            NativeQuaternionMethods.q8_add(q1.Data, q2.Data, data);
+            FortranMethods.q8_add(q1.Data, q2.Data, data);
             return new NativeQuaternion(data);
         }
         public static NativeQuaternion Subtract(NativeQuaternion q1, NativeQuaternion q2)
         {
             double[] data = new double[4];
-            NativeQuaternionMethods.q8_subtract(q1.Data, q2.Data, data);
+            FortranMethods.q8_subtract(q1.Data, q2.Data, data);
             return new NativeQuaternion(data);
         }
         public static NativeQuaternion Scale(double x, NativeQuaternion q)
         {
             double[] data = new double[4];
-            NativeQuaternionMethods.q8_scale(x, q.Data, data);
+            FortranMethods.q8_scale(x, q.Data, data);
             return new NativeQuaternion(data);
         }
         public static NativeQuaternion Multiply(NativeQuaternion q1, NativeQuaternion q2)
         {
             double[] data = new double[4];
-            NativeQuaternionMethods.q8_multiply(q1.Data, q2.Data, data);
+            FortranMethods.q8_multiply(q1.Data, q2.Data, data);
             return new NativeQuaternion(data);
         }
         public static NativeQuaternion Multiply2(NativeQuaternion q1, NativeQuaternion q2)
         {
             double[] data = new double[4];
-            NativeQuaternionMethods.q8_multiply2(q1.Data, q2.Data, data);
+            FortranMethods.q8_multiply2(q1.Data, q2.Data, data);
             return new NativeQuaternion(data);
         }
         public static NativeQuaternion Exp(NativeQuaternion q)
         {
             double[] result = new double[4];
-            NativeQuaternionMethods.q8_exponentiate(q.Data, result);
+            FortranMethods.q8_exponentiate(q.Data, result);
             return new NativeQuaternion(result);
         }
 
@@ -208,11 +208,11 @@ namespace FortranDriver
             double[] result = new double[vector.Count];
             if (inverse)
             {
-                NativeQuaternionMethods.rotation_quat_vector_inv(Data, vector.Data, result, true);
+                FortranMethods.rotation_quat_vector_inv(Data, vector.Data, result, true);
             }
             else
             {
-                NativeQuaternionMethods.rotation_quat_vector(Data, vector.Data, result);
+                FortranMethods.rotation_quat_vector(Data, vector.Data, result);
             }
             return new NativeVector(result);
         }
@@ -233,32 +233,32 @@ namespace FortranDriver
                 diag = temp;
             }
             double[,] result = new double[3, 3];
-            NativeQuaternionMethods.rotation_diag2mat(Data, diag, result);
+            FortranMethods.rotation_diag2mat(Data, diag, result);
             return new NativeMatrix(result);
         }
 
         public NativeQuaternion Conjugate()
         {
             double[] result = new double[4];
-            NativeQuaternionMethods.q8_conjugate(Data, result);
+            FortranMethods.q8_conjugate(Data, result);
             return new NativeQuaternion(result);
         }
         public NativeQuaternion Inverse()
         {
             double[] result = new double[4];
-            NativeQuaternionMethods.q8_inverse(Data, result);
+            FortranMethods.q8_inverse(Data, result);
             return new NativeQuaternion(result);
         }
 
         public double Norm()
         {
-            return NativeQuaternionMethods.q8_norm(Data);
+            return FortranMethods.q8_norm(Data);
         }
 
         public static NativeQuaternion Normalize(NativeQuaternion q)
         {
             double[] result = new double[4];
-            NativeQuaternionMethods.rotation_normalize(q.Data, result);
+            FortranMethods.rotation_normalize(q.Data, result);
             return new NativeQuaternion(result);
         }
 
@@ -319,116 +319,6 @@ namespace FortranDriver
         #endregion
 
 
-        #region Fortran Methods
-        // NOTE: Fortran methods declared with `DllImport()`. Consider use the newer `LibraryImport()`
-        //       delcaration instead. Use a ref to first element instead of passing a 2D array.
-
-        static class NativeQuaternionMethods
-        {
-            const string libraryName = "FortranDriverDLL";
-
-            #region Scalar Functions
-            [DllImport(libraryName, EntryPoint = "radians_to_degrees", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern double radians_to_degrees(double angle_rad);
-
-            [DllImport(libraryName, EntryPoint = "degrees_to_radians", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern double degrees_to_radians(double angle_deg);
-
-            [DllImport(libraryName, EntryPoint = "r8_acos", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern double r8_acos(double c);
-            #endregion
-
-            #region Quaternion Functions
-            [DllImport(libraryName, EntryPoint = "q8_normal_01", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void q8_normal_01(ref int seed, [Out] double[] q);
-
-            [DllImport(libraryName, EntryPoint = "q8_scalar", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void q8_scalar([In] double[] q, ref double s);
-
-            [DllImport(libraryName, EntryPoint = "q8_vector", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void q8_vector([In] double[] q, [Out] double[] v);
-
-            [DllImport(libraryName, EntryPoint = "q8_conjugate", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void q8_conjugate(double[] q, [Out] double[] q2);
-
-            [DllImport(libraryName, EntryPoint = "q8_exponentiate", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void q8_exponentiate(double[] q1, [Out] double[] q2);
-
-            [DllImport(libraryName, EntryPoint = "q8_inverse", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void q8_inverse(double[] q, [Out] double[] q2);
-
-            [DllImport(libraryName, EntryPoint = "q8_add", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void q8_add(double[] q1, double[] q2, [Out] double[] q3);
-            [DllImport(libraryName, EntryPoint = "q8_subtract", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void q8_subtract(double[] q1, double[] q2, [Out] double[] q3);
-            [DllImport(libraryName, EntryPoint = "q8_scale", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void q8_scale(double x, double[] q2, [Out] double[] q3);
-            [DllImport(libraryName, EntryPoint = "q8_multiply", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void q8_multiply(double[] q1, double[] q2, [Out] double[] q3);
-
-            [DllImport(libraryName, EntryPoint = "q8_multiply2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void q8_multiply2(double[] q1, double[] q2, [Out] double[] q3);
-
-            [DllImport(libraryName, EntryPoint = "q8_dot", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void q8_dot(double[] q1, double[] q2, ref double q3);
-            [DllImport(libraryName, EntryPoint = "q8_cross", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void q8_cross(double[] q1, double[] q2, [Out] double[] q3);
-            [DllImport(libraryName, EntryPoint = "q8_norm", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern double q8_norm(double[] q);
-            #endregion
-
-            #region Rotation Functions
-            [DllImport(libraryName, EntryPoint = "rotate_normal_01", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void rotate_normal_01(ref int seed, [Out] double[] q);            
-            
-            [DllImport(libraryName, EntryPoint = "rotation_normalize", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void rotation_normalize([In] double[] qt, [Out] double[] q);
-
-            [DllImport(libraryName, EntryPoint = "rotation_axis2mat", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void rotation_axis2mat([In] double[] axis, double angle, [Out] double[,] a);
-
-            [DllImport(libraryName, EntryPoint = "rotation_axis2quat", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void rotation_axis2quat([In] double[] axis, double angle, [Out] double[] q);
-
-            [DllImport(libraryName, EntryPoint = "rotation_axis_vector", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void rotation_axis_vector([In] double[] axis, double angle, double[] v, [Out] double[] w);
-
-            [DllImport(libraryName, EntryPoint = "rotation_mat2axis", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void rotation_mat2axis(double[,] a, [Out] double[] axis, ref double angle);
-
-            [DllImport(libraryName, EntryPoint = "rotation_mat2quat", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void rotation_mat2quat(double[,] a, [Out] double[] q);
-
-            [DllImport(libraryName, EntryPoint = "rotation_diag2mat", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void rotation_diag2mat(double[] q, double[] d, [Out] double[,] a);
-
-            [DllImport(libraryName, EntryPoint = "rotation_mat_vector", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void rotation_mat_vector(double[,] a, double[] v, [Out] double[] w);
-
-            [DllImport(libraryName, EntryPoint = "rotation_quat2axis", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void rotation_quat2axis(double[] q, [Out] double[] axis, ref double angle);
-
-            [DllImport(libraryName, EntryPoint = "rotation_quat2mat", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void rotation_quat2mat(double[] q, [Out] double[,] a);
-
-            [DllImport(libraryName, EntryPoint = "rotation_quat2mat_inv", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void rotation_quat2mat_inv(double[] q, [Out] double[,] a, bool inverse);
-
-            [DllImport(libraryName, EntryPoint = "rotation_quat_vector", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void rotation_quat_vector(double[] q, double[] v, [Out] double[] w);
-
-            [DllImport(libraryName, EntryPoint = "rotation_quat_vector_inv", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void rotation_quat_vector_inv(double[] q, double[] v, [Out] double[] w, bool inverse);
-            #endregion
-
-            #region Test Functions
-            [DllImport(libraryName, EntryPoint = "quat_array_test", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-            public static extern void quat_array_test(); 
-            #endregion
-        }
-
-        #endregion
-
         #region Testing
 
         public static void TestNativeQuaternion()
@@ -437,14 +327,14 @@ namespace FortranDriver
             const double deg = pi/180;
             const double rpm = pi/30;
 
-            //NativeQuaternionMethods.quat_array_test();
+            //FortranMethods.quat_array_test();
 
             { 
                 Console.WriteLine("Test Scalar Functions =================================");
                 double cos_th = 0.5;
-                double th = NativeQuaternionMethods.r8_acos(cos_th);
-                double th_deg = NativeQuaternionMethods.radians_to_degrees(th);
-                double th_rad = NativeQuaternionMethods.degrees_to_radians(th_deg);
+                double th = FortranMethods.r8_acos(cos_th);
+                double th_deg = FortranMethods.radians_to_degrees(th);
+                double th_rad = FortranMethods.degrees_to_radians(th_deg);
 
                 Console.WriteLine($"ACOS({cos_th}) => {th} rad => {th_deg} deg => {th_rad} rad");
                 Console.WriteLine();
@@ -578,6 +468,7 @@ namespace FortranDriver
                 double max_err = (I_mmoi - I_check).ToArray().Max((x) => Math.Abs(x));
 
                 Console.WriteLine($"Maximum Error = {max_err}");
+                Console.WriteLine();
             }
         }
 

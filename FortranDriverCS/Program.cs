@@ -1,16 +1,24 @@
 ﻿// #define USE_CODE_GEN
 
 using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Xml;
 
 namespace FortranDriver
 {
+    using static NativeVector;
+    using static NativeMatrix;
 
     static partial class Program
     {
+
+#if DEBUG
+        const string libraryName = "FortranDriverDLL_d";
+#else
         const string libraryName = "FortranDriverDLL";
+#endif
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void ActionRefInt([In] int progress, [In] int count);
@@ -25,26 +33,28 @@ namespace FortranDriver
             Console.WriteLine("Testing Native/Array Mathods");
             Console.WriteLine();
             TestNativeMethods();
-            Console.Write("<paused>");
-            Console.ReadLine();
+            //Console.Write("<paused>");
+            //Console.ReadLine();
 
             Console.WriteLine("Testing Fortran Vectors");
             Console.WriteLine();
             TestVectorMethods();
-            Console.Write("<paused>");
-            Console.ReadLine();
+            //Console.Write("<paused>");
+            //Console.ReadLine();
 
             Console.WriteLine("Testing Fortran Matrices");
             Console.WriteLine();
             TestMatrixMethods();
-            Console.Write("<paused>");
-            Console.ReadLine();
+            //Console.Write("<paused>");
+            //Console.ReadLine();
 
             Console.WriteLine("Testing Fortran Quaternion");
             Console.WriteLine();
             TestQuaternionMethods();
-            Console.Write("<paused>");
-            Console.ReadLine();
+            //Console.Write("<paused>");
+            //Console.ReadLine();
+
+            BenchMatrixSolve();
         }
 
 
@@ -109,103 +119,112 @@ namespace FortranDriver
 
             Console.WriteLine($"Vector Size ={s}");
 
-            var e = NativeVector.Elemental(s, 1);
+            var e = Elemental(s, 1);
 
             Console.WriteLine("Elemental");
             Console.WriteLine($"e =\n{e}");
 
-            var x = NativeVector.RandomMinMax(s, -1, 6);
+            var u = NativeVector.RandomMinMax(s, -1, 6);
 
             Console.WriteLine("Random");
-            Console.WriteLine($"x =\n{x}");
+            Console.WriteLine($"u =\n{u}");
 
             Console.WriteLine("Scaling/Negate");
-            Console.WriteLine($"-x =\n{-x}");
-            Console.WriteLine($"2x =\n{2*x}");
-            Console.WriteLine($"x/2 =\n{x/2}");
+            Console.WriteLine($"-u =\n{-u}");
+            Console.WriteLine($"2u =\n{2*u}");
+            Console.WriteLine($"u/2 =\n{u/2}");
 
-            var y = e + x;
-            var z = e - x;
+            var y = e + u;
+            var z = e - u;
 
             Console.WriteLine("Addition");
-            Console.WriteLine($"e + x =\n{y}");
+            Console.WriteLine($"e+u =\n{y}");
             Console.WriteLine("Subtraction");
-            Console.WriteLine($"e - x =\n{z}");
+            Console.WriteLine($"e-u =\n{z}");
 
-            var d = NativeVector.Dot(y, z);
-            var d_expect = 1 - x*x;
+            var d = Dot(y, z);
+            var d_expect = 1 - u*u;
 
             Console.WriteLine("Dot Product");
-            Console.WriteLine($"d = {d}");
+            Console.WriteLine($"d = {d} (actual), {d_expect} (expected)");
 
-            var M = NativeMatrix.Round( NativeMatrix.RandoMminMax(7, 7, -1.0, 6.0), 6);
+            var M = Round(RandomMinMax(7, 7, -1.0, 6.0), 6);
 
             Console.WriteLine("Random Matrix");
             Console.WriteLine($"M =\n{M}");
 
             Console.WriteLine("Matrix/Vector Product");
-            Console.WriteLine($"M*x =\n{M*x}");
+            Console.WriteLine($"M*u =\n{Round(M*u,4)}");
             Console.WriteLine("Vector/Matrix Product");
-            Console.WriteLine($"x*M =\n{x*M}");
+            Console.WriteLine($"u*M =\n{Round(u*M,4)}");
 
 
-            var A = NativeMatrix.FromRows(3, 3,
-                5, -1, 0,
-                1, 3, 44,
-                -1, 0, 4);                
+            for (int size = 2; size <= 6; size++)
+            {
 
-            Console.WriteLine("Matrix By Rows");
-            Console.WriteLine($"A =\n{A}");
+                var A = Round(RandomMinMax(size, size, -1.0, 6.0), 6);
 
-            var b = NativeVector.FromValues(3.0, 2.0, 1.0);
-            Console.WriteLine("Vector From Values");
-            Console.WriteLine($"b =\n{b}");
+                Console.WriteLine($"Test Matrix ({size},{size})");
+                Console.WriteLine($"A = \n{A}");
 
-            var g = A.Solve(b);
+                var A_inv = A.Inverse();
+                Console.WriteLine("Inverse");
+                Console.WriteLine($"A_inv = \n{Round(A_inv,6)}");
 
-            Console.WriteLine("Matrix/Vector Solve");
-            Console.WriteLine($"g = b/A = \n{g}");            
-            
-            Console.WriteLine("Residual");
-            Console.WriteLine($"b-A*g =\n{b - A*g}");            
+                Console.WriteLine("Check Identity");
+                Console.WriteLine($"A_inv*A=\n{Round(A_inv*A,4)}");
+
+                NativeVector b = Round(RandomMinMax(size, -1.0, 6.0), 6);
+                Console.WriteLine("RHS");
+                Console.WriteLine($"b = \n{b}");
+
+                NativeVector x = A.Solve(b);
+                Console.WriteLine("Solve A*x=b");
+                Console.WriteLine($"x=\n{x}");
+                Console.WriteLine("Product A*x");
+                Console.WriteLine($"\n{A*x}");
+                Console.WriteLine("Residual b-A*x");
+                Console.WriteLine($"\n{b-A*x}");
+            }
 
         }
         static void TestMatrixMethods()
         {
             const int s = 7, t = 3;
 
-            var r = NativeVector.Round( NativeVector.RandomMinMax(s, -1, 6), 6);
+            var r = Round( NativeVector.RandomMinMax(s, -1.0, 6.0), 6);
 
-            var D = NativeMatrix.Diagonal(r.ToArray());
-            var S = NativeMatrix.Scalar(s, s, 2.0);
-            var R = NativeMatrix.RandoMminMax(s, s, -1, 6);
+            var D = Diagonal(r.ToArray());
+            var S = Scalar(s, s, 4.0/Math.PI);
+            var R = Round(RandomMinMax(s, s, -1.0, 6.0), 4 );
             Console.WriteLine("Scalar");
-            Console.WriteLine($"S = \n{S}");
+            Console.WriteLine($"S = \n{Round(S, 6)}");
             Console.WriteLine("Diagonal");
-            Console.WriteLine($"D = \n{D}");
+            Console.WriteLine($"D = \n{Round(D, 6)}");
             Console.WriteLine("Random");
-            Console.WriteLine($"R = \n{R}");
+            Console.WriteLine($"R = \n{Round(R, 6)}");
 
-            var A = R + D;
-            var B = R - D;
+            var A = Round( R + D, 6);
+            var B = Round( R - D, 6);
             Console.WriteLine("Add");
-            Console.WriteLine($"A = \n{A}");
+            Console.WriteLine($"R + D = \n{Round(A, 6)}");
             Console.WriteLine("Subtract");
-            Console.WriteLine($"B = \n{B}");
+            Console.WriteLine($"R - D = \n{Round(B, 6)}");
 
-            var N = -R;
             Console.WriteLine("Scale/Negate");
-            Console.WriteLine($"N = \n{N}");
+            Console.WriteLine($"-R = \n{-R}");
+            Console.WriteLine($"2R = \n{2*R}");
+            Console.WriteLine($"R/π = \n{Round(R/Math.PI, 6)}");
 
             var d = R.Determinant();
             Console.WriteLine("Determinant");
             Console.WriteLine($"d = \n{d}");
 
-            var A_tr = NativeMatrix.Transpose(A);
+            var A_tr = Transpose(A);
             Console.WriteLine("Transpose");
             Console.WriteLine($"A_tr = \n{A_tr}");
 
-            var H_1 = NativeMatrix.Round( NativeMatrix.RandoMminMax(42,1), 4);
+            var H_1 = Round(RandomMinMax(42,1), 4);
             var H_2 = H_1.ReShape(21, 2);
             var H_3 = H_2.ReShape(7, 6);
             var H_4 = H_3.ReShape(3, 14);
@@ -249,45 +268,39 @@ namespace FortranDriver
             Console.WriteLine($"S_4[1..2, ^2..^1] = \n{S_4[1..2, ^2..^1]}");
             Console.WriteLine();
 
+
+            for (int size = 2; size <= 6; size++)
             {
-                A = NativeMatrix.FromRows(3, 3,
-                    5, -1, 0,
-                    1, 3, 44,
-                    -1, 0, 4);
 
-                Console.WriteLine("Test Matrix");
+                A = Round(RandomMinMax(size, size, -1.0, 6.0), 4);
+
+                Console.WriteLine($"Test Matrix ({size},{size})");
                 Console.WriteLine($"A = \n{A}");
+
+                NativeMatrix A_inv = A.Inverse();
+                Console.WriteLine("Inverse");
+                Console.WriteLine($"A_inv = \n{Round(A_inv, 6)}");
+
+                Console.WriteLine("Check Identity");
+                Console.WriteLine($"A_inv*A=\n{Round(A_inv * A, 6)}");
+
+                NativeMatrix b = Round(RandomMinMax(size, t, -1.0, 6.0), 6);
+                Console.WriteLine("RHS");
+                Console.WriteLine($"b = \n{b}");
+
+                NativeMatrix x = A.Solve(b);
+                Console.WriteLine("Solve A*x=b");
+                Console.WriteLine($"x=\n{x}");
+                Console.WriteLine("Product A*x");
+                Console.WriteLine($"\n{Round(A*x,6)}");
+                Console.WriteLine("Residual b-A*x");
+                Console.WriteLine($"\n{Round(b-A*x,6)}");
             }
-
-            var A_inv = A.Inverse();
-            Console.WriteLine("Inverse");
-            Console.WriteLine($"A_inv = \n{A_inv}");
-
-            Console.WriteLine("Check Identity");
-            Console.WriteLine($"A_inv*A=\n{A_inv * A}");
-
-            var Y = NativeMatrix.Round( NativeMatrix.RandoMminMax(s, t, -1, 6), 6);
-            Console.WriteLine("Random");
-            Console.WriteLine($"Y = \n{Y}");
-
-            var M = NativeMatrix.Round( NativeMatrix.RandoMminMax(7, 7, -1.0, 6.0), 6);
-
-            var G = M*Y;
-            Console.WriteLine("Product G=M*Y");
-            Console.WriteLine($"G=\n{G}");
-
-
-            var U = M.Solve(G);
-            Console.WriteLine("Solve M*U=G");
-            Console.WriteLine($"U=\n{U}");
-
-            Console.WriteLine("Residual");
-            Console.WriteLine($"U-Y=\n{NativeMatrix.Round(U-Y, 6)}");
 
             int seed = Environment.TickCount;
 
-            var C = NativeMatrix.Round( 6*NativeMatrix.Identity(6) - NativeMatrix.RandomUniform(6, 6, ref seed), 6);
-            var e = NativeVector.Round(NativeVector.RandomUniform(6), 6);
+            var C = Round( 6.0*Identity(6) - RandomUniform(6, 6, ref seed), 6);
+            var e = Round(RandomUniform(6), 6);
             var xs = C.Solve(e);
             var xb = C.BlockSolve(e);
 
@@ -302,21 +315,90 @@ namespace FortranDriver
             Console.WriteLine("Serial LU decomposition.");
             Console.WriteLine($"xs = \n{xs}");
             Console.WriteLine("Serial Residual.");
-            Console.WriteLine($"es = \n{ NativeVector.Round( es, 6)}");
+            Console.WriteLine($"es = \n{Round( es, 6)}");
 
 
             Console.WriteLine("Block LU decomposition.");
             Console.WriteLine($"xb = \n{xb}");
             Console.WriteLine("Block Residual.");
-            Console.WriteLine($"eb = \n{ NativeVector.Round( eb, 6)}");
+            Console.WriteLine($"eb = \n{Round( eb, 6)}");
 
         }
 
         static void TestQuaternionMethods()
         {
-            NativeQuaternion.TestNativeQuaternion();
+            NativeQuaternion.TestNativeQuaternion();            
+        }
 
-            
+        static void BenchMatrixSolve()
+        {
+#if DEBUG
+            Console.WriteLine("Benchmark DEBUG Matrix Solver.");
+#else
+            Console.WriteLine("Benchmark RELEASE Matrix Solver.");
+#endif
+            Console.WriteLine();
+            Console.WriteLine($"CPU#:{Environment.ProcessorCount}, USER:{Environment.UserName}, WIN:{Environment.OSVersion.VersionString}, {(Environment.Is64BitProcess ? "x64" : "x86")}");
+
+
+            Console.WriteLine();
+            Stopwatch sw = new Stopwatch();
+            double t1_μs, t1_s, t2_μs, t2_s;
+
+            // Burn In
+            {
+                NativeMatrix A = NativeMatrix.RandomMinMax(4, 4, -1.0, 6.0);
+                NativeVector b = NativeVector.RandomMinMax(4, -3.0, 9.0);
+                double sum = 0;
+                for (int k = 0; k < 20000; k++)
+                {
+                    NativeVector g = A.Solve((k+1)*b);
+                    sum += g[1];
+                }
+            }
+
+
+            Console.WriteLine($"|=========== SERIAL ============== |=========== BLOCK =============== |");
+            Console.Write($"| {"Size", 5} {"Time", 16} {"Rate",9} " );
+            Console.WriteLine($"| {"Size", 5} {"Time", 16} {"Rate",9} |");
+            Console.WriteLine($"|--------------------------------- |--------------------------------- |");
+            Console.Write($"| {"[#]", 5} {"[s]", 16} {"[n^2/μs]",9} ");
+            Console.WriteLine($"| {"[#]", 5} {"[s]", 16} {"[n^2/μs]",9} |");
+            for (int i = -4; i < 14; i++)
+            {
+                int size = i>=0 ? (int)Math.Pow(5, (double)i/4+1) : i+5;
+                NativeMatrix A = RandomMinMax(size, size, -1.0, 6.0);
+                NativeVector b = RandomMinMax(size, -3.0, 9.0);
+
+                int repeat = Math.Max(1, 1250000 / (size*size) );
+
+                double sum = 0.0;
+                NativeVector x = new NativeVector(size);
+                NativeVector y = new NativeVector(size);
+                sw.Reset();
+                sw.Start();
+                for (int iter = 0; iter < repeat; iter++)
+                {
+                    x = A.Solve(b);
+                    sum += x[1];
+                }
+                
+                sw.Stop();
+                t1_μs = sw.Elapsed.TotalMicroseconds/repeat;
+                t1_s = sw.Elapsed.TotalSeconds/repeat;
+                sw.Reset();
+                sw.Start();
+                for (int iter = 0; iter < repeat; iter++)
+                {
+                    y = A.BlockSolve(b);
+                    sum += x[1];
+                }
+                sw.Stop();
+                t2_μs = sw.Elapsed.TotalMicroseconds/repeat;
+                t2_s = sw.Elapsed.TotalSeconds/repeat;
+                Console.Write($"| {size, 5} {t1_s, 16:g9} {(size*size)/t1_μs, 9:g4} ");
+                Console.WriteLine($"| {size, 5} {t2_s, 16:g9} {(size*size)/t2_μs, 9:g4} |");
+            }
         }
 
 

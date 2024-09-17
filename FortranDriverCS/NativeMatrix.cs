@@ -63,7 +63,7 @@ namespace FortranDriver
             FortranMethods.array_reshape_vm(rows*columns, values, rows, columns, data);
             return new NativeMatrix(data);
         }
-        public static NativeMatrix RandoMminMax(int n, int m, double minValue = 0, double maxValue = 1)
+        public static NativeMatrix RandomMinMax(int n, int m, double minValue = 0, double maxValue = 1)
         {
             double[,] data = new double[m, n];
             FortranMethods.array_random_m(n, m, minValue, maxValue, data);
@@ -399,7 +399,8 @@ namespace FortranDriver
                 data[j] = new string[n];
                 for (int i = 0; i < n; i++)
                 {
-                    data[j][i] = Data[j, i].ToString(formatting, formatProvider);
+                    double x = Math.Round(Data[j, i], 11);
+                    data[j][i] = x.ToString(formatting, formatProvider);
                 }
                 maxWidth[j] = data[j].Max((s) => s.Length);
             }

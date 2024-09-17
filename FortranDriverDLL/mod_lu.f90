@@ -14,8 +14,8 @@
     use mod_common
     implicit none
 
-    integer, parameter :: wp = real64
-    integer, parameter :: nmax = 100    
+    !integer, parameter :: wp = real64
+    !integer, parameter :: nmax = 100    
     
     type :: lu_info(n)
         integer, len :: n
@@ -66,21 +66,10 @@
     pure function lu_decomp_dyn(A) result(lu)
     real(real64), intent(in) :: A(:,:)
     type(lu_info(:)), allocatable :: lu
-    real(real64) :: lum(size(A,1),size(A,1))
-    integer :: indx(size(A,1))
-    real(real64) :: d
-    integer :: ierr, n
-        n = size(A,1)
-        lum = A
-        call LUDCMP(lum, n, indx, d, ierr)
-        if( ierr /= 0 ) then
-            error stop "Singular Matrix"
-        end if
+    integer :: n
+        n = size(A, 1)
         allocate(lu_info(n) :: lu)
-        lu%data = lum
-        lu%indx = indx
-        lu%sgn = d
-        lu%ierr = ierr
+        lu = lu_decomp_fix(n, A)
     end function
     
     pure function lu_solve_vec(lu,b) result(x)
@@ -119,9 +108,9 @@
     real(real64) :: A_inv(lu%n, lu%n)
     integer :: j, k
         k = lu%n
-        A_inv = 0.0_wp
+        A_inv = 0.0_real64
         forall(j=1:k)
-            A_inv(j,j) = 1.0_wp
+            A_inv(j,j) = 1.0_real64
         end forall
         do j=1, k
             call LUBKSB(lu%data, lu%n, lu%indx, A_inv(:,j))
@@ -148,7 +137,7 @@
     integer, intent(out), dimension(N) :: INDX
     real(real64), intent(out) :: d    
 
-    real(real64)  :: AMAX, DUM, SUMM, VV(nmax)
+    real(real64)  :: AMAX, DUM, SUMM, VV(N)
     INTEGER :: i, j, k, imax
 
     D=1
@@ -213,7 +202,7 @@
     
     END subroutine LUDCMP    
     
-    pure Subroutine LUBKSB(A, N, INDX, B)
+    pure subroutine LUBKSB(A, N, INDX, B)
     !  ******************************************************************
     !  * Solves the set of N linear equations A . X = B.  Here A is     *
     !  * input, not as the matrix A but rather as its LU decomposition, *
@@ -236,7 +225,6 @@
     real(real64)  SUMM
 
     II = 0
-
     DO I=1,N
         LL = INDX(I)
         SUMM = B(LL)
@@ -250,7 +238,7 @@
         END IF
         B(I) = SUMM
     END DO ! i loop
-
+    
     DO I=N,1,-1
         SUMM = B(I)
         IF(I < N) THEN
@@ -260,11 +248,10 @@
         END IF
         B(I) = SUMM / A(I,I)
     END DO ! i loop
-
     RETURN
     END subroutine LUBKSB
     
-    pure Subroutine LUBKSB2(A, N, K, INDX, B)
+    pure subroutine LUBKSB2(A, N, K, INDX, B)
     implicit none
     integer, intent(in) :: N, K
     real(real64), intent(in), dimension(N,N) :: A

@@ -278,7 +278,7 @@
             
     end subroutine
     
-    pure subroutine array_block_solve_mv(n,A,b,x) bind(c)
+    subroutine array_block_solve_mv(n,A,b,x) bind(c)
     !DEC$ ATTRIBUTES DLLEXPORT :: array_block_solve_mv
     use mod_array_inv
     integer, intent(in), value :: n
@@ -440,7 +440,7 @@
             
     end subroutine
     
-    pure subroutine array_block_solve_mm(n,k,A,b,x) bind(c)
+    subroutine array_block_solve_mm(n,k,A,b,x) bind(c)
     !DEC$ ATTRIBUTES DLLEXPORT :: array_block_solve_mm
     use mod_array_inv
     integer, intent(in), value :: n,k
