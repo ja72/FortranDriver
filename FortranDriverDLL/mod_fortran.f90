@@ -228,7 +228,7 @@
             
     end subroutine
     
-    pure function array_norm_v(n,x) result(s)
+    pure function array_norm_v(n,x) result(s) bind(c)
     !DEC$ ATTRIBUTES DLLEXPORT :: array_norm_v
     integer, intent(in), value :: n
     real(real64), intent(in) :: x(n)
@@ -237,7 +237,7 @@
     return
     end
     
-    pure function array_norm_m(n,m,x) result(s)
+    pure function array_norm_m(n,m,x) result(s) bind(c)
     !DEC$ ATTRIBUTES DLLEXPORT :: array_norm_m
     integer, intent(in), value :: n,m
     real(real64), intent(in) :: x(n,m)    

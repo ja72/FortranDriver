@@ -501,7 +501,7 @@
 
     return
     end
-    pure subroutine q8_add(x,y,z)
+    pure subroutine q8_add(x,y,z) bind(c)
     !DEC$ ATTRIBUTES DLLEXPORT :: q8_add
     real(real64), intent(in) :: x(4), y(4)
     real(real64), intent(out) :: z(4)
@@ -509,7 +509,7 @@
         z = x + y
     
     end subroutine    
-    pure subroutine q8_subtract(x,y,z)
+    pure subroutine q8_subtract(x,y,z) bind(c)
     !DEC$ ATTRIBUTES DLLEXPORT :: q8_subtract
     real(real64), intent(in) :: x(4), y(4)
     real(real64), intent(out) :: z(4)
@@ -517,7 +517,7 @@
         z = x - y
     
     end subroutine    
-    pure subroutine q8_scale(f,x,r)
+    pure subroutine q8_scale(f,x,r) bind(c)
     !DEC$ ATTRIBUTES DLLEXPORT :: q8_scale
     real(real64), intent(in), value :: f
     real(real64), intent(in) :: x(4)
