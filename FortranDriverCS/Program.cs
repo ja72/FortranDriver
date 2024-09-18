@@ -364,9 +364,9 @@ namespace FortranDriver
             Console.WriteLine($"|--------------------------------- |--------------------------------- |");
             Console.Write($"| {"[#]", 5} {"[s]", 16} {"[n^2/μs]",9} ");
             Console.WriteLine($"| {"[#]", 5} {"[s]", 16} {"[n^2/μs]",9} |");
-            for (int i = -4; i < 14; i++)
+            for (int i = -5; i < 14; i++)
             {
-                int size = i>=0 ? (int)Math.Pow(5, (double)i/4+1) : i+5;
+                int size = i>=0 ? (int)Math.Pow(5, (double)(i+1)/4+1) : i+7;
                 NativeMatrix A = RandomMinMax(size, size, -1.0, 6.0);
                 NativeVector b = RandomMinMax(size, -3.0, 9.0);
 

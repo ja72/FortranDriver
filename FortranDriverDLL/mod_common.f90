@@ -12,7 +12,7 @@
     implicit none
     
     ! JA - Precission
-    real(real64), parameter :: eps  = 1.0_real64/4503599627370496_int64
+    real(real64), parameter :: ulp   = 1.0_real64/4503599627370496_int64
     real(real64), parameter :: tiny  = 1.0_real64/68719476736_int64
     real(real64), parameter :: huge  = 1/tiny
 
@@ -108,6 +108,7 @@
     elemental function triangle_side_ssa(side_a,side_b,angle_ab) result(side_c)
     !tex: Given two sides and an angle, the opposing side is
     ! $$c = \sqrt{a^2 + b^2 - 2 a b \cos(\gamma)}$$
+    
     real(real64), intent(in) :: side_a, side_b, angle_ab
     real(real64) :: side_c, t
         if( abs(angle_ab)<tiny ) then
@@ -122,6 +123,7 @@
     elemental function triangle_angle_sss(side_a,side_b,side_c) result(angle_ab)
     !tex: Given two adjacent sides and a opposing side, the included angle is
     ! $$\cos(\gamma) = \frac{a^2-b^2-c^2}{2 a b}$$
+    
     real(real64), intent(in) :: side_a, side_b, side_c
     real(real64) :: angle_ab, t
         if( abs( side_c + side_a - side_b )<tiny ) then
@@ -140,6 +142,7 @@
     elemental function triangle_side_saa(side_a,angle_bc,angle_ab) result(side_c)
     !tex: Given a side and two angles, the opposing side is
     ! $$c = a\, \frac{\sin \gamma}{\sin \alpha}$$
+    
     real(real64), intent(in) :: side_a, angle_bc, angle_ab
     real(real64) :: side_c
         if(abs(side_a)<tiny) then
@@ -157,6 +160,7 @@
     elemental function triangle_angle_ssa(side_a,side_c,angle_bc) result(angle_ab)
     !tex: Given two adjacent sides and a opposing side, the included angle is
     ! $$\gamma = \mathrm{asin}\left( \frac{c}{a} \sin \alpha \right)$$
+    
     real(real64), intent(in) :: side_a, angle_bc, side_c
     real(real64) :: angle_ab, t
         if(abs(side_c)<tiny) then

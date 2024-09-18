@@ -76,8 +76,12 @@
     class(lu_info(*)), intent(in) :: lu
     real(real64), intent(in) :: b(:)
     real(real64) :: x(size(b,1))
-        x = b
-        call LUBKSB(lu%data, lu%n, lu%indx, x)
+        if( lu%n == 1) then
+            x = b/lu%data(1,1)
+        else
+            x = b
+            call LUBKSB(lu%data, lu%n, lu%indx, x)
+        end if
     end function
     
     pure function lu_solve_mat(lu,b) result(x)
@@ -86,10 +90,14 @@
     real(real64) :: x(size(b,1),size(b,2))
     integer :: j, k
         k = size(b,2)
-        x = b
-        do j=1, k
-            call LUBKSB(lu%data, lu%n, lu%indx, x(:,j))
-        end do
+        if( lu%n == 1) then
+            x = b / lu%data(1,1)
+        else
+            x = b
+            do j=1, k
+                call LUBKSB(lu%data, lu%n, lu%indx, x(:,j))
+            end do
+        end if
     end function
     
     pure function lu_det(lu) result(d)
@@ -108,14 +116,17 @@
     real(real64) :: A_inv(lu%n, lu%n)
     integer :: j, k
         k = lu%n
-        A_inv = 0.0_real64
-        forall(j=1:k)
-            A_inv(j,j) = 1.0_real64
-        end forall
-        do j=1, k
-            call LUBKSB(lu%data, lu%n, lu%indx, A_inv(:,j))
-        end do
-                
+        if( k == 1) then
+            A_inv = 1/lu%data(1,1)
+        else
+            A_inv = 0.0_real64
+            forall(j=1:k)
+                A_inv(j,j) = 1.0_real64
+            end forall
+            do j=1, k
+                call LUBKSB(lu%data, lu%n, lu%indx, A_inv(:,j))
+            end do
+        end if
     end function
     
     pure Subroutine LUDCMP(A,N,INDX,D,CODE)

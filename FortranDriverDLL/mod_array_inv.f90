@@ -3,7 +3,7 @@ module mod_array_inv
 use mod_common
 implicit none
 
-    integer, parameter :: wp = real64
+    !integer, parameter :: wp = real64
     
     interface det
         module procedure :: mat_det
@@ -13,9 +13,58 @@ implicit none
     end interface
     interface solve
         module procedure :: mat_solve_vec, mat_solve_mat
+        module procedure :: lui_solve_vec, lui_solve_mat
     end interface
 
     contains
+    
+    pure function zero(n) result(A)
+    integer, intent(in) :: n
+    real(real64) :: A(n,n)
+    
+        A = 0.0_real64
+    
+    end function
+    
+    pure function zeros(n,m) result(A)
+    integer, intent(in) :: n, m
+    real(real64) :: A(n,m)
+    
+        A = 0.0_real64
+    
+    end function
+    
+    pure function eye(n,x) result(A)
+    integer, intent(in) :: n
+    real(real64), intent(in), optional :: x
+    real(real64) :: A(n,n), s
+    integer :: i
+    
+        if(present(x)) then
+            s=x
+        else
+            s=1
+        end if
+    
+        A = 0.0_real64
+        forall(i=1:n)
+            A(i,i) = s
+        end forall
+    
+    end function
+    
+    pure function diag(values) result(A)
+    real(real64), intent(in) :: values(:)
+    real(real64) :: A(size(values), size(values))
+    integer :: i
+    
+        A = 0.0_real64
+        forall(i=1:size(values))
+            A(i,i) = values(i)
+        end forall
+    
+    end function
+    
     
     pure function vec_inner(a,b) result(ab)
     real(real64), intent(in) :: a(:), b(:)
@@ -56,6 +105,10 @@ implicit none
             d = mat3_det(A)
         case(4)
             d = mat4_det(A)
+        !case(5)
+        !    d = mat5_det(A)
+        !case(6)
+        !    d = mat6_det(A)
         case default
             d = lu_mat_det(A)
         end select
@@ -82,6 +135,10 @@ implicit none
             B = mat3_inv(A)
         case (4)
             B = mat4_inv(A)
+        case (5)
+            B = mat5_inv(A)
+        case (6)
+            B = mat6_inv(A)
         case default
             B = lu_mat_invert(A)
         end select
@@ -108,6 +165,10 @@ implicit none
             x = mat3_solve_vec(A, b)
         case (4)
             x = mat4_solve_vec(A, b)
+        case (5)
+            x = mat5_solve_vec(A, b)
+        case (6)
+            x = mat6_solve_vec(A, b)
         case default
             x = lu_mat_solve_vec(A, b)
         end select
@@ -127,10 +188,30 @@ implicit none
             x = mat3_solve_mat(A, B)
         case (4)
             x = mat4_solve_mat(A, B)
+        case (5)
+            x = mat5_solve_mat(A, B)
+        case (6)
+            x = mat6_solve_mat(A, B)
         case default
             X = lu_mat_solve_mat(A, B)
         end select
         
+    end function
+    
+    pure function lui_solve_vec(A, b) result(x)
+    use mod_lu
+    class(lu_info(*)), intent(in) :: A
+    real(real64), intent(in) :: b(:)
+    real(real64) :: x(size(b))
+        x = A%solve(b)
+    end function
+    
+    pure function lui_solve_mat(A, B) result(x)
+    use mod_lu
+    class(lu_info(*)), intent(in) :: A
+    real(real64), intent(in) :: b(:,:)
+    real(real64) :: x(size(b,1),size(b,2))
+        x = A%solve(b)
     end function
     
     pure function mat2_det(A) result(d)
@@ -143,46 +224,61 @@ implicit none
         d = t2-t5
     end function
     
-    pure function mat2_inv(A) result(B)
-    real(real64) :: B(2,2), d_inv, d
+    pure function mat2_inv(A, d_known) result(A_inv)
     real(real64), intent(in) :: A(2,2)        
-        d = mat2_det(A)
+    real(real64), intent(in), optional :: d_known
+    real(real64) :: A_inv(2,2), d_inv, d
+        if(present(d_known)) then
+            d = d_known
+        else
+            d = mat2_det(A)
+        end if
         if( abs(d) <= tiny ) then
             error stop "Matrix is singular."
         end if
         d_inv = 1/d
-        B(1,1) = A(2,2)*d_inv
-        B(1,2) = -A(1,2)*d_inv
-        B(2,1) = -A(2,1)*d_inv
-        B(2,2) = A(1,1)*d_inv        
+        A_inv(1,1) =  A(2,2)*d_inv
+        A_inv(1,2) = -A(1,2)*d_inv
+        A_inv(2,1) = -A(2,1)*d_inv
+        A_inv(2,2) =  A(1,1)*d_inv        
     end function
     
-    pure function mat2_solve_vec(A,b) result(x)
-    real(real64) :: x(2), d_inv, d
+    pure function mat2_solve_vec(A,b,d_known) result(x)
     real(real64), intent(in) :: A(2,2), b(2)
-        d = mat2_det(A)
+    real(real64), intent(in), optional :: d_known
+    real(real64) :: x(2), d, s(2)
+        if(present(d_known)) then
+            d = d_known
+        else
+            d = mat2_det(A)
+        end if
         if( abs(d) <= tiny ) then
             error stop "Matrix is singular."
         end if
-        d_inv = 1/d
-        x(1) = d_inv*(A(2,2)*b(1) - A(1,2)*b(2))
-        x(2) = d_inv*(A(1,1)*b(2) - A(2,1)*b(1))    
+        s = b/d
+        x(1) = (A(2,2)*s(1) - A(1,2)*s(2))
+        x(2) = (A(1,1)*s(2) - A(2,1)*s(1))    
     end function
-    pure function mat2_solve_mat(A,b) result(x)
-    real(real64), intent(in) :: A(2,2), b(:,:)
-    real(real64) :: x(2,size(b,2)), d_inv, d
+    
+    pure function mat2_solve_mat(A, B, d_known) result(x)
+    real(real64), intent(in) :: A(2,2), B(:,:)
+    real(real64), intent(in), optional :: d_known
+    real(real64) :: x(2,size(b,2)), d
     integer :: h, j
         if(size(b,1)/=2) then
             error stop "Expecting 2 rows in B."
         end if
-        d = mat2_det(A)
+        h = size(B, 2)
+        if(present(d_known)) then
+            d = d_known
+        else
+            d = mat2_det(A)
+        end if
         if( abs(d) <= tiny ) then
             error stop "Matrix is singular."
         end if
-        d_inv = 1/d
         do j=1, h
-            x(1, j) = d_inv*(A(2,2)*b(1, j) - A(1,2)*b(2, j))
-            x(2, j) = d_inv*(A(1,1)*b(2, j) - A(2,1)*b(1, j))    
+            x(:, j) = mat2_solve_vec(A, B(:,j), d)
         end do
     end function
     
@@ -200,10 +296,15 @@ implicit none
         d = t2+t3+t4-t7-t8-t9
     end function
     
-    pure function mat3_inv(A) result(B)
-    real(real64) :: B(3,3), d_inv, d
+    pure function mat3_inv(A, d_known) result(B)
     real(real64), intent(in) :: A(3,3)
-        d = mat3_det(A)
+    real(real64), intent(in), optional :: d_known
+    real(real64) :: B(3,3), d_inv, d
+        if(present(d_known)) then
+            d = d_known
+        else
+            d = mat3_det(A)
+        end if
         if( abs(d) <= tiny ) then
             error stop "Matrix is singular."
         end if
@@ -220,36 +321,43 @@ implicit none
         
     end function
     
-    pure function mat3_solve_vec(A, b) result(x)
-    real(real64) :: x(3), d_inv, d
+    pure function mat3_solve_vec(A, b, d_known) result(x)
     real(real64), intent(in) :: A(3,3), b(3)
-        d = mat3_det(A)
+    real(real64), intent(in), optional :: d_known
+    real(real64) :: x(3), d, s(3)
+        if(present(d_known)) then
+            d = d_known
+        else
+            d = mat3_det(A)
+        end if
         if( abs(d) <= tiny ) then
             error stop "Matrix is singular."
         end if
-        d_inv = 1/d
-        x(1) = d_inv*(A(1,2)*(A(2,3)*b(3)-A(3,3)*b(2))+A(1,3)*(A(3,2)*b(2)-A(2,2)*b(3))+b(1)*(A(2,2)*A(3,3)-A(2,3)*A(3,2)))
-        x(2) = d_inv*(A(1,1)*(A(3,3)*b(2)-A(2,3)*b(3))+A(1,3)*(A(2,1)*b(3)-A(3,1)*b(2))-b(1)*(A(2,1)*A(3,3)-A(2,3)*A(3,1)))
-        x(3) = d_inv*(A(1,1)*(A(2,2)*b(3)-A(3,2)*b(2))+A(1,2)*(A(3,1)*b(2)-A(2,1)*b(3))+b(1)*(A(2,1)*A(3,2)-A(2,2)*A(3,1)))
+        s = b/d
+        x(1) = (A(1,2)*(A(2,3)*s(3)-A(3,3)*s(2))+A(1,3)*(A(3,2)*s(2)-A(2,2)*s(3))+s(1)*(A(2,2)*A(3,3)-A(2,3)*A(3,2)))
+        x(2) = (A(1,1)*(A(3,3)*s(2)-A(2,3)*s(3))+A(1,3)*(A(2,1)*s(3)-A(3,1)*s(2))-s(1)*(A(2,1)*A(3,3)-A(2,3)*A(3,1)))
+        x(3) = (A(1,1)*(A(2,2)*s(3)-A(3,2)*s(2))+A(1,2)*(A(3,1)*s(2)-A(2,1)*s(3))+s(1)*(A(2,1)*A(3,2)-A(2,2)*A(3,1)))
     end function
     
-    pure function mat3_solve_mat(A, b) result(x)
-    real(real64), intent(in) :: A(3,3), b(:,:)
-    real(real64) :: x(3,size(b,2)), d_inv, d
+    pure function mat3_solve_mat(A, B, d_known) result(x)
+    real(real64), intent(in) :: A(3,3), B(:,:)
+    real(real64), intent(in), optional :: d_known
+    real(real64) :: x(3,size(b,2)), d
     integer :: h, j
         if( size(B,1) /= 3) then
             error stop "Expecting 3 rows in B."
         end if
         h = size(B,2)
-        d = mat3_det(A)
+        if(present(d_known)) then
+            d = d_known
+        else
+            d = mat3_det(A)
+        end if
         if( abs(d) <= tiny ) then
             error stop "Matrix is singular."
         end if
-        d_inv = 1/d
         do j = 1, h
-            x(1, j) = d_inv*(+b(1,j)*(A(2,2)*A(3,3)-A(2,3)*A(3,2)))+A(1,2)*(A(2,3)*b(3,j)-A(3,3)*b(2,j))+A(1,3)*(A(3,2)*b(2,j)-A(2,2)*b(3,j))
-            x(2, j) = d_inv*(-b(1,j)*(A(2,1)*A(3,3)-A(2,3)*A(3,1)))+A(1,3)*(A(2,1)*b(3,j)-A(3,1)*b(2,j))+A(1,1)*(A(3,3)*b(2,j)-A(2,3)*b(3,j))
-            x(3, j) = d_inv*(+b(1,j)*(A(2,1)*A(3,2)-A(2,2)*A(3,1)))+A(1,1)*(A(2,2)*b(3,j)-A(3,2)*b(2,j))+A(1,2)*(A(3,1)*b(2,j)-A(2,1)*b(3,j))
+            x(:,j) = mat3_solve_vec(A, b(:,j), d)
         end do
     end function
     
@@ -287,10 +395,15 @@ implicit none
     end function
     
     
-    pure function mat4_inv(A) result(A_inv)
-    real(real64) :: A_inv(4,4), d_inv,d
+    pure function mat4_inv(A, d_known) result(A_inv)
+    real(real64) :: A_inv(4,4), d_inv, d
     real(real64), intent(in) :: A(4,4)
-        d = mat4_det(A)
+    real(real64), intent(in), optional :: d_known
+        if(present(d_known)) then
+            d = d_known
+        else
+            d = mat4_det(A)
+        end if
         if( abs(d) <= tiny ) then
             error stop "Matrix is singular."
         end if
@@ -317,18 +430,23 @@ implicit none
 
     end function
 
-    pure function mat4_solve_vec(A, b) result(x)
+    pure function mat4_solve_vec(A, b, d_known) result(x)
     real(real64), intent(in) :: A(4,4), b(4)
-    real(real64) :: x(4), d_inv,d, s(4)
+    real(real64), intent(in), optional :: d_known
+    real(real64) :: x(4), d, s(4)
     
         !x = matmul(mat4_inv(A), b)
         
-        d = mat4_det(A)
+        if(present(d_known)) then
+            d = d_known
+        else
+            d = mat4_det(A)
+        end if
         if( abs(d) <= tiny ) then
             error stop "Matrix is singular."
         end if
-        d_inv = 1/d
-        s = d_inv*b
+        !d_inv = 1/d
+        s = b/d
         x(1) =  s(1)*(A(2,2)*A(3,3)*A(4,4)-A(2,2)*A(3,4)*A(4,3)-A(2,3)*A(3,2)*A(4,4)+A(2,3)*A(3,4)*A(4,2)+A(2,4)*A(3,2)*A(4,3)-A(2,4)*A(3,3)*A(4,2)) &
                -s(2)*(A(1,2)*A(3,3)*A(4,4)-A(1,2)*A(3,4)*A(4,3)-A(1,3)*A(3,2)*A(4,4)+A(1,3)*A(3,4)*A(4,2)+A(1,4)*A(3,2)*A(4,3)-A(1,4)*A(3,3)*A(4,2)) &
                +s(3)*(A(1,2)*A(2,3)*A(4,4)-A(1,2)*A(2,4)*A(4,3)-A(1,3)*A(2,2)*A(4,4)+A(1,3)*A(2,4)*A(4,2)+A(1,4)*A(2,2)*A(4,3)-A(1,4)*A(2,3)*A(4,2)) &
@@ -351,18 +469,168 @@ implicit none
                 
     end function
     
-    pure function mat4_solve_mat(A,b) result(x)
-    real(real64), intent(in) :: A(4,4), b(:,:)
-    real(real64) :: x(4, size(b,2))
-    real(real64) :: A_inv(4,4)
-    integer :: m, h
+    pure function mat4_solve_mat(A,B, d_known) result(x)
+    real(real64), intent(in) :: A(4,4), B(:,:)
+    real(real64), intent(in), optional :: d_known
+    real(real64) :: x(4, size(B, 2)), d
+    integer :: m, h, j
         m = size(B,1)
-        h = size(B,2)
         if( m/= 4) then
             error stop "Expecting a 4 rows in B."
         end if
-        A_inv = mat4_inv(A)
-        x = matmul(A_inv, b)
+        h = size(B, 2)
+        if(present(d_known)) then
+            d = d_known
+        else
+            d = mat4_det(A)
+        end if
+        do j=1, h
+            x(:,j) = mat4_solve_vec(A, B(:,j), d)
+        end do
+    end function
+    
+    pure function mat5_inv(A) result(A_inv)
+    real(real64), intent(in) :: A(5,5)    
+    real(real64) :: A_inv(5,5), I(5,5)
+    
+        I = eye(5)
+        A_inv = solve(A, I)
+    
+    end function
+    
+    
+    pure function mat5_solve_vec(A, b) result(x)
+    real(real64), intent(in) :: A(5,5), b(5)
+    real(real64) :: x(5), x_1(3), x_2(2)
+    real(real64) :: A_11(3,3), A_12(3,2), A_21(2,3), A_22(2,2)
+    real(real64) :: B_12(3,2), B_21(2,3)
+    real(real64) :: b_1(3), b_2(2), y_1(3), y_2(2)
+    
+        A_11 = A(1:3, 1:3)
+        A_12 = A(1:3, 4:5)
+        A_21 = A(4:5, 1:3)
+        A_22 = A(4:5, 4:5)
+        b_1 = b(1:3)
+        b_2 = b(4:5)
+        
+        y_1 = solve(A_11, b_1)
+        y_2 = solve(A_22, b_2)
+        B_12 = solve(A_11, A_12)
+        B_21 = solve(A_22, A_21)
+        x_1 = solve(A_11 - matmul(A_12,B_21), b_1 - matmul(A_12,y_2))
+        x_2 = solve(A_22 - matmul(A_21,B_12), b_2 - matmul(A_21,y_1))
+        
+        x = [x_1, x_2]
+        
+    end function
+    
+    pure function mat5_solve_mat(A, B) result(x)
+    real(real64), intent(in) :: A(5,5), B(:,:)
+    real(real64) :: x(5, size(B, 2)), x_1(3, size(B, 2)), x_2(2, size(B, 2))
+    real(real64) :: A_11(3,3), A_12(3,2), A_21(2,3), A_22(2,2)
+    real(real64) :: B_12(3,2), B_21(2,3)
+    real(real64) :: b_1(3,size(B, 2)), b_2(2,size(B, 2)), y_1(3,size(B, 2)), y_2(2,size(B, 2))
+    integer :: m, h
+        m = size(B, 1)
+        if( m/= 5) then
+            error stop "Expecting a 5 rows in B."
+        end if
+        h = size(B, 2)
+        
+        A_11 = A(1:3, 1:3)
+        A_12 = A(1:3, 4:5)
+        A_21 = A(4:5, 1:3)
+        A_22 = A(4:5, 4:5)
+        b_1 = b(1:3,:)
+        b_2 = b(4:5,:)
+        
+        y_1 = solve(A_11, b_1)
+        y_2 = solve(A_22, b_2)
+        B_12 = solve(A_11, A_12)
+        B_21 = solve(A_22, A_21)
+        x_1 = solve(A_11 - matmul(A_12,B_21), b_1 - matmul(A_12,y_2))
+        x_2 = solve(A_22 - matmul(A_21,B_12), b_2 - matmul(A_21,y_1))
+        
+        x(1:3,:) = x_1
+        x(4:5,:) = x_2
+    end function
+
+    pure function mat6_inv(A) result(A_inv)
+    real(real64), intent(in) :: A(6,6)    
+    real(real64) :: A_inv(6,6), I(6,6)
+    
+        I = eye(6)
+        A_inv = solve(A, I)
+    
+    end function
+    
+    pure function mat6_solve_vec(A, b) result(x)
+    real(real64), intent(in) :: A(6,6), b(6)
+    real(real64) :: x(6), x_1(3), x_2(3)
+    real(real64) :: A_11(3,3), A_12(3,3), A_21(3,3), A_22(3,3)
+    real(real64) :: B_12(3,3), B_21(3,3)
+    real(real64) :: b_1(3), b_2(3), y_1(3), y_2(3)
+    
+        A_11 = A(1:3, 1:3)
+        A_12 = A(1:3, 4:6)
+        A_21 = A(4:6, 1:3)
+        A_22 = A(4:6, 4:6)
+        b_1 = b(1:3)
+        b_2 = b(4:6)
+    
+        y_1 = solve(A_11, b_1)
+        y_2 = solve(A_22, b_2)
+        B_12 = solve(A_11, A_12)
+        B_21 = solve(A_22, A_21)
+        x_1 = solve(A_11 - matmul(A_12,B_21), b_1 - matmul(A_12,y_2))
+        x_2 = solve(A_22 - matmul(A_21,B_12), b_2 - matmul(A_21,y_1))
+        
+        x = [x_1, x_2]
+        
+    end function
+    
+    !pure function mat6_solve_mat(A, B) result(x)
+    !real(real64), intent(in) :: A(6,6), B(:,:)
+    !real(real64) :: x(6, size(B, 2)), d
+    !integer :: m, h, j
+    !    m = size(B, 1)
+    !    if( m/= 6) then
+    !        error stop "Expecting a 6 rows in B."
+    !    end if
+    !    h = size(B, 2)
+    !    do j=1, h
+    !        x(:,j) = mat6_solve_vec(A, B(:,j))
+    !    end do
+    !end function
+    pure function mat6_solve_mat(A, B) result(x)
+    real(real64), intent(in) :: A(6,6), B(:,:)
+    real(real64) :: x(6, size(B, 2)), x_1(3, size(B, 2)), x_2(3, size(B, 2))
+    real(real64) :: A_11(3,3), A_12(3,3), A_21(3,3), A_22(3,3)
+    real(real64) :: B_12(3,3), B_21(3,3)
+    real(real64) :: b_1(3,size(B, 2)), b_2(3,size(B, 2)), y_1(3,size(B, 2)), y_2(3,size(B, 2))
+    integer :: m, h
+        m = size(B, 1)
+        if( m/= 6) then
+            error stop "Expecting a 6 rows in B."
+        end if
+        h = size(B, 2)
+        
+        A_11 = A(1:3, 1:3)
+        A_12 = A(1:3, 4:6)
+        A_21 = A(4:6, 1:3)
+        A_22 = A(4:6, 4:6)
+        b_1 = b(1:3,:)
+        b_2 = b(4:6,:)
+        
+        y_1 = solve(A_11, b_1)
+        y_2 = solve(A_22, b_2)
+        B_12 = solve(A_11, A_12)
+        B_21 = solve(A_22, A_21)
+        x_1 = solve(A_11 - matmul(A_12,B_21), b_1 - matmul(A_12,y_2))
+        x_2 = solve(A_22 - matmul(A_21,B_12), b_2 - matmul(A_21,y_1))
+        
+        x(1:3,:) = x_1
+        x(4:6,:) = x_2
     end function
     
     pure function lu_mat_det(A) result(d)
@@ -509,7 +777,7 @@ implicit none
     real(real64) :: A_11(n/2,n/2), A_22(n-n/2,n-n/2), A_12(n/2,n-n/2), A_21(n-n/2,n/2)
     real(real64) :: B_12(n/2,n-n/2), B_21(n-n/2,n/2), y_1(n/2), y_2(n-n/2)
     real(real64) :: b_1(n/2), b_2(n-n/2), x_1(n/2), x_2(n-n/2)
-    integer      :: k
+    integer      :: k, l
     
         if(n == 1) then
             x = b/A(1, 1) 
@@ -517,6 +785,7 @@ implicit none
         end if
             
         k = n/2
+        l = n-k
         
         !$OMP PARALLEL 
         !$OMP SECTIONS 
@@ -537,73 +806,76 @@ implicit none
         !call LU decomposition routine on A_11
         LU_1 = lu(A_11)
         !call LU solver on intermediate results
-        y_1  = LU_1%solve(b_1)
-        B_12 = LU_1%solve(A_12)
+        y_1  = solve(LU_1, b_1)
+        B_12 = solve(LU_1, A_12)
         !call LU decomposition routine on schure inverses
         LU_4 = lu( A_22 - matmul(A_21, B_12) )
         !call LU solver on final results
-        x_2 = LU_4%solve( b_2 - matmul(A_21, y_1) )
+        x_2 = solve(LU_4, b_2 - matmul(A_21, y_1) )
         
         !$OMP SECTION
         !call LU decomposition routine on A_22
         LU_2 = lu(A_22)
         !call LU solver on intermediate results
-        y_2  = LU_2%solve(b_2)        
-        B_21 = LU_2%solve(A_21)
+        y_2  = solve(LU_2, b_2)        
+        B_21 = solve(LU_2, A_21)
         !call LU decomposition routine on schure inverses
         LU_3 = lu( A_11 - matmul(A_12, B_21) )
         !call LU solver on final results
-        x_1 = LU_3%solve( b_1 - matmul(A_12, y_2) )
+        x_1 = solve(LU_3, b_1 - matmul(A_12, y_2) )
         
         !$OMP END SECTIONS
         x = [x_1, x_2]
         
         !$OMP END PARALLEL
+
     end function
+    
     
     function lu_mat_block_solve_mat(A, b) result(x)
     use mod_lu
     real(real64), intent(in) :: A(:,:), b(:,:)
     real(real64) :: x(size(b,1), size(b, 2))
-    integer :: n, k
+    integer :: n, h
         n = size(A, 1)
-        k = size(b, 2)
+        h = size(b, 2)
         if(n /= size(A,2) ) then
             error stop "Expecting a square matrix."
         end if
         if( n/= size(b,1) ) then
             error stop "Incompatible matrix sizes."
         end if
-        x = lu_mat_block_solve_mat_fix(n,k,A,B)
+        x = lu_mat_block_solve_mat_fix(n,h,A,B)
     end function
     
-    function lu_mat_block_solve_mat_fix(n, k, A, b) result(x)
+    function lu_mat_block_solve_mat_fix(n, h, A, b) result(x)
     use mod_lu
-    integer, intent(in) :: n, k
-    real(real64), intent(in) :: A(n,n), b(n,k)
-    real(real64) :: x(n,k)
+    integer, intent(in) :: n, h
+    real(real64), intent(in) :: A(n,n), b(n,h)
+    real(real64) :: x(n,h)
     type(lu_info(n)) :: LU_1, LU_2, LU_3, LU_4
     real(real64) :: A_11(n/2,n/2), A_22(n-n/2,n-n/2), A_12(n/2,n-n/2), A_21(n-n/2,n/2)
     real(real64) :: B_12(n/2,n-n/2), B_21(n-n/2,n/2), y_1(n/2), y_2(n-n/2)
     real(real64) :: b_1(n/2), b_2(n-n/2), x_1(n/2), x_2(n-n/2)
-    integer      :: h, j
+    integer      :: k, j, l
             
         if(n == 1) then
             x = b/A(1, 1) 
             return
         end if
         
-        h = n/2
+        k = n/2
+        l = n - k
         
         !$OMP PARALLEL 
         !$OMP SECTIONS 
         
         !$OMP SECTION
-        A_11 = A(1:h, 1:h)
-        A_12 = A(1:h, h+1:n)
+        A_11 = A(1:k, 1:k)
+        A_12 = A(1:k, k+1:n)
         !$OMP SECTION
-        A_21 = A(h+1:n, 1:h)
-        A_22 = A(h+1:n, h+1:n)
+        A_21 = A(k+1:n, 1:k)
+        A_22 = A(k+1:n, k+1:n)
         !$OMP END SECTIONS 
         
         !$OMP SECTIONS 
@@ -611,7 +883,7 @@ implicit none
         !call LU decomposition routine on A_11
         LU_1 = lu(A_11)
         !call LU solver on intermediate results
-        B_12 = LU_1%solve(A_12)
+        B_12 = solve(LU_1, A_12)
         !call LU decomposition routine on schure inverses
         LU_4 = lu( A_22 - matmul(A_21, B_12) )
         
@@ -619,29 +891,29 @@ implicit none
         !call LU decomposition routine on A_22
         LU_2 = lu(A_22)        
         !call LU solver on intermediate results
-        B_21 = LU_2%solve(A_21)
+        B_21 = solve(LU_2, A_21)
         !call LU decomposition routine on schure inverses
         LU_3 = lu( A_11 - matmul(A_12, B_21) )
         !$OMP END SECTIONS
         
-        do j=1, k
+        do j=1, h
             
             !$OMP SECTIONS 
                                                 
             !call LU solver on intermediate results
             !$OMP SECTION
-            b_1 = b(1:h,j)
+            b_1 = b(1:k,j)
             !call LU solver on intermediate results
-            y_1  = LU_1%solve(b_1)
+            y_1  = solve(LU_1, b_1)
             !call LU decomposition routine on schure inverses
-            x_2 = LU_4%solve( b_2 - matmul(A_21, y_1) )
+            x_2 = solve(LU_4, b_2 - matmul(A_21, y_1) )
             
             !$OMP SECTION
-            b_2 = b(h+1:n,j)
+            b_2 = b(k+1:n,j)
             !call LU solver on intermediate results
-            y_2  = LU_2%solve(b_2)
+            y_2  = solve(LU_2, b_2)
             !call LU decomposition routine on schure inverses
-            x_1 = LU_3%solve( b_1 - matmul(A_12, y_2) )
+            x_1 = solve(LU_2, b_1 - matmul(A_12, y_2) )
         
             !$OMP END SECTIONS
             !call LU solver on final results
