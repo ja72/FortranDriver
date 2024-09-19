@@ -4,9 +4,13 @@
     implicit none
     
     integer ( int32 ), parameter :: i4_huge = 2147483647    
+    
+    enum, bind(c)
+      enumerator :: by_row = 0
+      enumerator :: by_column = 1
+    end enum    
 
     abstract interface
-
     pure subroutine actionrefint(i, n) !bind(c)
     import
     !DEC$ ATTRIBUTES VALUE :: i, n
@@ -291,6 +295,18 @@
     
 ! *** MATRIX OPERATIONS ***
     
+    subroutine array_fill_m(n,m,values,order,A) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: array_fill_m
+    integer, intent(in), value :: n, m, order
+    real(real64), intent(in) :: values(n*m)
+    real(real64), intent(out) :: A(n, m)    
+        if( order == by_row ) then
+            A = reshape( values, [n,m], order = [2,1])
+        else
+            A = reshape( values, [n,m] )
+        end if    
+    end subroutine
+    
     subroutine array_random_m(n,m,x,y,A) bind(c)
     !DEC$ ATTRIBUTES DLLEXPORT :: array_random_m
     integer, intent(in), value :: n, m
@@ -370,24 +386,28 @@
     
     end subroutine    
     
-    pure subroutine array_reshape_mv(n,m,A,k,B) bind(c)
+    pure subroutine array_reshape_mv(n,m,A,k,V) bind(c)
     !DEC$ ATTRIBUTES DLLEXPORT :: array_reshape_mv
     integer, intent(in), value :: n, m, k
     real(real64), intent(in) :: A(n,m)
-    real(real64), intent(out) :: B(k)
+    real(real64), intent(out) :: V(k)
     
-        B = reshape(A, [k])
+        V = reshape(A, [k])
         
     end subroutine
     
-    pure subroutine array_reshape_vm(n,A,k,l,B) bind(c)
+    pure subroutine array_reshape_vm(n,V,k,l,order,A) bind(c)
     !DEC$ ATTRIBUTES DLLEXPORT :: array_reshape_vm
     integer, intent(in), value :: n, k, l
-    real(real64), intent(in) :: A(n)
-    real(real64), intent(out) :: B(k,l)
+    real(real64), intent(in) :: V(n)
+    integer, intent(in), value :: order
+    real(real64), intent(out) :: A(k,l)
     
-        B = reshape(A, [k,l])
-        
+        if( order == by_row ) then
+            A = reshape(V, [k,l], order=[2,1])
+        else
+            A = reshape(V, [k,l])
+        end if
     end subroutine
     
     pure subroutine array_reshape_mm(n,m,A,k,l,B) bind(c)

@@ -190,6 +190,20 @@ namespace FortranDriver
         }
         static void TestMatrixMethods()
         {
+
+            double[] values = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0];
+
+            Console.WriteLine($"data = [{string.Join(",", values)}]");
+
+            Console.WriteLine($"FromRows(2,3,data) = ");
+            Console.WriteLine(NativeMatrix.FromRows(2, 3, values   ));
+            Console.WriteLine($"FromColumns(2,3,data) = ");
+            Console.WriteLine(NativeMatrix.FromColumns(2, 3, values));
+            Console.WriteLine($"FromRows(3,2,data) = ");
+            Console.WriteLine(NativeMatrix.FromRows(3, 2, values   ));
+            Console.WriteLine($"FromColumns(3,2,data) = ");
+            Console.WriteLine(NativeMatrix.FromColumns(3, 2, values));
+
             const int s = 7, t = 3;
 
             var r = Round( NativeVector.RandomMinMax(s, -1.0, 6.0), 6);

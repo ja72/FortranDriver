@@ -1,5 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
 namespace FortranDriver
 {
     internal static class FortranMethods
@@ -48,20 +50,12 @@ namespace FortranDriver
         /// <param name="y">The second vector.</param>
         /// <param name="z">The dot product result.</param>
         [DllImport(libraryName, EntryPoint = "array_dot_v", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void array_dot_v(int size, [In] double[] x, [In] double[] y, [Out] out double z); 
-        #endregion
+        internal static extern void array_dot_v(int size, [In] double[] x, [In] double[] y, [Out] out double z);
 
+        #endregion
         #region Matrix Functions
-        /// <summary>
-        /// Fortran DLL call to solve the linear system of equations <code>A*x=b</code> for <paramref name="x"/>.
-        /// </summary>
-        /// <param name="A">The coefficient matrix.</param>
-        /// <param name="b">The known vector</param>
-        /// <param name="x">The unknown vector</param>
-        [DllImport(libraryName, EntryPoint = "array_solve_mv", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void array_solve_mv(int rows, [In] double[,] A, [In] double[] b, [Out] double[] x);
-        [DllImport(libraryName, EntryPoint = "array_block_solve_mv", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void array_block_solve_mv(int rows, [In] double[,] A, [In] double[] b, [Out] double[] x);
+        [DllImport(libraryName, EntryPoint = "array_fill_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void array_fill_m(int rows, int columns, double[] values, ElementOrder order, [Out] double[,] data);
 
         [DllImport(libraryName, EntryPoint = "array_random_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void array_random_m(int rows, int columns, [In] double minValue, [In] double maxValue, [Out] double[,] A);
@@ -94,8 +88,10 @@ namespace FortranDriver
 
         [DllImport(libraryName, EntryPoint = "array_reshape_mv", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void array_reshape_mv(int rows, int columns, [In] double[,] A, int new_size, [Out] double[] B);
+
         [DllImport(libraryName, EntryPoint = "array_reshape_vm", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void array_reshape_vm(int size, [In] double[] A, int new_rows, int new_columns, [Out] double[,] B);
+        internal static extern void array_reshape_vm(int size, [In] double[] A, int new_rows, int new_columns, ElementOrder order, [Out] double[,] B);
+
         [DllImport(libraryName, EntryPoint = "array_reshape_mm", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void array_reshape_mm(int rows, int columns, [In] double[,] A, int new_rows, int new_columns, [Out] double[,] B);
 
@@ -129,6 +125,16 @@ namespace FortranDriver
         [DllImport(libraryName, EntryPoint = "array_product_mm", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void array_product_mm(int rows, int columns, int pages, [In] double[,] A, [In] double[,] B, [Out] double[,] C);
 
+        /// <summary>
+        /// Fortran DLL call to solve the linear system of equations <code>A*x=b</code> for <paramref name="x"/>.
+        /// </summary>
+        /// <param name="A">The coefficient matrix.</param>
+        /// <param name="b">The known vector</param>
+        /// <param name="x">The unknown vector</param>
+        [DllImport(libraryName, EntryPoint = "array_solve_mv", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void array_solve_mv(int rows, [In] double[,] A, [In] double[] b, [Out] double[] x);
+        [DllImport(libraryName, EntryPoint = "array_block_solve_mv", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void array_block_solve_mv(int rows, [In] double[,] A, [In] double[] b, [Out] double[] x);
         /// <summary>
         /// Fortran DLL call to solve the linear system of equations <code>A*X=B</code> for <paramref name="X"/>.
         /// </summary>

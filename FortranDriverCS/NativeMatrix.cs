@@ -8,6 +8,20 @@ using System.Linq.Expressions;
 
 namespace FortranDriver
 {
+    /// <summary>
+    /// Specify element ordering. <see cref="ByRow"/> = 0 (default for CLR), <see cref="ByColumn"/> = 1 (default for Fortran)
+    /// </summary>
+    public enum ElementOrder
+    {
+        /// <summary>
+        /// Order elements row by row
+        /// </summary>
+        ByRow = 0,
+        /// <summary>
+        /// Order elements column by column
+        /// </summary>
+        ByColumn = 1,
+    }
     public unsafe class NativeMatrix :
         System.Collections.ICollection,
         ICollection<double>,
@@ -18,23 +32,32 @@ namespace FortranDriver
             this.Rows=rows;
             this.Columns=columns;
             this.Data=new double[columns, rows];
+            this.Order = ElementOrder.ByColumn;
         }
         internal NativeMatrix(double[,] data)
         {
             this.Rows=data.GetLength(1);
             this.Columns=data.GetLength(0);
             this.Data=data??throw new ArgumentNullException(nameof(data));
+            this.Order = ElementOrder.ByColumn;
+        }
+        NativeMatrix(int rows, int columns, double[] values, ElementOrder order = ElementOrder.ByRow)
+            : this(rows, columns)
+        {
+            double[,] data = Data;
+            FortranMethods.array_fill_m(rows, columns, values, order, data);
         }
         public NativeMatrix(int rows, int columns, Func<int, int, double> initializer)
             : this(rows, columns)
         {
+            double[,] data = Data;
             if (rows>= columns)
             {
                 for (int col_idx = 0; col_idx < columns; col_idx++)
                 {
                     for (int row_idx = 0; row_idx < rows; row_idx++)
                     {
-                        Data[col_idx, row_idx] = initializer(row_idx+1, col_idx+1);
+                        data[col_idx, row_idx] = initializer(row_idx+1, col_idx+1);
                     }
                 }
             }
@@ -44,24 +67,26 @@ namespace FortranDriver
                 {
                     for (int col_idx = 0; col_idx < columns; col_idx++)
                     {
-                        Data[col_idx, row_idx] = initializer(row_idx+1, col_idx+1);
+                        data[col_idx, row_idx] = initializer(row_idx+1, col_idx+1);
                     }
                 }
             }
         }
         public static NativeMatrix FromRows(int rows, int columns, params double[] values)
         {
-            double[,] data = new double[rows, columns];
-            FortranMethods.array_reshape_vm(rows*columns, values, columns, rows, data);
-            double[,] temp = new double[columns, rows];
-            FortranMethods.array_tansp_m(columns, rows, data, temp);
-            return new NativeMatrix(temp);
+            return new NativeMatrix(rows, columns, values, ElementOrder.ByRow);
+            //double[,] data = new double[rows, columns];
+            //FortranMethods.array_reshape_vm(rows*columns, values, columns, rows, data);
+            //double[,] temp = new double[columns, rows];
+            //FortranMethods.array_tansp_m(columns, rows, data, temp);
+            //return new NativeMatrix(temp);
         }
         public static NativeMatrix FromColumns(int rows, int columns, params double[] values)
         {
-            double[,] data = new double[columns, rows];
-            FortranMethods.array_reshape_vm(rows*columns, values, rows, columns, data);
-            return new NativeMatrix(data);
+            return new NativeMatrix(rows, columns, values, ElementOrder.ByColumn);
+            //double[,] data = new double[columns, rows];
+            //FortranMethods.array_reshape_vm(rows*columns, values, rows, columns, data);
+            //return new NativeMatrix(data);
         }
         public static NativeMatrix RandomMinMax(int n, int m, double minValue = 0, double maxValue = 1)
         {
@@ -106,6 +131,8 @@ namespace FortranDriver
             FortranMethods.array_diag_m(size, value, data);
             return new NativeMatrix(data);
         }
+
+        public ElementOrder Order { get; }
 
         public ref double this[Index row, Index column]
         {
@@ -385,10 +412,6 @@ namespace FortranDriver
         public string ToString(string formatting) => ToString(formatting, null);
         public string ToString(string formatting, IFormatProvider formatProvider)
         {
-            const int width = 11;
-
-            //double[,] data = new double[Columns, Rows];
-            //FortranMethods.array_round_m(Rows, Columns, Data, 11, data);
 
             StringBuilder sb = new StringBuilder();
             int n = Data.GetLength(1), m = Data.GetLength(0);
@@ -433,7 +456,12 @@ namespace FortranDriver
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public double[] ToArray() => AsSpan().ToArray();
+        public double[] ToArray()
+        {
+            double[] data = new double[this.Data.Length];
+            FortranMethods.array_reshape_mv(Rows, Columns, Data, data.Length, data);
+            return data;
+        }
 
         public bool Contains(double item) => IndexOf(item)>=0;
         public int IndexOf(double item) => Array.IndexOf(Data, item);

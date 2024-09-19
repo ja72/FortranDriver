@@ -324,8 +324,7 @@ namespace FortranDriver
         public static void TestNativeQuaternion()
         {
             const double pi = Math.PI;
-            const double deg = pi/180;
-            const double rpm = pi/30;
+            const double deg = pi/180;            
 
             //FortranMethods.quat_array_test();
 

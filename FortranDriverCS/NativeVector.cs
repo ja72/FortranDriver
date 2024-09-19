@@ -89,11 +89,11 @@ namespace FortranDriver
             return new NativeVector(data);
         }
 
-        public NativeMatrix ReShape(int newRows, int newColumns)
+        public NativeMatrix ReShape(int newRows, int newColumns, ElementOrder order)
         {
             int n = Size, k = newRows, l = newColumns;
             double[,] data = new double[l, k];
-            FortranMethods.array_reshape_vm(n, Data, k, l, data);
+            FortranMethods.array_reshape_vm(n, Data, k, l, order, data);
             return new NativeMatrix(data);
         }
         public NativeVector Slice(int startRow, int endRow)
