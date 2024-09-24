@@ -58,7 +58,10 @@
 		<File RelativePath=".\mod_common.f90"/>
 		<File RelativePath=".\mod_fortran.f90"/>
 		<File RelativePath=".\mod_lu.f90"/>
-		<File RelativePath=".\mod_nasa_quat.f90"/></Filter>
+		<File RelativePath=".\mod_nasa_quat.f90"/>
+		<File RelativePath=".\mod_nasa_quat_print.f90"/>
+		<File RelativePath=".\mod_nasa_quat_test.f90"/>
+		<File RelativePath=".\mod_rigid_bodies.f90"/></Filter>
 	</Files>
 	<Globals/>
 </VisualStudioProject>

@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using static FortranDriver.Program;
 
 namespace FortranDriver
 {
@@ -9,10 +10,24 @@ namespace FortranDriver
         // NOTE: Fortran methods declared with `DllImport()`. Consider use the newer `LibraryImport()`
         //       delcaration instead. Use a ref to first element instead of passing a 2D array.
 #if DEBUG
-        const string libraryName = "FortranDriverDLL_d";
+        public const string libraryName = "FortranDriverDLL_d";
 #else
-        const string libraryName = "FortranDriverDLL";
-#endif        
+        public const string libraryName = "FortranDriverDLL";
+#endif
+
+        #region Interop Methods
+        /// <summary>
+        /// Fortran DLL call to manipulate matrix <paramref name="A"/>
+        /// </summary>
+        /// <param name="rows">The n.</param>
+        /// <param name="columns">The n.</param>
+        /// <param name="A">The matrix. Fortran requires <paramref name="A"/> to be column major 
+        /// and C# supplies a row major matrix by default.</param>
+        /// <param name="callBack">The call-back function to report on progress.</param>
+        [DllImport(libraryName, EntryPoint = "DoWork", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void DoWork(int rows, int columns, [In, Out] double[,] A, [MarshalAs(UnmanagedType.FunctionPtr)] ActionRefInt callBack);
+
+        #endregion
 
         #region Vector Functions
         [DllImport(libraryName, EntryPoint = "array_round_v", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
@@ -53,6 +68,7 @@ namespace FortranDriver
         internal static extern void array_dot_v(int size, [In] double[] x, [In] double[] y, [Out] out double z);
 
         #endregion
+
         #region Matrix Functions
         [DllImport(libraryName, EntryPoint = "array_fill_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void array_fill_m(int rows, int columns, double[] values, ElementOrder order, [Out] double[,] data);
@@ -222,8 +238,8 @@ namespace FortranDriver
         [DllImport(libraryName, EntryPoint = "rotation_mat2quat", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void rotation_mat2quat(double[,] a, [Out] double[] q);
 
-        [DllImport(libraryName, EntryPoint = "rotation_diag2mat", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void rotation_diag2mat(double[] q, double[] d, [Out] double[,] a);
+        [DllImport(libraryName, EntryPoint = "rotation_q8_diag2mat", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void rotation_q8_diag2mat(double[] q, double[] d, [Out] double[,] a);
 
         [DllImport(libraryName, EntryPoint = "rotation_mat_vector", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void rotation_mat_vector(double[,] a, double[] v, [Out] double[] w);

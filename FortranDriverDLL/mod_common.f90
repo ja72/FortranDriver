@@ -49,7 +49,7 @@
             are_equal_vector, &
             are_equal_matrix
     end interface    
-
+    
     contains
 
     function are_equal_integer(a,b) result(ok)

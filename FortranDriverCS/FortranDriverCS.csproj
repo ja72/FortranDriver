@@ -11,7 +11,8 @@
 		<AssemblyVersion>1.0.*</AssemblyVersion>
 		<RootNamespace>FortranDriver</RootNamespace>
 		<Deterministic>false</Deterministic>
-		<Platforms>AnyCPU;x86;x64</Platforms>
+		<Platforms>x86;x64</Platforms>
+		<GenerateDocumentationFile>False</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -37,7 +38,7 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<!--
-		<None Include="..\svml_dispmd.dll" Link="svml_dispmd.dll">
+		<None Include="..\libiomp5md.dll" Link="libiomp5md.dll">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		 -->

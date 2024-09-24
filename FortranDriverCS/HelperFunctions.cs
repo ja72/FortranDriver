@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.Contracts;
+﻿using System;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -99,9 +100,9 @@ namespace FortranDriver
         {
             return string.Join(separator, array.Select((x) => x.ToString<T>(formatting, null)));
         }
-        public static string ToFixedColumnString<T>(this T[] data, string formatting = null, int width = 11)
+        public static string ToFixedColumnString<T>(this T[] data, string formatting, int width)
             => ToFixedColumnString<T>(data, formatting, null, width);
-        public static string ToFixedColumnString<T>(this T[] data, string formatting = null, IFormatProvider provider = null, int width = 11)
+        public static string ToFixedColumnString<T>(this T[] data, string formatting, IFormatProvider provider, int width)
         {
             StringBuilder sb = new StringBuilder();
             int n = data.Length;

@@ -15,9 +15,9 @@ namespace FortranDriver
     {
 
 #if DEBUG
-        const string libraryName = "FortranDriverDLL_d";
+        public const string libraryName = "FortranDriverDLL_d";
 #else
-        const string libraryName = "FortranDriverDLL";
+        public const string libraryName = "FortranDriverDLL";
 #endif
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -54,42 +54,58 @@ namespace FortranDriver
             //Console.Write("<paused>");
             //Console.ReadLine();
 
+            Console.WriteLine("Testing Rigid Body Mechanics");
+            TestRigidBodyMethods();
+
+#if !DEBUG
             BenchMatrixSolve();
+#endif
         }
 
-
-        public static class FortranMethods
+        static void TestRigidBodyMethods()
         {
-        #region Native Methods
+            
+            RigidBody rb = new RigidBody(1.0,
+                0.0644, 0.0644, 0.0322);
 
-#if USE_CODE_GEN
-        /// <summary>
-        /// Fortran DLL call to manipulate matrix <paramref name="A"/>
-        /// </summary>
-        /// <param name="rows">The n.</param>
-        /// <param name="columns">The n.</param>
-        /// <param name="A">The matrix. Fortran requires <paramref name="A"/> to be column major 
-        /// and C# supplies a row major matrix by default.</param>
-        /// <param name="callBack">The call-back function to report on progress.</param>
-        [LibraryImport(libraryName, EntryPoint = "DoWork", StringMarshalling = StringMarshalling.Utf8)]
-        //[UnmanagedCallConv( CallConvs = new[] { typeof(CallConvCdecl) })]
-        public static partial void DoWork(int n, int m, ref double A, [MarshalAs(UnmanagedType.FunctionPtr)] ActionRefInt callBack);
+            double t = 0.0;
 
-#else
-        /// <summary>
-        /// Fortran DLL call to manipulate matrix <paramref name="A"/>
-        /// </summary>
-        /// <param name="rows">The n.</param>
-        /// <param name="columns">The n.</param>
-        /// <param name="A">The matrix. Fortran requires <paramref name="A"/> to be column major 
-        /// and C# supplies a row major matrix by default.</param>
-        /// <param name="callBack">The call-back function to report on progress.</param>
-        [DllImport(libraryName, EntryPoint = "DoWork", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void DoWork(int rows, int columns, [In, Out] double[,] A, [MarshalAs(UnmanagedType.FunctionPtr)] ActionRefInt callBack);
+            double[] pos = [0, 0, 0];
+            NativeQuaternion ori = NativeQuaternion.Identity;
+            double[] vee = [1, 0, 0];
+            double[] omg = [0, 0, 1];
+            Console.WriteLine("Position = ");
+            Console.WriteLine(pos.ToFixedColumnString("g5", 11));
+            Console.WriteLine("Orienation = ");
+            Console.WriteLine(ori.ToString("g6"));
+            Console.WriteLine("Velocity = ");
+            Console.WriteLine(vee.ToFixedColumnString("g5", 11));
+            Console.WriteLine("Rot. Velocity = ");
+            Console.WriteLine(omg.ToFixedColumnString("g5", 11));
 
-#endif
+            rb.GetState(pos, ori, vee, omg, out NativeVector y);
 
-        #endregion
+            Console.WriteLine($"State Vector =\n{y}");
+
+            rb.GetStateDerivative(t, y, out NativeVector yp);
+
+            Console.WriteLine($"State Vector Derivative =\n{yp}");
+
+            double h = 0.05;
+            var y_next = y + h * yp;
+
+            Console.WriteLine($"Next Vector =\n{y_next}");
+
+            rb.SetState(y_next, out pos, out ori, out vee, out omg);
+
+            Console.WriteLine("Position = ");
+            Console.WriteLine(pos.ToFixedColumnString("g5", 11));
+            Console.WriteLine("Orienation = ");
+            Console.WriteLine(ori.ToString("g6"));
+            Console.WriteLine("Velocity = ");
+            Console.WriteLine(vee.ToFixedColumnString("g5", 11));
+            Console.WriteLine("Rot. Velocity = ");
+            Console.WriteLine(omg.ToFixedColumnString("g5", 11));
         }
 
         static void TestNativeMethods()
@@ -154,9 +170,9 @@ namespace FortranDriver
             Console.WriteLine($"M =\n{M}");
 
             Console.WriteLine("Matrix/Vector Product");
-            Console.WriteLine($"M*u =\n{Round(M*u,4)}");
+            Console.WriteLine($"M*u =\n{Round(M*u, 4)}");
             Console.WriteLine("Vector/Matrix Product");
-            Console.WriteLine($"u*M =\n{Round(u*M,4)}");
+            Console.WriteLine($"u*M =\n{Round(u*M, 4)}");
 
 
             for (int size = 2; size <= 6; size++)
@@ -169,10 +185,10 @@ namespace FortranDriver
 
                 var A_inv = A.Inverse();
                 Console.WriteLine("Inverse");
-                Console.WriteLine($"A_inv = \n{Round(A_inv,6)}");
+                Console.WriteLine($"A_inv = \n{Round(A_inv, 6)}");
 
                 Console.WriteLine("Check Identity");
-                Console.WriteLine($"A_inv*A=\n{Round(A_inv*A,4)}");
+                Console.WriteLine($"A_inv*A=\n{Round(A_inv*A, 4)}");
 
                 NativeVector b = Round(RandomMinMax(size, -1.0, 6.0), 6);
                 Console.WriteLine("RHS");
@@ -196,21 +212,21 @@ namespace FortranDriver
             Console.WriteLine($"data = [{string.Join(",", values)}]");
 
             Console.WriteLine($"FromRows(2,3,data) = ");
-            Console.WriteLine(NativeMatrix.FromRows(2, 3, values   ));
+            Console.WriteLine(NativeMatrix.FromRows(2, 3, values));
             Console.WriteLine($"FromColumns(2,3,data) = ");
             Console.WriteLine(NativeMatrix.FromColumns(2, 3, values));
             Console.WriteLine($"FromRows(3,2,data) = ");
-            Console.WriteLine(NativeMatrix.FromRows(3, 2, values   ));
+            Console.WriteLine(NativeMatrix.FromRows(3, 2, values));
             Console.WriteLine($"FromColumns(3,2,data) = ");
             Console.WriteLine(NativeMatrix.FromColumns(3, 2, values));
 
             const int s = 7, t = 3;
 
-            var r = Round( NativeVector.RandomMinMax(s, -1.0, 6.0), 6);
+            var r = Round(NativeVector.RandomMinMax(s, -1.0, 6.0), 6);
 
             var D = Diagonal(r.ToArray());
             var S = Scalar(s, s, 4.0/Math.PI);
-            var R = Round(RandomMinMax(s, s, -1.0, 6.0), 4 );
+            var R = Round(RandomMinMax(s, s, -1.0, 6.0), 4);
             Console.WriteLine("Scalar");
             Console.WriteLine($"S = \n{Round(S, 6)}");
             Console.WriteLine("Diagonal");
@@ -218,8 +234,8 @@ namespace FortranDriver
             Console.WriteLine("Random");
             Console.WriteLine($"R = \n{Round(R, 6)}");
 
-            var A = Round( R + D, 6);
-            var B = Round( R - D, 6);
+            var A = Round(R + D, 6);
+            var B = Round(R - D, 6);
             Console.WriteLine("Add");
             Console.WriteLine($"R + D = \n{Round(A, 6)}");
             Console.WriteLine("Subtract");
@@ -238,7 +254,7 @@ namespace FortranDriver
             Console.WriteLine("Transpose");
             Console.WriteLine($"A_tr = \n{A_tr}");
 
-            var H_1 = Round(RandomMinMax(42,1), 4);
+            var H_1 = Round(RandomMinMax(42, 1), 4);
             var H_2 = H_1.ReShape(21, 2);
             var H_3 = H_2.ReShape(7, 6);
             var H_4 = H_3.ReShape(3, 14);
@@ -306,14 +322,14 @@ namespace FortranDriver
                 Console.WriteLine("Solve A*x=b");
                 Console.WriteLine($"x=\n{x}");
                 Console.WriteLine("Product A*x");
-                Console.WriteLine($"\n{Round(A*x,6)}");
+                Console.WriteLine($"\n{Round(A*x, 6)}");
                 Console.WriteLine("Residual b-A*x");
-                Console.WriteLine($"\n{Round(b-A*x,6)}");
+                Console.WriteLine($"\n{Round(b-A*x, 6)}");
             }
 
             int seed = Environment.TickCount;
 
-            var C = Round( 6.0*Identity(6) - RandomUniform(6, 6, ref seed), 6);
+            var C = Round(6.0*Identity(6) - RandomUniform(6, 6, ref seed), 6);
             var e = Round(RandomUniform(6), 6);
             var xs = C.Solve(e);
             var xb = C.BlockSolve(e);
@@ -329,19 +345,19 @@ namespace FortranDriver
             Console.WriteLine("Serial LU decomposition.");
             Console.WriteLine($"xs = \n{xs}");
             Console.WriteLine("Serial Residual.");
-            Console.WriteLine($"es = \n{Round( es, 6)}");
+            Console.WriteLine($"es = \n{Round(es, 6)}");
 
 
             Console.WriteLine("Block LU decomposition.");
             Console.WriteLine($"xb = \n{xb}");
             Console.WriteLine("Block Residual.");
-            Console.WriteLine($"eb = \n{Round( eb, 6)}");
+            Console.WriteLine($"eb = \n{Round(eb, 6)}");
 
         }
 
         static void TestQuaternionMethods()
         {
-            NativeQuaternion.TestNativeQuaternion();            
+            NativeQuaternion.TestNativeQuaternion();
         }
 
         static void BenchMatrixSolve()
@@ -373,18 +389,18 @@ namespace FortranDriver
 
 
             Console.WriteLine($"|=========== SERIAL ============== |=========== BLOCK =============== |");
-            Console.Write($"| {"Size", 5} {"Time", 16} {"Rate",9} " );
-            Console.WriteLine($"| {"Size", 5} {"Time", 16} {"Rate",9} |");
+            Console.Write($"| {"Size",5} {"Time",16} {"Rate",9} ");
+            Console.WriteLine($"| {"Size",5} {"Time",16} {"Rate",9} |");
             Console.WriteLine($"|--------------------------------- |--------------------------------- |");
-            Console.Write($"| {"[#]", 5} {"[s]", 16} {"[n^2/μs]",9} ");
-            Console.WriteLine($"| {"[#]", 5} {"[s]", 16} {"[n^2/μs]",9} |");
+            Console.Write($"| {"[#]",5} {"[s]",16} {"[n^2/μs]",9} ");
+            Console.WriteLine($"| {"[#]",5} {"[s]",16} {"[n^2/μs]",9} |");
             for (int i = -5; i < 14; i++)
             {
                 int size = i>=0 ? (int)Math.Pow(5, (double)(i+1)/4+1) : i+7;
                 NativeMatrix A = RandomMinMax(size, size, -1.0, 6.0);
                 NativeVector b = RandomMinMax(size, -3.0, 9.0);
 
-                int repeat = Math.Max(1, 1250000 / (size*size) );
+                int repeat = Math.Max(1, 1250000 / (size*size));
 
                 double sum = 0.0;
                 NativeVector x = new NativeVector(size);
@@ -396,7 +412,7 @@ namespace FortranDriver
                     x = A.Solve(b);
                     sum += x[1];
                 }
-                
+
                 sw.Stop();
                 t1_μs = sw.Elapsed.TotalMicroseconds/repeat;
                 t1_s = sw.Elapsed.TotalSeconds/repeat;
@@ -410,8 +426,8 @@ namespace FortranDriver
                 sw.Stop();
                 t2_μs = sw.Elapsed.TotalMicroseconds/repeat;
                 t2_s = sw.Elapsed.TotalSeconds/repeat;
-                Console.Write($"| {size, 5} {t1_s, 16:g9} {(size*size)/t1_μs, 9:g4} ");
-                Console.WriteLine($"| {size, 5} {t2_s, 16:g9} {(size*size)/t2_μs, 9:g4} |");
+                Console.Write($"| {size,5} {t1_s,16:g9} {(size*size)/t1_μs,9:g4} ");
+                Console.WriteLine($"| {size,5} {t2_s,16:g9} {(size*size)/t2_μs,9:g4} |");
             }
         }
 

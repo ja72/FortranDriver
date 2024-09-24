@@ -11,10 +11,10 @@ namespace FortranDriver
     public unsafe class NativeQuaternion :
         IFormattable
     {
-        public static readonly double[] o_ = [0.0, 0.0, 0.0];
-        public static readonly double[] i_ = [1.0, 0.0, 0.0];
-        public static readonly double[] j_ = [0.0, 1.0, 0.0];
-        public static readonly double[] k_ = [0.0, 0.0, 1.0];
+        public static readonly double[] o_ = new[] { 0.0, 0.0, 0.0 };
+        public static readonly double[] i_ = new[] { 1.0, 0.0, 0.0 };
+        public static readonly double[] j_ = new[] { 0.0, 1.0, 0.0 };
+        public static readonly double[] k_ = new[] { 0.0, 0.0, 1.0 };
 
         #region Factory
         internal NativeQuaternion(params double[] data)
@@ -220,20 +220,8 @@ namespace FortranDriver
             => RotateDiagonal([d1, d2, d3]);
         public NativeMatrix RotateDiagonal(double[] diag)
         {
-            if (diag.Length<3)
-            {
-                var temp = new double[3];
-                Array.Copy(diag, temp, diag.Length);
-                diag = temp;
-            }
-            else if (diag.Length>3)
-            {
-                var temp = new double[3];
-                Array.Copy(diag, temp, temp.Length);
-                diag = temp;
-            }
             double[,] result = new double[3, 3];
-            FortranMethods.rotation_diag2mat(Data, diag, result);
+            FortranMethods.rotation_q8_diag2mat(Data, diag, result);
             return new NativeMatrix(result);
         }
 
@@ -314,7 +302,7 @@ namespace FortranDriver
                 }
             }
             sb.AppendLine();
-            return sb.ToString();            
+            return sb.ToString();
         }
         #endregion
 
@@ -324,11 +312,11 @@ namespace FortranDriver
         public static void TestNativeQuaternion()
         {
             const double pi = Math.PI;
-            const double deg = pi/180;            
+            const double deg = pi/180;
 
             //FortranMethods.quat_array_test();
 
-            { 
+            {
                 Console.WriteLine("Test Scalar Functions =================================");
                 double cos_th = 0.5;
                 double th = FortranMethods.r8_acos(cos_th);
@@ -369,10 +357,10 @@ namespace FortranDriver
                 NativeMatrix R = q1.ToRotationMatrix();
                 NativeMatrix R_inv = q1.ToRotationMatrix(true);
 
-                Console.WriteLine($"Rotation Matrix=\n{NativeMatrix.Round(R,6)}");
-                Console.WriteLine($"Inverse Rotation Matrix=\n{NativeMatrix.Round(R_inv,6)}");
+                Console.WriteLine($"Rotation Matrix=\n{NativeMatrix.Round(R, 6)}");
+                Console.WriteLine($"Inverse Rotation Matrix=\n{NativeMatrix.Round(R_inv, 6)}");
 
-                NativeMatrix eye3 = NativeMatrix.Round( R_inv * R, 6);
+                NativeMatrix eye3 = NativeMatrix.Round(R_inv * R, 6);
                 Console.WriteLine($"Check that product is identity matrix\n{eye3}");
 
             }
@@ -398,12 +386,12 @@ namespace FortranDriver
                 Console.WriteLine($"Norm = {q.Norm()}\n");
 
                 NativeMatrix R_test = NativeQuaternion.FromAxisAngleToMatrix(axis, angle);
-                Console.WriteLine($"Axis angle to Rotation Matrix=\n{NativeMatrix.Round(R_test,6)}");
+                Console.WriteLine($"Axis angle to Rotation Matrix=\n{NativeMatrix.Round(R_test, 6)}");
 
 
                 NativeMatrix R = q.ToRotationMatrix();
                 NativeQuaternion q_test = NativeQuaternion.FromRotationMatrix(R);
-                Console.WriteLine($"Quat to Rotation Matrix=\n{NativeMatrix.Round(R,6)}");
+                Console.WriteLine($"Quat to Rotation Matrix=\n{NativeMatrix.Round(R, 6)}");
 
             }
             {
@@ -424,9 +412,9 @@ namespace FortranDriver
                 Console.WriteLine($"Rotated Vector = \n{v_rot}");
 
 
-                Console.WriteLine($"Rotation Matrix=\n{NativeMatrix.Round(R,6)}");
+                Console.WriteLine($"Rotation Matrix=\n{NativeMatrix.Round(R, 6)}");
                 NativeMatrix R_axis = NativeQuaternion.FromAxisAngleToMatrix(axis, angle);
-                Console.WriteLine($"Rotation Matrix From Axis/Angle = \n{NativeMatrix.Round(R_axis,6)}");
+                Console.WriteLine($"Rotation Matrix From Axis/Angle = \n{NativeMatrix.Round(R_axis, 6)}");
 
                 NativeQuaternion.FromRotationMatrixToAxisAngle(R_axis, out axis, out angle);
 
