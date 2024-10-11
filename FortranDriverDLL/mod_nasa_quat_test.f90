@@ -7,7 +7,7 @@
     ! ** TEST FUNCTIONS                                                         **
     ! *****************************************************************************
 
-    subroutine q8_conjugate_test ( )
+    subroutine quat_conjugate_test ( )
 
     !*****************************************************************************80
     !
@@ -40,18 +40,18 @@
 
     do i = 1, 5
 
-        call q8_normal_01 ( seed, q1 )
-        call q8_conjugate ( q1, q2 )
+        call quat_normal_01 ( seed, q1 )
+        call quat_conjugate ( q1, q2 )
 
         write ( *, '(a)' ) ''
-        call q8_transpose_print ( q1, '  q1 = q8_normal_01 ( seed ):' )
-        call q8_transpose_print ( q2, '  q2 = q8_conjugate ( q1 ):  ' )
+        call quat_transpose_print ( q1, '  q1 = quat_normal_01 ( seed ):' )
+        call quat_transpose_print ( q2, '  q2 = quat_conjugate ( q1 ):  ' )
 
     end do
 
     return
     end
-    subroutine q8_exponentiate_test ( )
+    subroutine quat_exponentiate_test ( )
 
     !*****************************************************************************80
     !
@@ -84,18 +84,18 @@
 
     do i = 1, 5
 
-        call q8_normal_01 ( seed, q1 )
-        call q8_exponentiate ( q1, q2 )
+        call quat_normal_01 ( seed, q1 )
+        call quat_exponentiate ( q1, q2 )
 
         write ( *, '(a)' ) ''
-        call q8_transpose_print ( q1, '  q1 = q8_normal_01 ( seed ):' )
-        call q8_transpose_print ( q2, '  q2 = q8_exponentiate ( q1 ):' )
+        call quat_transpose_print ( q1, '  q1 = quat_normal_01 ( seed ):' )
+        call quat_transpose_print ( q2, '  q2 = quat_exponentiate ( q1 ):' )
 
     end do
 
     return
     end
-    subroutine q8_inverse_test ( )
+    subroutine quat_inverse_test ( )
 
     !*****************************************************************************80
     !
@@ -129,20 +129,20 @@
 
     do i = 1, 5
 
-        call q8_normal_01 ( seed, q1 )
-        call q8_inverse ( q1, q2 )
-        call q8_multiply ( q1, q2, q3 )
+        call quat_normal_01 ( seed, q1 )
+        call quat_inverse ( q1, q2 )
+        call quat_multiply ( q1, q2, q3 )
 
         write ( *, '(a)' ) ''
-        call q8_transpose_print ( q1, '  q1 = q8_normal_01 ( seed ):' )
-        call q8_transpose_print ( q2, '  q2 = q8_inverse ( q1 ):    ' )
-        call q8_transpose_print ( q3, '  q3 = q8_multiply ( q1, q2 ):    ' )
+        call quat_transpose_print ( q1, '  q1 = quat_normal_01 ( seed ):' )
+        call quat_transpose_print ( q2, '  q2 = quat_inverse ( q1 ):    ' )
+        call quat_transpose_print ( q3, '  q3 = quat_multiply ( q1, q2 ):    ' )
 
     end do
 
     return
     end
-    subroutine q8_multiply_test ( )
+    subroutine quat_multiply_test ( )
 
     !*****************************************************************************80
     !
@@ -176,20 +176,20 @@
 
     do i = 1, 5
 
-        call q8_normal_01 ( seed, q1 )
-        call q8_normal_01 ( seed, q2 )
-        call q8_multiply ( q1, q2, q3 )
+        call quat_normal_01 ( seed, q1 )
+        call quat_normal_01 ( seed, q2 )
+        call quat_multiply ( q1, q2, q3 )
 
         write ( *, '(a)' ) ''
-        call q8_transpose_print ( q1, '  q1 = q8_normal_01 ( seed ) :' )
-        call q8_transpose_print ( q2, '  q2 = q8_normal_01 ( seed ) :' )
-        call q8_transpose_print ( q3, '  q3 = q8_multiply ( q1, q2 ):' )
+        call quat_transpose_print ( q1, '  q1 = quat_normal_01 ( seed ) :' )
+        call quat_transpose_print ( q2, '  q2 = quat_normal_01 ( seed ) :' )
+        call quat_transpose_print ( q3, '  q3 = quat_multiply ( q1, q2 ):' )
 
     end do
 
     return
     end
-    subroutine q8_multiply2_test ( )
+    subroutine quat_multiply2_test ( )
 
     !*****************************************************************************80
     !
@@ -223,20 +223,20 @@
 
     do i = 1, 5
 
-        call q8_normal_01 ( seed, q1 )
-        call q8_normal_01 ( seed, q2 )
-        call q8_multiply2 ( q1, q2, q3 )
+        call quat_normal_01 ( seed, q1 )
+        call quat_normal_01 ( seed, q2 )
+        call quat_multiply2 ( q1, q2, q3 )
 
         write ( *, '(a)' ) ''
-        call q8_transpose_print ( q1, '  q1 = q8_normal_01 ( seed )  :' )
-        call q8_transpose_print ( q2, '  q2 = q8_normal_01 ( seed )  :' )
-        call q8_transpose_print ( q3, '  q3 = q8_multiply2 ( q1, q2 ):' )
+        call quat_transpose_print ( q1, '  q1 = quat_normal_01 ( seed )  :' )
+        call quat_transpose_print ( q2, '  q2 = quat_normal_01 ( seed )  :' )
+        call quat_transpose_print ( q3, '  q3 = quat_multiply2 ( q1, q2 ):' )
 
     end do
 
     return
     end
-    subroutine q8_normal_01_test ( )
+    subroutine quat_normal_01_test ( )
 
     !*****************************************************************************80
     !
@@ -269,14 +269,14 @@
     write ( *, '(a)' ) ''
 
     do i = 1, 5
-        call q8_normal_01 ( seed, q )
+        call quat_normal_01 ( seed, q )
         write ( label, '(a,i2)' ) '  Sample #', i
-        call q8_transpose_print ( q, label )
+        call quat_transpose_print ( q, label )
     end do
 
     return
     end
-    subroutine q8_norm_test ( )
+    subroutine quat_norm_test ( )
 
     !*****************************************************************************80
     !
@@ -309,15 +309,15 @@
 
     do i = 1, 5
         write ( *, '(a)' ) ''
-        call q8_normal_01 ( seed, q )
-        call q8_transpose_print ( q, '  q = q8_normal_01(seed):' )
-        value = q8_norm ( q )
-        write ( *, '(a,g14.6)' ) '  q8_norm(q) = ', value
+        call quat_normal_01 ( seed, q )
+        call quat_transpose_print ( q, '  q = quat_normal_01(seed):' )
+        value = quat_norm ( q )
+        write ( *, '(a,g14.6)' ) '  quat_norm(q) = ', value
     end do
 
     return
     end
-    subroutine q8_transpose_print_test ( )
+    subroutine quat_transpose_print_test ( )
 
     !*****************************************************************************80
     !
@@ -347,13 +347,13 @@
     write ( *, '(a)' ) '  Q8_TRANSPOSE_PRINT prints a quaternion "transposed",'
     write ( *, '(a)' ) '  that is, writing it as a row vector.'
 
-    call q8_normal_01 ( seed, q )
+    call quat_normal_01 ( seed, q )
 
-    call q8_transpose_print ( q, '  The quaternion:' )
+    call quat_transpose_print ( q, '  The quaternion:' )
 
     return
     end
-    subroutine r8_acos_test ( )
+    subroutine acos_scalar_test ( )
 
     !*****************************************************************************80
     !
@@ -389,10 +389,10 @@
 
         if ( -1.0D+00 <= c .and. c <= 1.0D+00 ) then
             write ( *, '(2x,g14.6,2x,g14.6,2x,g14.6)' ) &
-                c, r8_acos ( c ), acos ( c )
+                c, acos_scalar ( c ), acos ( c )
         else
             write ( *, '(2x,g14.6,2x,g14.6)' ) &
-                c, r8_acos ( c )
+                c, acos_scalar ( c )
         end if
 
     end do
@@ -516,7 +516,7 @@
     return
     end
     subroutine r8vec_uniform_01_test ( )
-    use mod_fortran, only : array_uniform_v
+    use mod_fortran, only : call_uniform_array_v
     !*****************************************************************************80
     !
     !! R8VEC_UNIFORM_01_TEST tests R8VEC_UNIFORM_01.
@@ -550,13 +550,13 @@
     write ( *, '(a)' ) ''
     write ( *, '(a,i12)' ) '  Input SEED = ', seed
 
-    call array_uniform_v ( n, seed, r )
+    call call_uniform_array_v ( n, seed, r )
 
     call r8vec_print ( n, r, '  Random R8VEC:' )
 
     return
     end
-    subroutine rotation_axis2mat_test ( )
+    subroutine rotate_axis2mat_test ( )
 
     !*****************************************************************************80
     !
@@ -584,21 +584,21 @@
 
     write ( *, '(a)' ) ''
     write ( *, '(a)' ) 'ROTATION_AXIS2MAT_TEST'
-    write ( *, '(a)' ) '  ROTATION_AXIS2MAT converts a rotation axis to a matrix.'
+    write ( *, '(a)' ) '  ROTATION_AXIS2MAT converts a rotate axis to a matrix.'
 
     v = (/ 1.0D+00, 4.0D+00, 10.0D+00 /)
     call r8vec_print ( 3, v, '  The vector V:' )
 
     axis = (/ 0.2361737D+00, -0.8814124D+00, -0.4090649D+00 /)
-    call r8vec_print ( 3, axis, '  The rotation axis:' )
+    call r8vec_print ( 3, axis, '  The rotate axis:' )
 
     angle = 1.159804D+00
     write ( *, '(a)' ) ''
-    write ( *, '(a,g14.6)' ) '  The rotation angle is ', angle
+    write ( *, '(a,g14.6)' ) '  The rotate angle is ', angle
 
-    call rotation_axis2mat ( axis, angle, a )
+    call rotate_axis2mat ( axis, angle, a )
 
-    call r8mat_print ( 3, 3, a, '  The rotation matrix A:' )
+    call r8mat_print ( 3, 3, a, '  The rotate matrix A:' )
 
     w = matmul ( a, v )
 
@@ -610,17 +610,17 @@
     call r8vec_print ( 3, v, '  The vector V:' )
 
     axis = (/ 0.0D+00, 0.0D+00, 2.0D+00 /)
-    call r8vec_print ( 3, axis, '  The rotation axis:' )
+    call r8vec_print ( 3, axis, '  The rotate axis:' )
 
     angle = 90.0D+00
     angle = degrees_to_radians ( angle )
 
     write ( *, '(a)' ) ''
-    write ( *, '(a,g14.6)' ) '  The rotation angle is ', angle
+    write ( *, '(a,g14.6)' ) '  The rotate angle is ', angle
 
-    call rotation_axis2mat ( axis, angle, a )
+    call rotate_axis2mat ( axis, angle, a )
 
-    call r8mat_print ( 3, 3, a, '  The rotation matrix A:' )
+    call r8mat_print ( 3, 3, a, '  The rotate matrix A:' )
 
     w = matmul ( a, v )
 
@@ -628,7 +628,7 @@
 
     return
     end
-    subroutine rotation_axis2quat_test ( )
+    subroutine rotate_axis2quat_test ( )
 
     !*****************************************************************************80
     !
@@ -656,23 +656,23 @@
 
     write ( *, '(a)' ) ''
     write ( *, '(a)' ) 'ROTATION_AXIS2QUAT_TEST'
-    write ( *, '(a)' ) '  ROTATION_AXIS2QUAT converts a rotation axis to a quaternion.'
+    write ( *, '(a)' ) '  ROTATION_AXIS2QUAT converts a rotate axis to a quaternion.'
 
     v = (/ 1.0D+00, 4.0D+00, 10.0D+00 /)
     call r8vec_print ( 3, v, '  The vector V:' )
 
     axis = (/ 0.2361737D+00, -0.8814124D+00, -0.4090649D+00 /)
-    call r8vec_print ( 3, axis, '  The rotation axis:' )
+    call r8vec_print ( 3, axis, '  The rotate axis:' )
 
     angle = 1.159804D+00
     write ( *, '(a)' ) ''
-    write ( *, '(a,g14.6)' ) '  The rotation angle is ', angle
+    write ( *, '(a,g14.6)' ) '  The rotate angle is ', angle
 
-    call rotation_axis2quat ( axis, angle, q )
+    call rotate_axis2quat ( axis, angle, q )
 
-    call r8vec_print ( 4, q, '  The rotation quaternion Q:' )
+    call r8vec_print ( 4, q, '  The rotate quaternion Q:' )
 
-    call rotation_quat_vector ( q, v, w )
+    call rotate_quat_vector ( q, v, w )
 
     call r8vec_print ( 3, w, '  The rotated vector W:' )
     !
@@ -683,24 +683,24 @@
     call r8vec_print ( 3, v, '  The vector V:' )
 
     axis = (/ 0.0D+00, 0.0D+00, 2.0D+00 /)
-    call r8vec_print ( 3, axis, '  The rotation axis:' )
+    call r8vec_print ( 3, axis, '  The rotate axis:' )
 
     angle = 90.0D+00
     angle = degrees_to_radians ( angle )
 
     write ( *, '(a)' ) ''
-    write ( *, '(a,g14.6)' ) '  The rotation angle is ', angle
-    call rotation_axis2quat ( axis, angle, q )
+    write ( *, '(a,g14.6)' ) '  The rotate angle is ', angle
+    call rotate_axis2quat ( axis, angle, q )
 
-    call r8vec_print ( 4, q, '  The rotation quaternion Q:' )
+    call r8vec_print ( 4, q, '  The rotate quaternion Q:' )
 
-    call rotation_quat_vector ( q, v, w )
+    call rotate_quat_vector ( q, v, w )
 
     call r8vec_print ( 3, w, '  The rotated vector W:' )
 
     return
     end
-    subroutine rotation_axis_vector_test ( )
+    subroutine rotate_axis_vector_test ( )
 
     !*****************************************************************************80
     !
@@ -732,16 +732,16 @@
     write ( *, '(a)' ) ''
     write ( *, '(a)' ) 'ROTATION_AXIS_VECTOR_TEST'
     write ( *, '(a)' ) '  ROTATION_AXIS_VECTOR applies an axis'
-    write ( *, '(a)' ) '  rotation to a vector.'
+    write ( *, '(a)' ) '  rotate to a vector.'
 
     call r8vec_print ( 3, v, '  The vector:' )
 
-    call r8vec_print ( 3, axis, '  The rotation axis:' )
+    call r8vec_print ( 3, axis, '  The rotate axis:' )
 
     write ( *, '(a)' ) ''
-    write ( *, '(a,g14.6)' ) '  The rotation angle is ', angle
+    write ( *, '(a,g14.6)' ) '  The rotate angle is ', angle
 
-    call rotation_axis_vector ( axis, angle, v, w )
+    call rotate_axis_vector ( axis, angle, v, w )
 
     call r8vec_print ( 3, w, '  The rotated vector:' )
     !
@@ -754,21 +754,21 @@
 
     axis = (/ 0.0D+00, 0.0D+00, 2.0D+00 /)
 
-    call r8vec_print ( 3, axis, '  The rotation axis:' )
+    call r8vec_print ( 3, axis, '  The rotate axis:' )
 
     angle = 90.0D+00
     angle = degrees_to_radians ( angle )
 
     write ( *, '(a)' ) ''
-    write ( *, '(a,g14.6)' ) '  The rotation angle is ', angle
+    write ( *, '(a,g14.6)' ) '  The rotate angle is ', angle
 
-    call rotation_axis_vector ( axis, angle, v, w )
+    call rotate_axis_vector ( axis, angle, v, w )
 
     call r8vec_print ( 3, w, '  The rotated vector:' )
 
     return
     end
-    subroutine rotation_mat2axis_test ( )
+    subroutine rotate_mat2axis_test ( )
 
     !*****************************************************************************80
     !
@@ -799,27 +799,27 @@
 
     write ( *, '(a)' ) ''
     write ( *, '(a)' ) 'ROTATION_MAT2AXIS_TEST'
-    write ( *, '(a)' ) '  ROTATION_MAT2AXIS computes a rotation axis'
-    write ( *, '(a)' ) '  and angle from a rotation matrix.'
-    write ( *, '(a)' ) '  ROTATION_AXIS2MAT computes a rotation matrix'
-    write ( *, '(a)' ) '  from a rotation axis and angle.'
+    write ( *, '(a)' ) '  ROTATION_MAT2AXIS computes a rotate axis'
+    write ( *, '(a)' ) '  and angle from a rotate matrix.'
+    write ( *, '(a)' ) '  ROTATION_AXIS2MAT computes a rotate matrix'
+    write ( *, '(a)' ) '  from a rotate axis and angle.'
 
-    call r8mat_print ( 3, 3, a, '  The rotation matrix:' )
+    call r8mat_print ( 3, 3, a, '  The rotate matrix:' )
 
-    call rotation_mat2axis ( a, axis, angle )
+    call rotate_mat2axis ( a, axis, angle )
 
-    call r8vec_print ( 3, axis, '  The rotation axis:' )
+    call r8vec_print ( 3, axis, '  The rotate axis:' )
 
     write ( *, '(a)' ) ''
-    write ( *, '(a,g14.6)' ) '  The rotation angle is ', angle
+    write ( *, '(a,g14.6)' ) '  The rotate angle is ', angle
 
-    call rotation_axis2mat ( axis, angle, a )
+    call rotate_axis2mat ( axis, angle, a )
 
-    call r8mat_print ( 3, 3, a, '  The recovered rotation matrix:' )
+    call r8mat_print ( 3, 3, a, '  The recovered rotate matrix:' )
 
     return
     end
-    subroutine rotation_mat2quat_test ( )
+    subroutine rotate_mat2quat_test ( )
 
     !*****************************************************************************80
     !
@@ -850,23 +850,23 @@
     write ( *, '(a)' ) ''
     write ( *, '(a)' ) 'ROTATION_MAT2QUAT_TEST'
     write ( *, '(a)' ) '  ROTATION_MAT2QUAT computes a quaternion'
-    write ( *, '(a)' ) '  from a rotation matrix.'
-    write ( *, '(a)' ) '  ROTATION_QUAT2MAT computes a rotation matrix'
+    write ( *, '(a)' ) '  from a rotate matrix.'
+    write ( *, '(a)' ) '  ROTATION_QUAT2MAT computes a rotate matrix'
     write ( *, '(a)' ) '  from a quaternion.'
 
-    call r8mat_print ( 3, 3, a, '  The rotation matrix:' )
+    call r8mat_print ( 3, 3, a, '  The rotate matrix:' )
 
-    call rotation_mat2quat ( a, q )
+    call rotate_mat2quat ( a, q )
 
-    call r8vec_print ( 4, q, '  The rotation quaternion Q:' )
+    call r8vec_print ( 4, q, '  The rotate quaternion Q:' )
 
-    call rotation_quat2mat ( q, a )
+    call rotate_quat2mat ( q, a )
 
-    call r8mat_print ( 3, 3, a, '  The recovered rotation matrix:' )
+    call r8mat_print ( 3, 3, a, '  The recovered rotate matrix:' )
 
     return
     end
-    subroutine rotation_mat_vector_test ( )
+    subroutine rotate_mat_vector_test ( )
 
     !*****************************************************************************80
     !
@@ -893,24 +893,24 @@
     write ( *, '(a)' ) ''
     write ( *, '(a)' ) 'ROTATION_MAT_VECTOR_TEST'
     write ( *, '(a)' ) '  ROTATION_MAT_VECTOR applies a matrix'
-    write ( *, '(a)' ) '  rotation to a vector.'
+    write ( *, '(a)' ) '  rotate to a vector.'
 
     a = reshape ( (/ &
         0.43301269D+00, -0.5D+00,        0.75D+00, &
         0.25D+00,        0.86602539D+00, 0.43301269D+00, &
         -0.86602539D+00,  0.0D+00,        0.5D+00 /), (/ 3, 3 /) )
 
-    call r8mat_print ( 3, 3, a, '  The rotation matrix:' )
+    call r8mat_print ( 3, 3, a, '  The rotate matrix:' )
 
     v = (/ 1.0D+00, 4.0D+00, 10.0D+00 /)
     call r8vec_print ( 3, v, '  The vector V:' )
 
-    call rotation_mat_vector ( a, v, w )
+    call rotate_mat_vector ( a, v, w )
     call r8vec_print ( 3, w, '  The rotated vector W = A * V:' )
 
     return
     end
-    subroutine rotation_quat2axis_test ( )
+    subroutine rotate_quat2axis_test ( )
 
     !*****************************************************************************80
     !
@@ -938,27 +938,27 @@
 
     write ( *, '(a)' ) ''
     write ( *, '(a)' ) 'ROTATION_QUAT2AXIS_TEST'
-    write ( *, '(a)' ) '  ROTATION_QUAT2AXIS computes a rotation axis'
-    write ( *, '(a)' ) '  and angle from a rotation quaternion.'
-    write ( *, '(a)' ) '  ROTATION_AXIS2QUAT computes a rotation'
-    write ( *, '(a)' ) '  quaternion from a rotation axis and angle.'
+    write ( *, '(a)' ) '  ROTATION_QUAT2AXIS computes a rotate axis'
+    write ( *, '(a)' ) '  and angle from a rotate quaternion.'
+    write ( *, '(a)' ) '  ROTATION_AXIS2QUAT computes a rotate'
+    write ( *, '(a)' ) '  quaternion from a rotate axis and angle.'
 
-    call r8vec_print ( 4, q, '  The rotation quaternion:' )
+    call r8vec_print ( 4, q, '  The rotate quaternion:' )
 
-    call rotation_quat2axis ( q, axis, angle )
+    call rotate_quat2axis ( q, axis, angle )
 
-    call r8vec_print ( 3, axis, '  The rotation axis:' )
+    call r8vec_print ( 3, axis, '  The rotate axis:' )
 
     write ( *, '(a)' ) ''
-    write ( *, '(a,g14.6)' ) '  The rotation angle is ', angle
+    write ( *, '(a,g14.6)' ) '  The rotate angle is ', angle
 
-    call rotation_axis2quat ( axis, angle, q )
+    call rotate_axis2quat ( axis, angle, q )
 
-    call r8vec_print ( 4, q, '  The recovered rotation quaternion:' )
+    call r8vec_print ( 4, q, '  The recovered rotate quaternion:' )
 
     return
     end
-    subroutine rotation_quat2mat_test ( )
+    subroutine rotate_quat2mat_test ( )
 
     !*****************************************************************************80
     !
@@ -985,25 +985,25 @@
 
     write ( *, '(a)' ) ''
     write ( *, '(a)' ) 'ROTATION_QUAT2MAT_TEST'
-    write ( *, '(a)' ) '  ROTATION_QUAT2MAT computes a rotation axis'
-    write ( *, '(a)' ) '  from a rotation quaternion.'
-    write ( *, '(a)' ) '  ROTATION_MAT2QUAT computes a rotation'
-    write ( *, '(a)' ) '  quaternion from a rotation matrix.'
+    write ( *, '(a)' ) '  ROTATION_QUAT2MAT computes a rotate axis'
+    write ( *, '(a)' ) '  from a rotate quaternion.'
+    write ( *, '(a)' ) '  ROTATION_MAT2QUAT computes a rotate'
+    write ( *, '(a)' ) '  quaternion from a rotate matrix.'
 
-    call r8vec_print ( 4, q, '  The rotation quaternion:' )
+    call r8vec_print ( 4, q, '  The rotate quaternion:' )
 
-    call rotation_quat2mat ( q, a )
+    call rotate_quat2mat ( q, a )
 
-    call r8mat_print ( 3, 3, a, '  The rotation matrix:' )
+    call r8mat_print ( 3, 3, a, '  The rotate matrix:' )
 
-    call rotation_mat2quat ( a, q )
+    call rotate_mat2quat ( a, q )
 
-    call r8vec_print ( 4, q, '  The recovered rotation quaternion:' )
+    call r8vec_print ( 4, q, '  The recovered rotate quaternion:' )
 
     return
     end
     
-    subroutine rotation_quat_vector_test ( )
+    subroutine rotate_quat_vector_test ( )
 
     !*****************************************************************************80
     !
@@ -1030,22 +1030,22 @@
     write ( *, '(a)' ) ''
     write ( *, '(a)' ) 'ROTATION_QUAT_VECTOR_TEST'
     write ( *, '(a)' ) '  ROTATION_QUAT_VECTOR applies a quaternion'
-    write ( *, '(a)' ) '  rotation to a vector.'
+    write ( *, '(a)' ) '  rotate to a vector.'
 
     q = (/ 0.836516D+00, 0.12941D+00, -0.482963D+00, -0.224144D+00 /)
-    call r8vec_print ( 4, q, '  The rotation quaternion:' )
+    call r8vec_print ( 4, q, '  The rotate quaternion:' )
 
     v = (/ 1.0D+00, 4.0D+00, 10.0D+00 /)
     call r8vec_print ( 3, v, '  The vector V:' )
 
-    call rotation_quat_vector ( q, v, w )
+    call rotate_quat_vector ( q, v, w )
     call r8vec_print ( 3, w, '  The rotated vector:' )
 
     return
     end
 
-    subroutine quat_array_test() bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: quat_array_test
+    subroutine call_quat_test_all() bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_quat_test_all
 
     !*****************************************************************************80
     !
@@ -1074,16 +1074,16 @@
     write ( *, '(a)' ) '  FORTRAN90 version'
     write ( *, '(a)' ) '  Test the QUATERNIONS library.'
 
-    call q8_conjugate_test ( )
-    call q8_exponentiate_test ( )
-    call q8_inverse_test ( )
-    call q8_multiply_test ( )
-    call q8_multiply2_test ( )
-    call q8_norm_test ( )
-    call q8_normal_01_test ( )
-    call q8_transpose_print_test ( )
+    call quat_conjugate_test ( )
+    call quat_exponentiate_test ( )
+    call quat_inverse_test ( )
+    call quat_multiply_test ( )
+    call quat_multiply2_test ( )
+    call quat_norm_test ( )
+    call quat_normal_01_test ( )
+    call quat_transpose_print_test ( )
 
-    call r8_acos_test ( )
+    call acos_scalar_test ( )
 
     call r8mat_print_test ( )
     call r8mat_print_some_test ( )
@@ -1091,18 +1091,18 @@
     call r8vec_print_test ( )
     call r8vec_uniform_01_test ( )
 
-    call rotation_axis_vector_test ( )
+    call rotate_axis_vector_test ( )
 
-    call rotation_axis2mat_test ( )
-    call rotation_axis2quat_test ( )
+    call rotate_axis2mat_test ( )
+    call rotate_axis2quat_test ( )
 
-    call rotation_mat_vector_test ( )
-    call rotation_mat2axis_test ( )
-    call rotation_mat2quat_test ( )
+    call rotate_mat_vector_test ( )
+    call rotate_mat2axis_test ( )
+    call rotate_mat2quat_test ( )
 
-    call rotation_quat_vector_test ( )
-    call rotation_quat2axis_test ( )
-    call rotation_quat2mat_test ( )
+    call rotate_quat_vector_test ( )
+    call rotate_quat2axis_test ( )
+    call rotate_quat2mat_test ( )
     !
     !  Terminate.
     !

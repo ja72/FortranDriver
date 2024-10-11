@@ -13,7 +13,7 @@
 
     abstract interface
 
-    pure subroutine actionrefint(i, n)
+    pure subroutine f_progress(i, n)
     import
     !DEC$ ATTRIBUTES VALUE :: i, n
     integer, intent(in) :: i, n
@@ -23,13 +23,12 @@
 
     contains
 
-
-    subroutine DoWork(n, m, A, progressCallBack) !bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: DoWork
-    !DEC$ ATTRIBUTES ALIAS: 'DoWork' :: DoWork
+    subroutine call_test_dowork(n, m, A, progressCallBack) !bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_test_dowork
+    !DEC$ ATTRIBUTES ALIAS: 'call_test_dowork' :: call_test_dowork
     !DEC$ ATTRIBUTES VALUE :: n, m
     !!DEC$ ATTRIBUTES REFERENCE :: A, progressCallBack
-    procedure(actionrefint) :: progressCallBack
+    procedure(f_progress) :: progressCallBack
     integer, intent(in) :: n, m
     real(real64), intent(inout) :: A(n, m)
     real(real64) :: B(n, m)
@@ -51,8 +50,8 @@
 
     ! *** VECTOR OPERATIONS ***
 
-    subroutine array_uniform_v( n, seed, r ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_uniform_v
+    subroutine call_uniform_array_v( n, seed, r ) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_uniform_array_v
     !*****************************************************************************80
     !
     !! R8VEC_UNIFORM_01 returns a unit pseudorandom R8VEC.
@@ -130,21 +129,21 @@
     return
     end
 
-    subroutine array_uniform_m( n, m, seed, r ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_uniform_m
+    subroutine call_uniform_array_m( n, m, seed, r ) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_uniform_array_m
     implicit none
     integer ( int32 ), intent(in), value :: n, m
     integer ( int32 ), intent(inout) :: seed
     real ( real64 ), intent(out) :: r(n,m)
     real ( real64 ) :: temp(n*m)
 
-    call array_uniform_v(n*m, seed, temp )
+    call call_uniform_array_v(n*m, seed, temp )
     r = reshape( temp, [n,m] )
 
     end subroutine
 
-    subroutine array_random_v(n,x,y,A) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_random_v
+    subroutine call_random_array_v(n,x,y,A) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_random_array_v
     integer, intent(in),value :: n
     real(real64), intent(in),value :: x, y
     real(real64), intent(out) :: A(n)
@@ -154,8 +153,8 @@
 
     end subroutine
 
-    pure subroutine array_elem_v(n,i,x,A) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_elem_v
+    pure subroutine call_elem_array_v(n,i,x,A) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_elem_array_v
     integer, intent(in), value :: n, i
     real(real64), intent(in), value :: x
     real(real64), intent(out) :: A(n)
@@ -165,8 +164,8 @@
 
     end subroutine
 
-    pure subroutine array_add_v(n,x,y,z) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_add_v
+    pure subroutine call_add_array_v(n,x,y,z) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_add_array_v
     integer, intent(in), value :: n
     real(real64), intent(in) :: x(n), y(n)
     real(real64), intent(out) :: z(n)
@@ -175,8 +174,8 @@
 
     end subroutine
 
-    pure subroutine array_subtract_v(n,x,y,z) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_subtract_v
+    pure subroutine call_sub_array_v(n,x,y,z) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_sub_array_v
     integer, intent(in), value :: n
     real(real64), intent(in) :: x(n), y(n)
     real(real64), intent(out) :: z(n)
@@ -185,8 +184,8 @@
 
     end subroutine
 
-    pure subroutine array_scale_v(n,f,x,r) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_scale_v
+    pure subroutine call_scale_array_v(n,f,x,r) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_scale_array_v
     integer, intent(in), value :: n
     real(real64), intent(in), value :: f
     real(real64), intent(in) :: x(n)
@@ -196,8 +195,8 @@
 
     end subroutine
 
-    pure subroutine array_round_v(n,x,d,r) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_round_v
+    pure subroutine call_round_array_v(n,x,d,r) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_round_array_v
     integer, intent(in), value :: n
     real(real64), intent(in) :: x(n)
     integer, intent(in),value :: d
@@ -210,8 +209,8 @@
 
     end subroutine
 
-    pure subroutine array_round_m(n,m,x,d,r) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_round_m
+    pure subroutine call_round_array_m(n,m,x,d,r) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_round_array_m
     integer, intent(in), value :: n, m
     real(real64), intent(in) :: x(n, m)
     integer, intent(in),value :: d
@@ -224,80 +223,64 @@
 
     end subroutine
 
-    pure subroutine array_dot_v(n,x,y,z) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_dot_v
+    pure subroutine call_inner_array_v(n,x,y,z) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_inner_array_v
     integer, intent(in), value :: n
     real(real64), intent(in) :: x(n), y(n)
     real(real64), intent(out) :: z
-
     z = dot_product(x, y)
-
+    end subroutine
+    
+    pure subroutine call_inner_array_m(n,m,x,y,z) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_inner_array_m
+    integer, intent(in), value :: n, m
+    real(real64), intent(in) :: x(n,m), y(n,m)
+    real(real64), intent(out) :: z(m,m)
+    z = matmul(transpose(x), y)
     end subroutine
 
-    pure function array_norm_v(n,x) result(s) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_norm_v
-    integer, intent(in), value :: n
-    real(real64), intent(in) :: x(n)
-    real(real64) :: s
-    s = norm2(x)
-    return
-    end
-
-    pure function array_norm_m(n,m,x) result(s) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_norm_m
-    integer, intent(in), value :: n,m
-    real(real64), intent(in) :: x(n,m)
-    real(real64) :: s
-    s = norm2(x)
-    return
-    end
-
-    pure subroutine array_product_mv(n,m,A,x,b) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_product_mv
+    pure subroutine call_mul_array_mv(n,m,A,x,b) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_mul_array_mv
     integer, intent(in), value :: n, m
     real(real64), intent(in) :: A(n,m), x(m)
     real(real64), intent(out) :: b(n)
+    b = matmul(A, x)
+    end subroutine
+
+    pure subroutine call_mul_array_vm(n,m,x,A,b) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_mul_array_vm
+    integer, intent(in), value :: n, m
+    real(real64), intent(in) :: A(n,m), x(m)
+    real(real64), intent(out) :: b(n)
+    b = matmul(x, A)
+    end subroutine
+    
+    pure subroutine call_mul_array_mm(n,m,k,A,x,b) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_mul_array_mm
+    integer, intent(in), value :: n, m, k
+    real(real64), intent(in) :: A(n,m), x(m,k)
+    real(real64), intent(out) :: b(n,k)
 
     b = matmul(A, x)
 
     end subroutine
 
-    pure subroutine array_product_vm(n,m,x,A,b) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_product_vm
-    integer, intent(in), value :: n, m
-    real(real64), intent(in) :: A(n,m), x(m)
-    real(real64), intent(out) :: b(n)
-
-    b = matmul(x, A)
-
-    end subroutine
-
-    pure subroutine array_solve_mv(n,A,b,x) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_solve_mv
+    pure subroutine call_solve_array_mv(n,A,b,x) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_solve_array_mv
     use mod_array_inv
     integer, intent(in), value :: n
     real(real64), intent(in) :: A(n,n), b(n)
     real(real64), intent(out) :: x(n)
 
-    x = mat_solve_vec(A, b)
+    x = solve_array_mv(A, b)
 
     end subroutine
 
-    subroutine array_block_solve_mv(n,A,b,x) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_block_solve_mv
-    use mod_array_inv
-    integer, intent(in), value :: n
-    real(real64), intent(in) :: A(n,n), b(n)
-    real(real64), intent(out) :: x(n)
-
-    x = lu_mat_block_solve_vec(A, b)
-
-    end subroutine
 
     ! *** MATRIX OPERATIONS ***
 
-    pure subroutine array_fill_m(n,m,values,order,A) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_fill_m
+    pure subroutine call_fill_array_m(n,m,values,order,A) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_fill_array_m
     integer, intent(in), value :: n, m, order
     real(real64), intent(in) :: values(n*m)
     real(real64), intent(out) :: A(n, m)
@@ -308,8 +291,8 @@
     end if
     end subroutine
 
-    subroutine array_random_m(n,m,x,y,A) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_random_m
+    subroutine call_random_array_m(n,m,x,y,A) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_random_array_m
     integer, intent(in), value :: n, m
     real(real64), intent(in), value :: x, y
     real(real64), intent(out) :: A(n, m)
@@ -319,8 +302,8 @@
 
     end subroutine
 
-    pure subroutine array_diag_m(n,x,A) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_diag_m
+    pure subroutine call_array_diag_m(n,x,A) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_array_diag_m
     integer, intent(in), value :: n
     real(real64), intent(in) :: x(n)
     real(real64), intent(out) :: A(n,n)
@@ -333,8 +316,8 @@
 
     end subroutine
 
-    pure subroutine array_scalar_m(n,m,x,A) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_scalar_m
+    pure subroutine call_array_scalar_m(n,m,x,A) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_array_scalar_m
     integer, intent(in), value :: n, m
     real(real64), intent(in), value :: x
     real(real64), intent(out) :: A(n,m)
@@ -346,8 +329,8 @@
     end forall
     end subroutine
 
-    pure subroutine array_add_m(n,m,x,y,z) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_add_m
+    pure subroutine call_add_array_m(n,m,x,y,z) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_add_array_m
     integer, intent(in), value :: n, m
     real(real64), intent(in) :: x(n,m), y(n,m)
     real(real64), intent(out) :: z(n,m)
@@ -356,8 +339,8 @@
 
     end subroutine
 
-    pure subroutine array_subtract_m(n,m,x,y,z) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_subtract_m
+    pure subroutine call_sub_array_m(n,m,x,y,z) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_sub_array_m
     integer, intent(in), value :: n, m
     real(real64), intent(in) :: x(n,m), y(n,m)
     real(real64), intent(out) :: z(n,m)
@@ -366,19 +349,19 @@
 
     end subroutine
 
-    pure subroutine array_scale_m(n,m,x,y,z) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_scale_m
+    pure subroutine call_scale_array_m(n,m,s,x,z) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_scale_array_m
     integer, intent(in), value :: n, m
-    real(real64), intent(in), value :: x
-    real(real64), intent(in) :: y(n,m)
+    real(real64), intent(in), value :: s
+    real(real64), intent(in) :: x(n,m)
     real(real64), intent(out) :: z(n,m)
 
-    z = x * y
+    z = s * x
 
     end subroutine
 
-    pure subroutine array_tansp_m(n,m,A,At) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_tansp_m
+    pure subroutine call_transpose_array_m(n,m,A,At) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_transpose_array_m
     integer, intent(in), value :: n, m
     real(real64), intent(in) :: A(n,m)
     real(real64), intent(out) :: At(m,n)
@@ -387,8 +370,8 @@
 
     end subroutine
 
-    pure subroutine array_reshape_mv(n,m,A,k,V) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_reshape_mv
+    pure subroutine call_reshape_array_mv(n,m,A,k,V) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_reshape_array_mv
     integer, intent(in), value :: n, m, k
     real(real64), intent(in) :: A(n,m)
     real(real64), intent(out) :: V(k)
@@ -397,8 +380,8 @@
 
     end subroutine
 
-    pure subroutine array_reshape_vm(n,V,k,l,order,A) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_reshape_vm
+    pure subroutine call_reshape_array_vm(n,V,k,l,order,A) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_reshape_array_vm
     integer, intent(in), value :: n, k, l
     real(real64), intent(in) :: V(n)
     integer, intent(in), value :: order
@@ -411,8 +394,8 @@
     end if
     end subroutine
 
-    pure subroutine array_reshape_mm(n,m,A,k,l,B) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_reshape_mm
+    pure subroutine call_reshape_array_mm(n,m,A,k,l,B) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_reshape_array_mm
     integer, intent(in), value :: n, m, k, l
     real(real64), intent(in) :: A(n,m)
     real(real64), intent(out) :: B(k,l)
@@ -421,79 +404,155 @@
 
     end subroutine
 
-    pure subroutine array_slice_v(n,A,i1,i2,B) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_slice_v
+    pure subroutine call_slice_array_v(n,A,i1,i2,B) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_slice_array_v
     integer, intent(in), value :: n, i1,i2
     real(real64), intent(in) :: A(n)
     real(real64), intent(out) :: B(i2-i1+1)
-
-    B = A(i1:i2)
-
+        B = A(i1:i2)
     end subroutine
-
-    pure subroutine array_slice_m(n,m,A,i1,i2,j1,j2,B) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_slice_m
+    
+    pure subroutine call_slice_array_m(n,m,A,i1,i2,j1,j2,B) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_slice_array_m
     integer, intent(in), value :: n, m, i1,i2,j1,j2
     real(real64), intent(in) :: A(n,m)
     real(real64), intent(out) :: B(i2-i1+1,j2-j1+1)
-
-    B = A(i1:i2, j1:j2)
-
+        B = A(i1:i2, j1:j2)
+    end subroutine
+    
+    pure subroutine call_row_array_m(n,m,A,i,b) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_row_array_m
+    integer, intent(in), value :: n, m, i
+    real(real64), intent(in) :: A(n,m)
+    real(real64), intent(out) :: b(m)
+        b = A(i, :)
+    end subroutine
+    pure subroutine call_col_array_m(n,m,A,j,b) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_col_array_m
+    integer, intent(in), value :: n, m, j
+    real(real64), intent(in) :: A(n,m)
+    real(real64), intent(out) :: b(n)
+        b = A(:, j)
     end subroutine
 
-    pure subroutine array_product_mm(n,m,k,A,x,b) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_product_mm
-    integer, intent(in), value :: n,m,k
-    real(real64), intent(in) :: A(n,m), x(m,k)
-    real(real64), intent(out) :: b(n,k)
-
-    b = matmul(A, x)
-
+    pure subroutine call_row_slice_array_m(n,m,A,i,j1,j2,b) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_row_slice_array_m
+    integer, intent(in), value :: n, m, i,j1,j2
+    real(real64), intent(in) :: A(n,m)
+    real(real64), intent(out) :: b(j2-j1+1)
+        b = A(i, j1:j2)
+    end subroutine
+    pure subroutine call_col_slice_array_m(n,m,A,i1,i2,j,b) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_col_slice_array_m
+    integer, intent(in), value :: n, m, i1,i2,j
+    real(real64), intent(in) :: A(n,m)
+    real(real64), intent(out) :: b(i2-i1+1)
+        b = A(i1:i2, j)
     end subroutine
 
-    pure subroutine array_solve_mm(n,k,A,b,x) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_solve_mm
+    pure subroutine call_solve_array_mm(n,k,A,b,x) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_solve_array_mm
     use mod_array_inv
     integer, intent(in), value :: n,k
     real(real64), intent(in) :: A(n,n), b(n,k)
     real(real64), intent(out) :: x(n,k)
 
-    x = mat_solve_mat(A, b)
+    x = solve_array_mm(A, b)
 
     end subroutine
 
-    subroutine array_block_solve_mm(n,k,A,b,x) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_block_solve_mm
-    use mod_array_inv
-    integer, intent(in), value :: n,k
-    real(real64), intent(in) :: A(n,n), b(n,k)
-    real(real64), intent(out) :: x(n,k)
-
-    x = lu_mat_block_solve_mat(A, b)
-
-    end subroutine
-
-    pure subroutine array_det_m(n,A,d) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_det_m
+    pure subroutine call_determinant_array_m(n,A,d) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_determinant_array_m
     use mod_array_inv
     integer, intent(in), value :: n
     real(real64), intent(in) :: A(n,n)
     real(real64), intent(out) :: d
 
-    d = mat_det(A)
+    d = determinant_array_m(A)
 
     end subroutine
 
-    pure subroutine array_inverse_m(n,A,B) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: array_inverse_m
+    pure subroutine call_inverse_array_m(n,A,A_inv) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_inverse_array_m
     use mod_array_inv
     integer, intent(in), value :: n
     real(real64), intent(in) :: A(n,n)
-    real(real64), intent(out) :: B(n,n)
+    real(real64), intent(out) :: A_inv(n,n)
 
-    B = mat_inv(A)
+    A_inv = inverse_array_m(A)
 
     end subroutine
-
+    
+    pure subroutine call_spline_calc_ypp_array(n,x,y,ypp) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_spline_calc_ypp_array
+    use mod_splines
+    integer, intent(in), value :: n
+    real( real64 ), intent(in)  :: x(n), y(n)
+    real( real64 ), intent(out) :: ypp(n)    
+    type( spline ) :: cs
+    
+        cs = spline(x,y,set_ypp,set_ypp,0._real64,0._real64)
+        
+        ypp = cs%ypp
+    
+    end subroutine
+    
+    pure subroutine call_spline_calc_ypp_domain(n,x_start, x_end,y,ypp) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_spline_calc_ypp_domain
+    use mod_splines
+    integer, intent(in), value :: n
+    real( real64 ), intent(in)  :: y(n)
+    real( real64 ), intent(in), value :: x_start, x_end
+    real( real64 ), intent(out) :: ypp(n)    
+    type( spline ) :: cs
+    
+        cs = spline(x_start, x_end, y, set_ypp,set_ypp,0._real64,0._real64)
+        
+        ypp = cs%ypp
+    
+    end subroutine
+    
+    pure subroutine call_spline_interpolate_point(n,x,y,ypp,xe,ye,ype,yppe) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_spline_interpolate_point
+    use mod_splines
+    integer, intent(in), value :: n
+    real( real64 ), intent(in)  :: x(n), y(n), ypp(n), xe
+    real( real64 ), intent(out) :: ye, ype, yppe
+    type( spline ) :: cs
+    
+        ! Define spline    
+        cs = spline(x, y, ypp, set_ypp,set_ypp,0._real64,0._real64)        
+        ! get values
+        call cs%spline_interpolate_point(xe,ye,ype,yppe)
+        
+    end subroutine
+    
+    pure subroutine call_spline_interpolate_array(n,x,y,ypp,m,xe,ye,yppe) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_spline_interpolate_array
+    use mod_splines
+    integer, intent(in), value :: n, m
+    real( real64 ), intent(in)  :: x(n), y(n), ypp(n)
+    real( real64 ), intent(in)  :: xe(m)
+    real( real64 ), intent(out) :: ye(m), yppe(m)
+    type( spline ) :: cs, ip
+        cs = spline(x,y,ypp,set_ypp,set_ypp,0._real64,0._real64)
+        ip = cs%interpolate(xe)
+        ye = ip%y        
+        yppe = ip%ypp
+    end subroutine
+    
+    pure subroutine call_spline_interpolate_domain(n,x,y,ypp,m,x_start,x_end,ye,yppe) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_spline_interpolate_array
+    use mod_splines
+    integer, intent(in), value :: n, m
+    real( real64 ), intent(in)  :: x(n), y(n), ypp(n)
+    real( real64 ), intent(in), value :: x_start, x_end
+    real( real64 ), intent(out) :: ye(m), yppe(m)
+    type( spline ) :: cs, ip
+        cs = spline(x,y,ypp,set_ypp,set_ypp,0._real64,0._real64)
+        ip = cs%interpolate(x_start, x_end, m)
+        ye = ip%y
+        yppe = ip%ypp
+    end subroutine
     end module
 

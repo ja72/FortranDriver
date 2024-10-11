@@ -13,6 +13,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F3817067-25B0-4DEE-98EC-CDD361B5FC35}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		FortranDriverDLL\exports.txt = FortranDriverDLL\exports.txt
 		README.md = README.md
 	EndProjectSection
 EndProject

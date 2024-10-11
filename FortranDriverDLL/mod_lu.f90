@@ -48,8 +48,37 @@
         sgn = 1
         ierr = 0
         
-        ! 1×1 systems have no LU decomposition
-        if( n > 1 ) then
+        if( n == 1 ) then
+            ! 1×1 systems have no LU decomposition
+        elseif ( n==2 ) then
+            T(1,2) = A(1,2)/A(1,1)
+            T(2,2) = A(2,2) - A(1,2)*A(2,1)/A(1,1)
+        elseif ( n==3 ) then
+            T(1,2) = A(1,2)/A(1,1)
+            T(1,3) = A(1,3)/A(1,1)
+            
+            T(2,2) = A(2,2) - A(1,2)*A(2,1)/A(1,1)
+            T(2,3) = ( A(1,1)*A(2,3) - A(1,3)*A(2,1) )/( A(1,1)*A(2,2) - A(1,2)*A(2,1) )
+            
+            T(3,2) = A(3,2) - A(1,2)*A(3,1)/A(1,1)
+            T(3,3) = A(3,3) + (A(1,2)*A(2,3)-A(1,3)*A(2,2))*(A(2,2)*A(3,1)-A(2,1)*A(3,2))/(A(2,2)*(A(1,1)*A(2,2)-A(1,2)*A(2,1)))-A(2,3)*A(3,2)/A(2,2)
+        elseif ( n==4) then
+            T(1,2) = A(1,2)/A(1,1)
+            T(1,3) = A(1,3)/A(1,1)
+            T(1,4) = A(1,4)/A(1,1)
+            
+            T(2,2) = A(2,2) - A(1,2)*A(2,1)/A(1,1)
+            T(2,3) = ( A(1,1)*A(2,3) - A(1,3)*A(2,1) )/( A(1,1)*A(2,2) - A(1,2)*A(2,1) )
+            T(2,4) = ( A(1,1)*A(2,4) - A(1,4)*A(2,1) )/( A(1,1)*A(2,2) - A(1,2)*A(2,1) )
+            
+            T(3,2) = A(3,2) - A(1,2)*A(3,1)/A(1,1)
+            T(3,3) = A(3,3) + (A(1,2)*A(2,3)-A(1,3)*A(2,2))*(A(2,2)*A(3,1)-A(2,1)*A(3,2))/(A(2,2)*(A(1,1)*A(2,2)-A(1,2)*A(2,1)))-A(2,3)*A(3,2)/A(2,2)
+            T(3,4) = (A(1,1)*(A(2,2)*A(3,4)-A(2,4)*A(3,2))+A(1,2)*(A(2,4)*A(3,1)-A(2,1)*A(3,4))+A(1,4)*(A(2,1)*A(3,2)-A(2,2)*A(3,1)))/(A(1,1)*(A(2,2)*A(3,3)-A(2,3)*A(3,2))+A(1,2)*(A(2,3)*A(3,1)-A(2,1)*A(3,3))+A(1,3)*(A(2,1)*A(3,2)-A(2,2)*A(3,1)))
+            
+            T(4,2) = A(4,2) - A(1,2)*A(4,1)/A(1,1)
+            T(4,3) = A(4,3) + (A(1,2)*A(2,3)-A(1,3)*A(2,2))*(A(2,2)*A(4,1)-A(2,1)*A(4,2))/(A(2,2)*(A(1,1)*A(2,2)-A(1,2)*A(2,1)))-A(2,3)*A(4,2)/A(2,2)
+            T(4,4) = A(4,4) - (A(1,1)*(A(2,2)*A(3,4)*A(4,3)-A(2,3)*A(3,4)*A(4,2)+A(2,4)*(A(3,3)*A(4,2)-A(3,2)*A(4,3)))-A(1,2)*(A(2,1)*A(3,4)*A(4,3)-A(2,3)*A(3,4)*A(4,1)+A(2,4)*(A(3,3)*A(4,1)-A(3,1)*A(4,3)))+A(1,3)*(A(2,1)*A(3,4)*A(4,2)-A(2,2)*A(3,4)*A(4,1)+A(2,4)*(A(3,2)*A(4,1)-A(3,1)*A(4,2)))+A(1,4)*(A(2,1)*(A(3,2)*A(4,3)-A(3,3)*A(4,2))+A(2,2)*(A(3,3)*A(4,1)-A(3,1)*A(4,3))+A(2,3)*(A(3,1)*A(4,2)-A(3,2)*A(4,1))))/(A(1,1)*(A(2,2)*A(3,3)-A(2,3)*A(3,2))+A(1,2)*(A(2,3)*A(3,1)-A(2,1)*A(3,3))+A(1,3)*(A(2,1)*A(3,2)-A(2,2)*A(3,1)))            
+        else
             call LUDCMP(T, n, indx, sgn, ierr)
             if( ierr /= 0 ) then 
                 error stop "Singular Matrix"                
@@ -94,7 +123,7 @@
             x = b / lu%data(1,1)
         else
             x = b
-            do j=1, k
+            do concurrent (j=1: k) shared(lu, x)
                 call LUBKSB(lu%data, lu%n, lu%indx, x(:,j))
             end do
         end if
@@ -106,7 +135,7 @@
     integer :: i, n
         n = lu%n
         d = lu%sgn
-        do i=1,n
+        do concurrent (i=1:n) reduce( * : d)
             d = d * lu%data(i,i)
         end do
     end function
@@ -169,7 +198,7 @@
     DO J=1,N
         DO I=1,J-1
             SUMM = A(I,J)
-            DO K=1,I-1
+            DO CONCURRENT (K=1:I-1) REDUCE (+ : SUMM)
                 SUMM = SUMM - A(I,K)*A(K,J)
             END DO ! k loop
             A(I,J) = SUMM
@@ -177,7 +206,7 @@
         AMAX = 0.d0
         DO I=J,N
             SUMM = A(I,J)
-            DO K=1,J-1
+            DO CONCURRENT (K=1:J-1) REDUCE (+ : SUMM)
                 SUMM = SUMM - A(I,K)*A(K,J)
             END DO ! k loop
             A(I,J) = SUMM
@@ -189,7 +218,7 @@
         END DO ! i loop
 
         IF(J /= IMAX) THEN
-            DO K=1,N
+            DO CONCURRENT (K=1:N)
                 DUM = A(IMAX,K)
                 A(IMAX,K) = A(J,K)
                 A(J,K) = DUM
@@ -203,7 +232,7 @@
 
         IF(J /= N) THEN
             DUM = 1 / A(J,J)
-            DO I=J+1,N
+            DO CONCURRENT (I=J+1:N)
                 A(I,J) = A(I,J)*DUM
             END DO ! i loop
         END IF
@@ -241,7 +270,7 @@
         SUMM = B(LL)
         B(LL) = B(I)
         IF(II /= 0) THEN
-            DO J=II,I-1
+            DO CONCURRENT (J=II:I-1) REDUCE( + : SUMM )
                 SUMM = SUMM - A(I,J)*B(J)
             END DO ! j loop
         ELSE IF(SUMM /= 0.d0) THEN
@@ -253,7 +282,7 @@
     DO I=N,1,-1
         SUMM = B(I)
         IF(I < N) THEN
-            DO J=I+1,N
+            DO CONCURRENT (J=I+1:N) REDUCE( + : SUMM )
                 SUMM = SUMM - A(I,J)*B(J)
             END DO ! j loop
         END IF

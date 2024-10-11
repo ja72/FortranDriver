@@ -107,7 +107,7 @@
     ! Calculates side of a triangle using the law of cosines
     elemental function triangle_side_ssa(side_a,side_b,angle_ab) result(side_c)
     !tex: Given two sides and an angle, the opposing side is
-    ! $$c = \sqrt{a^2 + b^2 - 2 a b \cos(\gamma)}$$
+    !$$c = \sqrt{a^2 + b^2 - 2 a b \cos(\gamma)}$$
     
     real(real64), intent(in) :: side_a, side_b, angle_ab
     real(real64) :: side_c, t
@@ -122,7 +122,7 @@
     ! Calculates angle of a triangle using the law of cosines
     elemental function triangle_angle_sss(side_a,side_b,side_c) result(angle_ab)
     !tex: Given two adjacent sides and a opposing side, the included angle is
-    ! $$\cos(\gamma) = \frac{a^2-b^2-c^2}{2 a b}$$
+    !$$\cos(\gamma) = \frac{a^2-b^2-c^2}{2 a b}$$
     
     real(real64), intent(in) :: side_a, side_b, side_c
     real(real64) :: angle_ab, t
@@ -175,12 +175,33 @@
         angle_ab = asin( t )
     end function
     
+    function vec3_angle(a,b) result(t) bind(c)
+    !dec$ attributes dllexport :: vec3_angle
+    real(real64), intent(in) :: a(3), b(3)
+    reaL(real64) :: t, ma, mb, ab
+    
+        ! |a.b| = |a| |b| cos(t)
+        ! |a×b| = |a| |b| sin(t)
+        ma = norm2(a)
+        mb = norm2(b)
+    
+        if( ma == 0._real64 .or. mb == 0._real64 ) then
+            t = 0._real64
+            return
+        end if
+    
+        ab = dot_product(a, b)
+        t = acos(ab/(ma*mb))
+        
+    end function
+    
+        
     pure function linspace(x_start, x_end, n_count) result(x)
     real(real64), intent(in) :: x_start, x_end
     integer, intent(in) :: n_count
-    real(real64), allocatable :: x(:)
+    real(real64) :: x(n_count)
     integer :: i
-        x = [ ( x_start + (x_end-x_start)*dble(i-1)/(n_count-1), i=1, n_count) ]
+        x = [ ( x_start + (x_end-x_start)*real(i-1, kind=real64)/(n_count-1), i=1, n_count) ]
     end function
     
     pure function index_of(x, x_target) result(i_target)
@@ -212,6 +233,7 @@
         end if
             
     end function
+    
     
     
     end module

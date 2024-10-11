@@ -1,0 +1,2909 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 138, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSS
+Args:
+  - Callee:          acos
+  - String:          ' will not be inlined into '
+  - Caller:          MOD_COMMON_mp_TRIANGLE_ANGLE_SSS
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 123, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 138, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSS
+Args:
+  - Callee:          acos
+  - String:          ' will not be inlined into '
+  - Caller:          MOD_COMMON_mp_TRIANGLE_ANGLE_SSS
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 123, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 175, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSA
+Args:
+  - Callee:          asin
+  - String:          ' will not be inlined into '
+  - Caller:          MOD_COMMON_mp_TRIANGLE_ANGLE_SSA
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 160, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 175, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSA
+Args:
+  - Callee:          asin
+  - String:          ' will not be inlined into '
+  - Caller:          MOD_COMMON_mp_TRIANGLE_ANGLE_SSA
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 160, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 194, Column: 0 }
+Function:        vec3_angle
+Args:
+  - Callee:          acos
+  - String:          ' will not be inlined into '
+  - Caller:          vec3_angle
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 178, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 194, Column: 0 }
+Function:        vec3_angle
+Args:
+  - Callee:          acos
+  - String:          ' will not be inlined into '
+  - Caller:          vec3_angle
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 178, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - Callee:          for_allocate_handle
+  - String:          ' will not be inlined into '
+  - Caller:          MOD_COMMON_mp_LINSPACE
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 199, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - Callee:          for_deallocate_handle
+  - String:          ' will not be inlined into '
+  - Caller:          MOD_COMMON_mp_LINSPACE
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 199, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - Callee:          for_allocate_handle
+  - String:          ' will not be inlined into '
+  - Caller:          MOD_COMMON_mp_LINSPACE
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 199, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - Callee:          for_deallocate_handle
+  - String:          ' will not be inlined into '
+  - Caller:          MOD_COMMON_mp_LINSPACE
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 199, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 102, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'hoisting '
+  - Inst:            call
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 102, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 102, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'hoisting '
+  - Inst:            call
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 102, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 102, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'hoisting '
+  - Inst:            icmp
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 102, Column: 0 }
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 138, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSS
+Args:
+  - Callee:          acos
+  - String:          ' will not be inlined into '
+  - Caller:          MOD_COMMON_mp_TRIANGLE_ANGLE_SSS
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 123, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 138, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSS
+Args:
+  - Callee:          acos
+  - String:          ' will not be inlined into '
+  - Caller:          MOD_COMMON_mp_TRIANGLE_ANGLE_SSS
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 123, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 175, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSA
+Args:
+  - Callee:          asin
+  - String:          ' will not be inlined into '
+  - Caller:          MOD_COMMON_mp_TRIANGLE_ANGLE_SSA
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 160, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 175, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSA
+Args:
+  - Callee:          asin
+  - String:          ' will not be inlined into '
+  - Caller:          MOD_COMMON_mp_TRIANGLE_ANGLE_SSA
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 160, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 194, Column: 0 }
+Function:        vec3_angle
+Args:
+  - Callee:          acos
+  - String:          ' will not be inlined into '
+  - Caller:          vec3_angle
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 178, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 194, Column: 0 }
+Function:        vec3_angle
+Args:
+  - Callee:          acos
+  - String:          ' will not be inlined into '
+  - Caller:          vec3_angle
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 178, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - Callee:          for_allocate_handle
+  - String:          ' will not be inlined into '
+  - Caller:          MOD_COMMON_mp_LINSPACE
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 199, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - Callee:          for_deallocate_handle
+  - String:          ' will not be inlined into '
+  - Caller:          MOD_COMMON_mp_LINSPACE
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 199, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - Callee:          for_allocate_handle
+  - String:          ' will not be inlined into '
+  - Caller:          MOD_COMMON_mp_LINSPACE
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 199, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - Callee:          for_deallocate_handle
+  - String:          ' will not be inlined into '
+  - Caller:          MOD_COMMON_mp_LINSPACE
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 199, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'hoisting '
+  - Inst:            load
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'hoisting '
+  - Inst:            load
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'hoisting '
+  - Inst:            fsub
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'hoisting '
+  - Inst:            call
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'hoisting '
+  - Inst:            add
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'hoisting '
+  - Inst:            sitofp
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Passed
+Pass:            gvn
+Name:            LoadElim
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' eliminated'
+  - String:          ' in favor of '
+  - InfavorOfValue:  ''
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' in favor of '
+  - OtherAccess:     store
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' in favor of '
+  - OtherAccess:     store
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' in favor of '
+  - OtherAccess:     store
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' in favor of '
+  - OtherAccess:     store
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'hoisting '
+  - Inst:            load
+...
+--- !Passed
+Pass:            gvn
+Name:            LoadElim
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 193, Column: 0 }
+Function:        vec3_angle
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' eliminated'
+  - String:          ' in favor of '
+  - InfavorOfValue:  load
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 185, Column: 0 }
+...
+--- !Passed
+Pass:            gvn
+Name:            LoadElim
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 193, Column: 0 }
+Function:        vec3_angle
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' eliminated'
+  - String:          ' in favor of '
+  - InfavorOfValue:  load
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 186, Column: 0 }
+...
+--- !Passed
+Pass:            gvn
+Name:            LoadElim
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 193, Column: 0 }
+Function:        vec3_angle
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' eliminated'
+  - String:          ' in favor of '
+  - InfavorOfValue:  load
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 185, Column: 0 }
+...
+--- !Passed
+Pass:            gvn
+Name:            LoadElim
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 193, Column: 0 }
+Function:        vec3_angle
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' eliminated'
+  - String:          ' in favor of '
+  - InfavorOfValue:  load
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 186, Column: 0 }
+...
+--- !Passed
+Pass:            gvn
+Name:            LoadElim
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 193, Column: 0 }
+Function:        vec3_angle
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' eliminated'
+  - String:          ' in favor of '
+  - InfavorOfValue:  load
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 185, Column: 0 }
+...
+--- !Passed
+Pass:            gvn
+Name:            LoadElim
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 193, Column: 0 }
+Function:        vec3_angle
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' eliminated'
+  - String:          ' in favor of '
+  - InfavorOfValue:  load
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 186, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' in favor of '
+  - OtherAccess:     store
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' in favor of '
+  - OtherAccess:     store
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     store
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     store
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     store
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     store
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' in favor of '
+  - OtherAccess:     store
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' in favor of '
+  - OtherAccess:     store
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     store
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     store
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     store
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     store
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 102, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'hoisting '
+  - Inst:            mul
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 102, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 102, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'hoisting '
+  - Inst:            getelementptr
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 102, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 102, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'hoisting '
+  - Inst:            mul
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 102, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 102, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'hoisting '
+  - Inst:            getelementptr
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 102, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 102, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'hoisting '
+  - Inst:            mul
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 102, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 102, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'hoisting '
+  - Inst:            getelementptr
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 102, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 102, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'hoisting '
+  - Inst:            mul
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 102, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 102, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'hoisting '
+  - Inst:            getelementptr
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 102, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 102, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'hoisting '
+  - Inst:            icmp
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 102, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 102, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'hoisting '
+  - Inst:            icmp
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 102, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 96, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'hoisting '
+  - Inst:            lshr
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 96, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 102, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'hoisting '
+  - Inst:            add
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 102, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 102, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'hoisting '
+  - Inst:            and
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 102, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 102, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'hoisting '
+  - Inst:            icmp
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 102, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 102, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'hoisting '
+  - Inst:            add
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 102, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'hoisting '
+  - Inst:            insertelement
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'hoisting '
+  - Inst:            shufflevector
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'hoisting '
+  - Inst:            insertelement
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'hoisting '
+  - Inst:            shufflevector
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'hoisting '
+  - Inst:            insertelement
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 204, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'hoisting '
+  - Inst:            shufflevector
+    DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                       Line: 204, Column: 0 }
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+Function:        MOD_COMMON.
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        MOD_COMMON.
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_0
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+Function:        MOD_COMMON.
+Args:
+  - NumInstructions: '1'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 55, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_INTEGER
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 55, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_INTEGER
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_1
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 55, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_INTEGER
+Args:
+  - NumInstructions: '6'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 61, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_SCALAR
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 61, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_SCALAR
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_2
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_SCALAR
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb_new8_then
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_SCALAR
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_2
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_SCALAR
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb1_endif
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '8'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 61, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_SCALAR
+Args:
+  - NumInstructions: '13'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 74, Column: 1 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_VECTOR
+Args:
+  - NumVRCopies:     '6'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '1.254902e+00'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 74, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_VECTOR
+Args:
+  - NumStackBytes:   '64'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 74, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_VECTOR
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_3
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '27'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_VECTOR
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb_new18_then
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_VECTOR
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb_new19_then
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_VECTOR
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      loop_body26.preheader
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '7'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_VECTOR
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      then.19
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '9'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_VECTOR
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      loop.18
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '58'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_VECTOR
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ifmerge.19
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_VECTOR
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      then.20
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '8'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_VECTOR
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      loop.16
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_VECTOR
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      loop.16
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_VECTOR
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      loop.16
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_VECTOR
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb_new18_then
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_VECTOR
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb2_endif
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_VECTOR
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb4_endif
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '10'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 74, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_VECTOR
+Args:
+  - NumInstructions: '144'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            LoopSpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 102, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - NumSpills:       '1'
+  - String:          ' spills '
+  - TotalSpillsCost: '1.014286e+01'
+  - String:          ' total spills cost '
+  - NumReloads:      '6'
+  - String:          ' reloads '
+  - TotalReloadsCost: '4.309524e+01'
+  - String:          ' total reloads cost '
+  - NumFoldedReloads: '2'
+  - String:          ' folded reloads '
+  - TotalFoldedReloadsCost: '1.647619e+01'
+  - String:          ' total folded reloads cost '
+  - NumVRCopies:     '4'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '1.266667e+01'
+  - String:          ' total copies cost '
+  - String:          generated in loop
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 90, Column: 1 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - NumSpills:       '8'
+  - String:          ' spills '
+  - TotalSpillsCost: '1.230952e+01'
+  - String:          ' total spills cost '
+  - NumReloads:      '6'
+  - String:          ' reloads '
+  - TotalReloadsCost: '4.309524e+01'
+  - String:          ' total reloads cost '
+  - NumFoldedReloads: '2'
+  - String:          ' folded reloads '
+  - TotalFoldedReloadsCost: '1.647619e+01'
+  - String:          ' total folded reloads cost '
+  - NumVRCopies:     '10'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '1.521429e+01'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 90, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - NumStackBytes:   '128'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 90, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_4
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '37'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_4
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb_new34_then
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb_new35_then
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      loop_test41.preheader.lr.ph
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '34'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ifmerge.2
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '10'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      loop.35
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      then.2
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      then.39
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      loop.38
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '58'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ifmerge.39
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      then.40
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      loop.36
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      loop.36
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      loop.36
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb_new34_then
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb5_endif
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb7_endif
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '11'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 90, Column: 0 }
+Function:        MOD_COMMON_mp_ARE_EQUAL_MATRIX
+Args:
+  - NumInstructions: '187'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 108, Column: 1 }
+Function:        MOD_COMMON_mp_TRIANGLE_SIDE_SSA
+Args:
+  - NumVRCopies:     '3'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '1.500000e+00'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 108, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_SIDE_SSA
+Args:
+  - NumStackBytes:   '72'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 108, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_SIDE_SSA
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_5
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '19'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_SIDE_SSA
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb_new54_then
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_SIDE_SSA
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb8_else
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '12'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_SIDE_SSA
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb_new54_then
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 108, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_SIDE_SSA
+Args:
+  - NumInstructions: '40'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 123, Column: 1 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSS
+Args:
+  - NumVRCopies:     '4'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '2.000000e+00'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 123, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSS
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 123, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSS
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_6
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '11'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSS
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb10_else
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSS
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb10_else
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSS
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      end_label63
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSS
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb12_else
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '11'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 123, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSS
+Args:
+  - NumInstructions: '32'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 142, Column: 1 }
+Function:        MOD_COMMON_mp_TRIANGLE_SIDE_SAA
+Args:
+  - NumVRCopies:     '4'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '1.250000e+00'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 142, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_SIDE_SAA
+Args:
+  - NumStackBytes:   '72'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 142, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_SIDE_SAA
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_7
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '18'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_SIDE_SAA
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb14_else
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '7'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_SIDE_SAA
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb16_else
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_SIDE_SAA
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      end_label81
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_SIDE_SAA
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      end_label81
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 142, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_SIDE_SAA
+Args:
+  - NumInstructions: '37'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 160, Column: 1 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSA
+Args:
+  - NumVRCopies:     '1'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '1.000000e+00'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 160, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSA
+Args:
+  - NumStackBytes:   '72'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 160, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSA
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_8
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '17'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSA
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb18_else
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSA
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      end_label97
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '7'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSA
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb20_else
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '10'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 160, Column: 0 }
+Function:        MOD_COMMON_mp_TRIANGLE_ANGLE_SSA
+Args:
+  - NumInstructions: '39'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 178, Column: 1 }
+Function:        vec3_angle
+Args:
+  - NumVRCopies:     '6'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '5.250000e+00'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 178, Column: 0 }
+Function:        vec3_angle
+Args:
+  - NumStackBytes:   '72'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 178, Column: 0 }
+Function:        vec3_angle
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_9
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '28'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        vec3_angle
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_9
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '16'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        vec3_angle
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      region.24
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '16'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        vec3_angle
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      end_label116
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '8'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 178, Column: 0 }
+Function:        vec3_angle
+Args:
+  - NumInstructions: '69'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 199, Column: 1 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - NumVRCopies:     '12'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '7.196078e+00'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 199, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - NumStackBytes:   '200'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 199, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_10
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '40'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      do.body152.preheader
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '9'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      loop.48.preheader
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '8'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      loop.48
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '11'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      afterloop.48
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      do.body152.preheader
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      loop.87
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '9'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      hir.L.82
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      hir.L.82
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      loop.31.preheader
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      loop.31
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      then.36
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      then.37
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      loop.38.preheader
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      loop.38
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      dealloc.list.then162
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '24'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 199, Column: 0 }
+Function:        MOD_COMMON_mp_LINSPACE
+Args:
+  - NumInstructions: '135'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            LoopSpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 217, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - NumVRCopies:     '36'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '1.269077e+02'
+  - String:          ' total copies cost '
+  - String:          generated in loop
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 207, Column: 1 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - NumVRCopies:     '39'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '1.276462e+02'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 207, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - NumStackBytes:   '40'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 207, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_11
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '21'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      hir.L.1.preheader
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ifmerge.21
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      hir.L.1
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '23'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      hir.L.1
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      hir.L.1
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      hir.L.1
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '9'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ifmerge.64
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '24'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ifmerge.64
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ifmerge.72
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ifmerge.80
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '24'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ifmerge.80
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '3'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ifmerge.88
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ifmerge.96
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '24'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      ifmerge.96
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_11
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb32
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb32
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 0, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      bb32
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '8'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_common.f90', 
+                   Line: 207, Column: 0 }
+Function:        MOD_COMMON_mp_INDEX_OF
+Args:
+  - NumInstructions: '167'
+  - String:          ' instructions in function'
+...

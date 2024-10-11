@@ -17,14 +17,14 @@
 			<Tool Name="VFManifestTool" SuppressStartupBanner="true"/>
 		</Configuration>
 		<Configuration Name="Debug|x64" UseCompiler="ifxCompiler" ConfigurationType="typeDynamicLibrary">
-			<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeDisabled" HeapArrays="1500" WarnDeclarations="true" WarnUndeclaredExternals="true" WarnUnusedVariables="true" WarnTruncateSource="true" WarnUncalled="true" WarnShape="true" WarnInterfaces="true" LocalSavedScalarsZero="true" InitArrays="true" FloatingPointModel="source" ExtendSinglePrecisionConstants="true" EmitSourceListing="true" BuildDependencies="true" Traceback="true" BoundsCheck="true" ArrayShapeCheck="true" StackFrameCheck="true" RuntimeLibrary="rtMultiThreadedDebugDLL" UsePortlib="true"/>
+			<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeDisabled" HeapArrays="1500" WarnDeclarations="true" WarnUndeclaredExternals="true" WarnUnusedVariables="true" WarnTruncateSource="true" WarnUncalled="true" WarnShape="true" WarnInterfaces="true" LocalSavedScalarsZero="true" InitArrays="true" FloatingPointModel="source" ExtendSinglePrecisionConstants="true" StringLengthArgPassing="strLenArgsMixed" EmitSourceListing="true" BuildDependencies="true" Traceback="true" BoundsCheck="true" ArrayShapeCheck="true" StackFrameCheck="true" RuntimeLibrary="rtMultiThreadedDebugDLL" UsePortlib="true"/>
 			<Tool Name="VFLinkerTool" LinkIncremental="linkIncrementalYes" SuppressStartupBanner="true" GenerateDebugInformation="true" SubSystem="subSystemConsole" LinkDLL="true" AdditionalDependencies="kernel32.lib"/>
 			<Tool Name="VFResourceCompilerTool"/>
 			<Tool Name="VFMidlTool" SuppressStartupBanner="true" TargetEnvironment="midlTargetAMD64"/>
 			<Tool Name="VFCustomBuildTool"/>
 			<Tool Name="VFPreLinkEventTool"/>
 			<Tool Name="VFPreBuildEventTool"/>
-			<Tool Name="VFPostBuildEventTool"/>
+			<Tool Name="VFPostBuildEventTool" CommandLine="dumpbin /exports $(OutDir)\$(TargetName)$(TargetExt) &gt; exports.txt" Description="=== Report on exports"/>
 			<Tool Name="VFManifestTool" SuppressStartupBanner="true"/>
 		</Configuration>
 		<Configuration Name="Release|Win32" UseCompiler="ifortCompiler" ConfigurationType="typeDynamicLibrary">
@@ -39,7 +39,7 @@
 			<Tool Name="VFManifestTool" SuppressStartupBanner="true"/>
 		</Configuration>
 		<Configuration Name="Release|x64" UseCompiler="ifxCompiler" ConfigurationType="typeDynamicLibrary">
-			<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" HeapArrays="1500" WarnDeclarations="true" WarnUndeclaredExternals="true" WarnTruncateSource="true" WarnShape="true" LocalSavedScalarsZero="true" InitArrays="true" FloatingPointModel="source" ExtendSinglePrecisionConstants="true" EmitSourceListing="true" BuildDependencies="true" RuntimeLibrary="rtMultiThreadedDLL" UsePortlib="true"/>
+			<Tool Name="VFFortranCompilerTool" AdditionalOptions="/Qparallel" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeFull" HeapArrays="1500" WarnDeclarations="true" WarnUndeclaredExternals="true" WarnTruncateSource="true" WarnShape="true" OptDiagLevel="odlLevel1" LocalSavedScalarsZero="true" InitArrays="true" FloatingPointModel="source" ExtendSinglePrecisionConstants="true" StringLengthArgPassing="strLenArgsMixed" EmitSourceListing="true" BuildDependencies="true" Traceback="true" RuntimeLibrary="rtMultiThreadedDLL" UsePortlib="true"/>
 			<Tool Name="VFLinkerTool" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" GenerateDebugInformation="true" SubSystem="subSystemConsole" LinkDLL="true" AdditionalDependencies="kernel32.lib"/>
 			<Tool Name="VFResourceCompilerTool"/>
 			<Tool Name="VFMidlTool" SuppressStartupBanner="true" TargetEnvironment="midlTargetAMD64"/>
@@ -61,7 +61,8 @@
 		<File RelativePath=".\mod_nasa_quat.f90"/>
 		<File RelativePath=".\mod_nasa_quat_print.f90"/>
 		<File RelativePath=".\mod_nasa_quat_test.f90"/>
-		<File RelativePath=".\mod_rigid_bodies.f90"/></Filter>
+		<File RelativePath=".\mod_physics.f90"/>
+		<File RelativePath=".\mod_splines.f90"/></Filter>
 	</Files>
 	<Globals/>
 </VisualStudioProject>

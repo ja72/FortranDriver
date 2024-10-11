@@ -9,9 +9,9 @@ For example, below is the code that wraps the Fortran native matrix multiplicati
 **Legacy style** fortran exports
 
 ```fortran
-subroutine array_product_mm(n,m,k,A,x,b)
-!DEC$ ATTRIBUTES DLLEXPORT :: array_product_mm
-!DEC$ ATTRIBUTES ALIAS: 'array_product_mm' :: array_product_mm
+subroutine call_mul_array_mm(n,m,k,A,x,b)
+!DEC$ ATTRIBUTES DLLEXPORT :: call_mul_array_mm
+!DEC$ ATTRIBUTES ALIAS: 'call_mul_array_mm' :: call_mul_array_mm
 !DEC$ ATTRIBUTES VALUE     :: n, m, k
 !DEC$ ATTRIBUTES REFERENCE :: A, b, x
 integer, intent(in)       :: n,m,k
@@ -26,8 +26,8 @@ end subroutine
 and **Modern style** fortran exports
 
 ```fortran
-subroutine array_product_mm(n,m,k,A,x,b) bind(c)
-!DEC$ ATTRIBUTES DLLEXPORT :: array_product_mm
+subroutine call_mul_array_mm(n,m,k,A,x,b) bind(c)
+!DEC$ ATTRIBUTES DLLEXPORT :: call_mul_array_mm
 integer, intent(in), value :: n,m,k
 real(real64), intent(in)   :: A(n,m), x(m,k)
 real(real64), intent(out)  :: b(n,k)
@@ -46,24 +46,24 @@ dimensional systems.
 Some of the exported functions are
 
   - `array_rand_v(integer, real, real, real(:))`
-  - `array_elem_v(integer, integer, real, real(:))`
-  - `array_add_v(integer, real(:), real(:), real(:))`
-  - `array_subtract_v(integer, real(:), real(:), real(:))`
-  - `array_scale_v(integer, real, real(:), real(:))`
-  - `array_dot_v(integer, real(:), real(:), real)`
-  - `array_product_mv(integer, integer, real(:,:), real(:), real(:))`
-  - `array_product_vm(integer, integer, real(:), real(:,:), real(:))`
-  - `array_solve_mv(integer, integer, real(:,:), real(:), real(:))`
+  - `call_elem_array_v(integer, integer, real, real(:))`
+  - `call_add_array_v(integer, real(:), real(:), real(:))`
+  - `call_sub_array_v(integer, real(:), real(:), real(:))`
+  - `call_scale_array_v(integer, real, real(:), real(:))`
+  - `call_inner_array_v(integer, real(:), real(:), real)`
+  - `call_mul_array_mv(integer, integer, real(:,:), real(:), real(:))`
+  - `call_mul_array_vm(integer, integer, real(:), real(:,:), real(:))`
+  - `call_solve_array_mv(integer, integer, real(:,:), real(:), real(:))`
   - `array_rand_m(integer, integer, real, real, real(:,:))`
-  - `array_diag_m(integer, real(:), real(:,:))`
-  - `array_scalar_m(integer, integer, real, real(:,:))`
-  - `array_add_m(integer, integer, real(:,:), real(:,:), real(:,:))`
-  - `array_subtract_m(integer, integer, real(:,:), real(:,:), real(:,:))`
-  - `array_scale_m(integer, integer, real, real(:,:), real(:,:))`
-  - `array_det_m(integer, real(:,:), real)`
-  - `array_tansp_m(integer, integer, real(:,:), real(:,:))`
-  - `array_product_mm(integer, integer, integer, real(:,:), real(:,:), real(:,:))`
-  - `array_solve_mm(integer, integer, integer, real(:,:), real(:,:), real(:,:))`
+  - `call_array_diag_m(integer, real(:), real(:,:))`
+  - `call_array_scalar_m(integer, integer, real, real(:,:))`
+  - `call_add_array_m(integer, integer, real(:,:), real(:,:), real(:,:))`
+  - `call_sub_array_m(integer, integer, real(:,:), real(:,:), real(:,:))`
+  - `call_scale_array_m(integer, integer, real, real(:,:), real(:,:))`
+  - `call_determinant_array_m(integer, real(:,:), real)`
+  - `call_transpose_array_m(integer, integer, real(:,:), real(:,:))`
+  - `call_mul_array_mm(integer, integer, integer, real(:,:), real(:,:), real(:,:))`
+  - `call_solve_array_mm(integer, integer, integer, real(:,:), real(:,:), real(:,:))`
   - `array_inverse_m(integer, real(:,:), real(:,:))`
 
 ## C# Console App `FortranDriverCS`
@@ -71,24 +71,24 @@ Some of the exported functions are
  The corresponding imported functions are
 
  - `array_rand_v(int, double, double, double[]);`
- - `array_elem_v(int, int, double, double[]);`
- - `array_add_v(int, double[], double[], double[]);`
- - `array_subtract_v(int, double[], double[], double[]);`
- - `array_scale_v(int, double, double[], double[]);`
- - `array_dot_v(int, double[], double[], out double);`
- - `array_product_mv(int, int, double[,], double[], double[]);`
- - `array_product_vm(int, int, double[], double[,], double[]);`
- - `array_solve_mv(int, int, double[,], double[], double[]);`
+ - `call_elem_array_v(int, int, double, double[]);`
+ - `call_add_array_v(int, double[], double[], double[]);`
+ - `call_sub_array_v(int, double[], double[], double[]);`
+ - `call_scale_array_v(int, double, double[], double[]);`
+ - `call_inner_array_v(int, double[], double[], out double);`
+ - `call_mul_array_mv(int, int, double[,], double[], double[]);`
+ - `call_mul_array_vm(int, int, double[], double[,], double[]);`
+ - `call_solve_array_mv(int, int, double[,], double[], double[]);`
  - `array_rand_m(int, int, double, double, double[,]);`
- - `array_diag_m(int, double[], double[,]);`
- - `array_scalar_m(int, int, double, double[,]);`
- - `array_add_m(int, int, double[,], double[,], double[,]);`
- - `array_subtract_m(int, int, double[,], double[,], double[,]);`
- - `array_scale_m(int, int, double, double[,], double[,]);`
- - `array_det_m(int, double[,], out double);`
- - `array_tansp_m(int, int, double[,], double[,]);`
- - `array_product_mm(int, int, int, double[,], double[,], double[,]);`
- - `array_solve_mm(int, int, int, double[,], double[,], double[,]);`
+ - `call_array_diag_m(int, double[], double[,]);`
+ - `call_array_scalar_m(int, int, double, double[,]);`
+ - `call_add_array_m(int, int, double[,], double[,], double[,]);`
+ - `call_sub_array_m(int, int, double[,], double[,], double[,]);`
+ - `call_scale_array_m(int, int, double, double[,], double[,]);`
+ - `call_determinant_array_m(int, double[,], out double);`
+ - `call_transpose_array_m(int, int, double[,], double[,]);`
+ - `call_mul_array_mm(int, int, int, double[,], double[,], double[,]);`
+ - `call_solve_array_mm(int, int, int, double[,], double[,], double[,]);`
  - `array_inverse_m(int, double[,], double[,]);`
 
 ### `NativeVector` and `NativeMatrix`
