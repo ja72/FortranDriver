@@ -3,24 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.CompilerServices;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Xml.Linq;
 
 namespace JA.Fortran
 {
 
-    public unsafe partial class FVector :
+    public unsafe class FVector :
         System.Collections.ICollection,
         ICollection<double>,
         IFormattable
     {
+        
+        readonly int _size;
+        readonly double[] _data;
         public FVector(int size)
         {
-            Size=size;
-            Data=new double[size];
+            _size = size;
+            _data = new double[size];
         }
         internal FVector(double[] data)
         {
-            Size=data.GetLength(0);
-            Data=data??throw new ArgumentNullException(nameof(data));
+            _size = data.GetLength(0);
+            _data = data??throw new ArgumentNullException(nameof(data));
         }
         public FVector(int size, Func<int, double> initializer)
             : this(size)
@@ -34,26 +40,35 @@ namespace JA.Fortran
         {
             return new FVector(values);
         }
-
+        public static FVector Zeros(int n)
+        {
+            double[] data = new double[n];
+            call_array_zeros_v(n, data);
+            return new FVector(data);
+        }
+        public static FVector LinearSpace(double x_start, double x_end, int count)
+            => linspace(x_start, x_end, count);
         public static FVector Elemental(int size, int index, double value = 1.0)
         {
             double[] data = new double[size];
-            FortranMethods.call_elem_array_v(size, index, value, data);
+            call_elem_array_v(size, index, value, data);
             return new FVector(data);
         }
-        private static int seed = Environment.TickCount;
+
         public static FVector RandomMinMax(int size, double minValue = 0, double maxValue = 1)
         {
             double[] data = new double[size];
-            FortranMethods.call_random_array_v(size, minValue, maxValue, data);
+            call_random_array_v(size, minValue, maxValue, data);
             return new FVector(data);
         }
         public static FVector RandomUniform(int size)
         {
             double[] data = new double[size];
-            FortranMethods.call_uniform_array_v(size, ref seed, data);
+            call_uniform_array_v(size, ref FortranMethods.seed, data);
             return new FVector(data);
         }
+        public int Size => _size;
+        internal double[] Data => _data;
 
         public ref double this[Index index]
         {
@@ -74,20 +89,24 @@ namespace JA.Fortran
             }
         }
 
-        public int Size { get; }
-        internal double[] Data { get; }
-
 
 #pragma warning disable IDE0305 // Simplify collection initialization
         public static implicit operator double[](FVector a) => a.ToArray();
 #pragma warning restore IDE0305 // Simplify collection initialization
         public static explicit operator FVector(double[] a) => new FVector(a);
 
+        public static FMatrix AppendColumns(FVector a, FVector b)
+            => FMatrix.FromColumns(a, b);
+        public static FMatrix AppendRows(FVector a, FVector b)
+            => FMatrix.FromRows(a, b);
+
         #region Algebra
+        public double Norm() => norm_array_v(_size, _data);
+
         public static FVector Round(FVector A, int digits)
         {
             double[] data = new double[A.Size];
-            FortranMethods.call_round_array_v(A.Size, A.Data, digits, data);
+            call_round_array_v(A.Size, A.Data, digits, data);
             return new FVector(data);
         }
 
@@ -95,20 +114,26 @@ namespace JA.Fortran
         {
             int n = Size, k = newRows, l = newColumns;
             double[,] data = new double[l, k];
-            FortranMethods.call_reshape_array_vm(n, Data, k, l, order, data);
+            call_reshape_array_vm(n, Data, k, l, order, data);
             return new FMatrix(data);
         }
         public FVector Slice(int startRow, int endRow)
         {
             double[] data = new double[endRow - startRow + 1];
-            FortranMethods.call_slice_array_v(Size, Data, startRow, endRow, data);
+            call_slice_array_v(Size, Data, startRow, endRow, data);
             return new FVector(data);
         }
         public static double Dot(FVector x, FVector y)
         {
             int size = Math.Min(x.Size, y.Size);
-            FortranMethods.call_inner_array_v(size, x.Data, y.Data, out var result);
+            call_inner_array_v(size, x.Data, y.Data, out var result);
             return result;
+        }
+        public static FMatrix Outer(FVector x, FVector y)
+        {
+            var result = new double[y.Size, x.Size];
+            call_outer_array_v(x.Size, y.Size, x, y, result);
+            return new FMatrix(result);
         }
         public static FVector Negate(FVector x)
             => Scale(-1, x);
@@ -120,7 +145,7 @@ namespace JA.Fortran
             }
             int n = x.Size;
             double[] data = new double[n];
-            FortranMethods.call_add_array_v(n, x.Data, y.Data, data);
+            call_add_array_v(n, x.Data, y.Data, data);
             return new FVector(data);
         }
         public static FVector Subtract(FVector x, FVector y)
@@ -131,26 +156,14 @@ namespace JA.Fortran
             }
             int n = x.Size;
             double[] data = new double[n];
-            FortranMethods.call_sub_array_v(n, x.Data, y.Data, data);
+            call_sub_array_v(n, x.Data, y.Data, data);
             return new FVector(data);
         }
         public static FVector Scale(double x, FVector A)
         {
             int n = A.Size;
             double[] data = new double[n];
-            FortranMethods.call_scale_array_v(n, x, A.Data, data);
-            return new FVector(data);
-        }
-        public static FVector Product(FVector x, FMatrix A)
-        {
-            // | A(n,m) | * | x(m) | = | b(n) |
-            if (x.Size!=A.Rows)
-            {
-                throw new ArgumentException($"Expecting {x.Size} rows, found {A.Rows}.", nameof(A));
-            }
-            int n = A.Rows, m = A.Columns;
-            double[] data = new double[m];
-            FortranMethods.call_mul_array_vm(n, m, x.Data, A.Data, data);
+            call_scale_array_v(n, x, A.Data, data);
             return new FVector(data);
         }
 
@@ -165,38 +178,46 @@ namespace JA.Fortran
         public static FVector operator *(FVector a, double x) => Scale(x, a);
         public static FVector operator /(FVector a, double x) => Scale(1/x, a);
         public static double operator *(FVector a, FVector b) => Dot(a, b);
-        public static FVector operator *(FVector x, FMatrix A) => Product(x, A);
         public static FVector operator /(FVector x, FMatrix A) => A.Solve(x);
         #endregion
 
         #region Formatting
         public static string DefaultFormat { get; set; } = "g6";
-
+        public static bool ShowAsTable { get; set; } = true;
         public override string ToString() => ToString(DefaultFormat);
         public string ToString(string formatting) => ToString(formatting, null);
         public string ToString(string formatting, IFormatProvider formatProvider)
         {
-            //double[] data = new double[Size];
-            //FortranMethods.call_round_array_v(Size, Data, HelperFunctions.RoundDigits, data);
-
-            StringBuilder sb = new StringBuilder();
-            int n = Data.Length;
-            string[][] data = [new string[n]];
-            for (int i = 0; i<n; i++)
+            if (ShowAsTable)
             {
-                double f_val = Math.Round(Data[i], HelperFunctions.RoundDigits);
-                data[0][i]=f_val.ToString(formatting, formatProvider);
+                return ToArray().ToTableString(HorizontalAlignment.Right, formatting, formatProvider);
             }
-            int maxWidth = data[0].Max((s) => s.Length);
-            for (int i = 0; i<n; i++)
+            else
+            {
+                return ToArray().ToListString(formatting, ",");
+            }
+        }
+        public static string DefaultFormatting { get; set; } = "g6";
+        public string ToFixedColumnString(string formatting = null, int width = HelperFunctions.DefaultColumnWidth)
+        {
+            formatting??=DefaultFormatting;
+            StringBuilder sb = new StringBuilder();
+            var data = ToArray();
+            for (int i = 0; i < data.Length; i++)
             {
                 sb.Append('|');
-                var text = data[0][i].PadLeft(maxWidth);
+                var f_val = Math.Round(data[i], HelperFunctions.RoundDigits);
+                string text = f_val.ToString(formatting, CultureInfo.CurrentCulture.NumberFormat);
+                text = text.PadLeft(width);
+                if (text.Length > width)
+                {
+                    text = new string('*', width);
+                }
                 sb.Append($" {text}");
                 sb.AppendLine(" |");
             }
             sb.AppendLine();
-            return sb.ToString();
+            return sb.ToString();            
         }
         #endregion
 
@@ -236,5 +257,89 @@ namespace JA.Fortran
             => Array.Copy(Data, 0, array, index, Data.Length);
         #endregion
 
-    }
+        #region Fortran API        
+        const string libraryName = FortranMethods.libraryName;
+
+        [DllImport(libraryName, EntryPoint = "call_array_zeros_v", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_array_zeros_v(int size, [Out] double[] A);
+
+        [DllImport(libraryName, EntryPoint = "call_round_array_v", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_round_array_v(int size, [In] double[] x, int digits, [Out] double[] r);
+
+        [DllImport(libraryName, EntryPoint = "norm_array_v", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern double norm_array_v(int size, [In] double[] A);
+
+        [DllImport(libraryName, EntryPoint = "call_slice_array_v", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_slice_array_v(int size, [In] double[] A, int start_index, int end_index, [Out] double[] B);
+
+        [DllImport(libraryName, EntryPoint = "call_random_array_v", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_random_array_v(int size, [In] double minValue, [In] double maxValue, [Out] double[] A);
+        [DllImport(libraryName, EntryPoint = "call_uniform_array_v", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_uniform_array_v(int size, ref int seed, [Out] double[] A);
+
+        [DllImport(libraryName, EntryPoint = "call_elem_array_v", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_elem_array_v(int size, int index, [In] double x, [Out] double[] A);
+
+        [DllImport(libraryName, EntryPoint = "call_add_array_v", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_add_array_v(int size, [In] double[] x, [In] double[] y, [Out] double[] z);
+
+        [DllImport(libraryName, EntryPoint = "call_sub_array_v", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_sub_array_v(int size, [In] double[] x, [In] double[] y, [Out] double[] z);
+
+        [DllImport(libraryName, EntryPoint = "call_scale_array_v", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_scale_array_v(int size, double x, [In] double[] y, [Out] double[] z);
+        [DllImport(libraryName, EntryPoint = "call_reshape_array_vm", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_reshape_array_vm(int size, [In] double[] A, int new_rows, int new_columns, ElementOrder order, [Out] double[,] B);
+
+        /// <summary>
+        /// Vector inner product.
+        /// <code><![CDATA[
+        ///     pure subroutine call_inner_array_v(n,x,y,z) bind(c)
+        ///     integer, intent(in), value :: n
+        ///     real(real64), intent(in) :: x(n), y(n)
+        ///     real(real64), intent(out) :: z]]></code>
+        /// </summary>
+        /// <param name="x">The first vector.</param>
+        /// <param name="y">The second vector.</param>
+        /// <param name="z">The dot product result.</param>
+        [DllImport(libraryName, EntryPoint = "call_inner_array_v", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_inner_array_v(int size, [In] double[] x, [In] double[] y, [Out] out double z);
+
+        /// <summary>
+        /// Generate the outer product of two vectors.
+        /// <code><![CDATA[
+        /// pure subroutine call_outer_array_v(n,m,x,y,A) bind(c)
+        /// !DEC$ ATTRIBUTES DLLEXPORT :: call_outer_array_v
+        /// integer, intent(in), value :: n,m
+        /// real(real64), intent(in) :: x(n), y(m)
+        /// real(real64), intent(out) :: A(n,m)
+        /// ]]></code>
+        /// </summary>
+        /// <param name="n">The size of vector <paramref name="x"/>.</param>
+        /// <param name="m">The size of vector <paramref name="y"/>.</param>
+        /// <param name="x">The vector x.</param>
+        /// <param name="y">The vector y.</param>
+        /// <param name="A">The result matrix of size (n,m)</param>
+        [DllImport(libraryName, EntryPoint = "call_outer_array_v", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_outer_array_v(int n, int m, [In] double[] x, [In] double[] y, [Out] double[,] A);
+
+
+        /// <summary>
+        /// Create an equally spaced vector of values.
+        /// <![CDATA[pure function linspace(x_start, x_end, n_count) result(x)
+        /// real(real64), intent(in), value :: x_start, x_end
+        /// integer, intent(in), value :: n_count
+        /// real(real64) :: x(n_count)]]>
+        /// </summary>
+        /// <param name="x_start">The start value.</param>
+        /// <param name="x_end">The ending value.</param>
+        /// <param name="count">The count of values.</param>
+        /// <returns>FVector.</returns>
+        [DllImport(libraryName, EntryPoint = "linspace", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FVector linspace(double x_start, double x_end, int count);
+        [DllImport(libraryName, EntryPoint = "vec2_to_array", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FVector vec2_to_array(in FVector2 a);
+
+        #endregion
+   }
 }

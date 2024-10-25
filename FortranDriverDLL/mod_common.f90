@@ -15,17 +15,18 @@
     real(real64), parameter :: ulp   = 1.0_real64/4503599627370496_int64
     real(real64), parameter :: tiny  = 1.0_real64/68719476736_int64
     real(real64), parameter :: huge  = 1/tiny
+    integer     , parameter :: i4_huge = 2147483647
 
     ! JA - Trig constants
-    real(real64), parameter :: pi    = 3.1415926535897932d0
-    real(real64), parameter :: pid2  = 1.5707963267948966d0
-    real(real64), parameter :: twopi = 6.2831853071795864d0
-    real(real64), parameter :: pi_sq = 9.8690440108935862d0
-    real(real64), parameter :: rad   = 1.7453292519943296d-2
-    real(real64), parameter :: deg   = 57.29577951308232d0
-    real(real64), parameter :: div_pi= 0.31830988618379067d0
-    real(real64), parameter :: oned3 = 3.333333333333333d-1
-    real(real64), parameter :: tend3 = 3.3333333333333333d0
+    real(real64), parameter :: pi    = 3.1415926535897932d+00
+    real(real64), parameter :: pid2  = 1.5707963267948966d+00
+    real(real64), parameter :: twopi = 6.2831853071795864d+00
+    real(real64), parameter :: pi_sq = 9.8690440108935862d+00
+    real(real64), parameter :: rad   = 1.7453292519943296d-02
+    real(real64), parameter :: deg   = 57.29577951308232d+00
+    real(real64), parameter :: div_pi= 0.31830988618379067d+00
+    real(real64), parameter :: oned3 = 3.333333333333333d-01
+    real(real64), parameter :: tend3 = 3.3333333333333333d+00
 
     ! JA - Unit Conversion Factors
     real(real64), parameter :: mm_per_inch = 25.4d0                         ! in -> mm
@@ -51,6 +52,128 @@
     end interface    
     
     contains
+    
+    ! *** COMMON OPS ***
+    
+    
+    pure function acos_scalar ( c ) bind(c)
+    !!DEC$ ATTRIBUTES DLLEXPORT :: acos_scalar
+    !*****************************************************************************80
+    !
+    !! R8_ACOS computes the arc cosine function, with argument truncation.
+    !
+    !  Discussion:
+    !
+    !    If you call your system ACOS routine with an input argument that is
+    !    even slightly outside the range [-1.0, 1.0 ], you may get an unpleasant
+    !    surprise (I did).
+    !
+    !    This routine simply truncates arguments outside the range.
+    !
+    !  Licensing:
+    !
+    !    This code is distributed under the GNU LGPL license.
+    !
+    !  Modified:
+    !
+    !    19 October 2012
+    !
+    !  Author:
+    !
+    !    John Burkardt
+    !
+    !  Parameters:
+    !
+    !    Input, real ( real64 ) C, the argument.
+    !
+    !    Output, real ( real64 ) R8_ACOS, an angle whose cosine is C.
+    !
+    implicit none
+
+    real ( real64 ), intent(in), value :: c
+    real ( real64 ) acos_scalar
+    real ( real64 ) c2
+
+    c2 = c
+    c2 = max ( c2, -1.0D+00 )
+    c2 = min ( c2, +1.0D+00 )
+
+    acos_scalar = acos ( c2 )
+
+    return
+    end
+    pure function degrees_to_radians ( angle_deg ) bind(c)
+    !!DEC$ ATTRIBUTES DLLEXPORT :: degrees_to_radians
+    !*****************************************************************************80
+    !
+    !! DEGREES_TO_RADIANS converts an angle from degrees to radians.
+    !
+    !  Licensing:
+    !
+    !    This code is distributed under the GNU LGPL license.
+    !
+    !  Modified:
+    !
+    !    10 July 1999
+    !
+    !  Author:
+    !
+    !    John Burkardt
+    !
+    !  Parameters:
+    !
+    !    Input, real ( real64 ) ANGLE_DEG, an angle in degrees.
+    !
+    !    Output, real ( real64 ) DEGREES_TO_RADIANS, the equivalent angle
+    !    in radians.
+    !
+    implicit none
+
+    real ( real64 ), intent(in), value :: angle_deg
+    real ( real64 ) degrees_to_radians
+    !real ( real64 ), parameter :: r8_pi = 3.141592653589793D+00
+
+    degrees_to_radians = ( angle_deg / 180.0D+00 ) * pi
+
+    return
+    end
+    pure function radians_to_degrees ( angle_rad ) bind(c)
+    !!DEC$ ATTRIBUTES DLLEXPORT :: radians_to_degrees
+    !*****************************************************************************80
+    !
+    !! RADIANS_TO_DEGREES converts an angle from radians to degrees.
+    !
+    !  Licensing:
+    !
+    !    This code is distributed under the GNU LGPL license.
+    !
+    !  Modified:
+    !
+    !    10 July 1999
+    !
+    !  Author:
+    !
+    !    John Burkardt
+    !
+    !  Parameters:
+    !
+    !    Input, real ( real64 ) ANGLE_RAD, an angle in radians.
+    !
+    !    Output, real ( real64 ) RADIANS_TO_DEGREES, the equivalent angle
+    !    in degrees.
+    !
+    implicit none
+
+    real ( real64 ), intent(in), value :: angle_rad
+    !real ( real64 ), parameter :: r8_pi = 3.141592653589793D+00
+    real ( real64 ) radians_to_degrees
+
+    radians_to_degrees = ( angle_rad / pi ) * 180.0D+00
+
+    return
+    end
+    
+    
 
     function are_equal_integer(a,b) result(ok)
     integer, intent(in) :: a, b
@@ -173,32 +296,13 @@
         end if
         t = side_c*sin(angle_bc)/side_a
         angle_ab = asin( t )
-    end function
-    
-    function vec3_angle(a,b) result(t) bind(c)
-    !dec$ attributes dllexport :: vec3_angle
-    real(real64), intent(in) :: a(3), b(3)
-    reaL(real64) :: t, ma, mb, ab
-    
-        ! |a.b| = |a| |b| cos(t)
-        ! |a×b| = |a| |b| sin(t)
-        ma = norm2(a)
-        mb = norm2(b)
-    
-        if( ma == 0._real64 .or. mb == 0._real64 ) then
-            t = 0._real64
-            return
-        end if
-    
-        ab = dot_product(a, b)
-        t = acos(ab/(ma*mb))
-        
-    end function
-    
+    end function    
         
     pure function linspace(x_start, x_end, n_count) result(x)
-    real(real64), intent(in) :: x_start, x_end
-    integer, intent(in) :: n_count
+    !DEC$ ATTRIBUTES DLLEXPORT :: linspace
+    !dec$ attributes alias : 'linspace' :: linspace
+    real(real64), intent(in), value :: x_start, x_end
+    integer, intent(in), value :: n_count
     real(real64) :: x(n_count)
     integer :: i
         x = [ ( x_start + (x_end-x_start)*real(i-1, kind=real64)/(n_count-1), i=1, n_count) ]
@@ -233,7 +337,5 @@
         end if
             
     end function
-    
-    
-    
+        
     end module

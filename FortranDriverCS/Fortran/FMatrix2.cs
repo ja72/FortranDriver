@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.Contracts;
+using System.Runtime.InteropServices;
 
 namespace JA.Fortran
 {
@@ -15,13 +16,14 @@ namespace JA.Fortran
 
         public FMatrix2(double a11, double a12, double a21, double a22)
         {
-            fixed (double* ptr = _data)
-            {
-                _data[0]=a11;
-                _data[1]=a21;
-                _data[2]=a12;
-                _data[3]=a22;
-            }
+            this=mat2_values(a11, a12, a21, a22);
+            //fixed (double* ptr = _data)
+            //{
+            //    _data[0]=a11;
+            //    _data[1]=a21;
+            //    _data[2]=a12;
+            //    _data[3]=a22;
+            //}
         }
         public FMatrix2(double[] values, int index = 0)
         {
@@ -35,9 +37,9 @@ namespace JA.Fortran
                 }
             }
         }
-        public static FMatrix2 Zero { get; } = new FMatrix2(0, 0, 0, 0);
-        public static FMatrix2 Identity { get; } = new FMatrix2(1, 0, 0, 1);
-        public static FMatrix2 Ones { get; } = new FMatrix2(1, 1, 1, 1);
+        public static FMatrix2 Zero { get; } = mat2_zeros();
+        public static FMatrix2 Identity { get; } = mat2_eye();
+        public static FMatrix2 Ones { get; } = mat2_ones();
 
         public static FMatrix2 Diagonal(double a11, double a22)
             => new FMatrix2(a11, 0, 0, a22);
@@ -48,20 +50,25 @@ namespace JA.Fortran
         public static FMatrix2 SkewSymmetric(double a12)
             => new FMatrix2(0, -a12, a12, 0);
 
+        public static FMatrix2 Uniform(ref int seed) => mat2_uniform(ref seed);
+
         public static explicit operator FMatrix2(double a) => Scalar(a);
 
         #region Formatting
-        public override string ToString() => ToString("g");
+        public static string DefaultFormatting { get; set; } = "g6";
+        public static bool ShowAsTable { get; set; } = true;
+        public override string ToString() => ToString(DefaultFormatting);
         public string ToString(string formatting) => ToString(formatting, null);
         public string ToString(string formatting, IFormatProvider formatProvider)
         {
-            string a11 = ((float)_data[0]).ToString(formatting,formatProvider);
-            string a21 = ((float)_data[1]).ToString(formatting,formatProvider);
-
-            string a12 = ((float)_data[2]).ToString(formatting,formatProvider);
-            string a22 = ((float)_data[3]).ToString(formatting,formatProvider);
-
-            return $"[[{a11},{a12}],[{a21},{a22}]]";
+            if (ShowAsTable)
+            {
+                return ToArray2().ToTableString(HorizontalAlignment.Right, formatting, formatProvider);
+            }
+            else
+            {
+                return ToArray2().ToListString(formatting);
+            }
         }
         #endregion
 
@@ -112,13 +119,14 @@ namespace JA.Fortran
 
         #endregion
 
+        #region Properties
         public double A11 => _data[0];
         public double A12 => _data[2];
         public double A21 => _data[1];
         public double A22 => _data[3];
 
-        public readonly double Trace() => FortranMethods.trace_mat2(this);
-        public readonly double Determinant() => FortranMethods.determinant_mat2(this);
+        public readonly double Trace() => trace_mat2(this);
+        public readonly double Determinant() => determinant_mat2(this);
         public Span<double> AsSpan()
         {
             fixed (double* ptr = _data)
@@ -126,47 +134,114 @@ namespace JA.Fortran
                 return new Span<double>(ptr, _count);
             }
         }
+        public double[] ToArray() => AsSpan().ToArray();
+        public double[,] ToArray2()
+        {
+            double[,] result = new double[_size, _size];
+            call_mat2_to_array(this, result);
+            return result;
+        }
+        public FMatrix ToVector() => new FMatrix(ToArray2());
+        #endregion
 
         #region Algebra
-        public static FMatrix2 Negate(FMatrix2 a) => FortranMethods.mul_scalar_mat2(-1.0, a);
-        public static FMatrix2 Scale(double factor, FMatrix2 a) => FortranMethods.mul_scalar_mat2(factor, a);
-        public static FMatrix2 Add(FMatrix2 a, FMatrix2 b) => FortranMethods.add_mat2_mat2(a, b);
-        public static FMatrix2 Subtract(FMatrix2 a, FMatrix2 b) => FortranMethods.sub_mat2_mat2(a, b);
-        public static FMatrix2 Add(double a, FMatrix2 b) => FortranMethods.add_scalar_mat2(a, b);
-        public static FMatrix2 Subtract(double a, FMatrix2 b) => FortranMethods.sub_scalar_mat2(a, b);
-        public static FMatrix2 Add(FMatrix2 a, double b) => FortranMethods.add_mat2_scalar(a, b);
-        public static FMatrix2 Subtract(FMatrix2 a, double b) => FortranMethods.sub_mat2_scalar(a, b);
-        public static FVector2 Product(FMatrix2 a, FVector2 b) => FortranMethods.mul_mat2_vec2(a, b);
-        public static FVector2 Product(FVector2 a, FMatrix2 b) => FortranMethods.mul_vec2_mat2(a, b);
-        public static FMatrix2 Product(FMatrix2 a, FMatrix2 b) => FortranMethods.mul_mat2_mat2(a, b);
-        public static FMatrix2 Inner(FMatrix2 a, FMatrix2 b) => FortranMethods.inner_mat2_mat2(a, b);
-        public readonly FMatrix2 Transpose() => FortranMethods.transpose_mat2(this);
-        public readonly FMatrix2 Inverse() => FortranMethods.inverse_mat2(this);
-        public readonly FVector2 Solve(FVector2 b) => FortranMethods.solve_mat2_vec2(this, b);
-        public readonly FMatrix2 Solve(FMatrix2 b) => FortranMethods.solve_mat2_mat2(this, b);
+        public static FMatrix2 Negate(in FMatrix2 a) => neg_mat2(a);
+        public static FMatrix2 Scale(double factor, in FMatrix2 a) => mul_scalar_mat2(factor, a);
+        public static FMatrix2 Scale(in FMatrix2 a, double divisor) => mul_mat2_scalar(a, divisor);
+        public static FMatrix2 Divide(in FMatrix2 a, double divisor) => div_mat2_scalar(a, divisor);
+        public static FMatrix2 Add(in FMatrix2 a, in FMatrix2 b) => add_mat2_mat2(a, b);
+        public static FMatrix2 Subtract(in FMatrix2 a, in FMatrix2 b) => sub_mat2_mat2(a, b);
+        public static FMatrix2 Add(double a, in FMatrix2 b) => add_scalar_mat2(a, b);
+        public static FMatrix2 Subtract(double a, in FMatrix2 b) => sub_scalar_mat2(a, b);
+        public static FMatrix2 Add(in FMatrix2 a, double b) => add_mat2_scalar(a, b);
+        public static FMatrix2 Subtract(in FMatrix2 a, double b) => sub_mat2_scalar(a, b);
+        public static FVector2 Product(in FMatrix2 a, in FVector2 b) => mul_mat2_vec2(a, b);
+        public static FVector2 Product(in FVector2 a, in FMatrix2 b) => mul_vec2_mat2(a, b);
+        public static FMatrix2 Product(in FMatrix2 a, in FMatrix2 b) => mul_mat2_mat2(a, b);
+        public static FMatrix2 Inner(in FMatrix2 a, in FMatrix2 b) => inner_mat2_mat2(a, b);
+        public readonly FMatrix2 Transpose() => transpose_mat2(this);
+        public readonly FMatrix2 Inverse() => inverse_mat2(this);
+        public readonly FVector2 Solve(in FVector2 b) => solve_mat2_vec2(this, b);
+        public readonly FMatrix2 Solve(in FMatrix2 b) => solve_mat2_mat2(this, b);
         #endregion
 
         #region Operators
-        public static FMatrix2 operator +(FMatrix2 a) => a;
-        public static FMatrix2 operator -(FMatrix2 a) => Negate(a);
-        public static FMatrix2 operator +(FMatrix2 a, FMatrix2 b) => Add(a, b);
-        public static FMatrix2 operator -(FMatrix2 a, FMatrix2 b) => Subtract(a, b);
-        public static FMatrix2 operator +(double a, FMatrix2 b) => Add(a, b);
-        public static FMatrix2 operator -(double a, FMatrix2 b) => Subtract(a, b);
-        public static FMatrix2 operator +(FMatrix2 a, double b) => Add(a, b);
-        public static FMatrix2 operator -(FMatrix2 a, double b) => Subtract(a, b);
-        public static FMatrix2 operator *(double factor, FMatrix2 a) => Scale(factor, a);
-        public static FMatrix2 operator *(FMatrix2 a, double factor) => Scale(factor, a);
-        public static FVector2 operator *(FMatrix2 a, FVector2 v) => Product(a, v);
-        public static FVector2 operator *(FVector2 v, FMatrix2 a) => Product(v, a);
-        public static FMatrix2 operator *(FMatrix2 a, FMatrix2 b) => Product(a, b);
-        public static FMatrix2 operator |(FMatrix2 a, FMatrix2 b) => Inner(a, b);
-        public static FMatrix2 operator /(FMatrix2 A, double divisor) => Scale(1/divisor, A);
-        public static FMatrix2 operator ~(FMatrix2 A) => A.Transpose();
-        public static FMatrix2 operator !(FMatrix2 A) => A.Inverse();
-        public static FVector2 operator /(FVector2 b, FMatrix2 A) => A.Solve(b);
-        public static FMatrix2 operator /(FMatrix2 B, FMatrix2 A) => A.Solve(B);
+        public static FMatrix2 operator +(in FMatrix2 a) => a;
+        public static FMatrix2 operator -(in FMatrix2 a) => Negate(a);
+        public static FMatrix2 operator +(in FMatrix2 a, in FMatrix2 b) => Add(a, b);
+        public static FMatrix2 operator -(in FMatrix2 a, in FMatrix2 b) => Subtract(a, b);
+        public static FMatrix2 operator +(double a, in FMatrix2 b) => Add(a, b);
+        public static FMatrix2 operator -(double a, in FMatrix2 b) => Subtract(a, b);
+        public static FMatrix2 operator +(in FMatrix2 a, double b) => Add(a, b);
+        public static FMatrix2 operator -(in FMatrix2 a, double b) => Subtract(a, b);
+        public static FMatrix2 operator *(double factor, in FMatrix2 a) => Scale(factor, a);
+        public static FMatrix2 operator *(in FMatrix2 a, double factor) => Scale(factor, a);
+        public static FMatrix2 operator /(in FMatrix2 a, double divisor) => Divide(a, divisor);
+        public static FVector2 operator *(in FMatrix2 a, in FVector2 v) => Product(a, v);
+        public static FVector2 operator *(in FVector2 v, in FMatrix2 a) => Product(v, a);
+        public static FMatrix2 operator *(in FMatrix2 a, in FMatrix2 b) => Product(a, b);
+        public static FMatrix2 operator |(in FMatrix2 a, in FMatrix2 b) => Inner(a, b);
+        public static FMatrix2 operator ~(in FMatrix2 A) => A.Transpose();
+        public static FMatrix2 operator !(in FMatrix2 A) => A.Inverse();
+        public static FVector2 operator /(in FVector2 b, in FMatrix2 A) => A.Solve(b);
+        public static FMatrix2 operator /(in FMatrix2 B, in FMatrix2 A) => A.Solve(B);
         #endregion
 
+        #region Fortran API
+        const string libraryName = FortranMethods.libraryName;
+
+        [DllImport(libraryName, EntryPoint = "mat2_zeros", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 mat2_zeros();
+        [DllImport(libraryName, EntryPoint = "mat2_eye", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 mat2_eye();
+        [DllImport(libraryName, EntryPoint = "mat2_ones", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 mat2_ones();
+        [DllImport(libraryName, EntryPoint = "mat2_values", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 mat2_values(double a11, double a12, double a21, double a22);
+        [DllImport(libraryName, EntryPoint = "mat2_uniform", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 mat2_uniform(ref int seed);
+        [DllImport(libraryName, EntryPoint = "add_mat2_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 add_mat2_mat2(in FMatrix2 a, in FMatrix2 b);
+        [DllImport(libraryName, EntryPoint = "sub_mat2_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 sub_mat2_mat2(in FMatrix2 a, in FMatrix2 b);
+        [DllImport(libraryName, EntryPoint = "add_scalar_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 add_scalar_mat2(double a, in FMatrix2 b);
+        [DllImport(libraryName, EntryPoint = "sub_scalar_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 sub_scalar_mat2(double a, in FMatrix2 b);
+        [DllImport(libraryName, EntryPoint = "add_mat2_scalar", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 add_mat2_scalar(in FMatrix2 a, double b);
+        [DllImport(libraryName, EntryPoint = "sub_mat2_scalar", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 sub_mat2_scalar(in FMatrix2 a, double b);
+        [DllImport(libraryName, EntryPoint = "neg_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 neg_mat2(in FMatrix2 a);
+        [DllImport(libraryName, EntryPoint = "mul_scalar_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 mul_scalar_mat2(double a, in FMatrix2 b);
+        [DllImport(libraryName, EntryPoint = "mul_mat2_scalar", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 mul_mat2_scalar(in FMatrix2 a, double b);
+        [DllImport(libraryName, EntryPoint = "div_mat2_scalar", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 div_mat2_scalar(in FMatrix2 a, double b);
+        [DllImport(libraryName, EntryPoint = "mul_mat2_vec2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FVector2 mul_mat2_vec2(in FMatrix2 a, in FVector2 b);
+        [DllImport(libraryName, EntryPoint = "mul_vec2_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FVector2 mul_vec2_mat2(in FVector2 a, in FMatrix2 b);
+        [DllImport(libraryName, EntryPoint = "mul_mat2_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 mul_mat2_mat2(in FMatrix2 a, in FMatrix2 b);
+        [DllImport(libraryName, EntryPoint = "inner_mat2_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 inner_mat2_mat2(in FMatrix2 a, in FMatrix2 b);
+        [DllImport(libraryName, EntryPoint = "trace_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern double trace_mat2(in FMatrix2 a);
+        [DllImport(libraryName, EntryPoint = "determinant_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern double determinant_mat2(in FMatrix2 a);
+        [DllImport(libraryName, EntryPoint = "transpose_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 transpose_mat2(in FMatrix2 a);
+        [DllImport(libraryName, EntryPoint = "inverse_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 inverse_mat2(in FMatrix2 a);
+        [DllImport(libraryName, EntryPoint = "solve_mat2_vec2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FVector2 solve_mat2_vec2(in FMatrix2 a, in FVector2 b);
+        [DllImport(libraryName, EntryPoint = "solve_mat2_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 solve_mat2_mat2(in FMatrix2 a, in FMatrix2 b);
+        [DllImport(libraryName, EntryPoint = "call_mat2_to_array", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_mat2_to_array(in FMatrix2 a, [Out] double[,] b);
+        #endregion
     }
 }

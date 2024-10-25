@@ -15,22 +15,48 @@ namespace JA
 
     static partial class Program
     {
+        #region Fortran API
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void ActionRefInt([In] int progress, [In] int count);
 
-        static readonly Random rng = new Random();
+        #endregion
+
+        public static readonly Random rng = new Random();
+
         [STAThread()]
         static void Main(string[] args)
         {
 
+#if DEBUG
+            var f_methods  = typeof(FortranMethods).GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
+            var v_methods  = typeof(FVector)       .GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
+            var m_methods  = typeof(FMatrix)       .GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
+            var s_methods  = typeof(FSpline)       .GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
+            var v2_methods = typeof(FVector2)      .GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
+            var v3_methods = typeof(FVector3)      .GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
+            var q4_methods = typeof(FQuat4)        .GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
+            var m2_methods = typeof(FMatrix2)      .GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
+            var m3_methods = typeof(FMatrix3)      .GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
+            var r_methods  = typeof(RigidBody)     .GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
+
+            var methods = Enumerable.SelectMany(new [] { f_methods, v_methods, m_methods, s_methods, v2_methods, v3_methods, q4_methods, m2_methods, m3_methods, r_methods }, (s)=> s); 
+            string text = string.Join(Environment.NewLine, methods.OrderBy((v) => v));
+            Debug.WriteLine(text);
+            File.WriteAllText("imports.txt", text);
+
+            var all = File.ReadLines("exports_dump.txt");
+            var vars = all.Where((line) => line.Contains('='));
+            text=string.Join(Environment.NewLine, vars.Select(item =>
+            {
+                int index = item.IndexOf('=');
+                return item.Substring(index+1).Trim();
+            }));
+            File.WriteAllText("exports.txt", text);
+#endif
+
 #if false
             Application.Run(new RunningForm1());
 #else
-            ConsoleTests();
-#endif
-
-        }
-
-        static void ConsoleTests()
-        {
             Console.WriteLine("Calling Fortran from C#");
             Console.WriteLine();
 
@@ -46,155 +72,33 @@ namespace JA
             Console.WriteLine();
             TestMatrixMethods();
 
-            Console.WriteLine("Testing Fortran Quaternion");
-            Console.WriteLine();
-            TestQuaternionMethods();
-
-            Console.WriteLine("Testing Rigid Body Mechanics");
-            TestRigidBodyMethods();
+            //Console.WriteLine("Testing Fortran Quaternion");
+            //Console.WriteLine();
+            //TestQuaternionMethods();
 
             Console.WriteLine("Testing Fixed Vectors");
             TestFixedVectorMethods();
+
+            Console.WriteLine("Testing Fixed Quaternion");
+            Console.WriteLine();
+            TestFixedQuatMethods();
+
+
+            //Console.WriteLine("Testing Rigid Body Mechanics");
+            //TestRigidBodyMethods();
 
 #if !DEBUG
             // BenchMatrixMultiply();
             Console.WriteLine("System Solution Bench");
             BenchMatrixSolve();
+            Process.Start(logFileName);
 #endif
+            #endif
+
         }
 
-        public static void BenchMatrixMultiply()
-        {
-            const int size = 2000; // Adjust this size to change runtime
 
-            Console.WriteLine($"Matrix Multiplication Bench (size={size})");
-            Console.WriteLine();
-            var sw = Stopwatch.StartNew();
-            double[,] matrixA = GenerateMatrix(size);            
-            var t1 = sw.Elapsed.TotalSeconds;
-            Console.WriteLine($"CSharp Time to 1st generate matrix {t1:g6} sec");
-            sw.Restart();
-            double[,] matrixB = GenerateMatrix(size);
-            var t2 = sw.Elapsed.TotalSeconds;
-            Console.WriteLine($"CSharp Time to 2nd generate matrix {t2:g6} sec");
-            sw.Restart();
-            double[,] result = MultiplyMatrices(matrixA, matrixB, size);
-            var t3 = sw.Elapsed.TotalSeconds;
-            Console.WriteLine($"CSharp Time to do matrix multiply  {t3:g6} sec");
-            sw.Stop();
-            var nativeResult = new FMatrix(result, ElementOrder.ByRow);
-
-            // Optional: Output a single value to prevent optimizations
-            Console.WriteLine($"CSharp Result[0,0]: {result[0, 0]}");
-            Console.WriteLine();
-            sw.Restart();
-            var nativeA = new FMatrix(matrixA, ElementOrder.ByRow);
-            var t4 = sw.Elapsed.TotalSeconds;
-            Console.WriteLine($"Fortran Time to 1st generate matrix {t4:g6} sec");
-            sw.Restart();
-            var nativeB = new FMatrix(matrixB, ElementOrder.ByRow);
-            var t5 = sw.Elapsed.TotalSeconds;
-            Console.WriteLine($"Fortran Time to 2nd generate matrix {t5:g6} sec");
-            sw.Restart();
-            var fortranResult = FMatrix.Product(nativeA, nativeB);
-            var t6 = sw.Elapsed.TotalSeconds;
-            Console.WriteLine($"Fortran Time to do matrix multiply  {t6:g6} sec");
-            sw.Stop();
-
-            // Optional: Output a single value to prevent optimizations
-            Console.WriteLine($"Fortran Result(1,1): {fortranResult[1,1]}");
-            Console.WriteLine();
-
-            var maxDelta = ( fortranResult - nativeResult).Max( (x)=>Math.Abs(x));
-            Console.WriteLine($"Max Delta between CSharp and Fortran {maxDelta}");
-
-            static double[,] GenerateMatrix(int size)
-            {
-                double[,] matrix = new double[size, size];
-                for (int i = 0; i<size; i++)
-                {
-                    for (int j = 0; j<size; j++)
-                    {
-                        matrix[i, j] = rng.NextDouble();
-                    }
-                }
-                return matrix;
-            }
-
-            static double[,] MultiplyMatrices(double[,] a, double[,] b, int size)
-            {
-                double[,] result = new double[size, size];
-                for (int i = 0; i<size; i++)
-                {
-                    for (int j = 0; j<size; j++)
-                    {
-                        double sum = 0;
-                        for (int k = 0; k<size; k++)
-                        {
-                            sum+=a[i, k]*b[k, j];
-                        }
-                        result[i, j]=sum;
-                    }
-                }
-                return result;
-            }
-        }
-
-        static void TestRigidBodyMethods()
-        {
-
-            RigidBody rb = new RigidBody(1.0,
-                0.0644, 0.0644, 0.0322);
-
-            double t = 0.0;
-
-            double[] pos = [0, 0, 0];
-            FQuaternion ori = FQuaternion.Identity;
-            double[] vee = [1, 0, 0];
-            double[] omg = [0, 0, 1];
-            Console.WriteLine("Position = ");
-            Console.WriteLine(pos.ToFixedColumnString("g5", HelperFunctions.DefaultColumnWidth));
-            Console.WriteLine("Orienation = ");
-            Console.WriteLine(ori.ToString("g6"));
-            Console.WriteLine("Velocity = ");
-            Console.WriteLine(vee.ToFixedColumnString("g5", HelperFunctions.DefaultColumnWidth));
-            Console.WriteLine("Rot. Velocity = ");
-            Console.WriteLine(omg.ToFixedColumnString("g5", HelperFunctions.DefaultColumnWidth));
-
-            rb.GetState(pos, ori, vee, omg, out FVector y);
-
-            Console.WriteLine($"State Vector =\n{y}");
-
-            rb.GetStateDerivative(t, y, out FVector yp);
-
-            Console.WriteLine($"State Vector Derivative =\n{yp}");
-
-            double h = 0.05;
-            var y_next = y + h * yp;
-
-            Console.WriteLine($"Next Vector =\n{y_next}");
-
-            rb.SetState(y_next, out pos, out ori, out vee, out omg);
-
-            Console.WriteLine("Position = ");
-            Console.WriteLine(pos.ToFixedColumnString("g5", HelperFunctions.DefaultColumnWidth));
-            Console.WriteLine("Orienation = ");
-            Console.WriteLine(ori.ToString("g6"));
-            Console.WriteLine("Velocity = ");
-            Console.WriteLine(vee.ToFixedColumnString("g5", HelperFunctions.DefaultColumnWidth));
-            Console.WriteLine("Rot. Velocity = ");
-            Console.WriteLine(omg.ToFixedColumnString("g5", HelperFunctions.DefaultColumnWidth));
-        }
-
-#if DEBUG
-        public const string libraryName = "FortranDriverDLL_d";
-#else
-        public const string libraryName = "FortranDriverDLL";
-#endif
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void ActionRefInt([In] int progress, [In] int count);
-
+        #region TESTING METHODS
         static void TestNativeMethods()
         {
             static void StepUpdate(int i, int n)
@@ -218,7 +122,6 @@ namespace JA
             A.ShowInConsole("A=", 6);
 
         }
-
         static void TestVectorMethods()
         {
             const int s = 7;
@@ -398,6 +301,18 @@ namespace JA
             Console.WriteLine($"S_4[1..2, ^2..^1] = \n{S_4[1..2, ^2..^1]}");
             Console.WriteLine();
 
+            var e_1 = FVector.Elemental(6,1);
+            var e_2 = FVector.Elemental(6,2);
+            var e_3 = FVector.Elemental(6,6);
+            Console.WriteLine($"e_1 = \n{e_1}");
+            Console.WriteLine($"e_2 = \n{e_2}");
+            Console.WriteLine($"e_3 = \n{e_3}");
+
+            var E123 = FMatrix.FromColumns(e_1, e_2, e_3);
+            Console.WriteLine($"{{e_1|e_2|e_3}} = \n{E123}");
+
+            var G123 = FMatrix.FromRows(e_1, e_2, e_3);
+            Console.WriteLine($"{{e_1&e_2&e_3}} = \n{G123}");
 
             for (int size = 2; size<=6; size++)
             {
@@ -427,9 +342,7 @@ namespace JA
                 Console.WriteLine($"\n{FMatrix.Round(b-A*x, 6)}");
             }
 
-            int seed = Environment.TickCount;
-
-            var C = FMatrix.Round(6.0*FMatrix.Identity(6) - FMatrix.RandomUniform(6, 6, ref seed), 6);
+            var C = FMatrix.Round(6.0*FMatrix.Identity(6) - FMatrix.RandomUniform(6, 6, ref FortranMethods.seed), 6);
             var e = FVector.Round(FVector.RandomUniform(6), 6);
             var xs = C.Solve(e);
 
@@ -446,99 +359,277 @@ namespace JA
             Console.WriteLine($"es = \n{FVector.Round(es, 6)}");
 
         }
-
-        static void TestQuaternionMethods()
-        {
-            FQuaternion.TestFortranQuaternion();
-            FQuaternion.TestFQuaternion();
-        }
-
         static void TestFixedVectorMethods()
         {
             {
-                Console.WriteLine("Initialize some FVector2 variables");
+                Console.WriteLine("### Initialize some FVector2 variables");
                 FVector2 v = new FVector2(1,2);
                 FVector2 u = new FVector2(3,5);
-                Console.WriteLine($"v={v}");
-                Console.WriteLine($"u={u}");
+                Console.WriteLine($"v= \n{v}");
+                Console.WriteLine($"u= \n{u}");
 
                 Console.WriteLine($"u.AsSpan().ToArray()={{{string.Join(',', u.AsSpan().ToArray())}}}");
 
-                Console.WriteLine($"-v={-v}");
-                Console.WriteLine($"2u={2*u}");
-                Console.WriteLine($"u+v={u+v}");
-                Console.WriteLine($"u-v={u-v}");
-                Console.WriteLine($"u|v={u|v}");
+                Console.WriteLine($"-v= \n{-v}");
+                Console.WriteLine($"2u= \n{2*u}");
+                Console.WriteLine($"u+v=\n{u+v}");
+                Console.WriteLine($"u-v=\n{u-v}");
+                Console.WriteLine($"u|v=\n{u|v}");
+                var r = FVector2.Uniform(ref FortranMethods.seed);
+                Console.WriteLine($"Uniform = \n{r}");
+                Console.WriteLine($"Norm = {r.Norm()}");
+                Console.WriteLine();
             }
             {
-                Console.WriteLine("Initialize some FVector3 variables");
+                Console.WriteLine("### Initialize some FVector3 variables");
                 FVector3 v = new FVector3(1,2,-1);
                 FVector3 u = new FVector3(3,5,2);
-                Console.WriteLine($"v={v}");
-                Console.WriteLine($"u={u}");
+                Console.WriteLine($"v= \n{v}");
+                Console.WriteLine($"u= \n{u}");
 
                 Console.WriteLine($"u.AsSpan().ToArray()={{{string.Join(',', u.AsSpan().ToArray())}}}");
 
-                Console.WriteLine($"-v={-v}");
-                Console.WriteLine($"2u={2*u}");
-                Console.WriteLine($"u+v={u+v}");
-                Console.WriteLine($"u-v={u-v}");
-                Console.WriteLine($"u|v={u|v}");
+                Console.WriteLine($"-v= \n{-v}");
+                Console.WriteLine($"2u= \n{2*u}");
+                Console.WriteLine($"u+v=\n{u+v}");
+                Console.WriteLine($"u-v=\n{u-v}");
+                Console.WriteLine($"u|v=\n{u|v}");
+                var r = FVector3.Uniform(ref FortranMethods.seed);
+                Console.WriteLine($"Uniform = \n{r}");
+                Console.WriteLine($"Norm = {r.Norm()}");
+                Console.WriteLine();
             }
             {
-                Console.WriteLine("Initialize some FMatrix2 variables");
+                Console.WriteLine("### Initialize some FMatrix2 variables");
                 FMatrix2 a = new FMatrix2(1,2,-1,0.25);
                 FMatrix2 b = new FMatrix2(3,5,2,-0.75);
-                Console.WriteLine($"a={a}");
-                Console.WriteLine($"b={b}");
+                Console.WriteLine($"a= \n{a}");
+                Console.WriteLine($"b= \n{b}");
 
                 Console.WriteLine($"u.AsSpan().ToArray()={{{string.Join(',', b.AsSpan().ToArray())}}}");
 
-                Console.WriteLine($"-a={-a}");
-                Console.WriteLine($"2b={2*b}");
-                Console.WriteLine($"b+a={b+a}");
-                Console.WriteLine($"b-a={b-a}");
-                Console.WriteLine($"b*a={b*a}");
-                Console.WriteLine($"b|a={b|a}");
-                Console.WriteLine($"trace(b)={b.Trace()}");
-                Console.WriteLine($"det(b)={b.Determinant()}");
-                Console.WriteLine($"inv(b)={b.Inverse()}");
-                Console.WriteLine($"det(b)*inv(b)={b.Determinant()*b.Inverse()}");
-                Console.WriteLine($"inv(b)*b={b.Inverse()*b}");
+                Console.WriteLine($"-a= \n{-a}");
+                Console.WriteLine($"2b= \n{2*b}");
+                Console.WriteLine($"b+a=\n{b+a}");
+                Console.WriteLine($"b-a=\n{b-a}");
+                Console.WriteLine($"b*a=\n{b*a}");
+                Console.WriteLine($"b|a=\n{b|a}");
+                Console.WriteLine($"trace(b)=\n{b.Trace()}");
+                Console.WriteLine($"det(b)=\n{b.Determinant()}");
+                Console.WriteLine($"inv(b)=\n{b.Inverse()}");
+                Console.WriteLine($"det(b)*inv(b)=\n{b.Determinant()*b.Inverse()}");
+                Console.WriteLine($"inv(b)*b=\n{b.Inverse()*b}");
                 FVector2 u = new FVector2(3,5);
-                Console.WriteLine($"u={u}");
+                Console.WriteLine($"u= \n{u}");
                 FVector2 v = b.Solve(u);
-                Console.WriteLine($"v=solve(b,u)={v}"); // u = b*v
-                Console.WriteLine($"residual=u-b*v={u-b*v}");
+                Console.WriteLine($"v=solve(b,u)=\n{v}"); // u = b*v
+                Console.WriteLine($"residual=u-b*v=\n{u-b*v}");
+                var r = FMatrix2.Uniform(ref FortranMethods.seed);
+                Console.WriteLine($"Uniform = \n{r}");
+                Console.WriteLine();
             }
             {
-                Console.WriteLine("Initialize some FMatrix3 variables");
+                Console.WriteLine("### Initialize some FMatrix3 variables");
                 FMatrix3 a = new FMatrix3(1,2,-1,0.25,-0.5,6,2.7,-1.4,3);
                 FMatrix3 b = new FMatrix3(3,5,2,-0.75,0.4,2.15,5.5,0,1);
-                Console.WriteLine($"a={a}");
-                Console.WriteLine($"b={b}");
+                Console.WriteLine($"a= \n{a}");
+                Console.WriteLine($"b= \n{b}");
 
                 Console.WriteLine($"u.AsSpan().ToArray()={{{string.Join(',', b.AsSpan().ToArray())}}}");
 
-                Console.WriteLine($"-a={-a}");
-                Console.WriteLine($"2b={2*b}");
-                Console.WriteLine($"b+a={b+a}");
-                Console.WriteLine($"b-a={b-a}");
-                Console.WriteLine($"b*a={b*a}");
-                Console.WriteLine($"b|a={b|a}");
-                Console.WriteLine($"trace(b)={b.Trace()}");
-                Console.WriteLine($"det(b)={b.Determinant()}");
-                Console.WriteLine($"inv(b)={b.Inverse()}");
-                Console.WriteLine($"det(b)*inv(b)={b.Determinant()*b.Inverse()}");
-                Console.WriteLine($"inv(b)*b={b.Inverse()*b}");
+                Console.WriteLine($"-a= \n{-a}");
+                Console.WriteLine($"2b= \n{2*b}");
+                Console.WriteLine($"b+a=\n{b+a}");
+                Console.WriteLine($"b-a=\n{b-a}");
+                Console.WriteLine($"b*a=\n{b*a}");
+                Console.WriteLine($"b|a=\n{b|a}");
+                Console.WriteLine($"trace(b)=\n{b.Trace()}");
+                Console.WriteLine($"det(b)=\n{b.Determinant()}");
+                Console.WriteLine($"inv(b)=\n{b.Inverse()}");
+                Console.WriteLine($"det(b)*inv(b)=\n{b.Determinant()*b.Inverse()}");
+                Console.WriteLine($"inv(b)*b=\n{b.Inverse()*b}");
                 FVector3 u = new FVector3(3,5,0.25);
                 Console.WriteLine($"u={u}");
                 FVector3 v = b.Solve(u);
-                Console.WriteLine($"v=solve(b,u)={v}"); // u = b*v
-                Console.WriteLine($"residual=u-b*v={u-b*v}");
+                Console.WriteLine($"v=solve(b,u)=\n{v}"); // u = b*v
+                Console.WriteLine($"residual=u-b*v=\n{u-b*v}");
+                var r = FMatrix3.Uniform(ref FortranMethods.seed);
+                Console.WriteLine($"Uniform = \n{r}");
+                Console.WriteLine();
             }
         }
+        static void TestFortranQuaternion()
+        {
+            FortranMethods.call_quat_test_all();
+        }
+        static void TestFixedQuatMethods()
+        {
+            {
+                Console.WriteLine("### Initialize some FQuat4 variables");
+                FQuat4 v = new FQuat4(1,2,-1,4);
+                FQuat4 u = new FQuat4(3,5,2,0);
+                Console.WriteLine($"v= \n{v}");
+                Console.WriteLine($"u= \n{u}");
 
+                Console.WriteLine($"u.AsSpan().ToArray()={{{string.Join(',', u.AsSpan().ToArray())}}}");
+
+                Console.WriteLine($"-v= \n{-v}");
+                Console.WriteLine($"2u= \n{2*u}");
+                Console.WriteLine($"u+v=\n{u+v}");
+                Console.WriteLine($"u-v=\n{u-v}");
+                Console.WriteLine($"u|v=\n{u|v}");
+                Console.WriteLine($"u^v=\n{u^v}");
+
+                var r = FQuat4.Uniform(ref FortranMethods.seed);
+                Console.WriteLine($"Uniform = \n{r}");
+                Console.WriteLine($"Norm = {r.Norm()}");
+                Console.WriteLine();
+            }
+            {
+                Console.WriteLine("### Test some FQuat4 rotations");
+                var axis = FVector3.Uniform(ref FortranMethods.seed);
+                var angle = double.Pi * rng.NextDouble();
+
+                FQuat4 q1 = FQuat4.FromRotation(axis, angle);
+                Console.WriteLine($"Axis = \n{axis}, Angle = {180*angle/double.Pi} deg");
+                Console.WriteLine($"q1 = \n{q1}, mag = {q1.Norm()}");
+                Console.WriteLine();
+
+                Console.WriteLine("Rotation Matrix");
+                FMatrix3 R = q1.ToRotation();
+                Console.WriteLine(R);
+
+                Console.WriteLine("Quaternion From Rotation");
+                FQuat4 q2 = FQuat4.FromRotation(R);
+                Console.WriteLine($"q2 = \n{q2}, mag = {q2.Norm()}");
+                Console.WriteLine();
+                Console.WriteLine("Quaternion to Axis/Angle");
+                q2.ToAxisAngle(out axis, out angle);
+                Console.WriteLine($"Axis = \n{axis}, Angle = {180*angle/double.Pi} deg");
+            }
+        }
+        static void TestRigidBodyMethods()
+        {
+
+            RigidBody rb = new RigidBody(1.0,
+                0.0644, 0.0644, 0.0322);
+
+            double t = 0.0;
+
+            FVector3 pos = FVector3.Zero;
+            FQuat4 ori = FQuat4.Identity;
+            FVector3 vee = 5*FVector3.EX;
+            FVector3 omg = FVector3.EZ;
+
+            Console.WriteLine("Position = ");
+            Console.WriteLine(pos.ToString("g5"));
+            Console.WriteLine("Orienation = ");
+            Console.WriteLine(ori.ToString("g5"));
+            Console.WriteLine("Velocity = ");
+            Console.WriteLine(vee.ToString("g5"));
+            Console.WriteLine("Rot. Velocity = ");
+            Console.WriteLine(omg.ToString("g5"));
+            var y = new FVector(13);
+            rb.GetState(pos, ori, vee, omg, ref y);
+
+            Console.WriteLine($"State Vector =\n{y}");
+            var yp = new FVector(13);
+            rb.GetStateDerivative(t, y, ref yp);
+
+            Console.WriteLine($"State Vector Derivative =\n{yp}");
+
+            double h = 0.05;
+            var y_next = y + h * yp;
+
+            Console.WriteLine($"Next Vector =\n{y_next}");
+
+            rb.SetState(y_next, out pos, out ori, out vee, out omg);
+
+            Console.WriteLine("Position = ");
+            Console.WriteLine(pos.ToString("g5"));
+            Console.WriteLine("Orienation = ");
+            Console.WriteLine(ori.ToString("g6"));
+            Console.WriteLine("Velocity = ");
+            Console.WriteLine(vee.ToString("g5"));
+            Console.WriteLine("Rot. Velocity = ");
+            Console.WriteLine(omg.ToString("g5"));
+        }
+        static void BenchMatrixMultiply()
+        {
+            const int size = 2000; // Adjust this size to change runtime
+
+            Console.WriteLine($"Matrix Multiplication Bench (size={size})");
+            Console.WriteLine();
+            var sw = Stopwatch.StartNew();
+            double[,] matrixA = GenerateMatrix(size);
+            var t1 = sw.Elapsed.TotalSeconds;
+            Console.WriteLine($"CSharp Time to 1st generate matrix {t1:g6} sec");
+            sw.Restart();
+            double[,] matrixB = GenerateMatrix(size);
+            var t2 = sw.Elapsed.TotalSeconds;
+            Console.WriteLine($"CSharp Time to 2nd generate matrix {t2:g6} sec");
+            sw.Restart();
+            double[,] result = MultiplyMatrices(matrixA, matrixB, size);
+            var t3 = sw.Elapsed.TotalSeconds;
+            Console.WriteLine($"CSharp Time to do matrix multiply  {t3:g6} sec");
+            sw.Stop();
+            var nativeResult = new FMatrix(result, ElementOrder.ByRow);
+
+            // Optional: Output a single value to prevent optimizations
+            Console.WriteLine($"CSharp Result[0,0]: {result[0, 0]}");
+            Console.WriteLine();
+            sw.Restart();
+            var nativeA = new FMatrix(matrixA, ElementOrder.ByRow);
+            var t4 = sw.Elapsed.TotalSeconds;
+            Console.WriteLine($"Fortran Time to 1st generate matrix {t4:g6} sec");
+            sw.Restart();
+            var nativeB = new FMatrix(matrixB, ElementOrder.ByRow);
+            var t5 = sw.Elapsed.TotalSeconds;
+            Console.WriteLine($"Fortran Time to 2nd generate matrix {t5:g6} sec");
+            sw.Restart();
+            var fortranResult = FMatrix.Product(nativeA, nativeB);
+            var t6 = sw.Elapsed.TotalSeconds;
+            Console.WriteLine($"Fortran Time to do matrix multiply  {t6:g6} sec");
+            sw.Stop();
+
+            // Optional: Output a single value to prevent optimizations
+            Console.WriteLine($"Fortran Result(1,1): {fortranResult[1, 1]}");
+            Console.WriteLine();
+
+            var maxDelta = ( fortranResult - nativeResult).Max( (x)=>Math.Abs(x));
+            Console.WriteLine($"Max Delta between CSharp and Fortran {maxDelta}");
+
+            static double[,] GenerateMatrix(int size)
+            {
+                double[,] matrix = new double[size, size];
+                for (int i = 0; i<size; i++)
+                {
+                    for (int j = 0; j<size; j++)
+                    {
+                        matrix[i, j]=rng.NextDouble();
+                    }
+                }
+                return matrix;
+            }
+
+            static double[,] MultiplyMatrices(double[,] a, double[,] b, int size)
+            {
+                double[,] result = new double[size, size];
+                for (int i = 0; i<size; i++)
+                {
+                    for (int j = 0; j<size; j++)
+                    {
+                        double sum = 0;
+                        for (int k = 0; k<size; k++)
+                        {
+                            sum+=a[i, k]*b[k, j];
+                        }
+                        result[i, j]=sum;
+                    }
+                }
+                return result;
+            }
+        }
         static void BenchMatrixSolve()
         {
 #if DEBUG
@@ -567,9 +658,9 @@ namespace JA
             }
 
 
-            Console.WriteLine($"|=========== SERIAL ============== |=========== BLOCK =============== |");
+            Console.WriteLine($"|=========== SERIAL ============== |");
             Console.WriteLine($"| {"Size",5} {"Time",16} {"Rate",9} ");
-            Console.WriteLine($"|--------------------------------- |--------------------------------- |");
+            Console.WriteLine($"|--------------------------------- |");
             Console.WriteLine($"| {"[#]",5} {"[s]",16} {"[n^2/μs]",9} ");
             for (int i = -5; i<14; i++)
             {
@@ -596,7 +687,7 @@ namespace JA
                 sw.Reset();
                 Console.WriteLine($"| {size,5} {t1_s,16:g9} {( size*size )/t1_μs,9:g4} ");
             }
-        }
-
+        } 
+        #endregion
     }
 }

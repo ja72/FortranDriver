@@ -13,33 +13,35 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F3817067-25B0-4DEE-98EC-CDD361B5FC35}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		FortranDriverDLL\exports.txt = FortranDriverDLL\exports.txt
+		FortranDriverCS\bin\x64\Debug\net8.0-windows10.0.19041.0\exports.txt = FortranDriverCS\bin\x64\Debug\net8.0-windows10.0.19041.0\exports.txt
+		FortranDriverCS\bin\x64\Debug\net8.0-windows10.0.19041.0\imports.txt = FortranDriverCS\bin\x64\Debug\net8.0-windows10.0.19041.0\imports.txt
 		README.md = README.md
 	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
 		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
+		Release|Win32 = Release|Win32
 		Release|x64 = Release|x64
-		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDB0DA04-D519-4F54-80B4-1EB14E76C6D4}.Debug|Win32.ActiveCfg = Debug|x86
+		{EDB0DA04-D519-4F54-80B4-1EB14E76C6D4}.Debug|Win32.Build.0 = Debug|x86
 		{EDB0DA04-D519-4F54-80B4-1EB14E76C6D4}.Debug|x64.ActiveCfg = Debug|x64
 		{EDB0DA04-D519-4F54-80B4-1EB14E76C6D4}.Debug|x64.Build.0 = Debug|x64
-		{EDB0DA04-D519-4F54-80B4-1EB14E76C6D4}.Debug|x86.ActiveCfg = Debug|x86
-		{EDB0DA04-D519-4F54-80B4-1EB14E76C6D4}.Debug|x86.Build.0 = Debug|x86
+		{EDB0DA04-D519-4F54-80B4-1EB14E76C6D4}.Release|Win32.ActiveCfg = Release|x86
+		{EDB0DA04-D519-4F54-80B4-1EB14E76C6D4}.Release|Win32.Build.0 = Release|x86
 		{EDB0DA04-D519-4F54-80B4-1EB14E76C6D4}.Release|x64.ActiveCfg = Release|x64
 		{EDB0DA04-D519-4F54-80B4-1EB14E76C6D4}.Release|x64.Build.0 = Release|x64
-		{EDB0DA04-D519-4F54-80B4-1EB14E76C6D4}.Release|x86.ActiveCfg = Release|x86
+		{B3D07F9F-DD7B-4491-B011-823069741E33}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B3D07F9F-DD7B-4491-B011-823069741E33}.Debug|Win32.Build.0 = Debug|Win32
 		{B3D07F9F-DD7B-4491-B011-823069741E33}.Debug|x64.ActiveCfg = Debug|x64
 		{B3D07F9F-DD7B-4491-B011-823069741E33}.Debug|x64.Build.0 = Debug|x64
-		{B3D07F9F-DD7B-4491-B011-823069741E33}.Debug|x86.ActiveCfg = Debug|Win32
-		{B3D07F9F-DD7B-4491-B011-823069741E33}.Debug|x86.Build.0 = Debug|Win32
+		{B3D07F9F-DD7B-4491-B011-823069741E33}.Release|Win32.ActiveCfg = Release|Win32
+		{B3D07F9F-DD7B-4491-B011-823069741E33}.Release|Win32.Build.0 = Release|Win32
 		{B3D07F9F-DD7B-4491-B011-823069741E33}.Release|x64.ActiveCfg = Release|x64
 		{B3D07F9F-DD7B-4491-B011-823069741E33}.Release|x64.Build.0 = Release|x64
-		{B3D07F9F-DD7B-4491-B011-823069741E33}.Release|x86.ActiveCfg = Release|Win32
-		{B3D07F9F-DD7B-4491-B011-823069741E33}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -354,7 +354,7 @@
     return
     end
     subroutine acos_scalar_test ( )
-
+    use mod_common, only : acos_scalar
     !*****************************************************************************80
     !
     !! R8_ACOS_TEST tests R8_ACOS.
@@ -557,7 +557,7 @@
     return
     end
     subroutine rotate_axis2mat_test ( )
-
+    use mod_common, only : degrees_to_radians, radians_to_degrees
     !*****************************************************************************80
     !
     !! ROTATION_AXIS2MAT_TEST tests ROTATION_AXIS2MAT.
@@ -629,7 +629,7 @@
     return
     end
     subroutine rotate_axis2quat_test ( )
-
+    use mod_common, only : degrees_to_radians, radians_to_degrees
     !*****************************************************************************80
     !
     !! ROTATION_AXIS2QUAT_TEST tests ROTATION_AXIS2QUAT.
@@ -701,7 +701,7 @@
     return
     end
     subroutine rotate_axis_vector_test ( )
-
+    use mod_common, only : degrees_to_radians, radians_to_degrees
     !*****************************************************************************80
     !
     !! ROTATION_AXIS_VECTOR_TEST tests ROTATION_AXIS_VECTOR.

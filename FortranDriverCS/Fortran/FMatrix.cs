@@ -27,11 +27,15 @@ namespace JA.Fortran
         ICollection<double>,
         IFormattable
     {
+        readonly int _rows;
+        readonly int _columns;
+        readonly double[,] _data;
+
         public FMatrix(int rows, int columns)
         {
-            Rows = rows;
-            Columns = columns;
-            Data = new double[columns, rows];
+            _rows = rows;
+            _columns = columns;
+            this._data = new double[columns, rows];
             Order = ElementOrder.ByColumn;
         }
         internal FMatrix(double[,] data, ElementOrder order = ElementOrder.ByColumn)
@@ -40,19 +44,19 @@ namespace JA.Fortran
             {
                 case ElementOrder.ByRow:
                 {
-                    Rows=data.GetLength(0);
-                    Columns=data.GetLength(1);
-                    var temp = new double[Columns,Rows];
-                    FortranMethods.call_transpose_array_m(Rows, Columns, data, temp);
-                    Data=temp;
+                    _rows=data.GetLength(0);
+                    _columns=data.GetLength(1);
+                    var temp = new double[_columns,_rows];
+                    call_transpose_array_m(_rows, _columns, data, temp);
+                    this._data=temp;
                     Order=ElementOrder.ByColumn;
                 }
                 break;
                 case ElementOrder.ByColumn:
                 {
-                    Rows = data.GetLength(1);
-                    Columns = data.GetLength(0);
-                    Data=data??throw new ArgumentNullException(nameof(data));
+                    _rows = data.GetLength(1);
+                    _columns = data.GetLength(0);
+                    this._data=data??throw new ArgumentNullException(nameof(data));
                     Order = ElementOrder.ByColumn;
                 }
                 break;
@@ -63,13 +67,13 @@ namespace JA.Fortran
         FMatrix(int rows, int columns, double[] values, ElementOrder order = ElementOrder.ByRow)
             : this(rows, columns)
         {
-            double[,] data = Data;
-            FortranMethods.call_fill_array_m(rows, columns, values, order, data);
+            double[,] data = _data;
+            call_fill_array_m(rows, columns, values, order, data);
         }
         public FMatrix(int rows, int columns, Func<int, int, double> initializer)
             : this(rows, columns)
         {
-            double[,] data = Data;
+            double[,] data = _data;
             if (rows >= columns)
             {
                 for (int col_idx = 0; col_idx < columns; col_idx++)
@@ -91,51 +95,41 @@ namespace JA.Fortran
                 }
             }
         }
-        public static FMatrix FromRows(int rows, int columns, params double[] values)
-        {
-            return new FMatrix(rows, columns, values, ElementOrder.ByRow);
-            //double[,] data = new double[rows, columns];
-            //FortranMethods.call_reshape_array_vm(rows*columns, values, columns, rows, data);
-            //double[,] temp = new double[columns, rows];
-            //FortranMethods.call_transpose_array_m(columns, rows, data, temp);
-            //return new NativeMatrix(temp);
-        }
-        public static FMatrix FromColumns(int rows, int columns, params double[] values)
-        {
-            return new FMatrix(rows, columns, values, ElementOrder.ByColumn);
-            //double[,] data = new double[columns, rows];
-            //FortranMethods.call_reshape_array_vm(rows*columns, values, rows, columns, data);
-            //return new NativeMatrix(data);
-        }
         public static FMatrix RandomMinMax(int n, int m, double minValue = 0, double maxValue = 1)
         {
             double[,] data = new double[m, n];
-            FortranMethods.call_random_array_m(n, m, minValue, maxValue, data);
+            call_random_array_m(n, m, minValue, maxValue, data);
             return new FMatrix(data);
         }
         public static FMatrix RandomUniform(int n, int m, ref int seed)
         {
             double[,] data = new double[m, n];
-            FortranMethods.call_uniform_array_m(n, m, ref seed, data);
+            call_uniform_array_m(n, m, ref seed, data);
             return new FMatrix(data);
         }
 
-        public static FMatrix Zero(int n) => Zero(n, n);
-        public static FMatrix Zero(int n, int m) => Scalar(n, m, 0.0);
+        public static FMatrix Zeros(int n) => Zeros(n, n);
+        public static FMatrix Zeros(int n, int m)
+        {
+            double[,] data = new double[m, n];
+            call_array_zeros_m(n, m, data);
+            return new FMatrix(data);
+        }
+
         public static FMatrix Identity(int n) => Identity(n, n);
         public static FMatrix Identity(int n, int m) => Scalar(n, m, 1.0);
         public static FMatrix Scalar(int n, double value) => Scalar(n, n, value);
         public static FMatrix Scalar(int n, int m, double value)
         {
             double[,] data = new double[m, n];
-            FortranMethods.call_array_scalar_m(n, m, value, data);
+            call_array_scalar_m(n, m, value, data);
             return new FMatrix(data);
         }
         public static FMatrix Diagonal(double[] value)
         {
             int n = value.Length;
             double[,] data = new double[n, n];
-            FortranMethods.call_array_diag_m(n, value, data);
+            call_array_diag_m(n, value, data);
             return new FMatrix(data);
         }
         public static FMatrix Diagonal(int size, double[] value)
@@ -147,27 +141,76 @@ namespace JA.Fortran
                 value = temp;
             }
             double[,] data = new double[size, size];
-            FortranMethods.call_array_diag_m(size, value, data);
+            call_array_diag_m(size, value, data);
             return new FMatrix(data);
         }
-
+        public static FMatrix FromRows(int rows, int columns, params double[] values)
+        {
+            return new FMatrix(rows, columns, values, ElementOrder.ByRow);
+        }
+        public static FMatrix FromColumns(int rows, int columns, params double[] values)
+        {
+            return new FMatrix(rows, columns, values, ElementOrder.ByColumn);
+        }
+        public static FMatrix FromColumns(params FVector[] vectors)
+        {
+            int m = vectors.Length;
+            int n = vectors.Length>0 ? vectors[0].Size : 0;
+            double[,] data = new double[m, n];
+            for (int j = 0; j<m; j++)
+            {
+                call_array_set_column(n, m, vectors[j].Data, j+1, data);
+            }
+            return new FMatrix(data);
+        }
+        public static FMatrix FromRows(params FVector[] vectors)
+        {
+            int n = vectors.Length;
+            int m = vectors.Length>0 ? vectors[0].Size : 0;
+            double[,] data = new double[m, n];
+            for (int i = 0; i<n; i++)
+            {
+                call_array_set_row(n, m, vectors[i].Data, i+1, data);
+            }
+            return new FMatrix(data);
+        }
+        public static FMatrix FromColumns(FVector[] vectors, FVector b)
+        {
+            FVector[] all = new FVector[vectors.Length+1];
+            vectors.CopyTo(all, 0);
+            all[vectors.Length]=b;
+            return FromColumns(all);
+        }
+        public static FMatrix FromRows(FVector[] vectors, FVector b)
+        {
+            FVector[] all = new FVector[vectors.Length+1];
+            vectors.CopyTo(all, 0);
+            all[vectors.Length]=b;
+            return FromRows(all);
+        }
+        public FMatrix AppendColumn(FVector a) => FromRows(this.GetRows(), a);
+        public FMatrix AppendRow(FVector a) => FromColumns(this.GetColumns(), a);
+        public void InsertColumn(FVector a, int column) 
+            => call_array_set_column(_rows, _columns, a.Data, column, _data);
+        public void InsertRow(FVector a, int row) 
+            => call_array_set_row(_rows, _columns, a.Data, row, _data);
         public ElementOrder Order { get; }
 
         public ref double this[Index row, Index column]
         {
             get
             {
-                int i = row.GetOffset(Rows) + (row.IsFromEnd ? 1 : 0);
-                int j = column.GetOffset(Columns) + (column.IsFromEnd ? 1 : 0);
-                return ref Data[j - 1, i - 1];
+                int i = row.GetOffset(_rows) + (row.IsFromEnd ? 1 : 0);
+                int j = column.GetOffset(_columns) + (column.IsFromEnd ? 1 : 0);
+                return ref _data[j - 1, i - 1];
             }
         }
         public FMatrix this[Index row, Range columns]
         {
             get
             {
-                int i1 = row.GetOffset(Rows) + (row.IsFromEnd ? 1 : 0);
-                (int j1, int m1) = columns.GetOffsetAndLength(Rows);
+                int i1 = row.GetOffset(_rows) + (row.IsFromEnd ? 1 : 0);
+                (int j1, int m1) = columns.GetOffsetAndLength(_rows);
                 j1 += columns.Start.IsFromEnd ? 1 : 0;
                 int i2 = i1, j2 = j1 + m1;
                 return Slice(i1, i2, j1, j2);
@@ -177,9 +220,9 @@ namespace JA.Fortran
         {
             get
             {
-                (int i1, int n1) = rows.GetOffsetAndLength(Rows);
+                (int i1, int n1) = rows.GetOffsetAndLength(_rows);
                 i1 += rows.Start.IsFromEnd ? 1 : 0;
-                int j1 = column.GetOffset(Columns) + (column.IsFromEnd ? 1 : 0);
+                int j1 = column.GetOffset(_columns) + (column.IsFromEnd ? 1 : 0);
                 int i2 = i1 + n1, j2 = j1;
                 return Slice(i1, i2, j1, j2);
             }
@@ -188,81 +231,112 @@ namespace JA.Fortran
         {
             get
             {
-                (int i1, int n1) = rows.GetOffsetAndLength(Rows);
+                (int i1, int n1) = rows.GetOffsetAndLength(_rows);
                 i1 += rows.Start.IsFromEnd ? 1 : 0;
-                (int j1, int m1) = columns.GetOffsetAndLength(Columns);
+                (int j1, int m1) = columns.GetOffsetAndLength(_columns);
                 j1 += columns.Start.IsFromEnd ? 1 : 0;
                 int i2 = i1 + n1, j2 = j1 + m1;
                 return Slice(i1, i2, j1, j2);
             }
         }
 
-        public int Rows { get; }
-        public int Columns { get; }
-        internal double[,] Data { get; }
-
-        public int Size { get => Math.Min(Rows, Columns); }
-        public double[,] ToArray2() => Data;
+        public int Rows => _rows;
+        public int Columns => _columns;
+        internal double[,] Data => _data;
+        public int Size { get => Math.Min(_rows, _columns); }
+        public double[,] ToArray2() => _data;
 
         public static implicit operator double[,](FMatrix a) => a.ToArray2();
         public static explicit operator FMatrix(double[,] a) => new FMatrix(a);
 
         #region Algebra
 
+        public double Norm() => norm_array_m(_rows, _columns, _data);
+
         public static FMatrix Round(FMatrix A, int digits)
         {
-            double[,] data = new double[A.Columns, A.Rows];
-            FortranMethods.call_round_array_m(A.Rows, A.Columns, A.Data, digits, data);
+            double[,] data = new double[A._columns, A.Rows];
+            call_round_array_m(A.Rows, A._columns, A.Data, digits, data);
             return new FMatrix(data);
         }
 
         public FMatrix ReShape(int newRows, int newColumns)
         {
-            int n = Rows, m = Columns, k = newRows, l = newColumns;
+            int n = _rows, m = _columns, k = newRows, l = newColumns;
             double[,] data = new double[l, k];
-            FortranMethods.call_reshape_array_mm(n, m, Data, k, l, data);
+            call_reshape_array_mm(n, m, _data, k, l, data);
             return new FMatrix(data);
         }
         public FVector ReShape(int newSize)
         {
-            int n = Rows, m = Columns, k = newSize;
+            int n = _rows, m = _columns, k = newSize;
             double[] data = new double[k];
-            FortranMethods.call_reshape_array_mv(n, m, Data, k, data);
+            call_reshape_array_mv(n, m, _data, k, data);
             return new FVector(data);
         }
         public FMatrix Slice(int startRow, int endRow, int startColumn, int endColumn)
         {
             double[,] data = new double[endColumn - startColumn + 1, endRow - startRow + 1];
-            FortranMethods.call_slice_array_m(Rows, Columns, Data, startRow, endRow, startColumn, endColumn, data);
+            call_slice_array_m(_rows, _columns, _data, startRow, endRow, startColumn, endColumn, data);
             return new FMatrix(data);
         }
         public FVector GetRow(int row)
-            => GetRow(row, 1, Columns);
+            => GetRow(row, 1, _columns);
         public FVector GetRow(int row, int startColumn, int endColumn)
         {
             int size = endColumn - startColumn + 1;
             double[,] matrix = new double[size, 1];
-            FortranMethods.call_slice_array_m(Rows, Columns, Data, row, row, startColumn, endColumn, matrix);
+            call_slice_array_m(_rows, _columns, _data, row, row, startColumn, endColumn, matrix);
             double[] data = new double[size];
-            FortranMethods.call_reshape_array_mv(size, 1, matrix, size, data);
+            call_reshape_array_mv(size, 1, matrix, size, data);
             return new FVector(data);
         }
         public FVector GetColumn(int row)
-            => GetColumn(row, 1, Columns);
+            => GetColumn(row, 1, _columns);
         public FVector GetColumn(int row, int startRow, int endRow)
         {
             int size = endRow - startRow + 1;
             double[,] matrix = new double[1, size];
-            FortranMethods.call_slice_array_m(Rows, Columns, Data, startRow, endRow, row, row, matrix);
+            call_slice_array_m(_rows, _columns, _data, startRow, endRow, row, row, matrix);
             double[] data = new double[size];
-            FortranMethods.call_reshape_array_mv(1, size, matrix, size, data);
+            call_reshape_array_mv(1, size, matrix, size, data);
             return new FVector(data);
+        }
+        public FVector[] GetColumns()
+        {
+            int m = _columns;
+            int n = _rows;
+            FVector[] result = new FVector[_columns];
+            double[,] matrix = new double[1, n];
+            for (int j = 0; j < m; j++)
+            {
+                call_slice_array_m(n, m, _data, 1, n, j+1, j+1, matrix);
+                var row = new double[m];
+                call_reshape_array_mv(n, 1, matrix, m, row);
+                result[j]=new FVector(row);
+            }
+            return result;
+        }
+        public FVector[] GetRows()
+        {
+            int m = _columns;
+            int n = _rows;
+            FVector[] result = new FVector[_rows];
+            double[,] matrix = new double[m, 1];
+            for (int i = 0; i < n; i++)
+            {
+                call_slice_array_m(n, m, _data, i+1, i+1, 1, m, matrix);
+                var col = new double[n];
+                call_reshape_array_mv(1, m, matrix, n, col);
+                result[i]=new FVector(col);
+            }
+            return result;
         }
         public static FMatrix Transpose(FMatrix A)
         {
-            int n = A.Rows, m = A.Columns;
+            int n = A.Rows, m = A._columns;
             double[,] data = new double[n, m];
-            FortranMethods.call_transpose_array_m(n, m, A.Data, data);
+            call_transpose_array_m(n, m, A.Data, data);
             return new FMatrix(data);
         }
         public static FMatrix Negate(FMatrix x)
@@ -274,13 +348,13 @@ namespace JA.Fortran
             => x + Scalar(x.Size, y);
         public static FMatrix Add(FMatrix x, FMatrix y)
         {
-            if (x.Rows != y.Rows || x.Columns != y.Columns)
+            if (x.Rows != y.Rows || x._columns != y._columns)
             {
-                throw new ArgumentException($"Expecting ({x.Rows},{x.Columns}) elements, found ({y.Rows},{y.Columns}).", nameof(y));
+                throw new ArgumentException($"Expecting ({x.Rows},{x._columns}) elements, found ({y.Rows},{y._columns}).", nameof(y));
             }
-            int n = x.Rows, m = x.Columns;
+            int n = x.Rows, m = x._columns;
             double[,] data = new double[m, n];
-            FortranMethods.call_add_array_m(n, m, x.Data, y.Data, data);
+            call_add_array_m(n, m, x.Data, y.Data, data);
             return new FMatrix(data);
         }
         public static FMatrix Subtract(double x, FMatrix y)
@@ -289,93 +363,95 @@ namespace JA.Fortran
             => x - Scalar(x.Size, y);
         public static FMatrix Subtract(FMatrix x, FMatrix y)
         {
-            if (x.Rows != y.Rows || x.Columns != y.Columns)
+            if (x.Rows != y.Rows || x._columns != y._columns)
             {
-                throw new ArgumentException($"Expecting ({x.Rows},{x.Columns}) elements, found ({y.Rows},{y.Columns}).", nameof(y));
+                throw new ArgumentException($"Expecting ({x.Rows},{x._columns}) elements, found ({y.Rows},{y._columns}).", nameof(y));
             }
-            int n = x.Rows, m = x.Columns;
+            int n = x.Rows, m = x._columns;
             double[,] data = new double[m, n];
-            FortranMethods.call_sub_array_m(n, m, x.Data, y.Data, data);
+            call_sub_array_m(n, m, x.Data, y.Data, data);
             return new FMatrix(data);
         }
         public static FMatrix Scale(double x, FMatrix A)
         {
-            int n = A.Rows, m = A.Columns;
+            int n = A.Rows, m = A._columns;
             double[,] data = new double[m, n];
-            FortranMethods.call_scale_array_m(n, m, x, A.Data, data);
+            call_scale_array_m(n, m, x, A.Data, data);
             return new FMatrix(data);
         }
 
-        public static FVector Product(FVector x, FMatrix A)
-        {
-            if (x.Size != A.Columns)
-            {
-                throw new ArgumentException($"Expecting {x.Size} columns, found {A.Columns}.", nameof(A));
-            }
-            int n = A.Rows, m = A.Columns;
-            double[] b_data = new double[m];
-            FortranMethods.call_mul_array_vm(n, m, x.Data, A.Data, b_data);
-            return new FVector(b_data);
-        }
         public static FVector Product(FMatrix A, FVector x)
         {
             if (x.Size != A.Rows)
             {
-                throw new ArgumentException($"Expecting {x.Size} columns, found {A.Columns}.", nameof(A));
+                throw new ArgumentException($"Expecting {x.Size} columns, found {A._columns}.", nameof(A));
             }
-            int n = A.Rows, m = A.Columns;
+            int n = A.Rows, m = A._columns;
             double[] b_data = new double[m];
-            FortranMethods.call_mul_array_mv(n, m, A.Data, x.Data, b_data);
+            call_mul_array_mv(n, m, A.Data, x.Data, b_data);
             return new FVector(b_data);
         }
+        public static FVector Product(FVector x, FMatrix A)
+        {
+            // | A(n,m) | * | x(m) | = | b(n) |
+            if (x.Size!=A.Rows)
+            {
+                throw new ArgumentException($"Expecting {x.Size} rows, found {A.Rows}.", nameof(A));
+            }
+            int n = A.Rows, m = A._columns;
+            double[] data = new double[m];
+            call_mul_array_vm(n, m, x.Data, A.Data, data);
+            return new FVector(data);
+        }
+
         public static FMatrix Product(FMatrix A, FMatrix X)
         {
             // | A(n,m) | * | x(m,k) | = | b(n,k) |
-            int n = A.Rows, m = A.Columns, k = X.Columns;
+            int n = A.Rows, m = A._columns, k = X._columns;
             if (X.Rows != m)
             {
-                throw new ArgumentException($"Expecting {A.Columns} rows, found {X.Rows}.", nameof(X));
+                throw new ArgumentException($"Expecting {A._columns} rows, found {X.Rows}.", nameof(X));
             }
             double[,] b_data = new double[k, n];
-            FortranMethods.call_mul_array_mm(n, m, k, A.Data, X.Data, b_data);
+            call_mul_array_mm(n, m, k, A.Data, X.Data, b_data);
             return new FMatrix(b_data);
         }
 
         public double Determinant()
         {
             int n = Size;
-            FortranMethods.call_determinant_array_m(n, Data, out double det);
+            call_determinant_array_m(n, _data, out double det);
             return det;
         }
         public FVector Solve(FVector b)
         {
             // | A(n,n) | * | x(n) | = | b(n) |
-            if (b.Size != Rows)
+            if (b.Size != _rows)
             {
-                throw new ArgumentException($"Expecting {Rows} elements, found {b.Size}.", nameof(b));
+                throw new ArgumentException($"Expecting {_rows} elements, found {b.Size}.", nameof(b));
             }
-            int n = Rows, m = Columns;
+            int n = _rows, m = _columns;
             double[] data = new double[m];
-            FortranMethods.call_solve_array_mv(n, Data, b.Data, data);
+            call_solve_array_mv(n, _data, b.Data, data);
             return new FVector(data);
         }
         public FMatrix Solve(FMatrix B)
         {
             // | A(n,n) | * | x(n,k) | = | b(n,k) |
-            int n = Rows, k = B.Columns;
+            int n = _rows, k = B._columns;
             if (B.Rows != n)
             {
                 throw new ArgumentException($"Expecting {n} rows, found {B.Rows}.", nameof(B));
             }
             double[,] data = new double[k, n];
-            FortranMethods.call_solve_array_mm(n, k, Data, B.Data, data);
+            call_solve_array_mm(n, k, _data, B.Data, data);
             return new FMatrix(data);
         }
         public FMatrix Inverse()
         {
             int n = Size;
             double[,] data = new double[n, n];
-            FortranMethods.call_inverse_array_m(n, Data, data);
+            call_inverse_array_m(n, _data, data);
             return new FMatrix(data);
         }
         #endregion
@@ -392,6 +468,7 @@ namespace JA.Fortran
         public static FMatrix operator *(double factor, FMatrix a) => Scale(factor, a);
         public static FMatrix operator *(FMatrix a, double factor) => Scale(factor, a);
         public static FVector operator *(FMatrix a, FVector v) => Product(a, v);
+        public static FVector operator *(FVector v, FMatrix a) => Product(v, a);
         public static FMatrix operator *(FMatrix a, FMatrix b) => Product(a, b);
         public static FMatrix operator /(FMatrix a, double divisor) => Scale(1 / divisor, a);
         public static FMatrix operator ~(FMatrix a) => Transpose(a);
@@ -401,71 +478,49 @@ namespace JA.Fortran
 
         #region Formatting
         public static string DefaultFormat { get; set; } = "g6";
-
+        public static bool ShowAsTable { get; set; } = true;
         public override string ToString() => ToString(DefaultFormat);
         public string ToString(string formatting) => ToString(formatting, null);
         public string ToString(string formatting, IFormatProvider formatProvider)
         {
-
-            StringBuilder sb = new StringBuilder();
-            int n = Data.GetLength(1), m = Data.GetLength(0);
-            string[][] data = new string[m][];
-            int[] maxWidth = new int[m];
-            for (int j = 0; j < m; j++)
+            if (ShowAsTable)
             {
-                data[j] = new string[n];
-                for (int i = 0; i < n; i++)
-                {
-                    double f_val = Math.Round(Data[j, i], HelperFunctions.RoundDigits);
-                    data[j][i] = f_val.ToString(formatting, formatProvider);
-                }
-                maxWidth[j] = data[j].Max((s) => s.Length);
-            }
-
-            for (int i = 0; i < n; i++)
+                return _data.ToTableString(HorizontalAlignment.Right, formatting, formatProvider);
+            } else
             {
-                sb.Append('|');
-                for (int j = 0; j < m; j++)
-                {
-                    string text = data[j][i];
-                    text = text.PadLeft(maxWidth[j]);
-                    sb.Append($" {text}");
-                }
-                sb.AppendLine(" |");
+                return _data.ToListString(formatting);
             }
-            sb.AppendLine();
-            return sb.ToString();
         }
         #endregion
 
         #region Collections
-        public int Count { get => Rows * Columns; }
+        public int Count { get => _rows * _columns; }
 
         public Span<double> AsSpan()
         {
-            fixed (double* ptr = &Data[0, 0])
+            fixed (double* ptr = &_data[0, 0])
             {
-                return new Span<double>(ptr, Data.Length);
+                return new Span<double>(ptr, _data.Length);
             }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public double[] ToArray()
         {
-            double[] data = new double[Data.Length];
-            FortranMethods.call_reshape_array_mv(Rows, Columns, Data, data.Length, data);
+            double[] data = new double[_data.Length];
+            call_reshape_array_mv(_rows, _columns, _data, data.Length, data);
             return data;
         }
 
         public bool Contains(double item) => IndexOf(item) >= 0;
-        public int IndexOf(double item) => Array.IndexOf(Data, item);
+        public int IndexOf(double item) => Array.IndexOf(_data, item);
         public IEnumerator<double> GetEnumerator()
         {
-            for (int j = 0; j < Columns; j++)
+            for (int j = 0; j < _columns; j++)
             {
-                for (int i = 0; i < Rows; i++)
+                for (int i = 0; i < _rows; i++)
                 {
-                    yield return Data[j, i];
+                    yield return _data[j, i];
                 }
             }
         }
@@ -486,12 +541,257 @@ namespace JA.Fortran
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void CopyTo(double[] array, int index)
         {
-            array = new double[Data.Length];
-            Buffer.BlockCopy(Data, 0, array, sizeof(double) * index, Buffer.ByteLength(Data));
+            array = new double[_data.Length];
+            Buffer.BlockCopy(_data, 0, array, sizeof(double) * index, Buffer.ByteLength(_data));
         }
 
         #endregion
 
+        #region Fortran API        
+        const string libraryName = FortranMethods.libraryName;
 
+        [DllImport(libraryName, EntryPoint = "call_array_zeros_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_array_zeros_m(int rows, int columns, [Out] double[,] A);
+        [DllImport(libraryName, EntryPoint = "call_fill_array_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_fill_array_m(int rows, int columns, double[] values, ElementOrder order, [Out] double[,] data);
+
+        /// <summary>
+        /// Set a column of a matrix from a vector of values.
+        /// </summary>
+        /// <param name="n">The size of the vector.</param>
+        /// <param name="m">The number of columns of the matrix.</param>
+        /// <param name="vectors">The vector of values.</param>
+        /// <param name="j">The column index.</param>
+        /// <param name="data">The resulting matrix data.</param>
+        [DllImport(libraryName, EntryPoint = "call_array_set_column", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_array_set_column(int n, int m, double[] vector, int j, [In, Out] double[,] data);
+        /// <summary>
+        /// Set a row of a matrix from a vector of values.
+        /// </summary>
+        /// <param name="n">The number rows of the matrix.</param>
+        /// <param name="m">The size of the vector.</param>
+        /// <param name="vector">The vector of values.</param>
+        /// <param name="i">The row index.</param>
+        /// <param name="data">The resulting matrix data.</param>
+        [DllImport(libraryName, EntryPoint = "call_array_set_row", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_array_set_row(int n, int m, double[] vector, int i, [In, Out] double[,] data);
+
+        [DllImport(libraryName, EntryPoint = "call_random_array_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_random_array_m(int rows, int columns, [In] double minValue, [In] double maxValue, [Out] double[,] A);
+        [DllImport(libraryName, EntryPoint = "call_uniform_array_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_uniform_array_m(int rows, int columns, ref int seed, [Out] double[,] A);
+
+        [DllImport(libraryName, EntryPoint = "call_array_diag_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_array_diag_m(int size, [In] double[] x, [Out] double[,] A);
+
+        [DllImport(libraryName, EntryPoint = "call_array_scalar_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_array_scalar_m(int rows, int columns, [In] double x, [Out] double[,] A);
+
+        [DllImport(libraryName, EntryPoint = "norm_array_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern double norm_array_m(int rows, int columns, [In] double[,] A);
+
+        [DllImport(libraryName, EntryPoint = "call_add_array_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_add_array_m(int rows, int columns, [In] double[,] x, [In] double[,] y, [Out] double[,] z);
+
+        [DllImport(libraryName, EntryPoint = "call_sub_array_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_sub_array_m(int rows, int columns, [In] double[,] x, [In] double[,] y, [Out] double[,] z);
+
+        [DllImport(libraryName, EntryPoint = "call_scale_array_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_scale_array_m(int rows, int columns, double x, [In] double[,] y, [Out] double[,] z);
+
+        [DllImport(libraryName, EntryPoint = "call_determinant_array_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_determinant_array_m(int size, [In] double[,] A, [Out] out double det);
+
+        [DllImport(libraryName, EntryPoint = "call_transpose_array_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_transpose_array_m(int rows, int columns, [In] double[,] A, [Out] double[,] At);
+
+        [DllImport(libraryName, EntryPoint = "call_round_array_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_round_array_m(int rows, int columns, [In] double[,] x, int digits, [Out] double[,] r);
+        [DllImport(libraryName, EntryPoint = "call_reshape_array_mv", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_reshape_array_mv(int rows, int columns, [In] double[,] A, int new_size, [Out] double[] B);
+
+        [DllImport(libraryName, EntryPoint = "call_reshape_array_mm", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_reshape_array_mm(int rows, int columns, [In] double[,] A, int new_rows, int new_columns, [Out] double[,] B);
+
+        [DllImport(libraryName, EntryPoint = "call_slice_array_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_slice_array_m(int rows, int columns, [In] double[,] A, int start_row, int end_row, int start_column, int end_column, [Out] double[,] B);
+
+        /// <summary>
+        /// <code><![CDATA[
+        /// pure subroutine call_slice_rows_array_m(n,m,A,i,b) bind(c)
+        /// integer, intent(in), value :: n, m, i
+        /// real(real64), intent(in) :: A(n,m)
+        /// real(real64), intent(out) :: b(m)]]></code>
+        /// </summary>
+        /// <param name="rows">The row count of A.</param>
+        /// <param name="columns">The column count of A.</param>
+        /// <param name="A">The input matrix</param>
+        /// <param name="row">The row to slice.</param>
+        /// <param name="b">The resulting vector.</param>
+        /// <remarks><c>b = A(i, :)</c></remarks>
+        [DllImport(libraryName, EntryPoint = "call_slice_rows_array_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_slice_rows_array_m(
+            int rows, 
+            int columns, 
+            [In] double[,] A, 
+            int row, 
+            [Out] double[] b);
+
+        /// <summary>
+        /// <code><![CDATA[
+        /// pure subroutine call_slice_cols_array_m(n,m,A,j,b) bind(c)
+        /// integer, intent(in), value :: n, m, j
+        /// real(real64), intent(in) :: A(n,m)
+        /// real(real64), intent(out) :: b(n)]]></code>
+        /// </summary>
+        /// <param name="rows">The row count of A.</param>
+        /// <param name="columns">The column count of A.</param>
+        /// <param name="A">The input matrix</param>
+        /// <param name="col">The column to slice.</param>
+        /// <param name="b">The resulting vector.</param>
+        /// <remarks><c>b = A(:, j)</c></remarks>
+        [DllImport(libraryName, EntryPoint = "call_slice_cols_array_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_slice_cols_array_m(
+            int rows, 
+            int columns, 
+            [In] double[,] A, 
+            int col, 
+            [Out] double[] b);
+
+        /// <summary>
+        /// <code><![CDATA[
+        /// pure subroutine call_slice_row_array_m(n,m,A,i,j1,j2,b) bind(c)
+        /// integer, intent(in), value :: n, m, i, j1, j2
+        /// real(real64), intent(in) :: A(n,m)
+        /// real(real64), intent(out) :: b(j2-j1+1)]]></code>
+        /// </summary>
+        /// <param name="rows">The row count of A.</param>
+        /// <param name="columns">The column count of A.</param>
+        /// <param name="A">The input matrix</param>
+        /// <param name="row">The row to slice.</param>
+        /// <param name="start_col">The start column of the row</param>
+        /// <param name="end_col">The end column of the row</param>
+        /// <param name="b">The resulting vector.</param>
+        /// <remarks><c>b = A(i, j1:j2)</c></remarks>
+        [DllImport(libraryName, EntryPoint = "call_slice_row_array_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_slice_row_array_m(
+            int rows, 
+            int columns, 
+            [In] double[,] A, 
+            int row, 
+            int start_col,
+            int end_col,
+            [Out] double[] b);
+
+        /// <summary>
+        /// <code><![CDATA[
+        /// pure subroutine call_slice_col_array_m(n,m,A,i1,i2,j,b) bind(c)
+        /// integer, intent(in), value :: n, m, i1,i2,j
+        /// real(real64), intent(in) :: A(n,m)
+        /// real(real64), intent(out) :: b(i2-i1+1)]]></code>
+        /// </summary>
+        /// <param name="rows">The row count of A.</param>
+        /// <param name="columns">The column count of A.</param>
+        /// <param name="A">The input matrix</param>
+        /// <param name="col">The column to slice.</param>
+        /// <param name="start_col">The starting column of the row</param>
+        /// <param name="end_col">The end column of the row</param>
+        /// <param name="b">The resulting vector.</param>
+        /// <remarks><c>b = A(i1:i2, j)</c></remarks>
+        [DllImport(libraryName, EntryPoint = "call_slice_col_array_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_slice_col_array_m(
+            int rows, 
+            int columns, 
+            [In] double[,] A, 
+            int col, 
+            int start_col,
+            int end_col,
+            [Out] double[] b);
+
+        /// <summary>
+        /// Fortran DLL call to matrix multiply <code>b=A*x</code>.
+        /// </summary>
+        /// <param name="A">The coefficient matrix.</param>
+        /// <param name="x">The known vector</param>
+        /// <param name="b">The result vector</param>
+        [DllImport(libraryName, EntryPoint = "call_mul_array_mv", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_mul_array_mv(int rows, int columns, [In] double[,] A, [In] double[] x, [Out] double[] b);
+
+        /// <summary>
+        /// Fortran DLL call to matrix multiply <code>b=x*A</code>.
+        /// <code><![CDATA[subroutine call_mul_array_vm(n,m,x,A,b) bind(c)
+        ///integer, intent(in), value :: n, m
+        ///real(real64), intent(in) :: A(n,m), x(m)
+        ///real(real64), intent(out) :: b(n)]]>
+        /// </code>
+        /// </summary>
+        /// <param name="x">The known vector</param>
+        /// <param name="A">The coefficient matrix.</param>
+        /// <param name="b">The result vector</param>
+        [DllImport(libraryName, EntryPoint = "call_mul_array_vm", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_mul_array_vm(int rows, int columns, [In] double[] x, [In] double[,] A, [Out] double[] b);
+        /// <summary>
+        /// Fortran DLL call to matrix multiply <c>C=A*B</c>
+        /// <code><![CDATA[subroutine call_mul_array_mm(n,m,k,A,x,b) bind(c)
+        ///integer, intent(in), value :: n, m, k
+        ///real(real64), intent(in) :: A(n,m), x(m,k)
+        ///real(real64), intent(out) :: b(n,k)]]>
+        ///</code>
+        /// </summary>
+        /// <param name="A">The coefficient matrix.</param>
+        /// <param name="B">The known matrix</param>
+        /// <param name="C">The result matrix</param>
+        [DllImport(libraryName, EntryPoint = "call_mul_array_mm", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_mul_array_mm(int rows, int columns, int pages, [In] double[,] A, [In] double[,] x, [Out] double[,] b);
+
+        /// <summary>
+        /// Fortran DLL call to solve the linear system of equations <c>A*x=b</c> for <paramref name="x"/>.
+        /// <code><![CDATA[subroutine call_solve_array_mv(n,A,b,x) bind(c)
+        ///use mod_array_inv
+        ///integer, intent(in), value :: n
+        ///real(real64), intent(in) :: A(n,n), b(n)
+        ///real(real64), intent(out) :: x(n) ]]>
+        /// </code>
+        /// </summary>
+        /// <param name="A">The coefficient matrix.</param>
+        /// <param name="b">The known vector</param>
+        /// <param name="x">The unknown vector</param>
+        [DllImport(libraryName, EntryPoint = "call_solve_array_mv", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_solve_array_mv(int rows, [In] double[,] A, [In] double[] b, [Out] double[] x);
+        /// <summary>
+        /// Fortran DLL call to solve the linear system of equations <c>A*X=B</c> for <paramref name="X"/>.
+        /// <code><![CDATA[subroutine call_solve_array_mm(n,k,A,b,x) bind(c)
+        ///integer, intent(in), value :: n,k
+        ///real(real64), intent(in) :: A(n,n), b(n,k)
+        ///real(real64), intent(out) :: x(n,k)]]>
+        /// </code>
+        /// </summary>
+        /// <param name="A">The coefficient matrix.</param>
+        /// <param name="B">The known matrix. </param>
+        /// <param name="X">The unknown matrix.</param>
+        [DllImport(libraryName, EntryPoint = "call_solve_array_mm", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_solve_array_mm(int rows, int pages, [In] double[,] A, [In] double[,] B, [Out] double[,] X);
+
+        [DllImport(libraryName, EntryPoint = "call_inverse_array_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_inverse_array_m(int size, [In] double[,] A, [Out] double[,] A_inv);
+        /// <summary>
+        /// Matrix inner product.
+        /// <code><![CDATA[
+        /// pure subroutine call_inner_array_m(n,m,x,y,z) bind(c)
+        /// integer, intent(in), value :: n, m, k
+        /// real(real64), intent(in) :: x(n,m), y(n,k)
+        /// real(real64), intent(out) :: z(m,k)]]></code>
+        /// </summary>
+        /// <param name="rows">Rows of x</param>
+        /// <param name="columns">Columns of x and y</param>
+        /// <param name="pages">Columns of y</param>
+        /// <param name="x">Input matrix x(n,m).</param>
+        /// <param name="y">Input matrix y(n,k).</param>
+        /// <param name="z">Result matrix z(m,k).</param>
+        /// <remarks><c>z = trans(x)*y</c></remarks>
+        [DllImport(libraryName, EntryPoint = "call_inner_array_m", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_inner_array_m(int rows, int columns, int pages, [In] double[,] x, [In] double[,] y, [Out] out double[,] z);
+
+        #endregion
     }
 }

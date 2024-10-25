@@ -18,8 +18,7 @@
     module mod_splines
     use mod_common
     implicit none
-    
-    
+        
     enum, bind(c)
     ! End conditions for spline
         enumerator :: set_yp
@@ -608,6 +607,72 @@
     end function
     
     
+    pure subroutine call_spline_calc_ypp_array(n,x,y,ypp) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_spline_calc_ypp_array
+    integer, intent(in), value :: n
+    real( real64 ), intent(in)  :: x(n), y(n)
+    real( real64 ), intent(out) :: ypp(n)    
+    type( spline ) :: cs
+    
+        cs = spline(x,y,set_ypp,set_ypp,0._real64,0._real64)
+        
+        ypp = cs%ypp
+    
+    end subroutine
+    
+    pure subroutine call_spline_calc_ypp_domain(n,x_start, x_end,y,ypp) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_spline_calc_ypp_domain
+    integer, intent(in), value :: n
+    real( real64 ), intent(in)  :: y(n)
+    real( real64 ), intent(in), value :: x_start, x_end
+    real( real64 ), intent(out) :: ypp(n)    
+    type( spline ) :: cs
+    
+        cs = spline(x_start, x_end, y, set_ypp,set_ypp,0._real64,0._real64)
+        
+        ypp = cs%ypp
+    
+    end subroutine
+    
+    pure subroutine call_spline_interpolate_point(n,x,y,ypp,xe,ye,ype,yppe) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_spline_interpolate_point
+    integer, intent(in), value :: n
+    real( real64 ), intent(in)  :: x(n), y(n), ypp(n), xe
+    real( real64 ), intent(out) :: ye, ype, yppe
+    type( spline ) :: cs
+    
+        ! Define spline    
+        cs = spline(x, y, ypp, set_ypp,set_ypp,0._real64,0._real64)        
+        ! get values
+        call cs%spline_interpolate_point(xe,ye,ype,yppe)
+        
+    end subroutine
+    
+    pure subroutine call_spline_interpolate_array(n,x,y,ypp,m,xe,ye,yppe) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_spline_interpolate_array
+    integer, intent(in), value :: n, m
+    real( real64 ), intent(in)  :: x(n), y(n), ypp(n)
+    real( real64 ), intent(in)  :: xe(m)
+    real( real64 ), intent(out) :: ye(m), yppe(m)
+    type( spline ) :: cs, ip
+        cs = spline(x,y,ypp,set_ypp,set_ypp,0._real64,0._real64)
+        ip = cs%interpolate(xe)
+        ye = ip%y        
+        yppe = ip%ypp
+    end subroutine
+    
+    pure subroutine call_spline_interpolate_domain(n,x,y,ypp,m,x_start,x_end,ye,yppe) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_spline_interpolate_domain
+    integer, intent(in), value :: n, m
+    real( real64 ), intent(in)  :: x(n), y(n), ypp(n)
+    real( real64 ), intent(in), value :: x_start, x_end
+    real( real64 ), intent(out) :: ye(m), yppe(m)
+    type( spline ) :: cs, ip
+        cs = spline(x,y,ypp,set_ypp,set_ypp,0._real64,0._real64)
+        ip = cs%interpolate(x_start, x_end, m)
+        ye = ip%y
+        yppe = ip%ypp
+    end subroutine
     
         
     end module

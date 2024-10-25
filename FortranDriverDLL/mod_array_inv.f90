@@ -1,7 +1,8 @@
   
 module mod_array_inv
-use mod_common
+use mod_common, only : real64, tiny
 implicit none
+
 
     interface trace
         module procedure :: trace_array_m
@@ -16,21 +17,13 @@ implicit none
         module procedure :: solve_array_mv, solve_array_mm
         module procedure :: lui_solve_array_v, lui_solve_array_m
     end interface
-    
-    interface zeros
-        module procedure :: array_zeros1, array_zeros2
-    end interface
-    interface eye
-        module procedure :: array_eye, array_scalar, array_diag
-    end interface
-        
+            
     contains
     
     
     pure function array_zeros1(n) result(A)
-    !MOD_ARRAY_INV_mp_MAT_ZEROS1
-    !dec$ attributes dllexport :: array_zeros1
-    !dec$ attributes alias : 'array_zeros1' :: array_zeros1
+    !!dec$ attributes dllexport :: array_zeros1
+    !!dec$ attributes alias : 'array_zeros1' :: array_zeros1
     integer, intent(in),value :: n
     real(real64) :: A(n,n)
     
@@ -39,9 +32,8 @@ implicit none
     end function
     
     pure function array_zeros2(n,m) result(A)
-    !MOD_ARRAY_INV_mp_MAT_ZEROS2
-    !dec$ attributes dllexport :: array_zeros2
-    !dec$ attributes alias : 'array_zeros2' :: array_zeros2
+    !!dec$ attributes dllexport :: array_zeros2
+    !!dec$ attributes alias : 'array_zeros2' :: array_zeros2
     integer, intent(in),value :: n, m
     real(real64) :: A(n,m)
     
@@ -58,45 +50,11 @@ implicit none
     integer :: i
     
         A = 0._real64
-        !dec$ parallel
-        do concurrent (i=1:n) shared(A)
+        do concurrent (i=1:n)
             A(i,i) = 1._real64
         end do
     end function
-    
-    pure function array_scalar(n, value) result(A)
-    !dec$ attributes dllexport :: array_scalar
-    !dec$ attributes alias : 'array_scalar' :: array_scalar
-    integer, intent(in), value :: n
-    real(real64), intent(in) :: value
-    real(real64) :: A(n,n)
-    integer :: i
-    
-        A = 0.0_real64
-        !dec$ parallel
-        do concurrent (i=1:n) shared(A)
-            A(i,i) = value
-        end do
-    
-    end function
-    
-    pure function array_diag(n, values) result(A)
-    !MOD_ARRAY_INV_mp_MAT_DIAG
-    !dec$ attributes dllexport :: array_diag
-    !dec$ attributes alias : 'array_diag' :: array_diag
-    integer, intent(in), value :: n
-    real(real64), intent(in) :: values(n)
-    real(real64) :: A(n,n)
-    integer :: i
-    
-        A = 0.0_real64
-        !dec$ parallel
-        do concurrent (i=1:n) shared(A)
-            A(i,i) = values(i)
-        end do
-    
-    end function
-
+        
     pure function norm_array_v(n,x) result(s) bind(c)
     !DEC$ ATTRIBUTES DLLEXPORT :: norm_array_v
     integer, intent(in), value :: n
@@ -112,43 +70,23 @@ implicit none
     real(real64) :: s
     s = norm2(x)    
     end function
-        
-    pure function inner_array_v(a,b) result(ab) 
-    !MOD_ARRAY_INV_mp_VEC_INNER
-    !dec$ attributes dllexport :: inner_array_v
-    !dec$ attributes alias : 'inner_array_v' :: inner_array_v
-    real(real64), intent(in) :: a(:), b(:)
-    real(real64) :: ab
-        ab = dot_product(a,b)
-    end function
-    
-    pure function inner_array_m(a,b) result(ab) 
-    !MOD_ARRAY_INV_mp_VEC_INNER
-    !dec$ attributes dllexport :: inner_array_m
-    !dec$ attributes alias : 'inner_array_m' :: inner_array_m
-    real(real64), intent(in) :: a(:,:), b(:,:)
-    real(real64) :: ab(size(a,2),size(b,2))
-        ab = matmul(transpose(a),b)
-    end function
-    
+            
     pure function outer_array_v(a,b) result(ab) 
-    !MOD_ARRAY_INV_mp_VEC_OUTER
-    !dec$ attributes dllexport :: outer_array_v
-    !dec$ attributes alias : 'outer_array_v' :: outer_array_v
     real(real64), intent(in) :: a(:), b(:)
     real(real64) :: ab(size(a),size(b))
     integer :: n,m,i,j
         n = size(a)
         m = size(b)
-        !dec$ parallel
-        do concurrent (i=1:n, j=1:m) shared(ab)
-            ab(i,j) = a(i)*b(j)
-        end do
+        
+        !do concurrent (i=1:n, j=1:m)
+        !    ab(i,j) = a(i)*b(j)
+        !end do
+        
+        AB = spread(source = a, dim = 2, ncopies = m) * &
+             spread(source = b, dim = 1, ncopies = n)        
     end function
             
     pure function trace_array_m(A) result(t)
-    !dec$ attributes dllexport :: trace_array_m
-    !dec$ attributes alias : 'trace_array_m' :: trace_array_m
     real(real64), intent(in) :: A(:,:)
     real(real64) :: t
     integer :: n, m, i
@@ -182,8 +120,6 @@ implicit none
     end function
     
     pure function determinant_array_m(A) result(d)
-    !dec$ attributes dllexport :: determinant_array_m
-    !dec$ attributes alias : 'determinant_array_m' :: determinant_array_m
     real(real64), intent(in) :: A(:,:)
     real(real64) :: d
     integer :: n, m
@@ -210,8 +146,6 @@ implicit none
     end function
     
     pure function inverse_array_m(A) result(B)
-    !dec$ attributes dllexport :: inverse_array_m
-    !dec$ attributes alias : 'inverse_array_m' :: inverse_array_m
     real(real64), intent(in) :: A(:,:)    
     real(real64) :: B(size(A,1),size(A,2))
     integer :: n, m
@@ -591,7 +525,7 @@ implicit none
     real(real64), intent(in) :: A(5,5)    
     real(real64) :: A_inv(5,5), I(5,5)
     
-        I = eye(5)
+        I = array_eye(5)
         A_inv = solve(A, I)
     
     end function
@@ -657,7 +591,7 @@ implicit none
     real(real64), intent(in) :: A(6,6)    
     real(real64) :: A_inv(6,6), I(6,6)
     
-        I = eye(6)
+        I = array_eye(6)
         A_inv = solve(A, I)
     
     end function
