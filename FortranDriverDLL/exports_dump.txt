@@ -17,6 +17,7 @@ File Type: DLL
 
     ordinal hint RVA      name
 
+<<<<<<< HEAD
           1    0 00066EA0 add_mat2_mat2 = add_mat2_mat2
           2    1 00067490 add_mat2_scalar = add_mat2_scalar
           3    2 0005E130 add_mat3_mat3 = add_mat3_mat3
@@ -25,6 +26,16 @@ File Type: DLL
           6    5 00066F90 add_scalar_mat2 = add_scalar_mat2
           7    6 0005E220 add_scalar_mat3 = add_scalar_mat3
           8    7 00066D80 add_vec2_vec2 = add_vec2_vec2
+=======
+          1    0 000638B0 add_mat2_mat2 = add_mat2_mat2
+          2    1 00063EA0 add_mat2_scalar = add_mat2_scalar
+          3    2 0005E130 add_mat3_mat3 = add_mat3_mat3
+          4    3 0005E720 add_mat3_scalar = add_mat3_scalar
+          5    4 00072EB0 add_quat4_quat4 = add_quat4_quat4
+          6    5 000639A0 add_scalar_mat2 = add_scalar_mat2
+          7    6 0005E220 add_scalar_mat3 = add_scalar_mat3
+          8    7 00063790 add_vec2_vec2 = add_vec2_vec2
+>>>>>>> origin/master
           9    8 0005E010 add_vec3_vec3 = add_vec3_vec3
          10    9 0005A0D0 call_add_array_m = call_add_array_m
          11    A 000564B0 call_add_array_v = call_add_array_v
@@ -40,13 +51,21 @@ File Type: DLL
          21   14 00056EC0 call_inner_array_m = call_inner_array_m
          22   15 00056DF0 call_inner_array_v = call_inner_array_v
          23   16 0005D0B0 call_inverse_array_m = call_inverse_array_m
+<<<<<<< HEAD
          24   17 0006AD00 call_mat2_to_array = call_mat2_to_array
+=======
+         24   17 00067710 call_mat2_to_array = call_mat2_to_array
+>>>>>>> origin/master
          25   18 00062B10 call_mat3_to_array = call_mat3_to_array
          26   19 00058190 call_mul_array_mm = call_mul_array_mm
          27   1A 000579D0 call_mul_array_mv = call_mul_array_mv
          28   1B 00057DB0 call_mul_array_vm = call_mul_array_vm
          29   1C 000576D0 call_outer_array_v = call_outer_array_v
+<<<<<<< HEAD
          30   1D 00073C10 call_quat_test_all = call_quat_test_all
+=======
+         30   1D 00072210 call_quat_test_all = call_quat_test_all
+>>>>>>> origin/master
          31   1E 000595D0 call_random_array_m = call_random_array_m
          32   1F 000561B0 call_random_array_v = call_random_array_v
          33   20 0005B5B0 call_reshape_array_mm = call_reshape_array_mm
@@ -64,17 +83,26 @@ File Type: DLL
          45   2C 0005BE80 call_slice_rows_array_m = call_slice_rows_array_m
          46   2D 0005CC30 call_solve_array_mm = call_solve_array_mm
          47   2E 00058750 call_solve_array_mv = call_solve_array_mv
+<<<<<<< HEAD
          48   2F 000344A0 call_spline_calc_ypp_array = call_spline_calc_ypp_array
          49   30 00034BA0 call_spline_calc_ypp_domain = call_spline_calc_ypp_domain
          50   31 00035810 call_spline_interpolate_array = call_spline_interpolate_array
          51   32 000365E0 call_spline_interpolate_domain = call_spline_interpolate_domain
          52   33 00035220 call_spline_interpolate_point = call_spline_interpolate_point
+=======
+         48   2F 00012770 call_spline_calc_ypp_array = call_spline_calc_ypp_array
+         49   30 00012E70 call_spline_calc_ypp_domain = call_spline_calc_ypp_domain
+         50   31 00013AE0 call_spline_interpolate_array = call_spline_interpolate_array
+         51   32 000148B0 call_spline_interpolate_domain = call_spline_interpolate_domain
+         52   33 000134F0 call_spline_interpolate_point = call_spline_interpolate_point
+>>>>>>> origin/master
          53   34 0005A4D0 call_sub_array_m = call_sub_array_m
          54   35 000566B0 call_sub_array_v = call_sub_array_v
          55   36 00054D40 call_test_dowork = call_test_dowork
          56   37 0005AAF0 call_transpose_array_m = call_transpose_array_m
          57   38 00055DB0 call_uniform_array_m = call_uniform_array_m
          58   39 00055B60 call_uniform_array_v = call_uniform_array_v
+<<<<<<< HEAD
          59   3A 0006AC90 call_vec2_to_array = call_vec2_to_array
          60   3B 00062AA0 call_vec3_to_array = call_vec3_to_array
          61   3C 0006B7E0 cross_quat4_quat4 = cross_quat4_quat4
@@ -102,6 +130,35 @@ File Type: DLL
          83   52 00066BC0 mat2_uniform = mat2_uniform
          84   53 00066750 mat2_values = mat2_values
          85   54 000662F0 mat2_zeros = mat2_zeros
+=======
+         59   3A 000676A0 call_vec2_to_array = call_vec2_to_array
+         60   3B 00062AA0 call_vec3_to_array = call_vec3_to_array
+         61   3C 00073010 cross_quat4_quat4 = cross_quat4_quat4
+         62   3D 000675F0 cross_scalar_vec2 = cross_scalar_vec2
+         63   3E 00067540 cross_vec2_scalar = cross_vec2_scalar
+         64   3F 000674F0 cross_vec2_vec2 = cross_vec2_vec2
+         65   40 00061E80 cross_vec3_op = cross_vec3_op
+         66   41 00061DB0 cross_vec3_vec3 = cross_vec3_vec3
+         67   42 00065ED0 determinant_mat2 = determinant_mat2
+         68   43 00060BA0 determinant_mat3 = determinant_mat3
+         69   44 00065AB0 div_mat2_scalar = div_mat2_scalar
+         70   45 00060370 div_mat3_scalar = div_mat3_scalar
+         71   46 00065A20 div_vec2_scalar = div_vec2_scalar
+         72   47 000602E0 div_vec3_scalar = div_vec3_scalar
+         73   48 00065F70 inner_mat2_mat2 = inner_mat2_mat2
+         74   49 000606E0 inner_mat3_mat3 = inner_mat3_mat3
+         75   4A 00073050 inner_quat4_quat4 = inner_quat4_quat4
+         76   4B 00067030 inner_vec2_vec2 = inner_vec2_vec2
+         77   4C 000618F0 inner_vec3_vec3 = inner_vec3_vec3
+         78   4D 00066380 inverse_mat2 = inverse_mat2
+         79   4E 00060C40 inverse_mat3 = inverse_mat3
+         80   4F 00001E60 linspace = linspace
+         81   50 00062D90 mat2_eye = mat2_eye
+         82   51 00063030 mat2_ones = mat2_ones
+         83   52 000635D0 mat2_uniform = mat2_uniform
+         84   53 00063160 mat2_values = mat2_values
+         85   54 00062D00 mat2_zeros = mat2_zeros
+>>>>>>> origin/master
          86   55 0005D580 mat3_eye = mat3_eye
          87   56 0005D820 mat3_ones = mat3_ones
          88   57 00062380 mat3_rotate_diag = mat3_rotate_diag
@@ -109,6 +166,7 @@ File Type: DLL
          90   59 0005DE50 mat3_uniform = mat3_uniform
          91   5A 0005D960 mat3_values = mat3_values
          92   5B 0005D4F0 mat3_zeros = mat3_zeros
+<<<<<<< HEAD
          93   5C 000688A0 mul_mat2_mat2 = mul_mat2_mat2
          94   5D 00068700 mul_mat2_scalar = mul_mat2_scalar
          95   5E 00068D70 mul_mat2_vec2 = mul_mat2_vec2
@@ -180,6 +238,79 @@ File Type: DLL
         161   A0 00066260 vec2_uy = vec2_uy
         162   A1 000666C0 vec2_values = vec2_values
         163   A2 000661D0 vec2_zeros = vec2_zeros
+=======
+         93   5C 000652B0 mul_mat2_mat2 = mul_mat2_mat2
+         94   5D 00065110 mul_mat2_scalar = mul_mat2_scalar
+         95   5E 00065780 mul_mat2_vec2 = mul_mat2_vec2
+         96   5F 0005FB60 mul_mat3_mat3 = mul_mat3_mat3
+         97   60 0005F9A0 mul_mat3_scalar = mul_mat3_scalar
+         98   61 00060040 mul_mat3_vec3 = mul_mat3_vec3
+         99   62 00072FD0 mul_quat4_quat4 = mul_quat4_quat4
+        100   63 000651E0 mul_scalar_mat2 = mul_scalar_mat2
+        101   64 0005FA80 mul_scalar_mat3 = mul_scalar_mat3
+        102   65 00072E20 mul_scalar_quat4 = mul_scalar_quat4
+        103   66 00065080 mul_scalar_vec2 = mul_scalar_vec2
+        104   67 0005F910 mul_scalar_vec3 = mul_scalar_vec3
+        105   68 000658D0 mul_vec2_mat2 = mul_vec2_mat2
+        106   69 00064FF0 mul_vec2_scalar = mul_vec2_scalar
+        107   6A 00060190 mul_vec3_mat3 = mul_vec3_mat3
+        108   6B 0005F880 mul_vec3_scalar = mul_vec3_scalar
+        109   6C 00064F10 neg_mat2 = neg_mat2
+        110   6D 0005F7A0 neg_mat3 = neg_mat3
+        111   6E 00064E80 neg_vec2 = neg_vec2
+        112   6F 0005F710 neg_vec3 = neg_vec3
+        113   70 000377F0 norm_array_m = norm_array_m
+        114   71 00037750 norm_array_v = norm_array_v
+        115   72 00072C40 norm_quat4 = norm_quat4
+        116   73 00063750 norm_vec2 = norm_vec2
+        117   74 0005DFD0 norm_vec3 = norm_vec3
+        118   75 000670D0 outer_vec2_vec2 = outer_vec2_vec2
+        119   76 00061990 outer_vec3_vec3 = outer_vec3_vec3
+        120   77 000728F0 quat4_array = quat4_array
+        121   78 00072B20 quat4_axis_angle = quat4_axis_angle
+        122   79 00072C80 quat4_conjugate = quat4_conjugate
+        123   7A 00072DF0 quat4_exp = quat4_exp
+        124   7B 000730D0 quat4_from_matrix = quat4_from_matrix
+        125   7C 00072660 quat4_identity = quat4_identity
+        126   7D 00073140 quat4_inverse = quat4_inverse
+        127   7E 00073170 quat4_normalize = quat4_normalize
+        128   7F 00073200 quat4_rotate_diag = quat4_rotate_diag
+        129   80 000731A0 quat4_rotate_vec3 = quat4_rotate_vec3
+        130   81 00072B70 quat4_scalar = quat4_scalar
+        131   82 000726D0 quat4_scalar_vec3 = quat4_scalar_vec3
+        132   83 00073100 quat4_to_axis_angle = quat4_to_axis_angle
+        133   84 00073090 quat4_to_matrix = quat4_to_matrix
+        134   85 00072810 quat4_uniform = quat4_uniform
+        135   86 00072840 quat4_values = quat4_values
+        136   87 00072BB0 quat4_vector = quat4_vector
+        137   88 00072600 quat4_zeros = quat4_zeros
+        138   89 00073290 rb_get_state = rb_get_state
+        139   8A 00073710 rb_set_state = rb_set_state
+        140   8B 00073C20 rb_state_derivative = rb_state_derivative
+        141   8C 00066B90 solve_mat2_mat2 = solve_mat2_mat2
+        142   8D 00066820 solve_mat2_vec2 = solve_mat2_vec2
+        143   8E 00061460 solve_mat3_mat3 = solve_mat3_mat3
+        144   8F 000610E0 solve_mat3_vec3 = solve_mat3_vec3
+        145   90 00064390 sub_mat2_mat2 = sub_mat2_mat2
+        146   91 00064990 sub_mat2_scalar = sub_mat2_scalar
+        147   92 0005EC10 sub_mat3_mat3 = sub_mat3_mat3
+        148   93 0005F220 sub_mat3_scalar = sub_mat3_scalar
+        149   94 00072F40 sub_quat4_quat4 = sub_quat4_quat4
+        150   95 00064480 sub_scalar_mat2 = sub_scalar_mat2
+        151   96 0005ED00 sub_scalar_mat3 = sub_scalar_mat3
+        152   97 00063820 sub_vec2_vec2 = sub_vec2_vec2
+        153   98 0005E0A0 sub_vec3_vec3 = sub_vec3_vec3
+        154   99 00065E30 trace_mat2 = trace_mat2
+        155   9A 00060B00 trace_mat3 = trace_mat3
+        156   9B 00065BA0 transpose_mat2 = transpose_mat2
+        157   9C 00060450 transpose_mat3 = transpose_mat3
+        158   9D 00062CA0 vec2_ones = vec2_ones
+        159   9E 000634E0 vec2_uniform = vec2_uniform
+        160   9F 00062C40 vec2_ux = vec2_ux
+        161   A0 00062C70 vec2_uy = vec2_uy
+        162   A1 000630D0 vec2_values = vec2_values
+        163   A2 00062BE0 vec2_zeros = vec2_zeros
+>>>>>>> origin/master
         164   A3 00062030 vec3_angle = vec3_angle
         165   A4 0005D490 vec3_ones = vec3_ones
         166   A5 0005DD60 vec3_uniform = vec3_uniform
