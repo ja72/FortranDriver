@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 
 using JA.Fortran;
-
 using Windows.Management.Deployment;
 
 namespace JA.UI
@@ -94,7 +93,8 @@ namespace JA.UI
             chart.Stroke.Color = Color.Purple;
             chart.DrawPoints(g, spline.X.ToArray(), spline.Y.ToArray());
             int count = chart.HorizontalPixels;
-            double[] x = HelperFunctions.LinearSpace(count, spline.X.First(), spline.X.Last());
+
+            double[] x = FVector.LinearSpace(spline.X.First(), spline.X.Last(), count);
             var cs = spline.Interpolate(x);
             chart.Stroke.Color = Color;
             chart.DrawCurve(g, cs.X.ToArray(), cs.Y.ToArray(), false);

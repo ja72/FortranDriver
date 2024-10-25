@@ -17,6 +17,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Content Include="..\FortranDriverDLL\exports_dump.txt" Link="exports_dump.txt">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Include="..\FortranDriverDLL\x64\Debug\FortranDriverDLL.dll" Link="FortranDriverDLL_d.dll">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>

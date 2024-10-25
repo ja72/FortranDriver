@@ -3,153 +3,13 @@
     implicit none
 
     integer ( int32 ), parameter :: dim_num = 3
-    real ( real64 ), parameter :: r8_pi = 3.1415926535897932D+00
-    integer ( int32 ), parameter :: i4_huge = 2147483647
     
-    interface dot
-        module procedure :: &
-            quat_dot_f
-    end interface    
-
-    interface cross
-        module procedure :: &
-            quat_cross_f
-    end interface
-
     contains
 
     ! *****************************************************************************
     ! ** REAL FUNCTIONS                                                         **
     ! *****************************************************************************
 
-    pure function acos_scalar ( c ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: acos_scalar
-    !*****************************************************************************80
-    !
-    !! R8_ACOS computes the arc cosine function, with argument truncation.
-    !
-    !  Discussion:
-    !
-    !    If you call your system ACOS routine with an input argument that is
-    !    even slightly outside the range [-1.0, 1.0 ], you may get an unpleasant
-    !    surprise (I did).
-    !
-    !    This routine simply truncates arguments outside the range.
-    !
-    !  Licensing:
-    !
-    !    This code is distributed under the GNU LGPL license.
-    !
-    !  Modified:
-    !
-    !    19 October 2012
-    !
-    !  Author:
-    !
-    !    John Burkardt
-    !
-    !  Parameters:
-    !
-    !    Input, real ( real64 ) C, the argument.
-    !
-    !    Output, real ( real64 ) R8_ACOS, an angle whose cosine is C.
-    !
-    implicit none
-
-    real ( real64 ), intent(in), value :: c
-    real ( real64 ) acos_scalar
-    real ( real64 ) c2
-
-    c2 = c
-    c2 = max ( c2, -1.0D+00 )
-    c2 = min ( c2, +1.0D+00 )
-
-    acos_scalar = acos ( c2 )
-
-    return
-    end
-    pure function degrees_to_radians ( angle_deg ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: degrees_to_radians
-    !*****************************************************************************80
-    !
-    !! DEGREES_TO_RADIANS converts an angle from degrees to radians.
-    !
-    !  Licensing:
-    !
-    !    This code is distributed under the GNU LGPL license.
-    !
-    !  Modified:
-    !
-    !    10 July 1999
-    !
-    !  Author:
-    !
-    !    John Burkardt
-    !
-    !  Parameters:
-    !
-    !    Input, real ( real64 ) ANGLE_DEG, an angle in degrees.
-    !
-    !    Output, real ( real64 ) DEGREES_TO_RADIANS, the equivalent angle
-    !    in radians.
-    !
-    implicit none
-
-    real ( real64 ), intent(in), value :: angle_deg
-    real ( real64 ) degrees_to_radians
-    !real ( real64 ), parameter :: r8_pi = 3.141592653589793D+00
-
-    degrees_to_radians = ( angle_deg / 180.0D+00 ) * r8_pi
-
-    return
-    end
-    pure function radians_to_degrees ( angle_rad ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: radians_to_degrees
-    !*****************************************************************************80
-    !
-    !! RADIANS_TO_DEGREES converts an angle from radians to degrees.
-    !
-    !  Licensing:
-    !
-    !    This code is distributed under the GNU LGPL license.
-    !
-    !  Modified:
-    !
-    !    10 July 1999
-    !
-    !  Author:
-    !
-    !    John Burkardt
-    !
-    !  Parameters:
-    !
-    !    Input, real ( real64 ) ANGLE_RAD, an angle in radians.
-    !
-    !    Output, real ( real64 ) RADIANS_TO_DEGREES, the equivalent angle
-    !    in degrees.
-    !
-    implicit none
-
-    real ( real64 ), intent(in), value :: angle_rad
-    !real ( real64 ), parameter :: r8_pi = 3.141592653589793D+00
-    real ( real64 ) radians_to_degrees
-
-    radians_to_degrees = ( angle_rad / r8_pi ) * 180.0D+00
-
-    return
-    end
-    
-    pure function r8_dot_f(a,b) result(c)
-    real(real64), intent(in) :: a(3), b(3)
-    real(real64) :: c
-        c = dot_product(a, b)
-    end function
-    
-    pure function quat_dot_f(a,b) result(c)
-    real(real64), intent(in) :: a(4), b(4)
-    real(real64) :: c
-        c = dot_product(a, b)
-    end function
     
     pure function r8_cross_f(a,b) result(c)
     real(real64), intent(in) :: a(3), b(3)
@@ -169,8 +29,8 @@
     ! ** QUATERNION FUNCTIONS                                                    **
     ! *****************************************************************************
     
-    subroutine quat_normal_01 ( seed, q ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: quat_normal_01
+    subroutine quat_normal_01 ( seed, q ) 
+    use mod_common, only : pi
     use mod_fortran, only : call_uniform_array_v
     !*****************************************************************************80
     !
@@ -204,29 +64,28 @@
     integer ( int32 ), intent(inout) :: seed
     real ( real64 ), intent(out) :: q(4)
     real ( real64 ) r(4)
-    !real ( real64 ), parameter :: r8_pi = 3.141592653589793D+00
+    !real ( real64 ), parameter :: pi = 3.141592653589793D+00
 
     call call_uniform_array_v ( 4, seed, r )
 
     q(1:3:2) = &
-        sqrt ( - 2.0D+00 * log ( r(1:3:2) ) ) * cos ( 2.0D+00 * r8_pi * r(2:4:2) )
+        sqrt ( - 2.0D+00 * log ( r(1:3:2) ) ) * cos ( 2.0D+00 * pi * r(2:4:2) )
 
     q(2:4:2) = &
-        sqrt ( - 2.0D+00 * log ( r(1:3:2) ) ) * sin ( 2.0D+00 * r8_pi * r(2:4:2) )
+        sqrt ( - 2.0D+00 * log ( r(1:3:2) ) ) * sin ( 2.0D+00 * pi * r(2:4:2) )
     
     return
     end    
     
-    pure subroutine quat_scalar(q, s) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: quat_scalar
+    pure subroutine quat_scalar(q, s)
     real(real64), intent(in) :: q(4)
     real(real64), intent(out) :: s
 
     s = q(1)
 
     end subroutine
-    pure subroutine quat_vector(q, v) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: quat_vector
+    
+    pure subroutine quat_vector(q, v) 
     real(real64), intent(in) :: q(4)
     real(real64), intent(out) :: v(3)
 
@@ -238,8 +97,7 @@
     ! ** QUATERNION FUNCTIONS                                                    **
     ! *****************************************************************************
 
-    pure subroutine quat_conjugate ( q, q2 ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: quat_conjugate
+    pure subroutine quat_conjugate ( q, q2 ) 
     !*****************************************************************************80
     !
     !! Q8_CONJUGATE conjugates a quaternion.
@@ -284,8 +142,7 @@
     return
     end
     
-    pure subroutine quat_exponentiate ( q1, q2 ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: quat_exponentiate
+    pure subroutine quat_exponentiate ( q1, q2 )    
     !*****************************************************************************80
     !
     !! Q8_EXPONENTIATE exponentiates a quaternion.
@@ -340,8 +197,7 @@
 
     return
     end
-    pure subroutine quat_inverse ( q, q2 ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: quat_inverse
+    pure subroutine quat_inverse ( q, q2 )
     !*****************************************************************************80
     !
     !! Q8_INVERSE inverts a quaternion.
@@ -385,8 +241,8 @@
 
     return
     end    
-    pure subroutine quat_multiply ( q1, q2, q3 ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: quat_multiply
+    
+    pure subroutine quat_multiply ( q1, q2, q3 )
     !*****************************************************************************80
     !
     !! Q8_MULTIPLY multiplies two quaternions.
@@ -436,8 +292,8 @@
 
     return
     end
-    pure subroutine quat_multiply2 ( q1, q2, q3 ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: quat_multiply2
+    pure subroutine quat_multiply2 ( q1, q2, q3 )
+    
     !*****************************************************************************80
     !
     !! Q8_MULTIPLY2 multiplies two quaternions using a matrix format.
@@ -493,8 +349,8 @@
 
     return
     end
-    pure function quat_norm ( q ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: quat_norm
+    pure function quat_norm ( q ) 
+    
     !*****************************************************************************80
     !
     !! Q8_NORM computes the norm of a quaternion.
@@ -537,33 +393,7 @@
 
     return
     end
-    pure subroutine quat_add(x,y,z) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: quat_add
-    real(real64), intent(in) :: x(4), y(4)
-    real(real64), intent(out) :: z(4)
-    
-        z = x + y
-    
-    end subroutine    
-    pure subroutine quat_subtract(x,y,z) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: quat_subtract
-    real(real64), intent(in) :: x(4), y(4)
-    real(real64), intent(out) :: z(4)
-    
-        z = x - y
-    
-    end subroutine    
-    pure subroutine quat_scale(f,x,r) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: quat_scale
-    real(real64), intent(in), value :: f
-    real(real64), intent(in) :: x(4)
-    real(real64), intent(out) :: r(4)
-    
-        r = f * x
-    
-    end subroutine            
-    pure subroutine quat_dot ( q1, q2, s ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: quat_dot
+    pure subroutine quat_dot ( q1, q2, s )
     !*****************************************************************************80
     !
     !! Q8_DOT computes the inner product of two quaternions.
@@ -608,8 +438,7 @@
 
     return
     end
-    pure subroutine quat_cross ( q1, q2, v ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: quat_cross
+    pure subroutine quat_cross ( q1, q2, v )
     !*****************************************************************************80
     !
     !! Q8_DOT computes the cross product of two quaternions.
@@ -648,9 +477,9 @@
     implicit none
 
     real ( real64 ), intent(in) :: q1(4), q2(4)
-    real ( real64 ), intent(out) :: v(4)
+    real ( real64 ), intent(out) :: v(3)
 
-        v = [ 0.0_real64, &
+        v = [ &
               q1(3)*q2(4) - q1(4)*q2(3), &
               q1(4)*q2(2) - q1(2)*q2(4), &
               q1(2)*q2(3) - q1(3)*q2(2) ]
@@ -673,8 +502,8 @@
     ! ** ROTATION FUNCTIONS                                                      **
     ! *****************************************************************************
     
-    subroutine rotate_normal_01 ( seed, q ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: rotate_normal_01
+    subroutine rotate_normal_01 ( seed, q ) 
+    use mod_common, only : pi
     use mod_fortran, only : call_uniform_array_v
     !*****************************************************************************80
     !
@@ -708,25 +537,24 @@
     integer ( int32 ), intent(inout) :: seed
     real ( real64 ), intent(out) :: q(4)
     real ( real64 ) r(4), qt(4)
-    !real ( real64 ), parameter :: r8_pi = 3.141592653589793D+00
+    !real ( real64 ), parameter :: pi = 3.141592653589793D+00
 
     call call_uniform_array_v ( 4, seed, r )
 
     qt(1:3:2) = &
-        sqrt ( - 2.0D+00 * log ( r(1:3:2) ) ) * cos ( 2.0D+00 * r8_pi * r(2:4:2) )
+        sqrt ( - 2.0D+00 * log ( r(1:3:2) ) ) * cos ( 2.0D+00 * pi * r(2:4:2) )
 
     qt(2:4:2) = &
-        sqrt ( - 2.0D+00 * log ( r(1:3:2) ) ) * sin ( 2.0D+00 * r8_pi * r(2:4:2) )
+        sqrt ( - 2.0D+00 * log ( r(1:3:2) ) ) * sin ( 2.0D+00 * pi * r(2:4:2) )
     
         call rotate_normalize(qt, q)
 
     return
     end    
     
-    pure subroutine rotate_normalize(qt,q) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: rotate_normalize
+    pure subroutine rotate_normalize(qt,q) 
     real ( real64 ), intent(in) :: qt(4)
-    real ( real64 ), intent(inout) :: q(4)
+    real ( real64 ), intent(out) :: q(4)
     real ( real64 ) :: m
         m = quat_norm(qt)
         if( m>0.0D+00) then
@@ -737,8 +565,7 @@
     return
     end    
     
-    pure subroutine rotate_axis_vector ( axis, angle, v, w ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: rotate_axis_vector
+    pure subroutine rotate_axis_vector ( axis, angle, v, w ) 
     !*****************************************************************************80
     !
     !! ROTATION_AXIS_VECTOR rotates a vector around an axis vector in 3D.
@@ -844,8 +671,7 @@
 
     return
     end
-    pure subroutine rotate_axis2mat ( axis, angle, a ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: rotate_axis2mat
+    pure subroutine rotate_axis2mat ( axis, angle, a ) 
     !*****************************************************************************80
     !
     !! ROTATION_AXIS2MAT converts a rotate from axis to matrix format in 3D.
@@ -925,8 +751,7 @@
 
     return
     end
-    pure subroutine rotate_axis2quat ( axis, angle, q ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: rotate_axis2quat
+    pure subroutine rotate_axis2quat ( axis, angle, q ) 
     !*****************************************************************************80
     !
     !! ROTATION_AXIS2QUAT converts rotate from axis to quaternion form in 3D.
@@ -991,8 +816,7 @@
 
     return
     end
-    pure subroutine rotate_mat_vector ( a, v, w ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: rotate_mat_vector
+    pure subroutine rotate_mat_vector ( a, v, w ) 
     !*****************************************************************************80
     !
     !! ROTATION_MAT_VECTOR applies a marix rotate to a vector in 3d.
@@ -1030,8 +854,8 @@
     return
     end
     
-    pure subroutine rotate_mat2axis ( a, axis, angle ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: rotate_mat2axis
+    pure subroutine rotate_mat2axis ( a, axis, angle ) 
+    use mod_common, only : acos_scalar
     !*****************************************************************************80
     !
     !! ROTATION_MAT2AXIS converts a rotate from matrix to axis format in 3D.
@@ -1106,8 +930,8 @@
 
     return
     end
-    pure subroutine rotate_mat2quat ( a, q ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: rotate_mat2quat
+    pure subroutine rotate_mat2quat ( a, q ) 
+    use mod_common, only : acos_scalar
     !*****************************************************************************80
     !
     !! ROTATION_MAT2QUAT converts rotate from matrix to quaternion format.
@@ -1191,8 +1015,7 @@
     return
     end
     
-    pure subroutine rotate_quat_vector ( q, v, w ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: rotate_quat_vector
+    pure subroutine rotate_quat_vector ( q, v, w ) 
     !*****************************************************************************80
     !
     !! ROTATION_QUAT_VECTOR applies a quaternion rotate to a vector in 3D.
@@ -1250,8 +1073,7 @@
 
     return
     end
-    pure subroutine rotate_quat_vector_inv ( q1, v, w, inverse ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: rotate_quat_vector_inv
+    pure subroutine rotate_quat_vector_inv ( q1, v, w, inverse ) 
     !*****************************************************************************80
     !
     !! ROTATION_QUAT_VECTOR applies a quaternion rotate to a vector in 3D.
@@ -1318,8 +1140,7 @@
 
     return
     end
-    pure subroutine rotate_quat2axis ( q, axis, angle ) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: rotate_quat2axis
+    pure subroutine rotate_quat2axis ( q, axis, angle ) 
     !*****************************************************************************80
     !
     !! ROTATION_QUAT2AXIS converts rotate from quaternion to axis form in 3D.
@@ -1387,8 +1208,7 @@
 
     return
     end
-    pure subroutine rotate_quat2mat ( q, a) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: rotate_quat2mat
+    pure subroutine rotate_quat2mat ( q, a) 
     !*****************************************************************************80
     !
     !! ROTATION_QUAT2MAT converts rotate from quaternion to matrix form in 3D.
@@ -1467,8 +1287,7 @@
 
     return
     end
-    pure subroutine rotate_quat2mat_inv ( q, a, inverse) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: rotate_quat2mat_inv
+    pure subroutine rotate_quat2mat_inv ( q, a, inverse) 
     !*****************************************************************************80
     !
     !! ROTATION_QUAT2MAT converts rotate from quaternion to matrix form in 3D.
@@ -1549,18 +1368,7 @@
     a(3,1) = ( 1.0D+00 - ca ) * v3 * v1 - sa * v2
 
     a(2,3) = ( 1.0D+00 - ca ) * v2 * v3 - sa * v1
-    a(3,2) = ( 1.0D+00 - ca ) * v3 * v2 + sa * v1
-        
-    !a(1,2) = ( 1.0D+00 - ca ) * v2 * v1 + sa * v3
-    !a(2,1) = ( 1.0D+00 - ca ) * v1 * v2 - sa * v3
-    !
-    !a(1,3) = ( 1.0D+00 - ca ) * v3 * v1 - sa * v2
-    !a(3,1) = ( 1.0D+00 - ca ) * v1 * v3 + sa * v2
-    !
-    !a(2,3) = ( 1.0D+00 - ca ) * v3 * v2 + sa * v1
-    !a(3,2) = ( 1.0D+00 - ca ) * v2 * v3 - sa * v1
-        
-    
+    a(3,2) = ( 1.0D+00 - ca ) * v3 * v2 + sa * v1    
 
     return
     end

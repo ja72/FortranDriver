@@ -1,0 +1,201 @@
+Microsoft (R) COFF/PE Dumper Version 14.41.34123.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file x64\Debug\FortranDriverDLL.dll
+
+File Type: DLL
+
+  Section contains the following exports for FortranDriverDLL.dll
+
+    00000000 characteristics
+           0 time date stamp
+        0.00 version
+           1 ordinal base
+         171 number of functions
+         171 number of names
+
+    ordinal hint RVA      name
+
+          1    0 00066EA0 add_mat2_mat2 = add_mat2_mat2
+          2    1 00067490 add_mat2_scalar = add_mat2_scalar
+          3    2 0005E130 add_mat3_mat3 = add_mat3_mat3
+          4    3 0005E720 add_mat3_scalar = add_mat3_scalar
+          5    4 0006B680 add_quat4_quat4 = add_quat4_quat4
+          6    5 00066F90 add_scalar_mat2 = add_scalar_mat2
+          7    6 0005E220 add_scalar_mat3 = add_scalar_mat3
+          8    7 00066D80 add_vec2_vec2 = add_vec2_vec2
+          9    8 0005E010 add_vec3_vec3 = add_vec3_vec3
+         10    9 0005A0D0 call_add_array_m = call_add_array_m
+         11    A 000564B0 call_add_array_v = call_add_array_v
+         12    B 00059960 call_array_diag_m = call_array_diag_m
+         13    C 00059D90 call_array_scalar_m = call_array_scalar_m
+         14    D 000589C0 call_array_set_column = call_array_set_column
+         15    E 00058D10 call_array_set_row = call_array_set_row
+         16    F 000598C0 call_array_zeros_m = call_array_zeros_m
+         17   10 00055B00 call_array_zeros_v = call_array_zeros_v
+         18   11 0005CFD0 call_determinant_array_m = call_determinant_array_m
+         19   12 00056330 call_elem_array_v = call_elem_array_v
+         20   13 00059060 call_fill_array_m = call_fill_array_m
+         21   14 00056EC0 call_inner_array_m = call_inner_array_m
+         22   15 00056DF0 call_inner_array_v = call_inner_array_v
+         23   16 0005D0B0 call_inverse_array_m = call_inverse_array_m
+         24   17 0006AD00 call_mat2_to_array = call_mat2_to_array
+         25   18 00062B10 call_mat3_to_array = call_mat3_to_array
+         26   19 00058190 call_mul_array_mm = call_mul_array_mm
+         27   1A 000579D0 call_mul_array_mv = call_mul_array_mv
+         28   1B 00057DB0 call_mul_array_vm = call_mul_array_vm
+         29   1C 000576D0 call_outer_array_v = call_outer_array_v
+         30   1D 00073C10 call_quat_test_all = call_quat_test_all
+         31   1E 000595D0 call_random_array_m = call_random_array_m
+         32   1F 000561B0 call_random_array_v = call_random_array_v
+         33   20 0005B5B0 call_reshape_array_mm = call_reshape_array_mm
+         34   21 0005AF20 call_reshape_array_mv = call_reshape_array_mv
+         35   22 0005B030 call_reshape_array_vm = call_reshape_array_vm
+         36   23 00056B60 call_round_array_m = call_round_array_m
+         37   24 000569D0 call_round_array_v = call_round_array_v
+         38   25 0005A8D0 call_scale_array_m = call_scale_array_m
+         39   26 000568B0 call_scale_array_v = call_scale_array_v
+         40   27 0005B970 call_slice_array_m = call_slice_array_m
+         41   28 0005B710 call_slice_array_v = call_slice_array_v
+         42   29 0005C8A0 call_slice_col_array_m = call_slice_col_array_m
+         43   2A 0005C1C0 call_slice_cols_array_m = call_slice_cols_array_m
+         44   2B 0005C500 call_slice_row_array_m = call_slice_row_array_m
+         45   2C 0005BE80 call_slice_rows_array_m = call_slice_rows_array_m
+         46   2D 0005CC30 call_solve_array_mm = call_solve_array_mm
+         47   2E 00058750 call_solve_array_mv = call_solve_array_mv
+         48   2F 000344A0 call_spline_calc_ypp_array = call_spline_calc_ypp_array
+         49   30 00034BA0 call_spline_calc_ypp_domain = call_spline_calc_ypp_domain
+         50   31 00035810 call_spline_interpolate_array = call_spline_interpolate_array
+         51   32 000365E0 call_spline_interpolate_domain = call_spline_interpolate_domain
+         52   33 00035220 call_spline_interpolate_point = call_spline_interpolate_point
+         53   34 0005A4D0 call_sub_array_m = call_sub_array_m
+         54   35 000566B0 call_sub_array_v = call_sub_array_v
+         55   36 00054D40 call_test_dowork = call_test_dowork
+         56   37 0005AAF0 call_transpose_array_m = call_transpose_array_m
+         57   38 00055DB0 call_uniform_array_m = call_uniform_array_m
+         58   39 00055B60 call_uniform_array_v = call_uniform_array_v
+         59   3A 0006AC90 call_vec2_to_array = call_vec2_to_array
+         60   3B 00062AA0 call_vec3_to_array = call_vec3_to_array
+         61   3C 0006B7E0 cross_quat4_quat4 = cross_quat4_quat4
+         62   3D 0006ABE0 cross_scalar_vec2 = cross_scalar_vec2
+         63   3E 0006AB30 cross_vec2_scalar = cross_vec2_scalar
+         64   3F 0006AAE0 cross_vec2_vec2 = cross_vec2_vec2
+         65   40 00061E80 cross_vec3_op = cross_vec3_op
+         66   41 00061DB0 cross_vec3_vec3 = cross_vec3_vec3
+         67   42 000694C0 determinant_mat2 = determinant_mat2
+         68   43 00060BA0 determinant_mat3 = determinant_mat3
+         69   44 000690A0 div_mat2_scalar = div_mat2_scalar
+         70   45 00060370 div_mat3_scalar = div_mat3_scalar
+         71   46 00069010 div_vec2_scalar = div_vec2_scalar
+         72   47 000602E0 div_vec3_scalar = div_vec3_scalar
+         73   48 00069560 inner_mat2_mat2 = inner_mat2_mat2
+         74   49 000606E0 inner_mat3_mat3 = inner_mat3_mat3
+         75   4A 0006B820 inner_quat4_quat4 = inner_quat4_quat4
+         76   4B 0006A620 inner_vec2_vec2 = inner_vec2_vec2
+         77   4C 000618F0 inner_vec3_vec3 = inner_vec3_vec3
+         78   4D 00069970 inverse_mat2 = inverse_mat2
+         79   4E 00060C40 inverse_mat3 = inverse_mat3
+         80   4F 00001E60 linspace = linspace
+         81   50 00066380 mat2_eye = mat2_eye
+         82   51 00066620 mat2_ones = mat2_ones
+         83   52 00066BC0 mat2_uniform = mat2_uniform
+         84   53 00066750 mat2_values = mat2_values
+         85   54 000662F0 mat2_zeros = mat2_zeros
+         86   55 0005D580 mat3_eye = mat3_eye
+         87   56 0005D820 mat3_ones = mat3_ones
+         88   57 00062380 mat3_rotate_diag = mat3_rotate_diag
+         89   58 00062220 mat3_rotate_vec3 = mat3_rotate_vec3
+         90   59 0005DE50 mat3_uniform = mat3_uniform
+         91   5A 0005D960 mat3_values = mat3_values
+         92   5B 0005D4F0 mat3_zeros = mat3_zeros
+         93   5C 000688A0 mul_mat2_mat2 = mul_mat2_mat2
+         94   5D 00068700 mul_mat2_scalar = mul_mat2_scalar
+         95   5E 00068D70 mul_mat2_vec2 = mul_mat2_vec2
+         96   5F 0005FB60 mul_mat3_mat3 = mul_mat3_mat3
+         97   60 0005F9A0 mul_mat3_scalar = mul_mat3_scalar
+         98   61 00060040 mul_mat3_vec3 = mul_mat3_vec3
+         99   62 0006B7A0 mul_quat4_quat4 = mul_quat4_quat4
+        100   63 000687D0 mul_scalar_mat2 = mul_scalar_mat2
+        101   64 0005FA80 mul_scalar_mat3 = mul_scalar_mat3
+        102   65 0006B5F0 mul_scalar_quat4 = mul_scalar_quat4
+        103   66 00068670 mul_scalar_vec2 = mul_scalar_vec2
+        104   67 0005F910 mul_scalar_vec3 = mul_scalar_vec3
+        105   68 00068EC0 mul_vec2_mat2 = mul_vec2_mat2
+        106   69 000685E0 mul_vec2_scalar = mul_vec2_scalar
+        107   6A 00060190 mul_vec3_mat3 = mul_vec3_mat3
+        108   6B 0005F880 mul_vec3_scalar = mul_vec3_scalar
+        109   6C 00068500 neg_mat2 = neg_mat2
+        110   6D 0005F7A0 neg_mat3 = neg_mat3
+        111   6E 00068470 neg_vec2 = neg_vec2
+        112   6F 0005F710 neg_vec3 = neg_vec3
+        113   70 000377F0 norm_array_m = norm_array_m
+        114   71 00037750 norm_array_v = norm_array_v
+        115   72 0006B410 norm_quat4 = norm_quat4
+        116   73 00066D40 norm_vec2 = norm_vec2
+        117   74 0005DFD0 norm_vec3 = norm_vec3
+        118   75 0006A6C0 outer_vec2_vec2 = outer_vec2_vec2
+        119   76 00061990 outer_vec3_vec3 = outer_vec3_vec3
+        120   77 0006B0C0 quat4_array = quat4_array
+        121   78 0006B2F0 quat4_axis_angle = quat4_axis_angle
+        122   79 0006B450 quat4_conjugate = quat4_conjugate
+        123   7A 0006B5C0 quat4_exp = quat4_exp
+        124   7B 0006B8A0 quat4_from_matrix = quat4_from_matrix
+        125   7C 0006AE30 quat4_identity = quat4_identity
+        126   7D 0006B910 quat4_inverse = quat4_inverse
+        127   7E 0006B940 quat4_normalize = quat4_normalize
+        128   7F 0006B9D0 quat4_rotate_diag = quat4_rotate_diag
+        129   80 0006B970 quat4_rotate_vec3 = quat4_rotate_vec3
+        130   81 0006B340 quat4_scalar = quat4_scalar
+        131   82 0006AEA0 quat4_scalar_vec3 = quat4_scalar_vec3
+        132   83 0006B8D0 quat4_to_axis_angle = quat4_to_axis_angle
+        133   84 0006B860 quat4_to_matrix = quat4_to_matrix
+        134   85 0006AFE0 quat4_uniform = quat4_uniform
+        135   86 0006B010 quat4_values = quat4_values
+        136   87 0006B380 quat4_vector = quat4_vector
+        137   88 0006ADD0 quat4_zeros = quat4_zeros
+        138   89 0006BA60 rb_get_state = rb_get_state
+        139   8A 0006BEE0 rb_set_state = rb_set_state
+        140   8B 0006C3F0 rb_state_derivative = rb_state_derivative
+        141   8C 0006A180 solve_mat2_mat2 = solve_mat2_mat2
+        142   8D 00069E10 solve_mat2_vec2 = solve_mat2_vec2
+        143   8E 00061460 solve_mat3_mat3 = solve_mat3_mat3
+        144   8F 000610E0 solve_mat3_vec3 = solve_mat3_vec3
+        145   90 00067980 sub_mat2_mat2 = sub_mat2_mat2
+        146   91 00067F80 sub_mat2_scalar = sub_mat2_scalar
+        147   92 0005EC10 sub_mat3_mat3 = sub_mat3_mat3
+        148   93 0005F220 sub_mat3_scalar = sub_mat3_scalar
+        149   94 0006B710 sub_quat4_quat4 = sub_quat4_quat4
+        150   95 00067A70 sub_scalar_mat2 = sub_scalar_mat2
+        151   96 0005ED00 sub_scalar_mat3 = sub_scalar_mat3
+        152   97 00066E10 sub_vec2_vec2 = sub_vec2_vec2
+        153   98 0005E0A0 sub_vec3_vec3 = sub_vec3_vec3
+        154   99 00069420 trace_mat2 = trace_mat2
+        155   9A 00060B00 trace_mat3 = trace_mat3
+        156   9B 00069190 transpose_mat2 = transpose_mat2
+        157   9C 00060450 transpose_mat3 = transpose_mat3
+        158   9D 00066290 vec2_ones = vec2_ones
+        159   9E 00066AD0 vec2_uniform = vec2_uniform
+        160   9F 00066230 vec2_ux = vec2_ux
+        161   A0 00066260 vec2_uy = vec2_uy
+        162   A1 000666C0 vec2_values = vec2_values
+        163   A2 000661D0 vec2_zeros = vec2_zeros
+        164   A3 00062030 vec3_angle = vec3_angle
+        165   A4 0005D490 vec3_ones = vec3_ones
+        166   A5 0005DD60 vec3_uniform = vec3_uniform
+        167   A6 0005D3D0 vec3_ux = vec3_ux
+        168   A7 0005D410 vec3_uy = vec3_uy
+        169   A8 0005D450 vec3_uz = vec3_uz
+        170   A9 0005D8C0 vec3_values = vec3_values
+        171   AA 0005D370 vec3_zeros = vec3_zeros
+
+  Summary
+
+        1000 .00cfg
+        9000 .data
+        2000 .pdata
+       13000 .rdata
+        1000 .reloc
+        1000 .rsrc
+       76000 .text
+        5000 .trace

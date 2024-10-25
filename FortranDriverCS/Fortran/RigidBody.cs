@@ -3,30 +3,28 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text.Json;
-using Microsoft.VisualBasic;
 
 namespace JA.Fortran
 {
-    public delegate void SumLoads(
-        double t,
-        double[] pos,
-        FQuaternion ori,
-        double[] vel,
-        double[] omg,
-        out double[] frc,
-        out double[] tau);
+    public delegate void rb_sum_loads(
+            double t,
+            FVector3 pos,
+            FQuat4 ori,
+            FVector3 vel,
+            FVector3 omg,
+            out FVector3 frc,
+            out FVector3 tau);
     public readonly struct RigidBody
     {
         public readonly double mass;
         public readonly double Ixx, Iyy, Izz;
 
-        public static readonly double[] o_ = [0.0, 0.0, 0.0];
-        public static readonly double[] i_ = [1.0, 0.0, 0.0];
-        public static readonly double[] j_ = [0.0, 1.0, 0.0];
-        public static readonly double[] k_ = [0.0, 0.0, 1.0];
-        public static readonly double[] q_eye = [1.0, 0.0, 0.0, 0.0];
-        public static readonly double[] gee_ = [0.0, -10.0, 0.0];
+        public static readonly FVector3 o_   = new FVector3(0.0, 0.0, 0.0);
+        public static readonly FVector3 i_   = new FVector3(1.0, 0.0, 0.0);
+        public static readonly FVector3 j_   = new FVector3(0.0, 1.0, 0.0);
+        public static readonly FVector3 k_   = new FVector3(0.0, 0.0, 1.0);
+        public static readonly FQuat4 q_eye  = new FQuat4  (1.0, 0.0, 0.0, 0.0);
+        public static readonly FVector3 gee_ = new FVector3(0.0, -10.0, 0.0);
 
         public RigidBody(double mass, double Ixx, double Iyy, double Izz)
         {
@@ -36,117 +34,87 @@ namespace JA.Fortran
             this.Izz = Izz;
             Loads = SetGravityLoads;
         }
-        public RigidBody(double mass, double Ixx, double Iyy, double Izz, SumLoads loads)
+        public RigidBody(double mass, double Ixx, double Iyy, double Izz, rb_sum_loads loads)
             : this(mass, Ixx, Iyy, Izz)
         {
             Loads = loads;
         }
 
         public void SetGravityLoads(double t,
-                double[] pos,
-                FQuaternion ori,
-                double[] vel,
-                double[] omg,
-                [Out] out double[] frc,
-                [Out] out double[] tau)
+                FVector3 pos,
+                FQuat4   ori,
+                FVector3 vel,
+                FVector3 omg,
+                [Out] out FVector3 frc,
+                [Out] out FVector3 tau)
         {
-            var R = ori.ToRotationMatrix();
+            //var R = ori.ToRotationMatrix();
 
-            frc = new double[3];
-            tau = new double[3];
-            for (int i = 0; i < 3; i++)
-            {
-                frc[i] = mass * gee_[i];
-                tau[i] = 0.0;
-            }
+            frc = mass * gee_;
+            tau=FVector3.Zero;
         }
 
-        public SumLoads Loads { get; }
+        public rb_sum_loads Loads { get; }
 
-        public void GetStateDerivative(double t, double[] y, out FVector yp)
+        public void GetStateDerivative(double t, FVector y, ref FVector yp)
         {
-            SumLoads f = Loads;
-            void nativeLoads(
-                double t,
-                double[] pos,
-                double[] ori,
-                double[] vel,
-                double[] omg,
-                [Out] out double[] frc,
-                [Out] out double[] tau)
-            {
-                var q = new FQuaternion(ori);
-                f(t, pos, q, vel, omg, out frc, out tau);
-            };
-            double[] data = new double[13];
-            rb_state_derivative(this, t, y, nativeLoads, data);
-            yp = new FVector(data);
+            //rb_sum_loads f = Loads;
+            double[] data = yp.Data;
+            rb_state_derivative(this, t, y, Loads, ref data);
+            //yp = new FVector(data);
         }
 
-        public void GetState(double[] pos, FQuaternion ori, double[] vee, double[] omg, out FVector y)
+        public void GetState(FVector3 pos, FQuat4 ori, FVector3 vee, FVector3 omg, ref FVector y)
         {
-            var data = new double[13];
-            rb_get_state(this, pos, ori.Data, vee, omg, data);
-            y = new FVector(data);
+            double[] data = y.Data;
+            rb_get_state(this, pos, ori, vee, omg, ref data);
+            //y = new FVector(data);
         }
-        public void SetState(FVector y, out double[] pos, out FQuaternion ori, out double[] vee, out double[] omg)
+        public void SetState(FVector y, out FVector3 pos, out FQuat4 ori, out FVector3 vee, out FVector3 omg)
         {
-            pos = new double[3];
-            var q = new double[4];
-            vee = new double[3];
-            omg = new double[3];
-            rb_set_state(this, y.Data, pos, q, vee, omg);
-            ori = new FQuaternion(q);
+            double[] data = y.Data;
+            rb_set_state(this, data, out pos, out ori, out vee, out omg);
         }
 
-        [DllImport(
-            FortranMethods.libraryName,
-            CallingConvention = CallingConvention.Cdecl,
+        #region Fortran API
+        const string libraryName = FortranMethods.libraryName;
+
+        [DllImport(libraryName,
+            EntryPoint = "rb_get_state",
             CharSet = CharSet.Ansi,
-            EntryPoint = "rb_get_state"
-            )]
+            CallingConvention = CallingConvention.Cdecl)]
         static extern void rb_get_state(
             [In] RigidBody rb,
-            double[] pos,
-            double[] ori,
-            double[] vee,
-            double[] omg,
-            [Out] double[] y);
+            FVector3 pos,
+            FQuat4 ori,
+            FVector3 vee,
+            FVector3 omg,
+            [In, Out] ref double[] y);
 
-        [DllImport(
-            FortranMethods.libraryName,
-            CallingConvention = CallingConvention.Cdecl,
+        [DllImport(libraryName,
+            EntryPoint = "rb_set_state",
             CharSet = CharSet.Ansi,
-            EntryPoint = "rb_set_state"
-            )]
+            CallingConvention = CallingConvention.Cdecl)]
         static extern void rb_set_state(
             [In] RigidBody rb,
-            double[] y,
-            [Out] double[] pos,
-            [Out] double[] ori,
-            [Out] double[] vee,
-            [Out] double[] omg);
+            [In] double[] y,
+            [Out] out FVector3 pos,
+            [Out] out FQuat4 ori,
+            [Out] out FVector3 vee,
+            [Out] out FVector3 omg);
 
-        delegate void SumLoadsNative(
-        double t,
-        double[] pos,
-        double[] ori,
-        double[] vel,
-        double[] omg,
-        [Out] out double[] frc,
-        [Out] out double[] tau);
-        [DllImport(
-            FortranMethods.libraryName,
-            CallingConvention = CallingConvention.Cdecl,
+        [DllImport(libraryName,
+            EntryPoint = "rb_state_derivative",
             CharSet = CharSet.Ansi,
-            EntryPoint = "rb_state_derivative"
-            )]
+            CallingConvention = CallingConvention.Cdecl)]
         static extern void rb_state_derivative(
             [In] RigidBody rb,
             double time,
-            double[] y,
-            [MarshalAs(UnmanagedType.FunctionPtr)] SumLoadsNative f,
-            [Out] double[] yp);
+            [In] double[] y,
+            [MarshalAs(UnmanagedType.FunctionPtr)] rb_sum_loads f,
+            [In, Out] ref double[] yp);
+
+        #endregion
 
     }
 }

@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
-
 using JA.Fortran;
 
-namespace JA
+namespace JA.UI
 {
     public readonly struct Vector2 :
         IEquatable<Vector2>,
@@ -42,12 +41,12 @@ namespace JA
         public static Vector2 Elliptical(double a, double b, double θ)
             => new Vector2(
             a * Math.Cos(θ),
-            b * Math.Sin(θ)); 
+            b * Math.Sin(θ));
 
         public static Vector2 Random(double minValue = 0, double maxValue = 1)
             => new Vector2(
-                minValue + (maxValue-minValue) * rng.NextDouble(),
-                minValue + (maxValue-minValue) * rng.NextDouble());
+                minValue + (maxValue - minValue) * rng.NextDouble(),
+                minValue + (maxValue - minValue) * rng.NextDouble());
 
         #endregion
 
@@ -57,17 +56,17 @@ namespace JA
         /// <summary>The Y component of the vector.</summary>
         public double Y => data.y;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public double SumSquares() => data.x*data.x+data.y*data.y;
+        public double SumSquares() => data.x * data.x + data.y * data.y;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public double Magnitude() => Math.Sqrt(SumSquares());
         public (double r, double θ) ToPolar() => (Magnitude(), Math.Atan2(Y, X));
 
-        public bool IsZero { get => data.x==0&&data.y==0; }
+        public bool IsZero { get => data.x == 0 && data.y == 0; }
 
         public void Deconstruct(out double x, out double y)
         {
-            (x, y)=data;
-        } 
+            (x, y) = data;
+        }
         #endregion
 
         #region Algebra
@@ -106,7 +105,7 @@ namespace JA
         public static Vector2 Normalize(Vector2 vector)
         {
             double m = vector.Magnitude();
-            return vector/m;
+            return vector / m;
         }
 
         /// <summary>
@@ -115,7 +114,7 @@ namespace JA
         /// <param name="fromPoint">From point.</param>
         /// <param name="toPoint">To point.</param>
         public static double Distance(Vector2 fromPoint, Vector2 toPoint)
-            => (toPoint-fromPoint).Magnitude();
+            => (toPoint - fromPoint).Magnitude();
 
         /// <summary>
         /// Calculate the Eucledian distance squared between two points.
@@ -125,7 +124,7 @@ namespace JA
         /// <param name="fromPoint">From point.</param>
         /// <param name="toPoint">To point.</param>
         public static double DistanceSquared(Vector2 fromPoint, Vector2 toPoint)
-            => (toPoint-fromPoint).SumSquares();
+            => (toPoint - fromPoint).SumSquares();
 
         /// <summary>
         /// Get the direction vector between two points.
@@ -133,13 +132,13 @@ namespace JA
         /// <param name="fromPoint">From point.</param>
         /// <param name="toPoint">To point.</param>
         public static Vector2 Direction(Vector2 fromPoint, Vector2 toPoint)
-            => Normalize(toPoint-fromPoint);
-        
+            => Normalize(toPoint - fromPoint);
+
         /// <summary>
         /// Dot product of two vectors.
         /// </summary>
         public static double Dot(Vector2 a, Vector2 b)
-            => a.data.x*b.data.x + a.data.y*b.data.y;
+            => a.data.x * b.data.x + a.data.y * b.data.y;
 
 #if VECTOR_ALGEBRA
         /// <summary>
@@ -206,7 +205,7 @@ namespace JA
         #region Equality
         public static bool operator ==(Vector2 vector1, Vector2 vector2) => vector1.Equals(vector2);
 
-        public static bool operator !=(Vector2 vector1, Vector2 vector2) => !( vector1==vector2 );
+        public static bool operator !=(Vector2 vector1, Vector2 vector2) => !(vector1 == vector2);
         public override bool Equals(object obj)
         {
             return obj is Vector2 vector && Equals(vector);
@@ -216,7 +215,7 @@ namespace JA
         public override int GetHashCode()
         {
             int hashCode = 1768953197;
-            hashCode=hashCode*-1521134295+data.GetHashCode();
+            hashCode = hashCode * -1521134295 + data.GetHashCode();
             return hashCode;
         }
         #endregion
@@ -248,7 +247,7 @@ namespace JA
         public void CopyTo(double[] array, int index)
             => ToArray().CopyTo(array, index);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo(Array array, int index) 
+        public void CopyTo(Array array, int index)
             => ToArray().CopyTo(array, index);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public double[] ToArray() => AsSpan().ToArray();

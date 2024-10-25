@@ -7,6 +7,8 @@ using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+
+using JA.Fortran;
 using JA.UI;
 
 namespace JA
@@ -14,8 +16,8 @@ namespace JA
     public partial class RunningForm1 : Form
     {
         static readonly Random rng = new Random();
-        FpsCounter clock;
-        DisplayChart chart;
+        readonly FpsCounter clock;
+        readonly DisplayChart chart;
 
         #region Windows API - User32.dll
         [StructLayout(LayoutKind.Sequential)]
@@ -58,17 +60,16 @@ namespace JA
                 Color = Color.Red,
                 Update = (chart) => ox+=0.01,
             };
-            //this.chart.Elements.Add(fun);
-            var x = HelperFunctions.LinearSpace(36, 0.0, x_range);
+            var x = FVector.LinearSpace(0.0, x_range, 36).ToArray();
             var y = x.Select((xi) => -1 + 2* rng.NextDouble()).ToArray();
-            var spl = new Fortran.FSpline(x, y);
+            var spl = new FSpline(x, y);
             var dspl = new DrawSpline(spl)
             {
                 Color = Color.Blue,
                 Update = (chart) =>
                 {
                     double xi = spl[18].X;
-                    spl[18] = new Vector2(xi, -1 + 2* rng.NextDouble());
+                    spl[18] = new FVector2(xi, -1 + 2* rng.NextDouble());
                 },
             };
             this.chart.Elements.Add(dspl);
