@@ -126,7 +126,7 @@ namespace JA.Fortran
         public double A22 => _data[3];
 
         public readonly double Trace() => trace_mat2(this);
-        public readonly double Determinant() => determinant_mat2(this);
+        public readonly double Determinant() => det_mat2(this);
         public Span<double> AsSpan()
         {
             fixed (double* ptr = _data)
@@ -141,7 +141,7 @@ namespace JA.Fortran
             call_mat2_to_array(this, result);
             return result;
         }
-        public FMatrix ToVector() => new FMatrix(ToArray2());
+        public Arrays.FMatrix ToVector() => new Arrays.FMatrix(ToArray2());
         #endregion
 
         #region Algebra
@@ -158,9 +158,9 @@ namespace JA.Fortran
         public static FVector2 Product(in FMatrix2 a, in FVector2 b) => mul_mat2_vec2(a, b);
         public static FVector2 Product(in FVector2 a, in FMatrix2 b) => mul_vec2_mat2(a, b);
         public static FMatrix2 Product(in FMatrix2 a, in FMatrix2 b) => mul_mat2_mat2(a, b);
-        public static FMatrix2 Inner(in FMatrix2 a, in FMatrix2 b) => inner_mat2_mat2(a, b);
-        public readonly FMatrix2 Transpose() => transpose_mat2(this);
-        public readonly FMatrix2 Inverse() => inverse_mat2(this);
+        public static FMatrix2 Inner(in FMatrix2 a, in FMatrix2 b) => dot_mat2_mat2(a, b);
+        public readonly FMatrix2 Transpose() => trans_mat2(this);
+        public readonly FMatrix2 Inverse() => inv_mat2(this);
         public readonly FVector2 Solve(in FVector2 b) => solve_mat2_vec2(this, b);
         public readonly FMatrix2 Solve(in FMatrix2 b) => solve_mat2_mat2(this, b);
         #endregion
@@ -226,16 +226,16 @@ namespace JA.Fortran
         internal static extern FVector2 mul_vec2_mat2(in FVector2 a, in FMatrix2 b);
         [DllImport(libraryName, EntryPoint = "mul_mat2_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern FMatrix2 mul_mat2_mat2(in FMatrix2 a, in FMatrix2 b);
-        [DllImport(libraryName, EntryPoint = "inner_mat2_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern FMatrix2 inner_mat2_mat2(in FMatrix2 a, in FMatrix2 b);
+        [DllImport(libraryName, EntryPoint = "dot_mat2_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 dot_mat2_mat2(in FMatrix2 a, in FMatrix2 b);
         [DllImport(libraryName, EntryPoint = "trace_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern double trace_mat2(in FMatrix2 a);
-        [DllImport(libraryName, EntryPoint = "determinant_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern double determinant_mat2(in FMatrix2 a);
-        [DllImport(libraryName, EntryPoint = "transpose_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern FMatrix2 transpose_mat2(in FMatrix2 a);
-        [DllImport(libraryName, EntryPoint = "inverse_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern FMatrix2 inverse_mat2(in FMatrix2 a);
+        [DllImport(libraryName, EntryPoint = "det_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern double det_mat2(in FMatrix2 a);
+        [DllImport(libraryName, EntryPoint = "trans_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 trans_mat2(in FMatrix2 a);
+        [DllImport(libraryName, EntryPoint = "inv_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix2 inv_mat2(in FMatrix2 a);
         [DllImport(libraryName, EntryPoint = "solve_mat2_vec2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern FVector2 solve_mat2_vec2(in FMatrix2 a, in FVector2 b);
         [DllImport(libraryName, EntryPoint = "solve_mat2_mat2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]

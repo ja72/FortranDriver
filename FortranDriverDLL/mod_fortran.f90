@@ -4,12 +4,17 @@
     implicit none
 
     integer ( int32 ), parameter :: i4_huge = 2147483647
+    
+    type, bind(c) :: obj_test 
+        real(real64) :: x_data
+    end type
+    
+    type(obj_test) :: val
 
     enum, bind(c)
         enumerator :: by_row = 0
         enumerator :: by_column = 1
     end enum
-
 
     abstract interface
 
@@ -45,6 +50,17 @@
 
     return
 
+    end subroutine
+    
+    subroutine call_test_obj_set(x) bind(c)
+    !dec$ attributes dllexport :: call_test_obj_set
+    type(obj_test), intent(in) :: x    
+        val = x
+    end subroutine
+    subroutine call_test_obj_get(x) bind(c)
+    !dec$ attributes dllexport :: call_test_obj_get
+    type(obj_test), intent(out) :: x    
+        x = val
     end subroutine
     
 
@@ -409,8 +425,8 @@
 
     end subroutine
 
-    pure subroutine call_transpose_array_m(n,m,A,At) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: call_transpose_array_m
+    pure subroutine call_trans_array_m(n,m,A,At) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_trans_array_m
     integer, intent(in), value :: n, m
     real(real64), intent(in) :: A(n,m)
     real(real64), intent(out) :: At(m,n)
@@ -510,25 +526,25 @@
 
     end subroutine
 
-    pure subroutine call_determinant_array_m(n,A,d) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: call_determinant_array_m
+    pure subroutine call_det_array_m(n,A,d) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_det_array_m
     use mod_array_inv
     integer, intent(in), value :: n
     real(real64), intent(in) :: A(n,n)
     real(real64), intent(out) :: d
 
-    d = determinant_array_m(A)
+    d = det_array_m(A)
 
     end subroutine
 
-    pure subroutine call_inverse_array_m(n,A,A_inv) bind(c)
-    !DEC$ ATTRIBUTES DLLEXPORT :: call_inverse_array_m
+    pure subroutine call_inv_array_m(n,A,A_inv) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_inv_array_m
     use mod_array_inv
     integer, intent(in), value :: n
     real(real64), intent(in) :: A(n,n)
     real(real64), intent(out) :: A_inv(n,n)
 
-    A_inv = inverse_array_m(A)
+    A_inv = inv_array_m(A)
 
     end subroutine
     

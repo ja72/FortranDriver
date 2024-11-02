@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Numerics;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using JA.Fortran;
+using JA.Fortran.Arrays;
 using JA.UI;
 
 namespace JA
@@ -53,23 +55,23 @@ namespace JA
 
             const double pi = Math.PI;
             double x_range = 4*pi;
-            this.chart.SetLimits(0, -1, x_range, 1);
+            this.chart.SetLimits(-x_range/8, -5, 9*x_range/8, 5);
             double ox = 0;
             var fun = new DrawFunction((x) => 0.5*Math.Sin(5*(x-ox)/3.2) + 0.5*Math.Cos(5*x/2), 0, x_range)
             {
-                Color = Color.Red,
+                Color = Color.Blue,
                 Update = (chart) => ox+=0.01,
             };
-            var x = FVector.LinearSpace(0.0, x_range, 36).ToArray();
-            var y = x.Select((xi) => -1 + 2* rng.NextDouble()).ToArray();
-            var spl = new FSpline(x, y);
-            var dspl = new DrawSpline(spl)
+            const int n = 36;
+            var y = Enumerable.Range(0,n).Select( i => -1 + 2* rng.NextDouble()).ToArray();
+            var spline = new FSpline(0.0, x_range, y, SplineEnd.SetYp, SplineEnd.SetYp,0,0);
+            Console.WriteLine($"yp0={spline[0].Yp}, ypn={spline[n-1].Yp}");
+            var dspl = new DrawSpline(spline)
             {
                 Color = Color.Blue,
                 Update = (chart) =>
                 {
-                    double xi = spl[18].X;
-                    spl[18] = new FVector2(xi, -1 + 2* rng.NextDouble());
+                    spline.SetPoint(18, -1 + 2* rng.NextDouble(),SplineEnd.SetYp, SplineEnd.SetYp,0,0);
                 },
             };
             this.chart.Elements.Add(dspl);

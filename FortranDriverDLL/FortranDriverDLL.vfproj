@@ -55,18 +55,17 @@
 		<Filter Name="Resource Files" Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"/>
 		<Filter Name="Source Files" Filter="f90;for;f;fpp;ftn;def;odl;idl">
 		<Filter Name="array">
-		<File RelativePath=".\mod_array_inv.f90"/>
-		<File RelativePath=".\mod_lu.f90"/></Filter>
+		<File RelativePath=".\array\mod_array_inv.f90"/>
+		<File RelativePath=".\array\mod_lu.f90"/>
+		<File RelativePath=".\array\mod_splines.f90"/></Filter>
 		<Filter Name="physics">
 		<Filter Name="NASA">
-		<File RelativePath=".\mod_nasa_quat.f90"/>
-		<File RelativePath=".\mod_nasa_quat_print.f90"/>
-		<File RelativePath=".\mod_nasa_quat_test.f90"/></Filter>
-		<File RelativePath=".\mod_physics_planar.f90"/>
-		<File RelativePath=".\mod_physics_rigid_body.f90"/>
-		<File RelativePath=".\mod_physics_spatial.f90"/></Filter>
-		<Filter Name="splines">
-		<File RelativePath=".\mod_splines.f90"/></Filter>
+		<File RelativePath=".\physics\nasa\mod_nasa_quat.f90"/>
+		<File RelativePath=".\physics\\nasa\mod_nasa_quat_print.f90"/>
+		<File RelativePath=".\physics\nasa\mod_nasa_quat_test.f90"/></Filter>
+		<File RelativePath=".\physics\mod_physics_planar.f90"/>
+		<File RelativePath=".\physics\mod_physics_rigid_body.f90"/>
+		<File RelativePath=".\physics\mod_physics_spatial.f90"/></Filter>
 		<File RelativePath=".\mod_common.f90"/>
 		<File RelativePath=".\mod_fortran.f90"/></Filter>
 	</Files>

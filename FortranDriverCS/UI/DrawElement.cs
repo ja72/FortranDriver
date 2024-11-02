@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
-
-using JA.Fortran;
+using JA.Fortran.Arrays;
 using Windows.Management.Deployment;
 
 namespace JA.UI
@@ -90,15 +89,24 @@ namespace JA.UI
         public void DrawElement(Graphics g, DisplayChart chart)
         {
             var prevColor = chart.Stroke.Color;
-            chart.Stroke.Color = Color.Purple;
-            chart.DrawPoints(g, spline.X.ToArray(), spline.Y.ToArray());
+            var prevFill = chart.Fill;
+            chart.Stroke.Color = Color;
+            chart.FillColor=Color;
+            chart.FillPoints(g, spline.X.ToArray(), spline.Y.ToArray());
+            var yp = spline.GetSlope();
+            chart.FillColor=Color.Red;
+            chart.FillPoints(g, spline.X.ToArray(), yp);
             int count = chart.HorizontalPixels;
-
-            double[] x = FVector.LinearSpace(spline.X.First(), spline.X.Last(), count);
-            var cs = spline.Interpolate(x);
+            double x_start = spline.X.First();
+            double x_end = this.spline.X.Last();
+            var cs = this.spline.Interpolate(x_start, x_end, count);
+            yp = cs.GetSlope();
             chart.Stroke.Color = Color;
             chart.DrawCurve(g, cs.X.ToArray(), cs.Y.ToArray(), false);
+            chart.Stroke.Color = Color.Red;
+            chart.DrawCurve(g, cs.X.ToArray(), yp, false);
             chart.Stroke.Color = prevColor;
+            chart.Fill=prevFill;
         }
         public Action<DisplayChart> Update { get; set; }
     }

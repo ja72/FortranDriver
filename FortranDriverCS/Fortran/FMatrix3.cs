@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
 
+using JA.Fortran.Arrays;
+
 namespace JA.Fortran
 {
     public unsafe struct FMatrix3 :
@@ -23,18 +25,6 @@ namespace JA.Fortran
                 a11, a12, a13,
                 a21, a22, a23,
                 a31, a32, a33);
-            //fixed (double* ptr = _data)
-            //{
-            //    _data[0+0]=a11;
-            //    _data[0+1]=a21;
-            //    _data[0+2]=a31;
-            //    _data[3+0]=a12;
-            //    _data[3+1]=a22;
-            //    _data[3+2]=a32;
-            //    _data[6+0]=a13;
-            //    _data[6+1]=a23;
-            //    _data[6+2]=a33;
-            //}
         }
         public FMatrix3(double[] values, int index = 0)
         {
@@ -53,13 +43,13 @@ namespace JA.Fortran
         public static FMatrix3 Ones { get; } = mat3_ones();
 
         public static FMatrix3 Diagonal(double a11, double a22, double a33)
-            => new FMatrix3(a11, 0, 0, 0, a22, 0, 0, 0, a33);
+            => mat3_diag(a11, a22, a33);
         public static FMatrix3 Scalar(double a)
-            => new FMatrix3(a, 0, 0, 0, a, 0, 0, 0, a);
+            => mat3_scalar(a);
         public static FMatrix3 Symmetric(double a11, double a12, double a13, double a22, double a23, double a33)
-            => new FMatrix3(a11, a12, a12, a12, a22, a23, a13, a23, a33);
-        public static FMatrix3 SkewSymmetric(double a12, double a13, double a23)
-            => new FMatrix3(0, a12, a13, a12, 0, a23, a13, a23, 0);
+            => mat3_symm(a11, a12, a13, a22, a23, a33);
+        public static FMatrix3 SkewSymmetric(double a32, double a13, double a21)
+            => mat3_skew(a32, a13, a21);
 
         public static FMatrix3 Uniform(ref int seed) => mat3_uniform(ref seed);
 
@@ -147,7 +137,7 @@ namespace JA.Fortran
         public double A33 => _data[6+2]; 
 
         public readonly double Trace() => trace_mat3(this);
-        public readonly double Determinant() => determinant_mat3(this);
+        public readonly double Determinant() => det_mat3(this);
         public Span<double> AsSpan()
         {
             fixed (double* ptr = _data)
@@ -155,7 +145,6 @@ namespace JA.Fortran
                 return new Span<double>(ptr, _count);
             }
         }
-        public double[] ToArray() => AsSpan().ToArray();
         public double[,] ToArray2()
         {
             double[,] result = new double[_size, _size];
@@ -163,7 +152,7 @@ namespace JA.Fortran
             return result;
         }
 
-        public FMatrix ToVector() => new FMatrix(ToArray2());
+        public FMatrix ToMatrix() => new FMatrix(ToArray2());
         #endregion
 
         #region Algebra
@@ -180,9 +169,9 @@ namespace JA.Fortran
         public static FVector3 Product(in FMatrix3 a, in FVector3 b) => mul_mat3_vec3(a, b);
         public static FVector3 Product(in FVector3 a, in FMatrix3 b) => mul_vec3_mat3(a, b);
         public static FMatrix3 Product(in FMatrix3 a, in FMatrix3 b) => mul_mat3_mat3(a, b);
-        public static FMatrix3 Inner(in FMatrix3 a, in FMatrix3 b) => inner_mat3_mat3(a, b);
-        public readonly FMatrix3 Transpose() => transpose_mat3(this);
-        public readonly FMatrix3 Inverse() => inverse_mat3(this);
+        public static FMatrix3 Inner(in FMatrix3 a, in FMatrix3 b) => dot_mat3_mat3(a, b);
+        public readonly FMatrix3 Transpose() => trans_mat3(this);
+        public readonly FMatrix3 Inverse() => inv_mat3(this);
         public readonly FVector3 Solve(in FVector3 b) => solve_mat3_vec3(this, b);
         public readonly FMatrix3 Solve(in FMatrix3 b) => solve_mat3_mat3(this, b);
         public readonly FVector3 Rotate(in FVector3 vector, bool inverse = false)
@@ -231,6 +220,14 @@ namespace JA.Fortran
             double a31, double a32, double a33);
         [DllImport(libraryName, EntryPoint = "mat3_uniform", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern FMatrix3 mat3_uniform(ref int seed);
+        [DllImport(libraryName, EntryPoint = "mat3_scalar", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix3 mat3_scalar(double a);
+        [DllImport(libraryName, EntryPoint = "mat3_diag", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix3 mat3_diag(double a11, double a22, double a33);
+        [DllImport(libraryName, EntryPoint = "mat3_symm", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix3 mat3_symm(double a11, double a12, double a13, double a22, double a23, double a33);
+        [DllImport(libraryName, EntryPoint = "mat3_skew", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix3 mat3_skew(double a32, double a13, double a21);
         [DllImport(libraryName, EntryPoint = "add_mat3_mat3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern FMatrix3 add_mat3_mat3(in FMatrix3 a, in FMatrix3 b);
         [DllImport(libraryName, EntryPoint = "sub_mat3_mat3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
@@ -257,16 +254,16 @@ namespace JA.Fortran
         internal static extern FVector3 mul_vec3_mat3(in FVector3 a, in FMatrix3 b);
         [DllImport(libraryName, EntryPoint = "mul_mat3_mat3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern FMatrix3 mul_mat3_mat3(in FMatrix3 a, in FMatrix3 b);
-        [DllImport(libraryName, EntryPoint = "inner_mat3_mat3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern FMatrix3 inner_mat3_mat3(in FMatrix3 a, in FMatrix3 b);
-        [DllImport(libraryName, EntryPoint = "transpose_mat3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern FMatrix3 transpose_mat3(in FMatrix3 a);
+        [DllImport(libraryName, EntryPoint = "dot_mat3_mat3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix3 dot_mat3_mat3(in FMatrix3 a, in FMatrix3 b);
+        [DllImport(libraryName, EntryPoint = "trans_mat3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix3 trans_mat3(in FMatrix3 a);
         [DllImport(libraryName, EntryPoint = "trace_mat3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern double trace_mat3(in FMatrix3 a);
-        [DllImport(libraryName, EntryPoint = "determinant_mat3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern double determinant_mat3(in FMatrix3 a);
-        [DllImport(libraryName, EntryPoint = "inverse_mat3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern FMatrix3 inverse_mat3(in FMatrix3 a);
+        [DllImport(libraryName, EntryPoint = "det_mat3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern double det_mat3(in FMatrix3 a);
+        [DllImport(libraryName, EntryPoint = "inv_mat3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern FMatrix3 inv_mat3(in FMatrix3 a);
         [DllImport(libraryName, EntryPoint = "solve_mat3_vec3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern FVector3 solve_mat3_vec3(in FMatrix3 a, in FVector3 b);
         [DllImport(libraryName, EntryPoint = "solve_mat3_mat3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]

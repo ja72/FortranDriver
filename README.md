@@ -91,73 +91,73 @@ Some of the exported functions are
  - `call_solve_array_mm(int, int, int, double[,], double[,], double[,]);`
  - `array_inverse_m(int, double[,], double[,]);`
 
-### `NativeVector` and `NativeMatrix`
+### `FVector` and `FMatrix`
 
 All of the above imports are neatly wrapped inside a vector and matrix classes **that store the values in a way that is compatible with Fortran (column-major arrays)** and defines corresponding methods and operators.
 
-#### `NativeVectors`
+#### `FVectors`
 
- - `NativeVector Elemental(int, int, double)`
- - `NativeVector Random(int, double, double)`
- - `double Dot(NativeVector, NativeVector)`
- - `NativeVector Negate(NativeVector)`
- - `NativeVector Add(NativeVector, NativeVector)`
- - `NativeVector Subtract(NativeVector, NativeVector)`
- - `NativeVector Scale(double, NativeVector)`
- - `NativeVector Product(NativeVector, NativeMatrix)`
- - `NativeVector op_UnaryPlus(NativeVector)`
- - `NativeVector op_Addition(NativeVector, NativeVector)`
- - `NativeVector op_UnaryNegation(NativeVector)`
- - `NativeVector op_Subtraction(NativeVector, NativeVector)`
- - `NativeVector op_Multiply(double, NativeVector)`
- - `NativeVector op_Multiply(NativeVector, double)`
- - `NativeVector op_Division(NativeVector, double)`
- - `double op_Multiply(NativeVector, NativeVector)`
- - `NativeVector op_Multiply(NativeVector, NativeMatrix)`
+ - `FVector Elemental(int, int, double)`
+ - `FVector Random(int, double, double)`
+ - `double Dot(FVector, FVector)`
+ - `FVector Negate(FVector)`
+ - `FVector Add(FVector, FVector)`
+ - `FVector Subtract(FVector, FVector)`
+ - `FVector Scale(double, FVector)`
+ - `FVector Product(FVector, FMatrix)`
+ - `FVector op_UnaryPlus(FVector)`
+ - `FVector op_Addition(FVector, FVector)`
+ - `FVector op_UnaryNegation(FVector)`
+ - `FVector op_Subtraction(FVector, FVector)`
+ - `FVector op_Multiply(double, FVector)`
+ - `FVector op_Multiply(FVector, double)`
+ - `FVector op_Division(FVector, double)`
+ - `double op_Multiply(FVector, FVector)`
+ - `FVector op_Multiply(FVector, FMatrix)`
 
-#### `NativeMatrix`
+#### `FMatrix`
 
- - `NativeMatrix Random(int, int, double, double)`
- - `NativeMatrix Zero(int)`
- - `NativeMatrix Zero(int, int)`
- - `NativeMatrix Identity(int)`
- - `NativeMatrix Identity(int, int)`
- - `NativeMatrix Scalar(int, double)`
- - `NativeMatrix Scalar(int, int, double)`
- - `NativeMatrix Diagonal(double[])`
- - `NativeMatrix Diagonal(int, double[])`
- - `NativeMatrix Transpose(NativeMatrix)`
- - `NativeMatrix Negate(NativeMatrix)`
- - `NativeMatrix Add(double, NativeMatrix)`
- - `NativeMatrix Add(NativeMatrix, double)`
- - `NativeMatrix Add(NativeMatrix, NativeMatrix)`
- - `NativeMatrix Subtract(double, NativeMatrix)`
- - `NativeMatrix Subtract(NativeMatrix, double)`
- - `NativeMatrix Subtract(NativeMatrix, NativeMatrix)`
- - `NativeMatrix Scale(double, NativeMatrix)`
- - `NativeVector Product(NativeMatrix, NativeVector)`
- - `NativeMatrix Product(NativeMatrix, NativeMatrix)`
- - `NativeVector Solve(NativeMatrix, NativeVector)`
- - `NativeMatrix Solve(NativeMatrix, NativeMatrix)`
- - `double Determinant(NativeMatrix)`
- - `NativeMatrix Inverse(NativeMatrix)`
- - `NativeMatrix op_UnaryPlus(NativeMatrix)`
- - `NativeMatrix op_UnaryNegation(NativeMatrix)`
- - `NativeMatrix op_Addition(double, NativeMatrix)`
- - `NativeMatrix op_Subtraction(double, NativeMatrix)`
- - `NativeMatrix op_Addition(NativeMatrix, double)`
- - `NativeMatrix op_Subtraction(NativeMatrix, double)`
- - `NativeMatrix op_Addition(NativeMatrix, NativeMatrix)`
- - `NativeMatrix op_Subtraction(NativeMatrix, NativeMatrix)`
- - `NativeMatrix op_Multiply(double, NativeMatrix)`
- - `NativeMatrix op_Multiply(NativeMatrix, double)`
- - `NativeVector op_Multiply(NativeMatrix, NativeVector)`
- - `NativeMatrix op_Multiply(NativeMatrix, NativeMatrix)`
- - `NativeMatrix op_Division(NativeMatrix, double)`
- - `NativeMatrix op_OnesComplement(NativeMatrix)`
- - `NativeVector op_Division(NativeVector, NativeMatrix)`
- - `NativeMatrix op_Division(NativeMatrix, NativeMatrix)`
- - `NativeMatrix op_LogicalNot(NativeMatrix)`
+ - `FMatrix Random(int, int, double, double)`
+ - `FMatrix Zero(int)`
+ - `FMatrix Zero(int, int)`
+ - `FMatrix Identity(int)`
+ - `FMatrix Identity(int, int)`
+ - `FMatrix Scalar(int, double)`
+ - `FMatrix Scalar(int, int, double)`
+ - `FMatrix Diagonal(double[])`
+ - `FMatrix Diagonal(int, double[])`
+ - `FMatrix Transpose(FMatrix)`
+ - `FMatrix Negate(FMatrix)`
+ - `FMatrix Add(double, FMatrix)`
+ - `FMatrix Add(FMatrix, double)`
+ - `FMatrix Add(FMatrix, FMatrix)`
+ - `FMatrix Subtract(double, FMatrix)`
+ - `FMatrix Subtract(FMatrix, double)`
+ - `FMatrix Subtract(FMatrix, FMatrix)`
+ - `FMatrix Scale(double, FMatrix)`
+ - `FVector Product(FMatrix, FVector)`
+ - `FMatrix Product(FMatrix, FMatrix)`
+ - `FVector Solve(FMatrix, FVector)`
+ - `FMatrix Solve(FMatrix, FMatrix)`
+ - `double Determinant(FMatrix)`
+ - `FMatrix Inverse(FMatrix)`
+ - `FMatrix op_UnaryPlus(FMatrix)`
+ - `FMatrix op_UnaryNegation(FMatrix)`
+ - `FMatrix op_Addition(double, FMatrix)`
+ - `FMatrix op_Subtraction(double, FMatrix)`
+ - `FMatrix op_Addition(FMatrix, double)`
+ - `FMatrix op_Subtraction(FMatrix, double)`
+ - `FMatrix op_Addition(FMatrix, FMatrix)`
+ - `FMatrix op_Subtraction(FMatrix, FMatrix)`
+ - `FMatrix op_Multiply(double, FMatrix)`
+ - `FMatrix op_Multiply(FMatrix, double)`
+ - `FVector op_Multiply(FMatrix, FVector)`
+ - `FMatrix op_Multiply(FMatrix, FMatrix)`
+ - `FMatrix op_Division(FMatrix, double)`
+ - `FMatrix op_OnesComplement(FMatrix)`
+ - `FVector op_Division(FVector, FMatrix)`
+ - `FMatrix op_Division(FMatrix, FMatrix)`
+ - `FMatrix op_LogicalNot(FMatrix)`
 
  ## Demo/Test code outout
 
@@ -493,3 +493,225 @@ U-Y=
 |          -0          -0          -0 |
 ```
 
+## Fortran
+
+Here is a list of types defined in Fortran that correspond to structs in C#
+
+```fortran
+    type, bind(c) :: vector2
+        real(real64) :: data(2)
+    end type
+    type, bind(c) :: matrix2
+        real(real64) :: data(2,2)
+    end type
+    type, bind(c) :: vector3
+        real(real64) :: data(3)
+    end type
+    type, bind(c) :: matrix3
+        real(real64) :: data(3,3)
+    end type
+    type, bind(c) :: quat4
+        real(real64) :: data(4)
+    end type
+```
+
+The the corresponding C# structures
+
+```c#
+public unsafe struct FVector2
+{
+    fixed double _data[2];
+}
+public unsafe struct FMatrix2
+{
+    fixed double _data[2*2];
+}
+public unsafe struct FVector3
+{
+    fixed double _data[3];
+}
+public unsafe struct FMatrix3
+{
+    fixed double _data[3*3];
+}
+public unsafe struct FQuat4
+{
+    fixed double _data[4];
+}
+```
+
+The full list of imported Fortran functions defined in C#
+
+
+ - `add_mat2_mat2`
+ - `add_mat2_scalar`
+ - `add_mat3_mat3`
+ - `add_mat3_scalar`
+ - `add_quat4_quat4`
+ - `add_scalar_mat2`
+ - `add_scalar_mat3`
+ - `add_vec2_vec2`
+ - `add_vec3_vec3`
+ - `call_add_array_m`
+ - `call_add_array_v`
+ - `call_array_diag_m`
+ - `call_array_scalar_m`
+ - `call_array_set_column`
+ - `call_array_set_row`
+ - `call_array_zeros_m`
+ - `call_array_zeros_v`
+ - `call_det_array_m`
+ - `call_elem_array_v`
+ - `call_fill_array_m`
+ - `call_inner_array_m`
+ - `call_inner_array_v`
+ - `call_inv_array_m`
+ - `call_mat2_to_array`
+ - `call_mat3_to_array`
+ - `call_mul_array_mm`
+ - `call_mul_array_mv`
+ - `call_mul_array_vm`
+ - `call_outer_array_v`
+ - `call_quat_test_all`
+ - `call_random_array_m`
+ - `call_random_array_v`
+ - `call_reshape_array_mm`
+ - `call_reshape_array_mv`
+ - `call_reshape_array_vm`
+ - `call_round_array_m`
+ - `call_round_array_v`
+ - `call_scale_array_m`
+ - `call_scale_array_v`
+ - `call_slice_array_m`
+ - `call_slice_array_v`
+ - `call_slice_col_array_m`
+ - `call_slice_cols_array_m`
+ - `call_slice_row_array_m`
+ - `call_slice_rows_array_m`
+ - `call_solve_array_mm`
+ - `call_solve_array_mv`
+ - `call_spline_calc_ypp_array`
+ - `call_spline_calc_ypp_domain`
+ - `call_spline_interpolate_array`
+ - `call_spline_interpolate_domain`
+ - `call_spline_interpolate_point`
+ - `call_sub_array_m`
+ - `call_sub_array_v`
+ - `call_test_dowork`
+ - `call_transpose_array_m`
+ - `call_uniform_array_m`
+ - `call_uniform_array_v`
+ - `call_vec2_to_array`
+ - `call_vec3_to_array`
+ - `cross_quat4_quat4`
+ - `cross_scalar_vec2`
+ - `cross_vec2_scalar`
+ - `cross_vec2_vec2`
+ - `cross_vec3_op`
+ - `cross_vec3_vec3`
+ - `determinant_mat2`
+ - `determinant_mat3`
+ - `div_mat2_scalar`
+ - `div_mat3_scalar`
+ - `div_vec2_scalar`
+ - `div_vec3_scalar`
+ - `inner_mat2_mat2`
+ - `inner_mat3_mat3`
+ - `inner_quat4_quat4`
+ - `inner_vec2_vec2`
+ - `inner_vec3_vec3`
+ - `inv_mat2`
+ - `inv_mat3`
+ - `linspace`
+ - `mat2_eye`
+ - `mat2_ones`
+ - `mat2_uniform`
+ - `mat2_values`
+ - `mat2_zeros`
+ - `mat3_eye`
+ - `mat3_ones`
+ - `mat3_rotate_diag`
+ - `mat3_rotate_vec3`
+ - `mat3_uniform`
+ - `mat3_values`
+ - `mat3_zeros`
+ - `mul_mat2_mat2`
+ - `mul_mat2_scalar`
+ - `mul_mat2_vec2`
+ - `mul_mat3_mat3`
+ - `mul_mat3_scalar`
+ - `mul_mat3_vec3`
+ - `mul_quat4_quat4`
+ - `mul_scalar_mat2`
+ - `mul_scalar_mat3`
+ - `mul_scalar_quat4`
+ - `mul_scalar_vec2`
+ - `mul_scalar_vec3`
+ - `mul_vec2_mat2`
+ - `mul_vec2_scalar`
+ - `mul_vec3_mat3`
+ - `mul_vec3_scalar`
+ - `neg_mat2`
+ - `neg_mat3`
+ - `neg_vec2`
+ - `neg_vec3`
+ - `norm_array_m`
+ - `norm_array_v`
+ - `norm_quat4`
+ - `norm_vec2`
+ - `norm_vec3`
+ - `outer_vec2_vec2`
+ - `outer_vec3_vec3`
+ - `quat4_array`
+ - `quat4_axis_angle`
+ - `quat4_conjugate`
+ - `quat4_exp`
+ - `quat4_from_matrix`
+ - `quat4_identity`
+ - `quat4_inverse`
+ - `quat4_normalize`
+ - `quat4_rotate_diag`
+ - `quat4_rotate_vec3`
+ - `quat4_scalar`
+ - `quat4_scalar_vec3`
+ - `quat4_to_axis_angle`
+ - `quat4_to_matrix`
+ - `quat4_uniform`
+ - `quat4_values`
+ - `quat4_vector`
+ - `quat4_zeros`
+ - `rb_get_state`
+ - `rb_set_state`
+ - `rb_state_derivative`
+ - `solve_mat2_mat2`
+ - `solve_mat2_vec2`
+ - `solve_mat3_mat3`
+ - `solve_mat3_vec3`
+ - `sub_mat2_mat2`
+ - `sub_mat2_scalar`
+ - `sub_mat3_mat3`
+ - `sub_mat3_scalar`
+ - `sub_quat4_quat4`
+ - `sub_scalar_mat2`
+ - `sub_scalar_mat3`
+ - `sub_vec2_vec2`
+ - `sub_vec3_vec3`
+ - `trace_mat2`
+ - `trace_mat3`
+ - `transpose_mat2`
+ - `transpose_mat3`
+ - `vec2_ones`
+ - `vec2_to_array`
+ - `vec2_uniform`
+ - `vec2_ux`
+ - `vec2_uy`
+ - `vec2_values`
+ - `vec2_zeros`
+ - `vec3_angle`
+ - `vec3_ones`
+ - `vec3_uniform`
+ - `vec3_ux`
+ - `vec3_uy`
+ - `vec3_uz`
+ - `vec3_values`
+ - `vec3_zeros`

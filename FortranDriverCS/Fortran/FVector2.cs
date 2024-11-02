@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Text;
+using JA.Fortran.Arrays;
 
 namespace JA.Fortran
 {
@@ -163,7 +164,7 @@ namespace JA.Fortran
         public static FVector2 Scale(double factor, in FVector2 a) => mul_scalar_vec2(factor, a);
         public static FVector2 Scale(in FVector2 a, double factor) => mul_vec2_scalar(a, factor);
         public static FVector2 Divide(in FVector2 a, double divider) => div_vec2_scalar(a, divider);
-        public static double Dot(in FVector2 a, in FVector2 b) => inner_vec2_vec2(a, b);
+        public static double Dot(in FVector2 a, in FVector2 b) => dot_vec2_vec2(a, b);
         public static FMatrix2 Outer(in FVector2 a, in FVector2 b) => outer_vec2_vec2(a, b);
         public static double Cross(in FVector2 a, in FVector2 b) => cross_vec2_vec2(a, b);
         public static FVector2 Cross(double a, in FVector2 b) => cross_scalar_vec2(a, b);
@@ -210,8 +211,8 @@ namespace JA.Fortran
         internal static extern FVector2 mul_vec2_scalar(in FVector2 a, double s);
         [DllImport(libraryName, EntryPoint = "div_vec2_scalar", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern FVector2 div_vec2_scalar(in FVector2 a, double s);
-        [DllImport(libraryName, EntryPoint = "inner_vec2_vec2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern double inner_vec2_vec2(in FVector2 a, in FVector2 b);
+        [DllImport(libraryName, EntryPoint = "dot_vec2_vec2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern double dot_vec2_vec2(in FVector2 a, in FVector2 b);
         [DllImport(libraryName, EntryPoint = "outer_vec2_vec2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern FMatrix2 outer_vec2_vec2(in FVector2 a, in FVector2 b);
         [DllImport(libraryName, EntryPoint = "cross_scalar_vec2", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]

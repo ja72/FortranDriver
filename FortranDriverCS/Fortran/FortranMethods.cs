@@ -21,24 +21,6 @@ namespace JA.Fortran
         public static int seed = Environment.TickCount;
 #endif
 
-        
-
-        #region Interop Methods
-
-        /// <summary>
-        /// Fortran DLL call to manipulate matrix <paramref name="A"/>
-        /// </summary>
-        /// <param name="rows">The n.</param>
-        /// <param name="columns">The n.</param>
-        /// <param name="A">The matrix. Fortran requires <paramref name="A"/> to be column major 
-        /// and C# supplies a row major matrix by default.</param>
-        /// <param name="callBack">The call-back function to report on progress.</param>
-        [DllImport(libraryName, EntryPoint = "call_test_dowork", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void call_test_dowork(int rows, int columns, [In, Out] double[,] A, [MarshalAs(UnmanagedType.FunctionPtr)] ActionRefInt callBack);
-
-        [DllImport(libraryName, EntryPoint = "call_quat_test_all", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern void call_quat_test_all();
-        #endregion
 
     }
 }

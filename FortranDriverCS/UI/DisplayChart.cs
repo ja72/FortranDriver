@@ -170,14 +170,29 @@ namespace JA.UI
         }
         public void DrawPoint(Graphics g, double x, double y, int size = 6)
             => DrawPoint(g, new Vector2(x, y), size);
+        public void FillPoint(Graphics g, Vector2 vector, int size = 6)
+        {
+            var point = GetPointF(vector);
+            g.FillEllipse(Fill, point.X - size / 2, point.Y - size / 2, size, size);
+        }
         public void DrawPoints(Graphics g, double[] x, double[] y, int size = 6)
             => DrawPoints(g, Enumerable.Zip(x, y, (xi, yi) => new Vector2(xi, yi)).ToArray(), size);
+        public void FillPoints(Graphics g, double[] x, double[] y, int size = 6)
+            => FillPoints(g, Enumerable.Zip(x, y, (xi, yi) => new Vector2(xi, yi)).ToArray(), size);
         public void DrawPoints(Graphics g, Vector2[] vectors, int size = 6)
         {
             var points = GetPointFs(vectors);
             foreach (var point in points)
             {
                 g.DrawEllipse(Stroke, point.X - size / 2, point.Y - size / 2, size, size);
+            }
+        }
+        public void FillPoints(Graphics g, Vector2[] vectors, int size = 6)
+        {
+            var points = GetPointFs(vectors);
+            foreach (var point in points)
+            {
+                g.FillEllipse(Fill, point.X - size / 2, point.Y - size / 2, size, size);
             }
         }
         public void DrawLine(Graphics g, Vector2 from, Vector2 to)
@@ -228,6 +243,19 @@ namespace JA.UI
                 foreach (var vector in vectors)
                 {
                     DrawPoint(g, vector, size);
+                }
+            }
+        }
+        public void FillPolygon(Graphics g, Vector2[] vectors, bool drawNodes = false, int size = 6)
+        {
+            var points = GetPointFs(vectors);
+            g.FillPolygon(Fill, points);
+
+            if (drawNodes)
+            {
+                foreach (var vector in vectors)
+                {
+                    FillPoint(g, vector, size);
                 }
             }
         }

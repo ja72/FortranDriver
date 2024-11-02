@@ -1,0 +1,3596 @@
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 66, Column: 0 }
+Function:        quat4_uniform
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_NORMAL_01
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_uniform
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 61, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 66, Column: 0 }
+Function:        quat4_uniform
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_NORMAL_01
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_uniform
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 61, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 89, Column: 0 }
+Function:        quat4_axis_angle
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_AXIS2QUAT
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_axis_angle
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 83, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 89, Column: 0 }
+Function:        quat4_axis_angle
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_AXIS2QUAT
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_axis_angle
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 83, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 111, Column: 0 }
+Function:        norm_quat4
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_NORM
+  - String:          ' will not be inlined into '
+  - Caller:          norm_quat4
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 106, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 111, Column: 0 }
+Function:        norm_quat4
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_NORM
+  - String:          ' will not be inlined into '
+  - Caller:          norm_quat4
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 106, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 127, Column: 0 }
+Function:        quat4_exp
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_EXPONENTIATE
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_exp
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 122, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 127, Column: 0 }
+Function:        quat4_exp
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_EXPONENTIATE
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_exp
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 122, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 157, Column: 0 }
+Function:        mul_quat4_quat4
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_MULTIPLY
+  - String:          ' will not be inlined into '
+  - Caller:          mul_quat4_quat4
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 151, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 157, Column: 0 }
+Function:        mul_quat4_quat4
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_MULTIPLY
+  - String:          ' will not be inlined into '
+  - Caller:          mul_quat4_quat4
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 151, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 165, Column: 0 }
+Function:        cross_quat4_quat4
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_CROSS
+  - String:          ' will not be inlined into '
+  - Caller:          cross_quat4_quat4
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 159, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 165, Column: 0 }
+Function:        cross_quat4_quat4
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_CROSS
+  - String:          ' will not be inlined into '
+  - Caller:          cross_quat4_quat4
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 159, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 173, Column: 0 }
+Function:        inner_quat4_quat4
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_DOT
+  - String:          ' will not be inlined into '
+  - Caller:          inner_quat4_quat4
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 167, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 173, Column: 0 }
+Function:        inner_quat4_quat4
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_DOT
+  - String:          ' will not be inlined into '
+  - Caller:          inner_quat4_quat4
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 167, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 181, Column: 0 }
+Function:        quat4_to_matrix
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_to_matrix
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 175, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 181, Column: 0 }
+Function:        quat4_to_matrix
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_to_matrix
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 175, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 188, Column: 0 }
+Function:        quat4_from_matrix
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_MAT2QUAT
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_from_matrix
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 183, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 188, Column: 0 }
+Function:        quat4_from_matrix
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_MAT2QUAT
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_from_matrix
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 183, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 196, Column: 0 }
+Function:        quat4_to_axis_angle
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2AXIS
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_to_axis_angle
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 190, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 196, Column: 0 }
+Function:        quat4_to_axis_angle
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2AXIS
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_to_axis_angle
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 190, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 204, Column: 0 }
+Function:        quat4_inverse
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_INVERSE
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_inverse
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 200, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 204, Column: 0 }
+Function:        quat4_inverse
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_INVERSE
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_inverse
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 200, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 212, Column: 0 }
+Function:        quat4_normalize
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_NORMALIZE
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_normalize
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 208, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 212, Column: 0 }
+Function:        quat4_normalize
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_NORMALIZE
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_normalize
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 208, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 224, Column: 0 }
+Function:        quat4_rotate_vec3
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT_VECTOR_INV
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_rotate_vec3
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 216, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 224, Column: 0 }
+Function:        quat4_rotate_vec3
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT_VECTOR_INV
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_rotate_vec3
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 216, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 238, Column: 0 }
+Function:        quat4_rotate_diag
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_rotate_diag
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 229, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 239, Column: 0 }
+Function:        quat4_rotate_diag
+Args:
+  - Callee:          mat3_rotate_diag
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_rotate_diag
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 229, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 238, Column: 0 }
+Function:        quat4_rotate_diag
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_rotate_diag
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 229, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 239, Column: 0 }
+Function:        quat4_rotate_diag
+Args:
+  - Callee:          mat3_rotate_diag
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_rotate_diag
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 229, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 253, Column: 0 }
+Function:        rb_get_state
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          rb_get_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 243, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 258, Column: 0 }
+Function:        rb_get_state
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          rb_get_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 243, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 259, Column: 0 }
+Function:        rb_get_state
+Args:
+  - Callee:          mat3_rotate_diag
+  - String:          ' will not be inlined into '
+  - Caller:          rb_get_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 243, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 253, Column: 0 }
+Function:        rb_get_state
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          rb_get_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 243, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 258, Column: 0 }
+Function:        rb_get_state
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          rb_get_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 243, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 259, Column: 0 }
+Function:        rb_get_state
+Args:
+  - Callee:          mat3_rotate_diag
+  - String:          ' will not be inlined into '
+  - Caller:          rb_get_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 243, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 285, Column: 0 }
+Function:        rb_set_state
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          rb_set_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 270, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 290, Column: 0 }
+Function:        rb_set_state
+Args:
+  - Callee:          mat3_rotate_diag
+  - String:          ' will not be inlined into '
+  - Caller:          rb_set_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 270, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 285, Column: 0 }
+Function:        rb_set_state
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          rb_set_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 270, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 290, Column: 0 }
+Function:        rb_set_state
+Args:
+  - Callee:          mat3_rotate_diag
+  - String:          ' will not be inlined into '
+  - Caller:          rb_set_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 270, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 312, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_DERIVATIVE
+  - String:          ' will not be inlined into '
+  - Caller:          rb_state_derivative
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 295, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 312, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_DERIVATIVE
+  - String:          ' will not be inlined into '
+  - Caller:          rb_state_derivative
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 295, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            TooCostly
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 310, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - String:          ''''
+  - Callee:          rb_set_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 270, Column: 0 }
+  - String:          ''' not inlined into '''
+  - Caller:          rb_state_derivative
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 295, Column: 0 }
+  - String:          ''' because too costly to inline '
+  - String:          '(cost='
+  - Cost:            '525'
+  - String:          ', threshold='
+  - Threshold:       '250'
+  - String:          ')'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 66, Column: 0 }
+Function:        quat4_uniform
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_NORMAL_01
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_uniform
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 61, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 66, Column: 0 }
+Function:        quat4_uniform
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_NORMAL_01
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_uniform
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 61, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 80, Column: 0 }
+Function:        quat4_array
+Args:
+  - String:          'hoisting '
+  - Inst:            getelementptr
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 80, Column: 0 }
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 89, Column: 0 }
+Function:        quat4_axis_angle
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_AXIS2QUAT
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_axis_angle
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 83, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 89, Column: 0 }
+Function:        quat4_axis_angle
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_AXIS2QUAT
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_axis_angle
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 83, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 111, Column: 0 }
+Function:        norm_quat4
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_NORM
+  - String:          ' will not be inlined into '
+  - Caller:          norm_quat4
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 106, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 111, Column: 0 }
+Function:        norm_quat4
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_NORM
+  - String:          ' will not be inlined into '
+  - Caller:          norm_quat4
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 106, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 127, Column: 0 }
+Function:        quat4_exp
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_EXPONENTIATE
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_exp
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 122, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 127, Column: 0 }
+Function:        quat4_exp
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_EXPONENTIATE
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_exp
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 122, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 157, Column: 0 }
+Function:        mul_quat4_quat4
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_MULTIPLY
+  - String:          ' will not be inlined into '
+  - Caller:          mul_quat4_quat4
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 151, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 157, Column: 0 }
+Function:        mul_quat4_quat4
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_MULTIPLY
+  - String:          ' will not be inlined into '
+  - Caller:          mul_quat4_quat4
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 151, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 165, Column: 0 }
+Function:        cross_quat4_quat4
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_CROSS
+  - String:          ' will not be inlined into '
+  - Caller:          cross_quat4_quat4
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 159, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 165, Column: 0 }
+Function:        cross_quat4_quat4
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_CROSS
+  - String:          ' will not be inlined into '
+  - Caller:          cross_quat4_quat4
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 159, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 173, Column: 0 }
+Function:        inner_quat4_quat4
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_DOT
+  - String:          ' will not be inlined into '
+  - Caller:          inner_quat4_quat4
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 167, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 173, Column: 0 }
+Function:        inner_quat4_quat4
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_DOT
+  - String:          ' will not be inlined into '
+  - Caller:          inner_quat4_quat4
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 167, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 174, Column: 0 }
+Function:        inner_quat4_quat4
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' in favor of '
+  - OtherAccess:     store
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 167, Column: 0 }
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 173, Column: 0 }
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 181, Column: 0 }
+Function:        quat4_to_matrix
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_to_matrix
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 175, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 181, Column: 0 }
+Function:        quat4_to_matrix
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_to_matrix
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 175, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 188, Column: 0 }
+Function:        quat4_from_matrix
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_MAT2QUAT
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_from_matrix
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 183, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 188, Column: 0 }
+Function:        quat4_from_matrix
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_MAT2QUAT
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_from_matrix
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 183, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 196, Column: 0 }
+Function:        quat4_to_axis_angle
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2AXIS
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_to_axis_angle
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 190, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 196, Column: 0 }
+Function:        quat4_to_axis_angle
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2AXIS
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_to_axis_angle
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 190, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 204, Column: 0 }
+Function:        quat4_inverse
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_INVERSE
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_inverse
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 200, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 204, Column: 0 }
+Function:        quat4_inverse
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_INVERSE
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_inverse
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 200, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 212, Column: 0 }
+Function:        quat4_normalize
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_NORMALIZE
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_normalize
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 208, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 212, Column: 0 }
+Function:        quat4_normalize
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_NORMALIZE
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_normalize
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 208, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 224, Column: 0 }
+Function:        quat4_rotate_vec3
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT_VECTOR_INV
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_rotate_vec3
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 216, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 224, Column: 0 }
+Function:        quat4_rotate_vec3
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT_VECTOR_INV
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_rotate_vec3
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 216, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 238, Column: 0 }
+Function:        quat4_rotate_diag
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_rotate_diag
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 229, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 239, Column: 0 }
+Function:        quat4_rotate_diag
+Args:
+  - Callee:          mat3_rotate_diag
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_rotate_diag
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 229, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 238, Column: 0 }
+Function:        quat4_rotate_diag
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_rotate_diag
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 229, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 239, Column: 0 }
+Function:        quat4_rotate_diag
+Args:
+  - Callee:          mat3_rotate_diag
+  - String:          ' will not be inlined into '
+  - Caller:          quat4_rotate_diag
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 229, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 253, Column: 0 }
+Function:        rb_get_state
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          rb_get_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 243, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 258, Column: 0 }
+Function:        rb_get_state
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          rb_get_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 243, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 259, Column: 0 }
+Function:        rb_get_state
+Args:
+  - Callee:          mat3_rotate_diag
+  - String:          ' will not be inlined into '
+  - Caller:          rb_get_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 243, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 253, Column: 0 }
+Function:        rb_get_state
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          rb_get_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 243, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 258, Column: 0 }
+Function:        rb_get_state
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          rb_get_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 243, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 259, Column: 0 }
+Function:        rb_get_state
+Args:
+  - Callee:          mat3_rotate_diag
+  - String:          ' will not be inlined into '
+  - Caller:          rb_get_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 243, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'hoisting '
+  - Inst:            call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 262, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'hoisting '
+  - Inst:            call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 262, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'hoisting '
+  - Inst:            load
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 262, Column: 0 }
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 285, Column: 0 }
+Function:        rb_set_state
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          rb_set_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 270, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 290, Column: 0 }
+Function:        rb_set_state
+Args:
+  - Callee:          mat3_rotate_diag
+  - String:          ' will not be inlined into '
+  - Caller:          rb_set_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 270, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 285, Column: 0 }
+Function:        rb_set_state
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_ROTATE_QUAT2MAT_INV
+  - String:          ' will not be inlined into '
+  - Caller:          rb_set_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 270, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 290, Column: 0 }
+Function:        rb_set_state
+Args:
+  - Callee:          mat3_rotate_diag
+  - String:          ' will not be inlined into '
+  - Caller:          rb_set_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 270, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'hoisting '
+  - Inst:            call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 292, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'hoisting '
+  - Inst:            call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 292, Column: 0 }
+...
+--- !Passed
+Pass:            licm
+Name:            Hoisted
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'hoisting '
+  - Inst:            load
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 292, Column: 0 }
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 312, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_DERIVATIVE
+  - String:          ' will not be inlined into '
+  - Caller:          rb_state_derivative
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 295, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            NoDefinition
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 312, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - Callee:          MOD_NASA_QUAT_mp_QUAT_DERIVATIVE
+  - String:          ' will not be inlined into '
+  - Caller:          rb_state_derivative
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 295, Column: 0 }
+  - String:          ' because its definition is unavailable'
+...
+--- !Missed
+Pass:            inline
+Name:            TooCostly
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 310, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - String:          ''''
+  - Callee:          rb_set_state
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 270, Column: 0 }
+  - String:          ''' not inlined into '''
+  - Caller:          rb_state_derivative
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 295, Column: 0 }
+  - String:          ''' because too costly to inline '
+  - String:          '(cost='
+  - Cost:            '525'
+  - String:          ', threshold='
+  - Threshold:       '250'
+  - String:          ')'
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 174, Column: 0 }
+Function:        inner_quat4_quat4
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' in favor of '
+  - OtherAccess:     store
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 167, Column: 0 }
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 173, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 259, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 259, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 259, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 259, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 259, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 259, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 259, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 259, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 259, Column: 0 }
+...
+--- !Passed
+Pass:            gvn
+Name:            LoadElim
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 266, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' eliminated'
+  - String:          ' in favor of '
+  - InfavorOfValue:  fmul
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 261, Column: 0 }
+...
+--- !Passed
+Pass:            gvn
+Name:            LoadElim
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 266, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' eliminated'
+  - String:          ' in favor of '
+  - InfavorOfValue:  fmul
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 261, Column: 0 }
+...
+--- !Passed
+Pass:            gvn
+Name:            LoadElim
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 266, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' eliminated'
+  - String:          ' in favor of '
+  - InfavorOfValue:  fmul
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 261, Column: 0 }
+...
+--- !Passed
+Pass:            gvn
+Name:            LoadElim
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 267, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' eliminated'
+  - String:          ' in favor of '
+  - InfavorOfValue:  fadd
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 262, Column: 0 }
+...
+--- !Passed
+Pass:            gvn
+Name:            LoadElim
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 267, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' eliminated'
+  - String:          ' in favor of '
+  - InfavorOfValue:  fadd
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 262, Column: 0 }
+...
+--- !Passed
+Pass:            gvn
+Name:            LoadElim
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 267, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' eliminated'
+  - String:          ' in favor of '
+  - InfavorOfValue:  fadd
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 262, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 259, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 259, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 259, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 259, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 259, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 259, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 259, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 259, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 262, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 259, Column: 0 }
+...
+--- !Passed
+Pass:            gvn
+Name:            LoadElim
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 290, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' eliminated'
+  - String:          ' in favor of '
+  - InfavorOfValue:  load
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 288, Column: 0 }
+...
+--- !Passed
+Pass:            gvn
+Name:            LoadElim
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 290, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' eliminated'
+  - String:          ' in favor of '
+  - InfavorOfValue:  load
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 288, Column: 0 }
+...
+--- !Passed
+Pass:            gvn
+Name:            LoadElim
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 290, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' eliminated'
+  - String:          ' in favor of '
+  - InfavorOfValue:  load
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 288, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 291, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' in favor of '
+  - OtherAccess:     store
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 282, Column: 0 }
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 291, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' in favor of '
+  - OtherAccess:     store
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 283, Column: 0 }
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' in favor of '
+  - OtherAccess:     store
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 283, Column: 0 }
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' in favor of '
+  - OtherAccess:     store
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 283, Column: 0 }
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 291, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' in favor of '
+  - OtherAccess:     store
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 282, Column: 0 }
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 291, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' in favor of '
+  - OtherAccess:     store
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 283, Column: 0 }
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' in favor of '
+  - OtherAccess:     store
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 283, Column: 0 }
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' in favor of '
+  - OtherAccess:     store
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 283, Column: 0 }
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 292, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 290, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 317, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 314, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 317, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 314, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 317, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 314, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 317, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 314, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 317, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 314, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 317, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 314, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 317, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 314, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 317, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 314, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 317, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 314, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 317, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 314, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 317, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 314, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 317, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 314, Column: 0 }
+...
+--- !Missed
+Pass:            gvn
+Name:            LoadClobbered
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 317, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - String:          'load of type '
+  - Type:            ''
+  - String:          ' not eliminated'
+  - String:          ' because it is clobbered by '
+  - ClobberedBy:     call
+    DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                       Line: 314, Column: 0 }
+...
+--- !Passed
+Pass:            loop-unroll
+Name:            FullyUnrolled
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 291, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'completely unrolled loop with '
+  - UnrollCount:     '1'
+  - String:          ' iterations'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+Function:        MOD_PHYSICS_RIGID_BODY.
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+Function:        MOD_PHYSICS_RIGID_BODY.
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_0
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+Function:        MOD_PHYSICS_RIGID_BODY.
+Args:
+  - NumInstructions: '1'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 44, Column: 0 }
+Function:        quat4_zeros
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 44, Column: 0 }
+Function:        quat4_zeros
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_1
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 44, Column: 0 }
+Function:        quat4_zeros
+Args:
+  - NumInstructions: '4'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 49, Column: 0 }
+Function:        quat4_identity
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 49, Column: 0 }
+Function:        quat4_identity
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_2
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 49, Column: 0 }
+Function:        quat4_identity
+Args:
+  - NumInstructions: '6'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 54, Column: 0 }
+Function:        quat4_scalar_vec3
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 0, Column: 0 }
+Function:        quat4_scalar_vec3
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_3
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 54, Column: 0 }
+Function:        quat4_scalar_vec3
+Args:
+  - NumInstructions: '6'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 61, Column: 1 }
+Function:        quat4_uniform
+Args:
+  - NumVRCopies:     '3'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '3.000000e+00'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 61, Column: 0 }
+Function:        quat4_uniform
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 61, Column: 0 }
+Function:        quat4_uniform
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_4
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 61, Column: 0 }
+Function:        quat4_uniform
+Args:
+  - NumInstructions: '4'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 68, Column: 0 }
+Function:        quat4_values
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 0, Column: 0 }
+Function:        quat4_values
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_5
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '6'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 68, Column: 0 }
+Function:        quat4_values
+Args:
+  - NumInstructions: '6'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 74, Column: 0 }
+Function:        quat4_array
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 74, Column: 0 }
+Function:        quat4_array
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_6
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '9'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 74, Column: 0 }
+Function:        quat4_array
+Args:
+  - NumInstructions: '9'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 83, Column: 1 }
+Function:        quat4_axis_angle
+Args:
+  - NumVRCopies:     '3'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '3.000000e+00'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 83, Column: 0 }
+Function:        quat4_axis_angle
+Args:
+  - NumStackBytes:   '56'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 0, Column: 0 }
+Function:        quat4_axis_angle
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_7
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '17'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 83, Column: 0 }
+Function:        quat4_axis_angle
+Args:
+  - NumInstructions: '17'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 92, Column: 0 }
+Function:        quat4_scalar
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 92, Column: 0 }
+Function:        quat4_scalar
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_8
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '2'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 92, Column: 0 }
+Function:        quat4_scalar
+Args:
+  - NumInstructions: '2'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 99, Column: 0 }
+Function:        quat4_vector
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 99, Column: 0 }
+Function:        quat4_vector
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_9
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '7'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 99, Column: 0 }
+Function:        quat4_vector
+Args:
+  - NumInstructions: '7'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 106, Column: 0 }
+Function:        norm_quat4
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 106, Column: 0 }
+Function:        norm_quat4
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_10
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 106, Column: 0 }
+Function:        norm_quat4
+Args:
+  - NumInstructions: '1'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 114, Column: 0 }
+Function:        quat4_conjugate
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 114, Column: 0 }
+Function:        quat4_conjugate
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_11
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '13'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 114, Column: 0 }
+Function:        quat4_conjugate
+Args:
+  - NumInstructions: '13'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 122, Column: 1 }
+Function:        quat4_exp
+Args:
+  - NumVRCopies:     '3'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '3.000000e+00'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 122, Column: 0 }
+Function:        quat4_exp
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 122, Column: 0 }
+Function:        quat4_exp
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_12
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 122, Column: 0 }
+Function:        quat4_exp
+Args:
+  - NumInstructions: '4'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 130, Column: 0 }
+Function:        mul_scalar_quat4
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 0, Column: 0 }
+Function:        mul_scalar_quat4
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_13
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '12'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 130, Column: 0 }
+Function:        mul_scalar_quat4
+Args:
+  - NumInstructions: '12'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 137, Column: 0 }
+Function:        add_quat4_quat4
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 137, Column: 0 }
+Function:        add_quat4_quat4
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_14
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '13'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 137, Column: 0 }
+Function:        add_quat4_quat4
+Args:
+  - NumInstructions: '13'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 144, Column: 0 }
+Function:        sub_quat4_quat4
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 144, Column: 0 }
+Function:        sub_quat4_quat4
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_15
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '13'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 144, Column: 0 }
+Function:        sub_quat4_quat4
+Args:
+  - NumInstructions: '13'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 151, Column: 1 }
+Function:        mul_quat4_quat4
+Args:
+  - NumVRCopies:     '4'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '4.000000e+00'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 151, Column: 0 }
+Function:        mul_quat4_quat4
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 151, Column: 0 }
+Function:        mul_quat4_quat4
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_16
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 151, Column: 0 }
+Function:        mul_quat4_quat4
+Args:
+  - NumInstructions: '5'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 159, Column: 1 }
+Function:        cross_quat4_quat4
+Args:
+  - NumVRCopies:     '4'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '4.000000e+00'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 159, Column: 0 }
+Function:        cross_quat4_quat4
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 159, Column: 0 }
+Function:        cross_quat4_quat4
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_17
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '5'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 159, Column: 0 }
+Function:        cross_quat4_quat4
+Args:
+  - NumInstructions: '5'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 167, Column: 0 }
+Function:        inner_quat4_quat4
+Args:
+  - NumStackBytes:   '56'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 167, Column: 0 }
+Function:        inner_quat4_quat4
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_18
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '15'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 167, Column: 0 }
+Function:        inner_quat4_quat4
+Args:
+  - NumInstructions: '15'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 175, Column: 1 }
+Function:        quat4_to_matrix
+Args:
+  - NumVRCopies:     '3'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '3.000000e+00'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 175, Column: 0 }
+Function:        quat4_to_matrix
+Args:
+  - NumStackBytes:   '56'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 0, Column: 0 }
+Function:        quat4_to_matrix
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_19
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '17'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 175, Column: 0 }
+Function:        quat4_to_matrix
+Args:
+  - NumInstructions: '17'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 183, Column: 1 }
+Function:        quat4_from_matrix
+Args:
+  - NumVRCopies:     '3'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '3.000000e+00'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 183, Column: 0 }
+Function:        quat4_from_matrix
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 183, Column: 0 }
+Function:        quat4_from_matrix
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_20
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 183, Column: 0 }
+Function:        quat4_from_matrix
+Args:
+  - NumInstructions: '4'
+  - String:          ' instructions in function'
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 190, Column: 0 }
+Function:        quat4_to_axis_angle
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 190, Column: 0 }
+Function:        quat4_to_axis_angle
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_21
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '1'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 190, Column: 0 }
+Function:        quat4_to_axis_angle
+Args:
+  - NumInstructions: '1'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 200, Column: 1 }
+Function:        quat4_inverse
+Args:
+  - NumVRCopies:     '3'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '3.000000e+00'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 200, Column: 0 }
+Function:        quat4_inverse
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 200, Column: 0 }
+Function:        quat4_inverse
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_22
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 200, Column: 0 }
+Function:        quat4_inverse
+Args:
+  - NumInstructions: '4'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 208, Column: 1 }
+Function:        quat4_normalize
+Args:
+  - NumVRCopies:     '3'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '3.000000e+00'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 208, Column: 0 }
+Function:        quat4_normalize
+Args:
+  - NumStackBytes:   '0'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 208, Column: 0 }
+Function:        quat4_normalize
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_23
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '4'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 208, Column: 0 }
+Function:        quat4_normalize
+Args:
+  - NumInstructions: '4'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 216, Column: 1 }
+Function:        quat4_rotate_vec3
+Args:
+  - NumVRCopies:     '4'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '4.000000e+00'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 216, Column: 0 }
+Function:        quat4_rotate_vec3
+Args:
+  - NumStackBytes:   '56'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 216, Column: 0 }
+Function:        quat4_rotate_vec3
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_24
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '19'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 216, Column: 0 }
+Function:        quat4_rotate_vec3
+Args:
+  - NumInstructions: '19'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 229, Column: 1 }
+Function:        quat4_rotate_diag
+Args:
+  - NumVRCopies:     '6'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '6.000000e+00'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 229, Column: 0 }
+Function:        quat4_rotate_diag
+Args:
+  - NumStackBytes:   '152'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 229, Column: 0 }
+Function:        quat4_rotate_diag
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_25
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '42'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 229, Column: 0 }
+Function:        quat4_rotate_diag
+Args:
+  - NumInstructions: '42'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 243, Column: 1 }
+Function:        rb_get_state
+Args:
+  - NumVRCopies:     '10'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '1.000000e+01'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 243, Column: 0 }
+Function:        rb_get_state
+Args:
+  - NumStackBytes:   '232'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 243, Column: 0 }
+Function:        rb_get_state
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_26
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '137'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 243, Column: 0 }
+Function:        rb_get_state
+Args:
+  - NumInstructions: '137'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 270, Column: 1 }
+Function:        rb_set_state
+Args:
+  - NumVRCopies:     '7'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '7.000000e+00'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 270, Column: 0 }
+Function:        rb_set_state
+Args:
+  - NumStackBytes:   '200'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 270, Column: 0 }
+Function:        rb_set_state
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_27
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '130'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 270, Column: 0 }
+Function:        rb_set_state
+Args:
+  - NumInstructions: '130'
+  - String:          ' instructions in function'
+...
+--- !Missed
+Pass:            regalloc
+Name:            SpillReloadCopies
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 295, Column: 1 }
+Function:        rb_state_derivative
+Args:
+  - NumVRCopies:     '12'
+  - String:          ' virtual registers copies '
+  - TotalCopiesCost: '1.200000e+01'
+  - String:          ' total copies cost '
+  - String:          generated in function
+...
+--- !Analysis
+Pass:            prologepilog
+Name:            StackSize
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 295, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - NumStackBytes:   '152'
+  - String:          ' stack bytes in function'
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionMix
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 0, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - String:          'BasicBlock: '
+  - BasicBlock:      alloca_28
+  - String:          "\n"
+  - String:          ''
+  - String:          ': '
+  - INST_:           '79'
+  - String:          "\n"
+...
+--- !Analysis
+Pass:            asm-printer
+Name:            InstructionCount
+DebugLoc:        { File: 'C:\Users\jalex\OneDrive\Source\repos\Fortran\FortranDriver\FortranDriverDLL\mod_physics_rigid_body.f90', 
+                   Line: 295, Column: 0 }
+Function:        rb_state_derivative
+Args:
+  - NumInstructions: '79'
+  - String:          ' instructions in function'
+...

@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
-
+using JA.Fortran.Arrays;
 using Windows.ApplicationModel.Activation;
 
 namespace JA.Fortran
@@ -61,17 +61,18 @@ namespace JA.Fortran
                 return new Span<double>(ptr, _size);
             }
         }
-        public double[] ToArray()
-        {
-            double[] result = new double[_size];
-            call_vec3_to_array(this, result);
-            return result;
-        }
-
-        public FVector ToVector() => new FVector(ToArray());
 
         public ref double this[int index] => ref _data[index];
         public readonly double Norm() => norm_vec3(this);
+
+        public readonly double[] ToArray()
+        {
+            double[] data = new double[3];
+            call_vec3_to_array(this, data);
+            return data;
+        }
+        public readonly FVector ToVector() => new FVector(ToArray());
+
         #endregion
 
         #region Formatting
@@ -135,8 +136,6 @@ namespace JA.Fortran
                 return hc;
             }
         }
-        public FMatrix3 CrossMatrix() => cross_vec3_op(this);
-
         #endregion
 
         #region Algebra
@@ -146,9 +145,11 @@ namespace JA.Fortran
         public static FVector3 Scale(double factor, in FVector3 a) => mul_scalar_vec3(factor, a);
         public static FVector3 Scale(in FVector3 a, double factor) => mul_vec3_scalar(a, factor);
         public static FVector3 Divide(in FVector3 a, double d) => div_vec3_scalar(a, d);
-        public static double Dot(in FVector3 A, in FVector3 B) => inner_vec3_vec3(A, B);
+        public static double Dot(in FVector3 A, in FVector3 B) => dot_vec3_vec3(A, B);
         public static FMatrix3 Outer(in FVector3 a, in FVector3 b) => outer_vec3_vec3(a, b);
         public static FVector3 Cross(in FVector3 a, in FVector3 b) => cross_vec3_vec3(a, b);
+        public FMatrix3 CrossMatrix() => cross_vec3_op(this);
+
         public static double AngleBetween(in FVector3 a, in FVector3 b)
             => vec3_angle(a, b);
         #endregion
@@ -182,7 +183,7 @@ namespace JA.Fortran
         [DllImport(libraryName, EntryPoint = "vec3_uniform", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern FVector3 vec3_uniform(ref int seed);
         [DllImport(libraryName, EntryPoint = "norm_vec3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern double norm_vec3(FVector3 a);
+        internal static extern double norm_vec3(in FVector3 a);
         [DllImport(libraryName, EntryPoint = "add_vec3_vec3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern FVector3 add_vec3_vec3(in FVector3 a, in FVector3 b);
         [DllImport(libraryName, EntryPoint = "sub_vec3_vec3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
@@ -195,8 +196,8 @@ namespace JA.Fortran
         internal static extern FVector3 mul_vec3_scalar(in FVector3 a, double s);
         [DllImport(libraryName, EntryPoint = "div_vec3_scalar", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern FVector3 div_vec3_scalar(in FVector3 a, double s);
-        [DllImport(libraryName, EntryPoint = "inner_vec3_vec3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal static extern double inner_vec3_vec3(in FVector3 a, in FVector3 b  );
+        [DllImport(libraryName, EntryPoint = "dot_vec3_vec3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern double dot_vec3_vec3(in FVector3 a, in FVector3 b  );
         [DllImport(libraryName, EntryPoint = "outer_vec3_vec3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern FMatrix3 outer_vec3_vec3(in FVector3 a, in FVector3 b);
         [DllImport(libraryName, EntryPoint = "cross_vec3_vec3", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]

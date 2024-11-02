@@ -1,4 +1,9 @@
 ﻿// #define USE_CODE_GEN
+//#define CHECK_EXPORTS
+//#define CHECK_IMPORTS
+#define TEST_OUTPUTS
+//#define RUN_BENCHMARK
+//#define TEST_FORMS
 
 using System;
 using System.Diagnostics;
@@ -7,17 +12,58 @@ using System.Runtime.InteropServices;
 using System.Xml;
 
 using JA.Fortran;
+using JA.Fortran.Arrays;
+using JA.Fortran.Physics;
 
 namespace JA
 {
-    //using static NativeVector;
-    //using static NativeMatrix;
 
     static partial class Program
     {
         #region Fortran API
+        const string libraryName = FortranMethods.libraryName;
+
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void ActionRefInt([In] int progress, [In] int count);
+
+        public readonly struct FVal
+        {
+            readonly double _value;
+
+            public FVal(double x)
+            {
+                this._value=x;
+            }
+            public double Value => this._value;
+
+            #region Formatting
+            public override string ToString() 
+                => ToString(HelperFunctions.DefaultFormatting);
+            public string ToString(string formatting) 
+                => ToString(formatting, null);
+            public string ToString(string formatting, IFormatProvider formatProvider) 
+                => _value.ToString(formatting, formatProvider);
+            #endregion
+        }
+
+        [DllImport(libraryName, EntryPoint = "call_test_obj_set", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_test_obj_set(in FVal x);
+        [DllImport(libraryName, EntryPoint = "call_test_obj_get", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_test_obj_get([Out] out FVal x);
+
+        /// <summary>
+        /// Fortran DLL call to manipulate matrix <paramref name="A"/>
+        /// </summary>
+        /// <param name="rows">The n.</param>
+        /// <param name="columns">The n.</param>
+        /// <param name="A">The matrix. Fortran requires <paramref name="A"/> to be column major 
+        /// and C# supplies a row major matrix by default.</param>
+        /// <param name="callBack">The call-back function to report on progress.</param>
+        [DllImport(libraryName, EntryPoint = "call_test_dowork", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_test_dowork(int rows, int columns, [In, Out] double[,] A, [MarshalAs(UnmanagedType.FunctionPtr)] ActionRefInt callBack);
+
+        [DllImport(libraryName, EntryPoint = "call_quat_test_all", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_quat_test_all();
 
         #endregion
 
@@ -27,23 +73,33 @@ namespace JA
         static void Main(string[] args)
         {
 
-#if DEBUG
-            var f_methods  = typeof(FortranMethods).GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
-            var v_methods  = typeof(FVector)       .GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
-            var m_methods  = typeof(FMatrix)       .GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
-            var s_methods  = typeof(FSpline)       .GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
-            var v2_methods = typeof(FVector2)      .GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
-            var v3_methods = typeof(FVector3)      .GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
-            var q4_methods = typeof(FQuat4)        .GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
-            var m2_methods = typeof(FMatrix2)      .GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
-            var m3_methods = typeof(FMatrix3)      .GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
-            var r_methods  = typeof(RigidBody)     .GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly).Select(m => m.Name);
+#if CHECK_IMPORTS
 
-            var methods = Enumerable.SelectMany(new [] { f_methods, v_methods, m_methods, s_methods, v2_methods, v3_methods, q4_methods, m2_methods, m3_methods, r_methods }, (s)=> s); 
+
+            IEnumerable<Type> types = [
+                typeof(Program),
+                typeof(FortranMethods),
+                typeof(FVector)       ,
+                typeof(FMatrix)       ,
+                typeof(FSpline)       ,
+                typeof(FVector2)      ,
+                typeof(FVector3)      ,
+                typeof(FQuat4)        ,
+                typeof(FMatrix2)      ,
+                typeof(FMatrix3)      ,
+                typeof(RigidBody)     ,
+                typeof(FVector6)      ,
+                typeof(FMatrix6)      ,
+                ];
+
+            var methods = types.SelectMany( 
+                (t)=> t.GetMethods(BindingFlags.NonPublic|BindingFlags.Static|BindingFlags.DeclaredOnly)
+                .Select(m => m.Name)).Where( s=>!s.StartsWith('<'));
+
             string text = string.Join(Environment.NewLine, methods.OrderBy((v) => v));
-            Debug.WriteLine(text);
             File.WriteAllText("imports.txt", text);
-
+#endif
+#if CHECK_EXPORTS
             var all = File.ReadLines("exports_dump.txt");
             var vars = all.Where((line) => line.Contains('='));
             text=string.Join(Environment.NewLine, vars.Select(item =>
@@ -54,9 +110,7 @@ namespace JA
             File.WriteAllText("exports.txt", text);
 #endif
 
-#if false
-            Application.Run(new RunningForm1());
-#else
+#if TEST_OUTPUTS
             Console.WriteLine("Calling Fortran from C#");
             Console.WriteLine();
 
@@ -87,20 +141,34 @@ namespace JA
             //Console.WriteLine("Testing Rigid Body Mechanics");
             //TestRigidBodyMethods();
 
-#if !DEBUG
+#endif
+
+#if RUN_BENCHMARK
             // BenchMatrixMultiply();
             Console.WriteLine("System Solution Bench");
             BenchMatrixSolve();
-            Process.Start(logFileName);
 #endif
-            #endif
+
+#if TEST_FORMS
+            Application.Run(new RunningForm1());
+#endif
 
         }
 
 
         #region TESTING METHODS
+
+
         static void TestNativeMethods()
         {
+            FVal x= new FVal(double.Pi/4);
+
+            Program.call_test_obj_set(x);
+            Program.call_test_obj_get(out var x_get);
+
+            Console.WriteLine($"Set internal value to {x}");
+            Console.WriteLine($"Get internal value as {x_get}");
+
             static void StepUpdate(int i, int n)
             => Console.WriteLine($" Step: \t\t {i,2} of {n,2}");
 
@@ -110,16 +178,17 @@ namespace JA
             double[,] A = HelperFunctions.BuildArray(n, m, (i, j) => m*(i-1.0) + j);
             Console.WriteLine();
             Console.WriteLine(" - Generate Matrix A in C#");
-            A.ShowInConsole("A=", 6);
+            const int Width = 12;
+            A.ShowInConsole("A=", Width);
 
 #if USE_CODE_GEN
             LibraryMethods.call_test_dowork(n, m, ref A[0, 0], callbackHandler);
 #else
-            FortranMethods.call_test_dowork(n, m, A, callbackHandler);
+            Program.call_test_dowork(n, m, A, callbackHandler);
 #endif
 
             Console.WriteLine(" - Manipulate Matrix A in Fortran");
-            A.ShowInConsole("A=", 6);
+            A.ShowInConsole("A=", Width);
 
         }
         static void TestVectorMethods()
@@ -460,7 +529,7 @@ namespace JA
         }
         static void TestFortranQuaternion()
         {
-            FortranMethods.call_quat_test_all();
+            Program.call_quat_test_all();
         }
         static void TestFixedQuatMethods()
         {
@@ -507,6 +576,7 @@ namespace JA
                 q2.ToAxisAngle(out axis, out angle);
                 Console.WriteLine($"Axis = \n{axis}, Angle = {180*angle/double.Pi} deg");
             }
+            Console.WriteLine();
         }
         static void TestRigidBodyMethods()
         {
