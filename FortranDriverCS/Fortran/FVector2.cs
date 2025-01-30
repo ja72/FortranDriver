@@ -44,6 +44,8 @@ namespace JA.Fortran
         public static FVector2 EY { get; } = vec2_uy();
         public static FVector2 Ones { get; } = vec2_ones();
         public static FVector2 Uniform(ref int seed) => vec2_uniform(ref seed);
+
+        public static implicit operator FVector(FVector2 vector) => vector.ToVector();
         #endregion
 
         #region Properties
@@ -79,7 +81,7 @@ namespace JA.Fortran
         {
             if (ShowAsTable)
             {
-                return ToArray().ToTableString(HorizontalAlignment.Right, formatting, formatProvider);
+                return ToArray().ToVectorTableString(HorizontalAlignment.Right, formatting, formatProvider);
             }
             else
             {

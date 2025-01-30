@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
 
+using JA.Fortran.Arrays;
+
 namespace JA.Fortran
 {
     public unsafe struct FMatrix2 :
@@ -14,6 +16,7 @@ namespace JA.Fortran
 
         fixed double _data[_count];
 
+        #region Factory
         public FMatrix2(double a11, double a12, double a21, double a22)
         {
             this=mat2_values(a11, a12, a21, a22);
@@ -52,7 +55,10 @@ namespace JA.Fortran
 
         public static FMatrix2 Uniform(ref int seed) => mat2_uniform(ref seed);
 
-        public static explicit operator FMatrix2(double a) => Scalar(a);
+        public static explicit operator FMatrix2(double a) => Scalar(a); 
+
+        public static implicit operator FMatrix(FMatrix2 matrix) => matrix.ToMatrix();
+        #endregion
 
         #region Formatting
         public static string DefaultFormatting { get; set; } = "g6";
@@ -141,7 +147,7 @@ namespace JA.Fortran
             call_mat2_to_array(this, result);
             return result;
         }
-        public Arrays.FMatrix ToVector() => new Arrays.FMatrix(ToArray2());
+        public FMatrix ToMatrix() => new FMatrix(ToArray2());
         #endregion
 
         #region Algebra

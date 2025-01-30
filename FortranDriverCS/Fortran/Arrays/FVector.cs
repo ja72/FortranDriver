@@ -123,6 +123,10 @@ namespace JA.Fortran.Arrays
             call_slice_array_v(Size, Data, startRow, endRow, data);
             return new FVector(data);
         }
+        public void Inject(int startRow, double[] data)
+        {
+            call_inject_array_v(Size, Data, startRow, data.Length, data);
+        }
         public static double Dot(FVector x, FVector y)
         {
             int size = Math.Min(x.Size, y.Size);
@@ -184,17 +188,17 @@ namespace JA.Fortran.Arrays
         #region Formatting
         public static string DefaultFormat { get; set; } = "g6";
         public static bool ShowAsTable { get; set; } = true;
-        public override string ToString() => ToString(DefaultFormat);
+        public sealed override string ToString() => ToString(DefaultFormat);
         public string ToString(string formatting) => ToString(formatting, null);
-        public string ToString(string formatting, IFormatProvider formatProvider)
+        public virtual string ToString(string formatting, IFormatProvider formatProvider)
         {
             if (ShowAsTable)
             {
-                return ToArray().ToTableString(HorizontalAlignment.Right, formatting, formatProvider);
+                return ToArray().ToVectorTableString(HorizontalAlignment.Right, formatting, formatProvider);
             }
             else
             {
-                return ToArray().ToListString(formatting, ",");
+                return $"[{ToArray().ToListString(formatting, ",")}]";
             }
         }
         public static string DefaultFormatting { get; set; } = "g6";
@@ -271,6 +275,9 @@ namespace JA.Fortran.Arrays
 
         [DllImport(libraryName, EntryPoint = "call_slice_array_v", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void call_slice_array_v(int size, [In] double[] A, int start_index, int end_index, [Out] double[] B);
+        [DllImport(libraryName, EntryPoint = "call_inject_array_v", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void call_inject_array_v(int size, [In, Out] double[] A, int start_index, int count, [In] double[] B);
+        // call_inject_array_v
 
         [DllImport(libraryName, EntryPoint = "call_random_array_v", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void call_random_array_v(int size, [In] double minValue, [In] double maxValue, [Out] double[] A);

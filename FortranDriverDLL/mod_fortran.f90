@@ -477,6 +477,14 @@
         B = A(i1:i2)
     end subroutine
     
+    pure subroutine call_inject_array_v(n,A,i,m,B) bind(c)
+    !DEC$ ATTRIBUTES DLLEXPORT :: call_inject_array_v
+    integer, intent(in), value :: n, i, m
+    real(real64), intent(inout) :: A(n)
+    real(real64), intent(in) :: B(m)
+        A(i:i+m-1) = B
+    end subroutine
+    
     pure subroutine call_slice_array_m(n,m,A,i1,i2,j1,j2,B) bind(c)
     !DEC$ ATTRIBUTES DLLEXPORT :: call_slice_array_m
     integer, intent(in), value :: n, m, i1,i2,j1,j2

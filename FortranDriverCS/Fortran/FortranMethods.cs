@@ -9,7 +9,7 @@ using static JA.Program;
 
 namespace JA.Fortran
 {
-    internal static partial class FortranMethods
+    internal static class FortranMethods
     {
         // NOTE: Fortran methods declared with `DllImport()`. Consider use the newer `LibraryImport()`
         // delcaration instead. Use a ref to first element instead of passing a 2D array.
@@ -20,7 +20,6 @@ namespace JA.Fortran
         public const string libraryName = "FortranDriverDLL";
         public static int seed = Environment.TickCount;
 #endif
-
 
     }
 }

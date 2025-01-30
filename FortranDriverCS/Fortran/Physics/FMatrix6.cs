@@ -106,15 +106,42 @@ namespace JA.Fortran.Physics
         #endregion
 
         #region Properties
-        public double E11 => _data[0+0];
-        public double E12 => _data[3+0];
-        public double E13 => _data[6+0];
-        public double E21 => _data[0+1];
-        public double E22 => _data[3+1];
-        public double E23 => _data[6+1];
-        public double E31 => _data[0+2];
-        public double E32 => _data[3+2];
-        public double E33 => _data[6+2];
+        public double E11 => _data[ 0+ 0];
+        public double E12 => _data[ 6+ 0];
+        public double E13 => _data[12+ 0];
+        public double E14 => _data[18+ 0];
+        public double E15 => _data[24+ 0];
+        public double E16 => _data[30+ 0];
+        public double E21 => _data[ 0+ 1];
+        public double E22 => _data[ 6+ 1];
+        public double E23 => _data[12+ 1];
+        public double E24 => _data[18+ 1];
+        public double E25 => _data[24+ 1];
+        public double E26 => _data[30+ 1];
+        public double E31 => _data[ 0+ 2];
+        public double E32 => _data[ 6+ 2];
+        public double E33 => _data[12+ 2];
+        public double E34 => _data[18+ 2];
+        public double E35 => _data[24+ 2];
+        public double E36 => _data[30+ 2];
+        public double E41 => _data[ 0+ 3];
+        public double E42 => _data[ 6+ 3];
+        public double E43 => _data[12+ 3];
+        public double E44 => _data[18+ 3];
+        public double E45 => _data[24+ 3];
+        public double E46 => _data[30+ 3];
+        public double E51 => _data[ 0+ 4];
+        public double E52 => _data[ 6+ 4];
+        public double E53 => _data[12+ 4];
+        public double E54 => _data[18+ 4];
+        public double E55 => _data[24+ 4];
+        public double E56 => _data[30+ 4];
+        public double E61 => _data[ 0+ 5];
+        public double E62 => _data[ 6+ 5];
+        public double E63 => _data[12+ 5];
+        public double E64 => _data[18+ 5];
+        public double E65 => _data[24+ 5];
+        public double E66 => _data[30+ 5];
 
         public Span<double> AsSpan()
         {

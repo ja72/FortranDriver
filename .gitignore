@@ -363,3 +363,14 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /FortranDriver.db3
+/FortranDriverDLL/mod_array_inv.opt.yaml
+/FortranDriverDLL/mod_fortran.opt.yaml
+/FortranDriverDLL/mod_lu.opt.yaml
+/FortranDriverDLL/mod_nasa_quat.opt.yaml
+/FortranDriverDLL/mod_nasa_quat_print.opt.yaml
+/FortranDriverDLL/mod_nasa_quat_test.opt.yaml
+/FortranDriverDLL/mod_physics_planar.opt.yaml
+/FortranDriverDLL/mod_physics_rigid_body.opt.yaml
+/FortranDriverDLL/mod_physics_spatial.opt.yaml
+/FortranDriverDLL/mod_splines.opt.yaml
+*.fdz

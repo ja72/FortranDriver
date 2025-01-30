@@ -88,7 +88,7 @@ namespace JA.Fortran.Physics
         {
             if (ShowAsTable)
             {
-                return ToArray().ToTableString(HorizontalAlignment.Right, formatting, formatProvider);
+                return ToArray().ToVectorTableString(HorizontalAlignment.Right, formatting, formatProvider);
             }
             else
             {

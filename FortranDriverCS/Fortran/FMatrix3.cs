@@ -16,6 +16,7 @@ namespace JA.Fortran
 
         fixed double _data[_count];
 
+        #region Factory
         public FMatrix3(
             double a11, double a12, double a13,
             double a21, double a22, double a23,
@@ -53,7 +54,10 @@ namespace JA.Fortran
 
         public static FMatrix3 Uniform(ref int seed) => mat3_uniform(ref seed);
 
-        public static explicit operator FMatrix3(double a) => Scalar(a);
+        public static explicit operator FMatrix3(double a) => Scalar(a); 
+
+        public static implicit operator FMatrix(FMatrix3 matrix) => matrix.ToMatrix();
+        #endregion
 
         #region Formatting
         public static string DefaultFormatting { get; set; } = "g6";

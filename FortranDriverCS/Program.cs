@@ -2,7 +2,7 @@
 //#define CHECK_EXPORTS
 //#define CHECK_IMPORTS
 #define TEST_OUTPUTS
-//#define RUN_BENCHMARK
+#define RUN_BENCHMARK
 //#define TEST_FORMS
 
 using System;
@@ -137,6 +137,9 @@ namespace JA
             Console.WriteLine();
             TestFixedQuatMethods();
 
+            Console.WriteLine("Testing Layout Matrix");
+            Console.WriteLine();
+            TestLayoutMatrix();
 
             //Console.WriteLine("Testing Rigid Body Mechanics");
             //TestRigidBodyMethods();
@@ -623,6 +626,22 @@ namespace JA
             Console.WriteLine(vee.ToString("g5"));
             Console.WriteLine("Rot. Velocity = ");
             Console.WriteLine(omg.ToString("g5"));
+        }
+        static void TestLayoutMatrix()
+        {
+
+            var vec = new FPartitionedVector(1, 3, 2);
+
+            var a = vec[1] = FVector.FromValues(HelperFunctions.RNG.NextDouble());
+            var b = vec[2] = FVector3.Uniform(ref FortranMethods.seed);
+            var c = vec[3] = FVector2.Uniform(ref FortranMethods.seed);
+
+            Console.WriteLine($"vec =\n{vec}");
+
+            var vec2 = new FPartitionedVector(a, b, c);
+
+            Console.WriteLine($"vec2 =\n{vec2}");
+
         }
         static void BenchMatrixMultiply()
         {

@@ -12,6 +12,7 @@ namespace JA
         public const int DefaultColumnWidth = 11;
         public static int RoundDigits { get; } = 11;
         public static string DefaultFormatting { get; set; } = "g6";
+        public static Random RNG { get; } = new Random();
         public static T[] BuildArray<T>(int size, T defaultValue)
         {
             var result = new T[size];
@@ -97,11 +98,11 @@ namespace JA
             };
         }
 
-        public static string ToListString<T>(this T[] array)
+        public static string ToListString<T>(this IList<T> array)
         {
             return string.Join(",", array.Select((x) => x.ToString<T>()));
         }
-        public static string ToListString<T>(this T[] array, string formatting, string separator = ",") where T : IFormattable
+        public static string ToListString<T>(this IList<T> array, string formatting, string separator = ",") where T : IFormattable
         {
             return string.Join(separator, array.Select((x) => x.ToString<T>(formatting, null)));
         }
@@ -129,11 +130,11 @@ namespace JA
                 _ => throw new NotSupportedException($"{alignment.ToString()}"),
             };
         }
-        public static string ToTableString<T>(this T[] data, HorizontalAlignment alignment, string formatting = null, IFormatProvider provider = null, char leftDelimiter = '|', char rightDelimiter = '|')
+        public static string ToVectorTableString<T>(this IList<T> data, HorizontalAlignment alignment, string formatting = null, IFormatProvider provider = null, char leftDelimiter = '|', char rightDelimiter = '|')
         {
             provider??=CultureInfo.CurrentCulture.NumberFormat;
             formatting??=DefaultFormatting;
-            string[] items = new string[data.Length];
+            string[] items = new string[data.Count];
             for (int i = 0; i<items.Length; i++)
             {
                 items[i]=data[i].ToString<T>(formatting, provider);
@@ -198,7 +199,7 @@ namespace JA
             }
             return sb.ToString();
         }
-        public static string ToBlockTableString<T>(this T[][] data, HorizontalAlignment alignment, string formatting = null, IFormatProvider provider = null, char leftDelimiter = '|', char rightDelimiter = '|')
+        public static string ToBlockTableString<T>(this IList<T>[] data, HorizontalAlignment alignment, string formatting = null, IFormatProvider provider = null, char leftDelimiter = '|', char rightDelimiter = '|')
         {
             provider??=CultureInfo.CurrentCulture.NumberFormat;
             formatting??=DefaultFormatting;
@@ -207,7 +208,7 @@ namespace JA
             string[][] items = new string[data.Length][];
             for (int k = 0; k<data.Length; k++)
             {
-                var block = new string[data[k].Length];
+                var block = new string[data[k].Count];
                 for (int i = 0; i<block.Length; i++)
                 {
                     block[i]=data[k][i].ToString<T>(formatting, provider);

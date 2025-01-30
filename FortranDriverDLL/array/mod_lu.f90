@@ -123,7 +123,7 @@
             x = b / lu%data(1,1)
         else
             x = b
-            do concurrent (j=1: k) shared(lu, x)
+            do concurrent (j=1: k) !shared(lu, x)
                 call LUBKSB(lu%data, lu%n, lu%indx, x(:,j))
             end do
         end if
@@ -135,7 +135,7 @@
     integer :: i, n
         n = lu%n
         d = lu%sgn
-        do concurrent (i=1:n) reduce( * : d)
+        do concurrent (i=1:n) !reduce( * : d)
             d = d * lu%data(i,i)
         end do
     end function
@@ -198,7 +198,7 @@
     DO J=1,N
         DO I=1,J-1
             SUMM = A(I,J)
-            DO CONCURRENT (K=1:I-1) REDUCE (+ : SUMM)
+            DO CONCURRENT (K=1:I-1) !REDUCE (+ : SUMM)
                 SUMM = SUMM - A(I,K)*A(K,J)
             END DO ! k loop
             A(I,J) = SUMM
@@ -206,7 +206,7 @@
         AMAX = 0.d0
         DO I=J,N
             SUMM = A(I,J)
-            DO CONCURRENT (K=1:J-1) REDUCE (+ : SUMM)
+            DO CONCURRENT (K=1:J-1) !REDUCE (+ : SUMM)
                 SUMM = SUMM - A(I,K)*A(K,J)
             END DO ! k loop
             A(I,J) = SUMM
@@ -270,7 +270,7 @@
         SUMM = B(LL)
         B(LL) = B(I)
         IF(II /= 0) THEN
-            DO CONCURRENT (J=II:I-1) REDUCE( + : SUMM )
+            DO CONCURRENT (J=II:I-1) !REDUCE( + : SUMM )
                 SUMM = SUMM - A(I,J)*B(J)
             END DO ! j loop
         ELSE IF(SUMM /= 0.d0) THEN
@@ -282,7 +282,7 @@
     DO I=N,1,-1
         SUMM = B(I)
         IF(I < N) THEN
-            DO CONCURRENT (J=I+1:N) REDUCE( + : SUMM )
+            DO CONCURRENT (J=I+1:N) !REDUCE( + : SUMM )
                 SUMM = SUMM - A(I,J)*B(J)
             END DO ! j loop
         END IF
